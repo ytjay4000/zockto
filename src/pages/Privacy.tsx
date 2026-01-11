@@ -2,23 +2,24 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
 const Privacy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="pt-32 pb-20">
         <div className="container px-4 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6
+        }}>
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
               Zockto{' '}
               <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
@@ -112,7 +113,7 @@ const Privacy = () => {
                 <p className="mb-4">We may share limited data with trusted partners solely for providing the Service:</p>
                 <ul className="list-disc list-inside space-y-2 text-muted-foreground text-sm">
                   <li>Bunny.net (hosting and storage, Germany)</li>
-                  <li>Runninghub (AI processing)</li>
+                  
                   <li>Runpod (AI processing)</li>
                   <li>Stripe (payments)</li>
                   <li>OpenAI (generating scripts)</li>
@@ -174,8 +175,6 @@ const Privacy = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Privacy;
