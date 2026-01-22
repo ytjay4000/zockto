@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize2, Loader2 } from 'lucide-react';
 import { VideoData } from '@/types/video';
 import { Badge } from '@/components/ui/badge';
 
@@ -14,7 +14,17 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Force load video metadata on mobile
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // Try to load enough data to show first frame
+      video.load();
+    }
+  }, [video.link]);
 
   const handlePlayPause = () => {
     if (videoRef.current) {
@@ -62,7 +72,14 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
       }}
       onClick={handlePlayPause}
     >
-      <div className="relative aspect-[9/16] bg-card rounded-xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-300">
+      <div className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-300">
+        {/* Loading spinner */}
+        {!isLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-muted z-10">
+            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+          </div>
+        )}
+        
         <video
           ref={videoRef}
           src={video.link}
@@ -70,7 +87,8 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
           muted={isMuted}
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
+          onLoadedData={() => setIsLoaded(true)}
         />
 
         {/* Overlay gradient */}
