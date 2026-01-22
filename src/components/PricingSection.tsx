@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const plans = [
   {
     name: 'Basic',
-    monthlyPrice: 9,
+    monthlyPrice: 10,
     annualPrice: 99,
     description: 'Great for small teams getting started.',
     features: [
