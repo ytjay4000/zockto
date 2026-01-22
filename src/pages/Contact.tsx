@@ -25,7 +25,7 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Call Us Card */}
-            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm">
+            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm flex flex-col">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
                 <Phone className="w-7 h-7 text-primary" />
               </div>
@@ -33,18 +33,16 @@ const Contact = () => {
               <p className="text-muted-foreground text-sm mb-6">
                 Available Mon-Sat, 10AM-6PM IST
               </p>
-              <div className="bg-muted/50 rounded-lg py-3 px-4">
-                <a 
-                  href="tel:+917610336917" 
-                  className="text-foreground font-medium hover:text-primary transition-colors"
-                >
-                  +91 7610336917
-                </a>
-              </div>
+              <a 
+                href="tel:+917610336917"
+                className="mt-auto w-full h-11 flex items-center justify-center bg-muted/50 hover:bg-muted rounded-lg text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                +91 7610336917
+              </a>
             </div>
 
             {/* WhatsApp Card */}
-            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm">
+            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm flex flex-col">
               <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                 <MessageCircle className="w-7 h-7 text-green-600" />
               </div>
@@ -52,22 +50,18 @@ const Contact = () => {
               <p className="text-muted-foreground text-sm mb-6">
                 Quick responses within 24 hours
               </p>
-              <Button 
-                asChild 
-                className="w-full bg-green-500 hover:bg-green-600 text-white"
+              <a 
+                href="https://wa.me/917610336917"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto w-full h-11 flex items-center justify-center bg-green-500 hover:bg-green-600 rounded-lg text-sm font-medium text-white transition-colors"
               >
-                <a 
-                  href="https://wa.me/917610336917" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  Chat on WhatsApp
-                </a>
-              </Button>
+                Chat on WhatsApp
+              </a>
             </div>
 
             {/* Email Card */}
-            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm">
+            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm flex flex-col">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
                 <Mail className="w-7 h-7 text-primary" />
               </div>
@@ -75,14 +69,12 @@ const Contact = () => {
               <p className="text-muted-foreground text-sm mb-6">
                 For detailed inquiries & support
               </p>
-              <div className="bg-muted/50 rounded-lg py-3 px-4">
-                <a 
-                  href="mailto:arpitdayma1@gmail.com" 
-                  className="text-foreground font-medium hover:text-primary transition-colors"
-                >
-                  arpitdayma1@gmail.com
-                </a>
-              </div>
+              <a 
+                href="mailto:arpitdayma1@gmail.com"
+                className="mt-auto w-full h-11 flex items-center justify-center bg-muted/50 hover:bg-muted rounded-lg text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                arpitdayma1@gmail.com
+              </a>
             </div>
           </div>
         </div>
