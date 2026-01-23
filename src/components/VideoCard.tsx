@@ -15,16 +15,28 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
   const [isMuted, setIsMuted] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Force load video metadata on mobile
+  // Lazy load videos using IntersectionObserver
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      // Try to load enough data to show first frame
-      video.load();
-    }
-  }, [video.link]);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '100px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   const handlePlayPause = () => {
     if (videoRef.current) {
@@ -57,10 +69,8 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
     ?.slice(0, 100) || '';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
+    <div
+      ref={containerRef}
       className="video-card group cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
@@ -73,23 +83,25 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
       onClick={handlePlayPause}
     >
       <div className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-300">
-        {/* Loading spinner */}
-        {!isLoaded && (
+        {/* Loading placeholder */}
+        {(!isInView || !isLoaded) && (
           <div className="absolute inset-0 flex items-center justify-center bg-muted z-10">
             <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
         )}
         
-        <video
-          ref={videoRef}
-          src={video.link}
-          className="w-full h-full object-cover"
-          muted={isMuted}
-          loop
-          playsInline
-          preload="auto"
-          onLoadedData={() => setIsLoaded(true)}
-        />
+        {isInView && (
+          <video
+            ref={videoRef}
+            src={video.link}
+            className="w-full h-full object-cover"
+            muted={isMuted}
+            loop
+            playsInline
+            preload="metadata"
+            onLoadedData={() => setIsLoaded(true)}
+          />
+        )}
 
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -155,7 +167,7 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
           </Badge>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
