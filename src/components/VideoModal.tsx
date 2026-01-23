@@ -61,11 +61,11 @@ const VideoModal = ({ video, onClose }: VideoModalProps) => {
           </button>
 
           {/* Video */}
-          <div className="relative aspect-[9/16]">
+          <div className="relative aspect-[9/16] bg-black">
             <video
               ref={videoRef}
               src={video.link}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               muted={isMuted}
               loop
               playsInline
