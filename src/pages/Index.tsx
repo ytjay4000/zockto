@@ -18,12 +18,14 @@ const Index = () => {
   useEffect(() => {
     // Handle hash navigation when coming from other pages
     if (location.hash) {
-      const element = document.querySelector(location.hash);
-      if (element) {
-        setTimeout(() => {
+      // Wait for page content to render before scrolling
+      const timer = setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
+        }
+      }, 300);
+      return () => clearTimeout(timer);
     }
   }, [location.hash]);
 
