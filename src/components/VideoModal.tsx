@@ -49,7 +49,7 @@ const VideoModal = ({ video, onClose }: VideoModalProps) => {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-lg max-h-[90vh] bg-card rounded-2xl overflow-hidden shadow-2xl"
+          className="relative w-auto h-[85vh] max-h-[85vh] bg-card rounded-2xl overflow-hidden shadow-2xl flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
@@ -61,11 +61,11 @@ const VideoModal = ({ video, onClose }: VideoModalProps) => {
           </button>
 
           {/* Video */}
-          <div className="relative aspect-[9/16] bg-black">
+          <div className="relative flex-1 min-h-0 bg-black">
             <video
               ref={videoRef}
               src={video.link}
-              className="w-full h-full object-contain"
+              className="h-full w-auto max-w-full mx-auto object-contain"
               muted={isMuted}
               loop
               playsInline
