@@ -67,7 +67,7 @@ const CTASection = () => {
               Create Ads With Just 5 Clicks!
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-              Convert your website into HIGH CONVERTING ADS
+              Convert your product landing page or product image into HIGH CONVERTING ADS
             </p>
             <Button size="lg" variant="hero" asChild>
               <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
