@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: 'What types of companies are using Zockto?',
-    answer: 'Businesses selling physical products, like E-commerce stores, have seen the best results using Zockto\'s UGC ad feature.',
+    answer: 'Businesses selling or marketing physical products, like E-commerce stores, have seen the best results using Zockto\'s UGC ad feature.',
   },
   {
     question: 'Is my data secure on Zockto?',
