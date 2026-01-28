@@ -75,7 +75,7 @@ const Hero = () => {
         }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" variant="hero" asChild>
               <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
-                Start Creating Free
+                Start Creating
                 <ArrowRight className="w-5 h-5 ml-2" />
               </a>
             </Button>
