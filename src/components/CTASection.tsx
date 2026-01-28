@@ -64,8 +64,7 @@ const CTASection = () => {
             className="text-center p-8 md:p-12 rounded-3xl gradient-card border border-primary/20 shadow-glow"
           >
             <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-              Create Ads With Just 5 Clicks{' '}
-              <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">For Free!</span>
+              Create Ads With Just 5 Clicks!
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
               Convert your website into HIGH CONVERTING ADS
