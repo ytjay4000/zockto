@@ -14,24 +14,32 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Start loading video on first interaction (hover or click)
-  const handleStartLoading = () => {
-    if (!shouldLoadVideo) {
-      setShouldLoadVideo(true);
-      setIsLoading(true);
-    }
-  };
+  // Lazy load video thumbnails using IntersectionObserver
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   const handlePlayPause = () => {
-    handleStartLoading();
-    
-    if (videoRef.current && isLoaded) {
+    if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
       } else {
@@ -40,17 +48,6 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
       setIsPlaying(!isPlaying);
     }
   };
-
-  // Auto-play when video is loaded after user interaction
-  useEffect(() => {
-    if (isLoaded && videoRef.current && isHovered && !isPlaying) {
-      videoRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        // Autoplay may be blocked
-      });
-    }
-  }, [isLoaded, isHovered]);
 
   const handleMuteToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -65,19 +62,17 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
     onExpand(video);
   };
 
-  // Extract first sentence of description for display
-  const shortDescription = video.description
-    ?.split('\n')[0]
-    ?.replace(/\*\*/g, '')
-    ?.slice(0, 100) || '';
-
   return (
     <div
       ref={containerRef}
       className="video-card group cursor-pointer"
       onMouseEnter={() => {
         setIsHovered(true);
-        handleStartLoading();
+        // Start playing on hover if loaded
+        if (videoRef.current && thumbnailLoaded) {
+          videoRef.current.play().catch(() => {});
+          setIsPlaying(true);
+        }
       }}
       onMouseLeave={() => {
         setIsHovered(false);
@@ -89,20 +84,14 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
       onClick={handlePlayPause}
     >
       <div className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-300">
-        {/* Loading/placeholder state - show gradient placeholder */}
-        {!isLoaded && (
+        {/* Loading placeholder - only show before thumbnail loads */}
+        {!thumbnailLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50 z-10">
-            {isLoading ? (
-              <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
-            ) : (
-              <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center shadow-glow opacity-80">
-                <Play className="w-7 h-7 text-primary-foreground ml-1" fill="currentColor" />
-              </div>
-            )}
+            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
         )}
         
-        {shouldLoadVideo && (
+        {isInView && (
           <video
             ref={videoRef}
             src={video.link}
@@ -110,11 +99,8 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
             muted={isMuted}
             loop
             playsInline
-            preload="auto"
-            onLoadedData={() => {
-              setIsLoaded(true);
-              setIsLoading(false);
-            }}
+            preload="metadata"
+            onLoadedMetadata={() => setThumbnailLoaded(true)}
           />
         )}
 
