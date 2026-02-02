@@ -94,13 +94,13 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
         {isInView && (
           <video
             ref={videoRef}
-            src={video.link}
+            src={`${video.link}#t=0.1`}
             className="w-full h-full object-cover"
             muted={isMuted}
             loop
             playsInline
-            preload="metadata"
-            onLoadedMetadata={() => setThumbnailLoaded(true)}
+            preload="auto"
+            onLoadedData={() => setThumbnailLoaded(true)}
           />
         )}
 
