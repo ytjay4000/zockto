@@ -39,7 +39,7 @@ const plans = [
     description: 'Great for enterprises to convert more.',
     features: [
       '8,500 credits',
-      '50 60sec UGC videos, or 100 25sec videos / month',
+      'Eighty-five 25sec UGC videos or forty-two 60sec UGC videos / month',
       '1080p video quality',
       '200+ public voices + voice cloning',
       '150+ avatars, avatar cloning',
