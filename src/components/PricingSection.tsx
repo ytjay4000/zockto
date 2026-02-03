@@ -10,7 +10,7 @@ const plans = [
     annualPrice: 99,
     description: 'Great for small teams getting started.',
     features: [
-      '1,000 credits',
+      '700 credits',
       'Five 60sec UGC videos, or ten 25sec videos / month',
       '1080p video quality',
       '200+ public voices + voice cloning',
@@ -24,7 +24,7 @@ const plans = [
     annualPrice: 399,
     description: 'For fast-growing teams who are scaling.',
     features: [
-      '3,000 credits',
+      '2,400 credits',
       'Triple the number of videos compared to Basic Plan',
       '1080p video quality',
       '200+ public voices + voice cloning',
@@ -38,7 +38,7 @@ const plans = [
     annualPrice: 999,
     description: 'Great for enterprises to convert more.',
     features: [
-      '10,000 credits',
+      '8,500 credits',
       '50 60sec UGC videos, or 100 25sec videos / month',
       '1080p video quality',
       '200+ public voices + voice cloning',
