@@ -11,7 +11,7 @@ const plans = [
     description: 'Great for small teams getting started.',
     features: [
       '700 credits',
-      'Five 60sec UGC videos, or ten 25sec videos / month',
+      'Seven 25sec UGC videos or three 60sec UGC videos / month',
       '1080p video quality',
       '200+ public voices + voice cloning',
       '90+ avatars, avatar cloning',
