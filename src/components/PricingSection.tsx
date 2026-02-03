@@ -84,26 +84,28 @@ const PricingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex items-center justify-center gap-4 mb-12"
+          className="flex flex-col items-center gap-2 mb-12"
         >
-          <span className={`font-medium transition-colors ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-            Monthly
-          </span>
-          <button
-            onClick={() => setIsAnnual(!isAnnual)}
-            className={`relative w-14 h-7 rounded-full transition-colors ${
-              isAnnual ? 'bg-primary' : 'bg-muted'
-            }`}
-          >
-            <span
-              className={`absolute top-1 left-1 w-5 h-5 rounded-full bg-foreground transition-transform duration-200 ${
-                isAnnual ? 'translate-x-7' : 'translate-x-0'
+          <div className="flex items-center gap-4">
+            <span className={`font-medium transition-colors ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Monthly
+            </span>
+            <button
+              onClick={() => setIsAnnual(!isAnnual)}
+              className={`relative w-14 h-7 rounded-full transition-colors ${
+                isAnnual ? 'bg-primary' : 'bg-muted'
               }`}
-            />
-          </button>
-          <span className={`font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-            Annually
-          </span>
+            >
+              <span
+                className={`absolute top-1 left-1 w-5 h-5 rounded-full bg-foreground transition-transform duration-200 ${
+                  isAnnual ? 'translate-x-7' : 'translate-x-0'
+                }`}
+              />
+            </button>
+            <span className={`font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Annually
+            </span>
+          </div>
           <span className="text-sm font-medium text-primary">
             Get 2 months for FREE on annual plan
           </span>
