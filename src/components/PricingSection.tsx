@@ -7,7 +7,7 @@ const plans = [
   {
     name: 'Basic',
     monthlyPrice: 13.99,
-    annualPrice: 99,
+    annualPrice: 139,
     description: 'Great for small teams getting started.',
     features: [
       '700 credits',
@@ -21,7 +21,7 @@ const plans = [
   {
     name: 'Pro',
     monthlyPrice: 29,
-    annualPrice: 399,
+    annualPrice: 299,
     description: 'For fast-growing teams who are scaling.',
     features: [
       '2,400 credits',
