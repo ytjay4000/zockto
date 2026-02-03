@@ -104,6 +104,9 @@ const PricingSection = () => {
           <span className={`font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
             Annually
           </span>
+          <span className="text-sm font-medium text-primary">
+            Get 2 months for FREE on annual plan
+          </span>
         </motion.div>
 
         {/* Pricing cards */}
