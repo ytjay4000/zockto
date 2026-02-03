@@ -71,7 +71,7 @@ const CTASection = () => {
             </p>
             <Button size="lg" variant="hero" asChild>
               <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
-                Get Started
+                Start Creating For Free
                 <ArrowRight className="w-5 h-5 ml-2" />
               </a>
             </Button>
