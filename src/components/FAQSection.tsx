@@ -23,6 +23,10 @@ const faqs = [
     question: 'Is my data secure on Zockto?',
     answer: 'Absolutely. We use enterprise-grade encryption and follow best practices in data privacy and compliance.',
   },
+  {
+    question: 'Can I try Zockto for free before committing?',
+    answer: 'Yes, we offer a free trial, so you can explore all features and create a sample video before upgrading to a paid plan.',
+  },
 ];
 
 const FAQSection = () => {
