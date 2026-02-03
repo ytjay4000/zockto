@@ -25,7 +25,7 @@ const plans = [
     description: 'For fast-growing teams who are scaling.',
     features: [
       '2,400 credits',
-      'Triple the number of videos compared to Basic Plan',
+      'Twenty-four 25sec UGC videos or twelve 60sec UGC videos / month',
       '1080p video quality',
       '200+ public voices + voice cloning',
       '150+ avatars, avatar cloning',
