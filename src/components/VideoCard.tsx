@@ -8,16 +8,26 @@ interface VideoCardProps {
   video: VideoData;
   index: number;
   onExpand: (video: VideoData) => void;
+  activeAudioId: string | null;
+  onAudioActivate: (id: string | null) => void;
 }
 
-const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
+const VideoCard = ({ video, index, onExpand, activeAudioId, onAudioActivate }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const isMuted = activeAudioId !== video.id;
+
+  // Sync muted state when activeAudioId changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   // Lazy load video thumbnails using IntersectionObserver
   useEffect(() => {
@@ -52,8 +62,13 @@ const VideoCard = ({ video, index, onExpand }: VideoCardProps) => {
   const handleMuteToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+      if (isMuted) {
+        onAudioActivate(video.id);
+        videoRef.current.muted = false;
+      } else {
+        onAudioActivate(null);
+        videoRef.current.muted = true;
+      }
     }
   };
 
