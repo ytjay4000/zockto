@@ -12,6 +12,7 @@ const VideoGallery = () => {
   const { videos, categories, selectedCategory, setSelectedCategory, loading, error } = useVideos();
   const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
   const [displayCount, setDisplayCount] = useState(12);
+  const [activeAudioId, setActiveAudioId] = useState<string | null>(null);
 
   const displayedVideos = videos.slice(0, displayCount);
   const hasMore = videos.length > displayCount;
@@ -77,7 +78,9 @@ const VideoGallery = () => {
                   key={video.id}
                   video={video}
                   index={index}
-                  onExpand={setSelectedVideo}
+                  onExpand={(v) => { setActiveAudioId(null); setSelectedVideo(v); }}
+                  activeAudioId={activeAudioId}
+                  onAudioActivate={setActiveAudioId}
                 />
               ))}
             </div>
