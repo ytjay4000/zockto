@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import AppLink from '@/components/AppLink';
 
 const sectionLinks = [
   { label: 'Features', href: '#features' },
@@ -42,9 +43,9 @@ const Footer = () => {
               Create digital ads that perform affordably in just five clicks.
             </p>
             <Button variant="hero" size="sm" asChild>
-              <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
+              <AppLink>
                 Create Now
-              </a>
+              </AppLink>
             </Button>
           </div>
 

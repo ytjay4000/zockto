@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap, Clock, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AppLink from '@/components/AppLink';
 
 const features = [
   {
@@ -70,10 +71,10 @@ const CTASection = () => {
               Convert your product landing page or product image into HIGH CONVERTING ADS
             </p>
             <Button size="lg" variant="hero" asChild>
-              <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
+              <AppLink>
                 Start Creating For Free
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
+              </AppLink>
             </Button>
           </motion.div>
         </motion.div>
