@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Play, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AppLink from '@/components/AppLink';
 const Hero = () => {
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
       {/* Background glow */}
@@ -74,10 +75,10 @@ const Hero = () => {
           duration: 0.5
         }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" variant="hero" asChild>
-              <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
+              <AppLink>
                 Get Started for Free
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
+              </AppLink>
             </Button>
             <Button size="lg" variant="outline" className="group" asChild>
               <a href="#demos">

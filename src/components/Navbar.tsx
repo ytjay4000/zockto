@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import AppLink from '@/components/AppLink';
 
 const navLinks = [
   { label: 'Demo', href: '#demos' },
@@ -74,9 +75,9 @@ const Navbar = () => {
               </a>
             ))}
             <Button variant="hero" size="sm" asChild>
-              <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
+              <AppLink>
                 Start Creating
-              </a>
+              </AppLink>
             </Button>
           </div>
 
@@ -106,9 +107,9 @@ const Navbar = () => {
                 </a>
               ))}
               <Button variant="hero" asChild>
-                <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
+                <AppLink>
                   Start Creating
-                </a>
+                </AppLink>
               </Button>
             </div>
           </motion.div>

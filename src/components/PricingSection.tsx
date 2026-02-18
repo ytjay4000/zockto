@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AppLink from '@/components/AppLink';
 
 const plans = [
   {
@@ -160,10 +161,10 @@ const PricingSection = () => {
                 className="w-full"
                 asChild
               >
-                <a href="https://app.zockto.com/ugc-ads" target="_blank" rel="noopener noreferrer">
+                <AppLink>
                   Get Started
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
+                </AppLink>
               </Button>
             </motion.div>
           ))}
