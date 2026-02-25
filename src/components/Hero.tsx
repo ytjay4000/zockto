@@ -59,7 +59,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            Turn product images into studio-quality ad videos. Create faster and scale profitably.
+            From product image or URL to studio-quality ad videos delivered in minutes.
           </p>
 
           {/* CTAs */}
