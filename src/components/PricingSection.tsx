@@ -12,7 +12,7 @@ const plans = [
     description: 'Great for small teams getting started.',
     features: [
       '600 credits',
-      'Up to 12 × 10-sec videos or 8 × 15-sec videos or 4 × 45-sec videos or 3 × 60-sec videos',
+      'Up to 12 × 10-sec videos\nor 8 × 15-sec videos\nor 4 × 45-sec videos\nor 3 × 60-sec videos',
       '1080p video quality',
       '200+ public voices + voice cloning',
       '150+ avatars, avatar cloning',
@@ -150,7 +150,7 @@ const PricingSection = () => {
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm text-foreground/90">{feature}</span>
+                      <span className="text-sm text-foreground/90 whitespace-pre-line">{feature}</span>
                     </li>
                   ))}
                 </ul>
