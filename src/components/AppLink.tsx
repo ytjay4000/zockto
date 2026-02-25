@@ -10,7 +10,7 @@ interface AppLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
  * A link component that redirects to app.zockto.com with the lead token appended.
  */
 const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
-  ({ appPath = '/ugc-ads', onClick, children, ...props }, ref) => {
+  ({ appPath = '/product-ad-shot', onClick, children, ...props }, ref) => {
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       if (onClick) onClick(e);
