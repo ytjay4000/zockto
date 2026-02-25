@@ -7,12 +7,12 @@ import AppLink from '@/components/AppLink';
 const plans = [
   {
     name: 'Basic',
-    monthlyPrice: 13.99,
-    annualPrice: 139,
+    monthlyPrice: 9.99,
+    annualPrice: 99,
     description: 'Great for small teams getting started.',
     features: [
-      '700 credits',
-      'Seven 25sec UGC videos or three 60sec UGC videos / month',
+      '600 credits',
+      'Up to 12 × 10-sec videos or 8 × 15-sec videos or 4 × 45-sec videos or 3 × 60-sec videos',
       '1080p video quality',
       '200+ public voices + voice cloning',
       '150+ avatars, avatar cloning',
