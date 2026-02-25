@@ -53,9 +53,9 @@ const Hero = () => {
 
           {/* Main headline */}
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
-            Create High-Converting{' '}
+            High-Converting{' '}
             <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">UGC Ads</span>{' '}
-            in 5 Minutes
+            in Minutes
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
