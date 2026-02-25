@@ -20,13 +20,13 @@ const plans = [
     popular: false,
   },
   {
-    name: 'Pro',
+    name: 'Creator',
     monthlyPrice: 29,
     annualPrice: 299,
     description: 'For fast-growing teams who are scaling.',
     features: [
       '2,400 credits',
-      'Twenty-four 25sec UGC videos or twelve 60sec UGC videos / month',
+      'Up to 48 × 10-sec videos\nor 32 × 15-sec videos\nor 16 × 45-sec videos\nor 12 × 60-sec videos',
       '1080p video quality',
       '200+ public voices + voice cloning',
       '150+ avatars, avatar cloning',
