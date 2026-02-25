@@ -53,14 +53,13 @@ const Hero = () => {
 
           {/* Main headline */}
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
-            Create Stunning{' '}
-            <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">UGC Videos</span>{' '}
-            in Minutes
+            Create High-Converting{' '}
+            <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">UGC Ads</span>{' '}
+            in 5 Minutes
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            Transform your marketing with AI-generated demo videos that convert. 
-            See real examples below and start creating your own today.
+            Turn product images into studio-quality ad videos. Create faster and scale profitably.
           </p>
 
           {/* CTAs */}
