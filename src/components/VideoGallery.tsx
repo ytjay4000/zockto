@@ -28,7 +28,7 @@ const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardP
   const [isInView, setIsInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMuted = activeAudioId !== video.id;
+  const isMuted = false;
 
   useEffect(() => {
     if (videoRef.current) videoRef.current.muted = isMuted;
