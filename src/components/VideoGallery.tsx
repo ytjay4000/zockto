@@ -81,7 +81,7 @@ const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardP
 
 const VideoGallery = () => {
   const [selectedVideo, setSelectedVideo] = useState<typeof VIDEOS[0] | null>(null);
-  const [activeAudioId, setActiveAudioId] = useState<string | null>(null);
+  const [activeAudioId, setActiveAudioId] = useState<string | null>(VIDEOS[0].id);
 
   return (
     <section id="demos" className="py-20 relative">
