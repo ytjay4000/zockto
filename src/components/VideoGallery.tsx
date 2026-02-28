@@ -8,7 +8,7 @@ import AppLink from './AppLink';
 const VIDEOS = [
   { id: '1', link: 'https://storages.zockto.com/product_ads_shot_output/0708f8ad-7601-4c73-89e2-57c18d72f367/6d7ae9c6-a735-4d78-a786-4db70ab42dc61.mp4' },
   { id: '2', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/74bf68d6-28fd-42f1-8e48-2e3f153eba0e1.mp4' },
-  { id: '3', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/b18de9b2-9950-4d9d-8e5e-56a2430f838b1.mp4' },
+  { id: '3', link: 'https://storages.zockto.com/demovideosample/video/ea424540-3da1-4a6e-9bf1-d45db7adc3c9/key_1763128653979_8744953.mp4' },
   { id: '4', link: 'https://storages.zockto.com/product_ads_shot_output/0708f8ad-7601-4c73-89e2-57c18d72f367/08f72cfd-a1e0-4fef-b9f9-0095bd0610691.mp4' },
   { id: '5', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/7e0c086d-3c4d-44c8-9366-f22b947a253a1.mp4' },
   { id: '6', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/979b835b-1997-49ac-b84c-eb34a2b8a84c1.mp4' },
