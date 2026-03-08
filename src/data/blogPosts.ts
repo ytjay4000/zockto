@@ -6,6 +6,7 @@ export interface BlogPost {
   date: string;
   excerpt: string;
   metaDescription: string;
+  image?: string;
 }
 
 export type BlogCategory = 'All' | 'Getting Started' | 'Platform Guides' | 'Industry' | 'Comparisons' | 'Strategy' | 'How-To' | 'Tools & Reviews';

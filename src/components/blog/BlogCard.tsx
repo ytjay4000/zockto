@@ -26,21 +26,31 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
         to={`/blog/${post.slug}`}
         className="group block rounded-xl border border-border/50 bg-card overflow-hidden transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1"
       >
-        {/* Gradient thumbnail */}
-        <div
-          className="h-44 relative overflow-hidden"
-          style={{
-            background: `linear-gradient(135deg, ${colors.from} 0%, ${colors.to} 100%)`,
-          }}
-        >
-          {/* Abstract pattern overlay */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-4 right-4 w-24 h-24 rounded-full border-2 border-white/30" />
-            <div className="absolute bottom-6 left-6 w-16 h-16 rounded-lg border-2 border-white/20 rotate-12" />
-            <div className="absolute top-1/2 left-1/3 w-8 h-8 rounded-full bg-white/10" />
-          </div>
+        {/* Thumbnail */}
+        <div className="h-44 relative overflow-hidden">
+          {post.image ? (
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            <div
+              className="w-full h-full"
+              style={{
+                background: `linear-gradient(135deg, ${colors.from} 0%, ${colors.to} 100%)`,
+              }}
+            >
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-4 right-4 w-24 h-24 rounded-full border-2 border-white/30" />
+                <div className="absolute bottom-6 left-6 w-16 h-16 rounded-lg border-2 border-white/20 rotate-12" />
+                <div className="absolute top-1/2 left-1/3 w-8 h-8 rounded-full bg-white/10" />
+              </div>
+            </div>
+          )}
           {/* Category badge */}
-          <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm text-white">
+          <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium bg-black/40 backdrop-blur-sm text-white">
             {post.category}
           </span>
         </div>

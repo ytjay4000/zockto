@@ -77,12 +77,21 @@ const BlogPost = () => {
       <Navbar />
 
       {/* Header */}
-      <header
-        className="pt-28 pb-12 md:pt-36 md:pb-16 relative overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg, ${colors.from}15 0%, ${colors.to}10 100%)`,
-        }}
-      >
+      <header className="pt-28 pb-12 md:pt-36 md:pb-16 relative overflow-hidden">
+        {/* Background - image or gradient */}
+        {post.image ? (
+          <div className="absolute inset-0">
+            <img src={post.image} alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+          </div>
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(135deg, ${colors.from}15 0%, ${colors.to}10 100%)`,
+            }}
+          />
+        )}
         <div className="container px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -119,6 +128,22 @@ const BlogPost = () => {
               </span>
             </div>
           </motion.div>
+
+          {/* Featured image */}
+          {post.image && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-8 max-w-3xl rounded-xl overflow-hidden shadow-lg"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-auto object-cover max-h-[400px]"
+              />
+            </motion.div>
+          )}
         </div>
       </header>
 
