@@ -124,18 +124,25 @@ const BlogPost = () => {
 
       {/* Content */}
       <div className="container px-4 py-12">
+        {/* Mobile TOC */}
+        <div className="lg:hidden max-w-[780px] mx-auto">
+          <TableOfContents content={content} />
+        </div>
+
         <div className="flex gap-12 max-w-5xl mx-auto">
           {/* Main content */}
           <article className="flex-1 min-w-0 max-w-[780px]">
-            <TableOfContents content={content} />
             <MarkdownRenderer content={bodyContent} />
             <FAQAccordion faqs={faqs} />
             <BlogCTA />
           </article>
 
           {/* Desktop TOC sidebar */}
-          <aside className="hidden lg:block">
-            <TableOfContents content={content} />
+          <aside className="hidden lg:block w-64 shrink-0">
+            <div className="sticky top-24">
+              <h4 className="font-display font-semibold text-sm text-foreground mb-3">Table of Contents</h4>
+              <TableOfContents content={content} />
+            </div>
           </aside>
         </div>
 
