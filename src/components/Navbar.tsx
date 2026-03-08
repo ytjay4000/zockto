@@ -29,10 +29,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setIsMobileMenuOpen(false);
     
+    // Regular route links (not hash links)
+    if (!href.startsWith('#')) {
+      e.preventDefault();
+      navigate(href);
+      return;
+    }
+
+    e.preventDefault();
     // If not on home page, navigate to home first with the hash
     if (location.pathname !== '/') {
       navigate('/' + href);
