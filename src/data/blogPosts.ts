@@ -21,6 +21,7 @@ export const CATEGORY_COLORS: Record<string, { from: string; to: string }> = {
   'Comparisons': { from: 'hsl(30, 90%, 50%)', to: 'hsl(40, 80%, 60%)' },
   'Strategy': { from: 'hsl(235, 70%, 50%)', to: 'hsl(250, 60%, 65%)' },
   'How-To': { from: 'hsl(190, 80%, 45%)', to: 'hsl(200, 70%, 60%)' },
+  'Tools & Reviews': { from: 'hsl(340, 70%, 50%)', to: 'hsl(350, 60%, 65%)' },
 };
 
 export const blogPosts: BlogPost[] = [
