@@ -15,6 +15,7 @@ const socialLinks = [
 
 const pageLinks = [
   { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Privacy Policy', href: '/privacy' },
   { label: 'Terms Of Service', href: '/terms-of-service' },
   { label: 'Contact', href: '/contact' },
