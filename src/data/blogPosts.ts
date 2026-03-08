@@ -8,10 +8,10 @@ export interface BlogPost {
   metaDescription: string;
 }
 
-export type BlogCategory = 'All' | 'Getting Started' | 'Platform Guides' | 'Industry' | 'Comparisons' | 'Strategy' | 'How-To';
+export type BlogCategory = 'All' | 'Getting Started' | 'Platform Guides' | 'Industry' | 'Comparisons' | 'Strategy' | 'How-To' | 'Tools & Reviews';
 
 export const BLOG_CATEGORIES: BlogCategory[] = [
-  'All', 'Getting Started', 'Platform Guides', 'Industry', 'Comparisons', 'Strategy', 'How-To'
+  'All', 'Getting Started', 'Platform Guides', 'Industry', 'Comparisons', 'Strategy', 'How-To', 'Tools & Reviews'
 ];
 
 export const CATEGORY_COLORS: Record<string, { from: string; to: string }> = {
