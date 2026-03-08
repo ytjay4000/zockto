@@ -81,9 +81,8 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
         )}
       </div>
 
-      {/* Desktop sticky sidebar */}
-      <nav className="hidden lg:block sticky top-24 w-64 shrink-0">
-        <h4 className="font-display font-semibold text-sm text-foreground mb-3">Table of Contents</h4>
+      {/* Desktop sidebar - just the list */}
+      <nav className="hidden lg:block">
         <ul className="space-y-1.5 border-l border-border/50">
           {headings.map((h) => (
             <li key={h.id}>
