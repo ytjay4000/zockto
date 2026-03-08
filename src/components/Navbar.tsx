@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Features', href: '#features' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Blog', href: '/blog' },
 ];
 
 const Navbar = () => {
@@ -28,10 +29,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setIsMobileMenuOpen(false);
     
+    // Regular route links (not hash links)
+    if (!href.startsWith('#')) {
+      e.preventDefault();
+      navigate(href);
+      return;
+    }
+
+    e.preventDefault();
     // If not on home page, navigate to home first with the hash
     if (location.pathname !== '/') {
       navigate('/' + href);
@@ -68,7 +76,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
@@ -100,7 +108,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.label}
