@@ -6,6 +6,7 @@ export interface BlogPost {
   date: string;
   excerpt: string;
   metaDescription: string;
+  image?: string;
 }
 
 export type BlogCategory = 'All' | 'Getting Started' | 'Platform Guides' | 'Industry' | 'Comparisons' | 'Strategy' | 'How-To' | 'Tools & Reviews';
@@ -33,6 +34,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-03-01',
     excerpt: 'Two years ago, if you were a startup trying to compete with an established brand in advertising, you were fighting with a slingshot against a cannon.',
     metaDescription: 'Learn how startups can use AI marketing tools to compete with big brands. Practical playbook for AI video ads, multilingual campaigns, and startup growth strategies.',
+    image: '/blog-images/startup-marketing-with-ai.jpg',
   },
   {
     slug: 'ugc-vs-traditional-ads',
@@ -42,6 +44,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-28',
     excerpt: "If you've spent any time in performance marketing circles lately, you've heard the gospel: UGC outperforms everything. But is that actually true?",
     metaDescription: 'Compare UGC ads vs traditional ads with real 2026 performance data. See CTR, CPC, conversion rates, and learn the best hybrid strategy for your brand.',
+    image: '/blog-images/ugc-vs-traditional-ads.jpg',
   },
   {
     slug: 'video-ads-vs-image-ads',
@@ -51,6 +54,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-25',
     excerpt: "It's the question every marketer and ecommerce brand eventually faces: should I run video ads or image ads?",
     metaDescription: 'Video ads vs image ads: see real 2026 performance data on CTR, CPC, ROAS, and conversion rates. Learn which ad format drives more sales for your brand.',
+    image: '/blog-images/video-ads-vs-image-ads.jpg',
   },
   {
     slug: 'd2c-brand-video-marketing',
@@ -60,6 +64,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-22',
     excerpt: "If you're running a D2C brand in 2026 and not investing heavily in video marketing, you're essentially bringing a knife to a gunfight.",
     metaDescription: 'The complete 2026 playbook for D2C brand video marketing. Learn video formats, platform strategies, creative testing frameworks, and scaling from ₹1L to ₹50L.',
+    image: '/blog-images/d2c-brand-video-marketing.jpg',
   },
   {
     slug: 'zockto-vs-arcads',
@@ -69,6 +74,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-19',
     excerpt: "If you're shopping for an AI ad generator in 2026, Zockto and Arcads are two names you'll come across quickly.",
     metaDescription: 'Zockto vs Arcads comparison: pricing, features, video quality, and ease of use. Find out which AI ad generator is better for your e-commerce brand in 2026.',
+    image: '/blog-images/zockto-vs-arcads.jpg',
   },
   {
     slug: 'zockto-vs-creatify',
@@ -78,6 +84,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-16',
     excerpt: "Creatify has been one of the more popular mid-range AI video ad tools for a while. So which one should you actually use?",
     metaDescription: 'Zockto vs Creatify: honest comparison of pricing, features, video length, and capabilities. See which AI video ad tool offers better value in 2026.',
+    image: '/blog-images/zockto-vs-creatify.jpg',
   },
   {
     slug: 'zockto-vs-heygen',
@@ -87,6 +94,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-13',
     excerpt: "Comparing Zockto and HeyGen is a bit like comparing a racing bike to an SUV. They're both vehicles but built for different purposes.",
     metaDescription: 'Zockto vs HeyGen comparison for product video ads. Specialist vs generalist: which AI video tool is better for e-commerce advertising in 2026?',
+    image: '/blog-images/zockto-vs-heygen.jpg',
   },
   {
     slug: 'zockto-vs-joggai',
@@ -96,6 +104,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-10',
     excerpt: "JoggAI and Zockto are both AI video ad tools targeting e-commerce brands, but they've taken different paths.",
     metaDescription: 'Zockto vs JoggAI comparison: video length, avatars, pricing, and features. Find out which AI video ad tool is right for your e-commerce brand.',
+    image: '/blog-images/zockto-vs-joggai.jpg',
   },
   {
     slug: 'multilingual-video-ads',
@@ -105,6 +114,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-07',
     excerpt: "Only 10% of India's population is comfortable consuming content in English. Running English-only ads means you're invisible to 90% of your market.",
     metaDescription: 'Learn how to create multilingual video ads with AI. Scale globally with ads in 48 languages. Data on regional language ad performance and step-by-step guide.',
+    image: '/blog-images/multilingual-video-ads.jpg',
   },
   {
     slug: 'ai-ads-skincare-beauty',
@@ -114,6 +124,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-04',
     excerpt: 'Skincare and beauty is a $430 billion global industry and one of the most competitive advertising categories on the planet.',
     metaDescription: 'Create high-converting AI video ads for skincare and beauty products. Script formulas, platform strategies, and creative scaling tips for beauty brands.',
+    image: '/blog-images/ai-ads-skincare-beauty.jpg',
   },
   {
     slug: 'future-of-ai-advertising',
@@ -123,6 +134,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-02-01',
     excerpt: "AI isn't \"coming\" to advertising. It's already here, and it's already reshaping the industry in ways that most people haven't fully processed.",
     metaDescription: 'Explore the future of AI in advertising: from AI-generated creatives to autonomous campaigns. Bold predictions and practical strategies for 2026 and beyond.',
+    image: '/blog-images/future-of-ai-advertising.jpg',
   },
   {
     slug: 'automated-ad-creation',
@@ -132,6 +144,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-29',
     excerpt: 'In 2020, creating a 30-second product video ad required a videographer, a model, a studio, an editor, and 2-4 weeks. In 2026, you upload a photo and click 5 buttons.',
     metaDescription: 'Learn how automated ad creation with AI is replacing traditional video production. Real cost comparisons, workflows, and step-by-step guide to making the switch.',
+    image: '/blog-images/automated-ad-creation.jpg',
   },
   {
     slug: 'ai-ads-health-supplements',
@@ -141,6 +154,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-26',
     excerpt: "The health and supplement industry in India is expected to hit $18 billion by 2027. The brands winning all have one thing in common: killer video ads.",
     metaDescription: 'Create high-converting AI video ads for health and supplement brands. Compliance tips, script frameworks, and platform strategies for supplement marketing.',
+    image: '/blog-images/ai-ads-health-supplements.jpg',
   },
   {
     slug: 'ab-testing-video-ads',
@@ -150,6 +164,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-23',
     excerpt: "Here's an uncomfortable truth about video ads: the ad you think will perform best almost never does.",
     metaDescription: 'Master A/B testing for video ads. Learn what to test first, how to read results, common mistakes, and how to scale winners for maximum ROAS.',
+    image: '/blog-images/ab-testing-video-ads.jpg',
   },
   {
     slug: 'why-ugc-ads-work',
@@ -159,6 +174,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-20',
     excerpt: "You're scrolling through Instagram, a polished brand ad appears. You scroll right past it. But then someone appears on screen — a regular person talking casually.",
     metaDescription: 'Discover the psychology behind why UGC ads work. 6 psychological principles, real performance data, and how AI-generated UGC is changing authentic marketing.',
+    image: '/blog-images/why-ugc-ads-work.jpg',
   },
   {
     slug: 'ai-voice-cloning-for-ads',
@@ -168,6 +184,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-17',
     excerpt: "Your English ad doesn't resonate in Coimbatore. Your Hindi voiceover falls flat in Kolkata. AI voice cloning solves this.",
     metaDescription: 'Learn how AI voice cloning lets you create ads in 48 languages. Real multilingual ad performance data and step-by-step guide for brands going global.',
+    image: '/blog-images/ai-voice-cloning-for-ads.jpg',
   },
   {
     slug: 'pinterest-video-ads',
@@ -177,6 +194,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-14',
     excerpt: "Pinterest isn't social media. It's a visual search engine where 97% of top searches are unbranded — a massive opportunity for product brands.",
     metaDescription: 'Complete guide to Pinterest video ads for product brands. Ad formats, creative best practices, targeting strategies, and AI-powered production tips.',
+    image: '/blog-images/pinterest-video-ads.jpg',
   },
   {
     slug: 'reduce-ad-production-costs',
@@ -186,6 +204,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-11',
     excerpt: "Every time you look at video production costs, you wince. A freelance UGC creator wants ₹15,000-₹40,000 per video. AI is demolishing this cost trap.",
     metaDescription: 'Reduce video ad production costs by 90% with AI. Real cost comparisons between traditional and AI production, plus a step-by-step switching guide.',
+    image: '/blog-images/reduce-ad-production-costs.jpg',
   },
   {
     slug: 'short-form-video-ads',
@@ -195,6 +214,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-08',
     excerpt: 'The average human attention span is now 8.25 seconds. Short-form video ads have a massive structural advantage.',
     metaDescription: 'Why 15-60 second video ads convert better than long-form. Data on optimal video length, hook strategies, and how to create short-form ads at scale.',
+    image: '/blog-images/short-form-video-ads.jpg',
   },
   {
     slug: 'ecommerce-video-marketing-strategy',
@@ -204,6 +224,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-05',
     excerpt: '84% of consumers say they\'ve been convinced to buy a product after watching a brand\'s video. If you don\'t have a clear video marketing strategy, you\'re leaving money on the table.',
     metaDescription: 'Complete 2026 e-commerce video marketing strategy. 7 essential video types, platform-by-platform playbook, budget framework, and AI-powered production guide.',
+    image: '/blog-images/ecommerce-video-marketing-strategy.jpg',
   },
   {
     slug: 'google-display-video-ads',
@@ -213,6 +234,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-01-02',
     excerpt: "Google Display Network reaches over 90% of internet users worldwide. Combine that reach with video and you've got one of the most powerful advertising channels available.",
     metaDescription: 'Complete guide to Google Display video ads. Ad formats, specs, creative strategies, targeting, and AI-powered production for higher CTR and lower CPA.',
+    image: '/blog-images/google-display-video-ads.jpg',
   },
   {
     slug: 'ai-video-ads-for-ecommerce',
@@ -222,6 +244,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-30',
     excerpt: '73% of consumers prefer watching a short video to learn about a product. AI video ad tools have matured to where a solo Shopify seller can create production-quality videos.',
     metaDescription: 'Complete 2026 guide to AI video ads for e-commerce. How AI video tools work, 5 essential ad types, category playbooks, and platform strategies.',
+    image: '/blog-images/ai-video-ads-for-ecommerce.jpg',
   },
   {
     slug: 'product-video-best-practices',
@@ -231,6 +254,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-27',
     excerpt: "Product pages with video convert 80% better than those without. Yet most e-commerce brands are still winging it with their video creative.",
     metaDescription: '10 product video best practices for higher conversions. Hook strategies, optimal length, CTA tips, and how to create high-converting video ads at scale.',
+    image: '/blog-images/product-video-best-practices.jpg',
   },
   {
     slug: 'flipkart-seller-video-ads',
@@ -240,6 +264,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-24',
     excerpt: "If you're selling on Flipkart and still relying on static images alone, you're leaving money on the table. Product videos have become one of the biggest conversion levers.",
     metaDescription: 'Flipkart seller guide to product video ads. Video specs, AI creation tools, ad manager setup, and tips from top-performing Flipkart sellers.',
+    image: '/blog-images/flipkart-seller-video-ads.jpg',
   },
   {
     slug: 'scaling-ad-creatives',
@@ -249,6 +274,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-21',
     excerpt: "You need more ad creatives — more hooks, more variations, more fresh content. But your production budget is already stretched thin.",
     metaDescription: 'Scale ad creative production 10-50x without increasing budget. Systematic testing frameworks, AI workflows, and budget allocation strategies.',
+    image: '/blog-images/scaling-ad-creatives.jpg',
   },
   {
     slug: 'ugc-ads-without-creators',
@@ -258,6 +284,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-18',
     excerpt: "79% of consumers say UGC highly impacts their purchasing decisions. What if you could create UGC-style ads without the cost and hassle of hiring creators?",
     metaDescription: 'Create UGC ads without hiring creators using AI. Step-by-step guide, proven frameworks, tool comparisons, and tips for authentic AI-generated UGC.',
+    image: '/blog-images/ugc-ads-without-creators.jpg',
   },
   {
     slug: 'video-ad-script-writing',
@@ -267,6 +294,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-15',
     excerpt: "The script matters more than production quality. A well-scripted ad filmed on an iPhone can outperform a $50,000 production 10x.",
     metaDescription: 'Master video ad script writing. 15 hook formulas, 4 proven frameworks, copy-paste templates, and psychology-backed tips for scripts that convert.',
+    image: '/blog-images/video-ad-script-writing.jpg',
   },
   {
     slug: 'amazon-product-video-ads',
@@ -276,6 +304,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-12',
     excerpt: "Amazon listings with video see a 9.7% average sales increase. Yet the majority of sellers still don't have video. AI is closing that gap.",
     metaDescription: 'Complete guide to Amazon product video ads. Listing videos, Sponsored Brand Video, A+ Content, and how to create Amazon videos with AI.',
+    image: '/blog-images/amazon-product-video-ads.jpg',
   },
   {
     slug: 'ai-ads-fashion',
@@ -285,6 +314,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-09',
     excerpt: "Fashion has always been visual. But in 2026, visual doesn't mean glossy magazine spreads — it means video. Short-form, vertical, fast-paced, and everywhere.",
     metaDescription: 'Create AI video ads for fashion and apparel brands. Ad formats, platform strategies, D2C tips, and how to produce fashion video content at scale.',
+    image: '/blog-images/ai-ads-fashion.jpg',
   },
   {
     slug: 'ai-ads-food-beverages',
@@ -294,6 +324,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-06',
     excerpt: "Food is visceral — the right video can literally make someone's mouth water and trigger an impulse buy. AI is making food video ads accessible to every brand.",
     metaDescription: 'Create AI video ads for food and beverage brands. Video formats, platform strategies, subcategory playbooks, and cost comparison vs traditional food shoots.',
+    image: '/blog-images/ai-ads-food-beverages.jpg',
   },
   {
     slug: 'ai-ads-home-decor',
@@ -303,6 +334,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-12-03',
     excerpt: "Selling home decor online has a unique challenge: your product needs context to sell. AI video ads bridge the gap between a white-background photo and an aspirational lifestyle.",
     metaDescription: 'Create AI video ads for home decor and lifestyle products. Video formats, seasonal strategies, platform tips, and cost comparison vs traditional production.',
+    image: '/blog-images/ai-ads-home-decor.jpg',
   },
   {
     slug: 'ai-ads-jewelry',
@@ -312,6 +344,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-30',
     excerpt: "Static images barely capture 10% of your jewelry's magic. AI-powered video ads let you showcase sparkle, craftsmanship, and light play in scroll-stopping content.",
     metaDescription: 'Create AI video ads for jewelry brands. Ad formats, platform strategies, production tips, and cost comparison for rings, necklaces, and fine jewelry marketing.',
+    image: '/blog-images/ai-ads-jewelry.jpg',
   },
   {
     slug: 'ai-ads-tech-gadgets',
@@ -321,6 +354,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-27',
     excerpt: "Tech products are feature-rich but hard to explain in a static image. Video lets you demonstrate features, compare specs, and create excitement that drives purchases.",
     metaDescription: 'Create AI video ads for tech and gadget products. Video formats by tech category, platform strategies, and tips for electronics marketing at scale.',
+    image: '/blog-images/ai-ads-tech-gadgets.jpg',
   },
   {
     slug: 'roi-of-ai-video-ads',
@@ -330,6 +364,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-24',
     excerpt: "Everyone talks about AI video ads. Very few talk about the actual numbers. We answer with data — not vague promises.",
     metaDescription: 'Real ROI data for AI video ads. Production cost savings, performance benchmarks, and revenue scenarios for brands at every ad spend level.',
+    image: '/blog-images/roi-of-ai-video-ads.jpg',
   },
   {
     slug: 'ai-product-photography',
@@ -339,6 +374,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-21',
     excerpt: "How many products in your catalog have genuinely great photography? AI product photography fills the gap — and in 2026, the results are stunning.",
     metaDescription: 'Create studio-quality product photos with AI. Cost comparison, category guides, platform requirements, and tips for e-commerce product photography.',
+    image: '/blog-images/ai-product-photography.jpg',
   },
   {
     slug: 'youtube-shorts-ads',
@@ -348,6 +384,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-18',
     excerpt: "YouTube Shorts gets 70 billion+ daily views with CPMs 50-80% lower than standard YouTube ads. The window of opportunity is wide open.",
     metaDescription: 'Complete guide to YouTube Shorts ads for product brands. Campaign types, creative strategies, targeting, and how to create Shorts ads with AI.',
+    image: '/blog-images/youtube-shorts-ads.jpg',
   },
   {
     slug: 'how-to-create-ugc-ads',
@@ -357,6 +394,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-15',
     excerpt: "UGC ads get 4x higher click-through rates than traditional brand ads. Here's a complete step-by-step guide to creating your first UGC ad.",
     metaDescription: 'Step-by-step guide to creating UGC ads. 5 UGC ad types, script writing, creation methods, testing strategies, and tools for beginners.',
+    image: '/blog-images/how-to-create-ugc-ads.jpg',
   },
   {
     slug: 'ai-avatar-video-ads',
@@ -366,6 +404,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-12',
     excerpt: "Humans are wired to pay attention to faces. AI avatars let you create spokesperson-style video ads at a fraction of the traditional cost.",
     metaDescription: 'Complete guide to AI avatar video ads. Avatar types, realism in 2026, use cases, brand matching tips, and ethics of AI spokesperson advertising.',
+    image: '/blog-images/ai-avatar-video-ads.jpg',
   },
   {
     slug: 'create-ads-without-camera',
@@ -375,6 +414,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-09',
     excerpt: "No camera. No studio. No lighting equipment. No actors. Just your product and a few minutes. AI tools create studio-quality ads from a basic product image.",
     metaDescription: 'Create professional product ads without a camera or studio. AI-powered video and photo creation guide with cost comparisons and quality tips.',
+    image: '/blog-images/create-ads-without-camera.jpg',
   },
   {
     slug: 'facebook-video-ads-guide',
@@ -384,6 +424,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-06',
     excerpt: "Every year someone declares Facebook ads dead. Every year Meta's ad revenue keeps climbing. Here's what actually works in 2026.",
     metaDescription: 'Facebook video ads guide for 2026. What works, what doesn\'t, ad formats, Advantage+ strategies, AI creative production, and scaling framework.',
+    image: '/blog-images/facebook-video-ads-guide.jpg',
   },
   {
     slug: 'zockto-vs-traditional-agency',
@@ -393,6 +434,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-11-03',
     excerpt: "Here's a scenario every growing business hits: you know video ads work, you know UGC-style content converts, and you know you need to start producing more of it.",
     metaDescription: 'Zockto vs video agency: real cost and time comparison. See per-video pricing, timelines, quality benchmarks, and when to use AI vs agency production.',
+    image: '/blog-images/zockto-vs-traditional-agency.jpg',
   },
   {
     slug: 'product-url-to-video',
@@ -402,6 +444,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-31',
     excerpt: "You've got 200 products in your Shopify store. You know video ads perform better. But creating even one professional video ad takes hours of work.",
     metaDescription: 'Turn any product URL into a video ad in 2 minutes with AI. Step-by-step guide, platform compatibility, and tips for scaling across your entire catalog.',
+    image: '/blog-images/product-url-to-video.jpg',
   },
   {
     slug: 'ai-ads-for-beginners',
@@ -411,6 +454,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-28',
     excerpt: "If you've been hearing the term \"AI ads\" everywhere but aren't quite sure what it means, you're not alone.",
     metaDescription: 'AI ads for beginners: what they are, how they work, and how to create your first one. No jargon, no hype — just a practical guide for starting from zero.',
+    image: '/blog-images/ai-ads-for-beginners.jpg',
   },
   {
     slug: 'best-ai-video-ad-tools-india',
@@ -420,6 +464,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-25',
     excerpt: "Most \"best of\" lists recommend tools priced in dollars, designed for Western markets, with zero support for Hindi or regional languages. That's changing fast.",
     metaDescription: 'Best AI video ad tools in India compared: Zockto, Hypergro, Scalio, InVideo, Spyne. INR pricing, Indian language support, and feature comparison.',
+    image: '/blog-images/best-ai-video-ad-tools-india.jpg',
   },
   {
     slug: 'tiktok-video-ads-ai',
@@ -429,6 +474,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-22',
     excerpt: "TikTok isn't the \"Gen Z dance app\" anymore. It's a full-blown commerce platform with over 1.5 billion active users.",
     metaDescription: 'Complete guide to TikTok video ads with AI. Ad formats, creative strategies, AI tools comparison, and scaling tips for higher ROAS on TikTok.',
+    image: '/blog-images/tiktok-video-ads-ai.jpg',
   },
   {
     slug: 'ai-video-ad-maker',
@@ -438,6 +484,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-19',
     excerpt: "If your e-commerce brand isn't running video ads in 2026, you're leaving money on the table. A lot of money.",
     metaDescription: 'Best AI video ad makers for e-commerce in 2026. Head-to-head comparison, pricing breakdown, use cases by category, and getting started guide.',
+    image: '/blog-images/ai-video-ad-maker.jpg',
   },
   {
     slug: 'video-ads-conversion-rate',
@@ -447,6 +494,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-16',
     excerpt: "Video ads convert at 2-3x the rate of static image ads across nearly every platform and product category. Here's the data.",
     metaDescription: 'How video ads increase conversion rates: platform benchmarks, psychology, creative elements, and a practical testing framework with real 2026 data.',
+    image: '/blog-images/video-ads-conversion-rate.jpg',
   },
   {
     slug: 'best-ai-ugc-tools-2026',
@@ -456,6 +504,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-13',
     excerpt: "The AI UGC space has exploded. We spent weeks testing the top tools — creating real ads, comparing output quality, and doing the math on pricing.",
     metaDescription: '7 best AI UGC tools in 2026 compared: Zockto, Arcads, Creatify, JoggAI, HeyGen, EzUGC, Winclo AI. Hands-on testing with real pricing and quality data.',
+    image: '/blog-images/best-ai-ugc-tools-2026.jpg',
   },
   {
     slug: 'instagram-reels-ads',
@@ -465,6 +514,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-10',
     excerpt: "Instagram Reels ads are the single best-performing ad format on Meta right now. But most brands are still running Reels ads that look like… ads.",
     metaDescription: 'Create Instagram Reels ads that convert. Ad anatomy, 5 creative formats, AI production at scale, targeting strategies, and common ROAS-killing mistakes.',
+    image: '/blog-images/instagram-reels-ads.jpg',
   },
   {
     slug: 'ai-ugc-video-generator',
@@ -474,6 +524,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-10-07',
     excerpt: "79% of consumers say UGC highly impacts their purchasing decisions. AI UGC video generators are completely changing the game for e-commerce brands.",
     metaDescription: 'AI UGC video generator guide: how they work, top tools compared, best practices for ads that convert, and real brand results in 2026.',
+    image: '/blog-images/ai-ugc-video-generator.jpg',
   },
 ];
 
