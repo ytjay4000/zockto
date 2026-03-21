@@ -6,15 +6,19 @@ interface AppLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
 }
 
-/**
- * A link component that redirects to app.zockto.com with the lead token appended.
- */
 const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
   ({ appPath = '/product-ad-shot', onClick, children, ...props }, ref) => {
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       if (onClick) onClick(e);
-      window.open(getAppUrl(appPath), '_blank', 'noopener,noreferrer');
+
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead');
+      }
+
+      setTimeout(() => {
+        window.open(getAppUrl(appPath), '_blank', 'noopener,noreferrer');
+      }, 300);
     };
 
     return (
