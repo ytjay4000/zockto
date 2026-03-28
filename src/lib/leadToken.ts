@@ -14,7 +14,7 @@ export function captureLeadToken() {
 /**
  * Get the app.zockto.com URL with lead token appended if available.
  */
-export function getAppUrl(path: string = "/product-ad-shot"): string {
+export function getAppUrl(path: string = "/ugc-ads"): string {
   const base = `https://app.zockto.com${path}`;
   const lead = localStorage.getItem("zockto_lead");
   if (lead) {
