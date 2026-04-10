@@ -89,7 +89,7 @@ const VideoGallery = () => {
     <section id="demos" className="py-20 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 gradient-glow opacity-50" />
       <div className="container px-4 relative z-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {VIDEOS.map((video, index) => (
             <motion.div key={video.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05 }}>
               <MiniCard video={video} activeAudioId={activeAudioId} onAudioActivate={setActiveAudioId} onExpand={(v) => { setActiveAudioId(null); setSelectedVideo(v); }} />
