@@ -9,9 +9,11 @@ const VIDEOS = [
   { id: '1', link: 'https://storages.zockto.com/product_ads_shot_output/0708f8ad-7601-4c73-89e2-57c18d72f367/6d7ae9c6-a735-4d78-a786-4db70ab42dc61.mp4' },
   { id: '2', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/74bf68d6-28fd-42f1-8e48-2e3f153eba0e1.mp4' },
   { id: '3', link: 'https://storages.zockto.com/demovideosample/video/ea424540-3da1-4a6e-9bf1-d45db7adc3c9/key_1763128653979_8744953.mp4' },
-  { id: '4', link: 'https://storages.zockto.com/product_ads_shot_output/0708f8ad-7601-4c73-89e2-57c18d72f367/08f72cfd-a1e0-4fef-b9f9-0095bd0610691.mp4' },
-  { id: '5', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/7e0c086d-3c4d-44c8-9366-f22b947a253a1.mp4' },
-  { id: '6', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/979b835b-1997-49ac-b84c-eb34a2b8a84c1.mp4' },
+  { id: '4', link: 'https://storages.zockto.com/product_ads_shot_output/0f5815f0-5465-4aaf-91b3-229196cd242b/2ae66c3b-44e3-48b5-a93b-2467b5ce14ec1.mp4' },
+  { id: '5', link: 'https://storages.zockto.com/product_ads_shot_output/0f5815f0-5465-4aaf-91b3-229196cd242b/8d992d7c-078f-48b5-b06f-6f1fc07b6a0f1.mp4' },
+  { id: '6', link: 'https://storages.zockto.com/product_ads_shot_output/0f5815f0-5465-4aaf-91b3-229196cd242b/3009ae18-8917-4875-9b44-0a8c3dd90a0c1.mp4' },
+  { id: '7', link: 'https://storages.zockto.com/product_ads_shot_output/0f5815f0-5465-4aaf-91b3-229196cd242b/f9861123-c191-4fe3-a3de-aec6b1c93afe1.mp4' },
+  { id: '8', link: 'https://storages.zockto.com/product_ads_shot_output/2a2be4cf-0028-4c18-801b-ef750e0c0be4/e467e9b3-fc62-42db-b645-4b3a6e5b88ba1.mp4' },
 ];
 
 interface MiniCardProps {
@@ -87,7 +89,7 @@ const VideoGallery = () => {
     <section id="demos" className="py-20 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 gradient-glow opacity-50" />
       <div className="container px-4 relative z-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {VIDEOS.map((video, index) => (
             <motion.div key={video.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05 }}>
               <MiniCard video={video} activeAudioId={activeAudioId} onAudioActivate={setActiveAudioId} onExpand={(v) => { setActiveAudioId(null); setSelectedVideo(v); }} />
