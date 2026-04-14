@@ -29,10 +29,10 @@ const VIDEOS_GLOBAL = [
 ];
 
 interface MiniCardProps {
-  video: typeof VIDEOS[0];
+  video: typeof VIDEOS_INDIA[0];
   activeAudioId: string | null;
   onAudioActivate: (id: string | null) => void;
-  onExpand: (video: typeof VIDEOS[0]) => void;
+  onExpand: (video: typeof VIDEOS_INDIA[0]) => void;
 }
 
 const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardProps) => {

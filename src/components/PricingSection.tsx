@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AppLink from '@/components/AppLink';
+import { useGeoLocation } from '@/hooks/useGeoLocation';
 
-const plans = [
+const plansIndia = [
   {
     name: 'Basic Plan',
     monthlyPrice: 999,
@@ -70,8 +71,77 @@ const plans = [
   },
 ];
 
+const plansGlobal = [
+  {
+    name: 'Basic Plan',
+    monthlyPrice: 39,
+    annualPrice: 372,
+    credits: '600',
+    description: 'Perfect for starting out',
+    whatYouGet: [
+      '12 × 10-sec videos',
+      '8 × 15-sec videos',
+      '4 × 45-sec videos',
+      '3 × 60-sec videos',
+      '40 product image creatives',
+    ],
+    features: [
+      '1080p video quality',
+      '200+ public voices + voice cloning',
+      '150+ avatars, avatar cloning',
+      '100+ templates, 48 languages supported',
+    ],
+    popular: false,
+  },
+  {
+    name: 'Creator Plan',
+    monthlyPrice: 99,
+    annualPrice: 948,
+    credits: '2,400',
+    description: 'Perfect for content creators',
+    whatYouGet: [
+      '48 × 10-sec videos',
+      '32 × 15-sec videos',
+      '16 × 45-sec videos',
+      '12 × 60-sec videos',
+      '160 product image creatives',
+    ],
+    features: [
+      '1080p video quality',
+      '200+ public voices + voice cloning',
+      '150+ avatars, avatar cloning',
+      '100+ templates, 48 languages supported',
+    ],
+    popular: true,
+  },
+  {
+    name: 'Business Plan',
+    monthlyPrice: 399,
+    annualPrice: 3828,
+    credits: '8,500',
+    description: 'Best for businesses and agencies',
+    whatYouGet: [
+      '170 × 10-sec videos',
+      '113 × 15-sec videos',
+      '57 × 45-sec videos',
+      '43 × 60-sec videos',
+      '567 product image creatives',
+    ],
+    features: [
+      '1080p video quality',
+      '200+ public voices + voice cloning',
+      '150+ avatars, avatar cloning',
+      '100+ templates, 48 languages supported',
+    ],
+    popular: false,
+  },
+];
+
 const PricingSection = () => {
   const [isAnnual, setIsAnnual] = useState(false);
+  const { isIndia } = useGeoLocation();
+  const plans = isIndia ? plansIndia : plansGlobal;
+  const currency = isIndia ? '₹' : '$';
 
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
@@ -161,7 +231,7 @@ const PricingSection = () => {
 
                 <div className="mb-1">
                   <span className="font-display text-5xl font-bold">
-                    ₹{isAnnual ? Math.round(plan.annualPrice / 12).toLocaleString() : plan.monthlyPrice.toLocaleString()}
+                    {currency}{isAnnual ? Math.round(plan.annualPrice / 12).toLocaleString() : plan.monthlyPrice.toLocaleString()}
                   </span>
                   <span className="text-muted-foreground text-lg">/ month</span>
                 </div>
