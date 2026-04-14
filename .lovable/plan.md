@@ -1,34 +1,32 @@
 
 
-## Plan: Install Meta Pixel & Track Lead Events
+## Plan: Geo-Based Content (Pricing + Demo Videos)
 
-### Current State
-- No Meta Pixel is currently installed (no `fbq` references in the codebase).
-- All "Get Started" / CTA buttons use the `AppLink` component, which calls `window.open()` on click.
-- There are ~7 places using `AppLink` (Navbar, Hero, CTASection, PricingSection, Footer, VideoGallery).
+### Approach
+Use a free IP geolocation API (e.g., `https://ipapi.co/json/`) to detect if the user is in India. Create a shared React context/hook (`useGeoLocation`) that caches the result and exposes an `isIndia` boolean. Both `PricingSection` and `VideoGallery` will consume this hook to show region-appropriate content.
 
-### Changes
+### New File: `src/hooks/useGeoLocation.ts`
+- On mount, fetch `https://ipapi.co/json/` (free, no key needed)
+- Parse `country_code`, set `isIndia = country_code === 'IN'`
+- Cache in `localStorage` to avoid repeated API calls
+- Default to India (`true`) while loading or on error (safe fallback for existing users)
 
-#### 1. Add Meta Pixel base code to `index.html`
-Insert the standard Meta Pixel snippet (ID: `1671282827362523`) in the `<head>` section, right after GTM. This loads the pixel on all pages with `PageView` tracking.
+### Changes to `src/components/PricingSection.tsx`
+- Import `useGeoLocation`
+- Define two plan arrays: current INR plans (unchanged) and new USD plans:
+  - Basic: $39/mo, $31/mo annual ($372/yr)
+  - Creator: $99/mo, $79/mo annual ($948/yr)  
+  - Business: $399/mo, $319/mo annual ($3,828/yr)
+  - Same credits, features, and whatYouGet as INR plans
+- Swap currency symbol (`₹` vs `$`) and plan prices based on `isIndia`
 
-#### 2. Update `AppLink.tsx` to fire `fbq('track', 'Lead')` before redirect
-Modify the `handleClick` function to:
-1. Prevent default
-2. Call `fbq('track', 'Lead')` (with a type-safe `window.fbq` declaration)
-3. Wait 300ms via `setTimeout` before calling `window.open()`
+### Changes to `src/components/VideoGallery.tsx`
+- Import `useGeoLocation`
+- Define `VIDEOS_INDIA` (current 8 videos) and `VIDEOS_GLOBAL` (the 8 new URLs provided)
+- Select video array based on `isIndia`
 
-This ensures all CTA buttons across the site (Hero, Navbar, CTA Section, Pricing, Footer, VideoGallery) automatically fire the Lead event before redirecting, with no duplication.
-
-#### 3. Add `BlogCTA` tracking
-The blog CTA component (`BlogCTA.tsx`) uses a plain `<a>` tag instead of `AppLink`. Update it to also fire `fbq('track', 'Lead')` with a 300ms delay before navigation.
-
-#### 4. Add TypeScript declaration for `fbq`
-Add a global type declaration for `window.fbq` to avoid TS errors.
-
-### Files to modify
-- `index.html` — add pixel snippet
-- `src/components/AppLink.tsx` — add Lead event + delay
-- `src/components/blog/BlogCTA.tsx` — add Lead event + delay
-- `src/vite-env.d.ts` — add `fbq` type declaration
+### Files to create/modify
+1. **Create** `src/hooks/useGeoLocation.ts` — geo detection hook
+2. **Modify** `src/components/PricingSection.tsx` — dual pricing
+3. **Modify** `src/components/VideoGallery.tsx` — dual video sets
 
