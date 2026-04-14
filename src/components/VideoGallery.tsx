@@ -4,8 +4,9 @@ import { Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import VideoModal from './VideoModal';
 import AppLink from './AppLink';
+import { useGeoLocation } from '@/hooks/useGeoLocation';
 
-const VIDEOS = [
+const VIDEOS_INDIA = [
   { id: '1', link: 'https://storages.zockto.com/product_ads_shot_output/0708f8ad-7601-4c73-89e2-57c18d72f367/6d7ae9c6-a735-4d78-a786-4db70ab42dc61.mp4' },
   { id: '2', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/74bf68d6-28fd-42f1-8e48-2e3f153eba0e1.mp4' },
   { id: '3', link: 'https://storages.zockto.com/demovideosample/video/ea424540-3da1-4a6e-9bf1-d45db7adc3c9/key_1763128653979_8744953.mp4' },
@@ -16,11 +17,22 @@ const VIDEOS = [
   { id: '8', link: 'https://storages.zockto.com/product_ads_shot_output/2a2be4cf-0028-4c18-801b-ef750e0c0be4/e467e9b3-fc62-42db-b645-4b3a6e5b88ba1.mp4' },
 ];
 
+const VIDEOS_GLOBAL = [
+  { id: 'g1', link: 'https://storages.zockto.com/globalvideo_tempate/Product%20Testimonial.mp4' },
+  { id: 'g2', link: 'https://storages.zockto.com/globalvideo_tempate/food%20supplement%20display.mp4' },
+  { id: 'g3', link: 'https://storages.zockto.com/product_ads_shot_output/6cf1c3e0-9747-4080-bad4-2a95dd81f280/fcd969f0-27cd-4918-b6e5-cf8d4f6c20a61.mp4' },
+  { id: 'g4', link: 'https://storages.zockto.com/globalvideo_tempate/Athlete%20Nutrition%20Testimonial.mp4' },
+  { id: 'g5', link: 'https://storages.zockto.com/globalvideo_tempate/Gym%20Jewelry%20Testimonial.mp4' },
+  { id: 'g6', link: 'https://storages.zockto.com/globalvideo_tempate/Sustainable%20Fitness%20Testimonial.mp4' },
+  { id: 'g7', link: 'https://storages.zockto.com/globalvideo_tempate/Men%27s%20Testimonial.mp4' },
+  { id: 'g8', link: 'https://storages.zockto.com/globalvideo_tempate/Stackable%20Styling%20Tutorial.mp4' },
+];
+
 interface MiniCardProps {
-  video: typeof VIDEOS[0];
+  video: typeof VIDEOS_INDIA[0];
   activeAudioId: string | null;
   onAudioActivate: (id: string | null) => void;
-  onExpand: (video: typeof VIDEOS[0]) => void;
+  onExpand: (video: typeof VIDEOS_INDIA[0]) => void;
 }
 
 const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardProps) => {
@@ -82,7 +94,9 @@ const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardP
 };
 
 const VideoGallery = () => {
-  const [selectedVideo, setSelectedVideo] = useState<typeof VIDEOS[0] | null>(null);
+  const { isIndia } = useGeoLocation();
+  const VIDEOS = isIndia ? VIDEOS_INDIA : VIDEOS_GLOBAL;
+  const [selectedVideo, setSelectedVideo] = useState<typeof VIDEOS_INDIA[0] | null>(null);
   const [activeAudioId, setActiveAudioId] = useState<string | null>(VIDEOS[0].id);
 
   return (
