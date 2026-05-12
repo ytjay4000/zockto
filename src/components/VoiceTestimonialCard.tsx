@@ -14,8 +14,7 @@ const formatTime = (s: number) => {
 
 const BAR_COUNT = 28;
 
-const Waveform = ({ active, progress }: { active: boolean; progress: number }) => {
-  // Stable pseudo-random heights
+const Waveform = ({ progress }: { active: boolean; progress: number }) => {
   const heights = Array.from({ length: BAR_COUNT }, (_, i) => {
     const v = Math.sin(i * 1.3) * 0.5 + Math.cos(i * 0.7) * 0.5;
     return 30 + Math.abs(v) * 60;
@@ -29,14 +28,9 @@ const Waveform = ({ active, progress }: { active: boolean; progress: number }) =
             key={i}
             className={cn(
               'w-[3px] rounded-full transition-colors duration-150',
-              filled ? 'bg-primary' : 'bg-muted-foreground/30',
-              active && 'animate-pulse',
+              filled ? 'bg-amber-500' : 'bg-slate-200',
             )}
-            style={{
-              height: `${h}%`,
-              animationDelay: active ? `${i * 40}ms` : undefined,
-              animationDuration: active ? '900ms' : undefined,
-            }}
+            style={{ height: `${h}%` }}
           />
         );
       })}
@@ -92,25 +86,25 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
   const progress = duration ? current / duration : 0;
 
   return (
-    <div className="p-5 rounded-2xl gradient-card border border-border/50 hover:shadow-card-hover transition-shadow flex flex-col gap-4">
+    <div className="bg-white rounded-2xl p-5 md:p-6 border border-slate-200/60 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(245,158,11,0.12)] transition-all duration-300 flex flex-col gap-5">
       <div className="flex items-center gap-3">
-        <Avatar className="h-12 w-12 border border-border/50">
+        <Avatar className="h-12 w-12 border border-slate-200">
           {testimonial.photo && <AvatarImage src={testimonial.photo} alt={testimonial.name} />}
-          <AvatarFallback className="gradient-primary text-primary-foreground font-semibold text-sm">
+          <AvatarFallback className="bg-slate-100 text-slate-600 font-semibold text-sm">
             {initials(testimonial.name)}
           </AvatarFallback>
         </Avatar>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <span className="font-display font-semibold truncate">{testimonial.name}</span>
+            <span className="font-display font-semibold text-slate-900 truncate">{testimonial.name}</span>
             <BadgeCheck className="w-4 h-4 text-primary shrink-0" aria-label="Verified client" />
           </div>
-          <p className="text-xs text-muted-foreground truncate">{testimonial.role}</p>
+          <p className="text-xs text-slate-500 truncate">{testimonial.role}</p>
         </div>
       </div>
 
       {testimonial.quote && (
-        <p className="text-sm text-foreground/80 leading-relaxed line-clamp-3">
+        <p className="text-sm text-slate-700 leading-relaxed line-clamp-3">
           "{testimonial.quote}"
         </p>
       )}
@@ -119,7 +113,7 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
         <button
           onClick={toggle}
           aria-label={isPlaying ? 'Pause testimonial' : 'Play testimonial'}
-          className="shrink-0 w-11 h-11 rounded-full gradient-primary text-primary-foreground flex items-center justify-center shadow-glow hover:scale-105 transition-transform"
+          className="shrink-0 w-11 h-11 rounded-full bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center shadow-lg shadow-amber-500/20 hover:scale-105 transition-all"
         >
           {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
         </button>
@@ -133,7 +127,7 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
         >
           <Waveform active={isPlaying} progress={progress} />
         </div>
-        <span className="text-xs tabular-nums text-muted-foreground shrink-0 w-12 text-right">
+        <span className="text-[10px] font-medium tabular-nums text-slate-400 shrink-0 w-12 text-right">
           {formatTime(current)} / {formatTime(duration)}
         </span>
       </div>
