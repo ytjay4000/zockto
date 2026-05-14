@@ -2,11 +2,17 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 const Privacy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return <div className="min-h-screen bg-background">
+      <SEO
+        title="Privacy Policy — Zockto"
+        description="Read how Zockto collects, uses, and safeguards your data when you create AI-powered UGC video ads on our platform."
+        path="/privacy"
+      />
       <Navbar />
       
       <main className="pt-32 pb-20">
