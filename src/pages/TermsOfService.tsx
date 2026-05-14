@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const TermsOfService = () => {
   useEffect(() => {
@@ -10,6 +11,11 @@ const TermsOfService = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Terms of Service — Zockto"
+        description="Review the Terms of Service for using Zockto's AI UGC video platform, including subscriptions, content rights, and refund policy."
+        path="/terms-of-service"
+      />
       <Navbar />
       
       <main className="pt-32 pb-20">

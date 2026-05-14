@@ -3,6 +3,7 @@ import { Phone, MessageCircle, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const Contact = () => {
   useEffect(() => {
@@ -11,6 +12,11 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Contact Zockto — Talk to Our AI UGC Team"
+        description="Reach the Zockto team by phone, WhatsApp, or email. We help D2C brands and sellers ship AI-powered UGC video ads, fast."
+        path="/contact"
+      />
       <Navbar />
       <main className="pt-32 pb-20">
         <div className="container px-4">

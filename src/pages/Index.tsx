@@ -12,6 +12,7 @@ import PricingSection from '@/components/PricingSection';
 import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const Index = () => {
   const location = useLocation();
@@ -31,6 +32,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Zockto AI-Powered UGC Video Creation"
+        description="Create high-converting, fully edited UGC ads in minutes with Zockto — no camera, no influencer, no editing required."
+        path="/"
+      />
       <Navbar />
       <Hero />
       <VideoGallery />
