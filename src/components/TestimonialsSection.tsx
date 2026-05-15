@@ -34,7 +34,10 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
           {testimonial.name.split(' ').map(n => n[0]).join('')}
         </span>
       </div>
-      <span className="font-display font-semibold text-sm md:text-base">{testimonial.name}</span>
+      <div className="flex flex-col">
+        <span className="font-display font-semibold text-sm md:text-base leading-tight">{testimonial.name}</span>
+        <span className="text-xs text-muted-foreground">{testimonial.role}</span>
+      </div>
     </div>
   </div>
 );
