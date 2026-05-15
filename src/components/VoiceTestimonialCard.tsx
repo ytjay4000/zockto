@@ -127,9 +127,6 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
         >
           <Waveform active={isPlaying} progress={progress} />
         </div>
-        <span className="text-[10px] font-medium tabular-nums text-slate-400 shrink-0 w-12 text-right">
-          {formatTime(current)} / {formatTime(duration)}
-        </span>
       </div>
 
       <audio
