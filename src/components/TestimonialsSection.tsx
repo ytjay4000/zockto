@@ -3,24 +3,24 @@ import { Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Carter June',
-    quote: "At first I didn't believe it could make real ad videos from just a product link, but Zockto actually does it. The videos look clean, professional, and perform better than anything I've made manually. It's now part of my daily workflow.",
+    name: 'Meet Shah',
+    role: 'D2C Brand Owner',
+    quote: "Running a D2C brand, creatives are everything. Zockto lets me spin up fresh ad variations from just my product link — no shoots, no editors. My ROAS has genuinely improved since I started testing more creatives every week.",
   },
   {
-    name: 'Elena Park',
-    quote: "Zockto has completely changed how I create ads for my store. I just paste my product link, and within minutes, I get a professional video ready to post on social media. It's saved me so much time and money compared to hiring editors or agencies, and my sales have gone up since using it.",
+    name: 'Khushi',
+    role: 'E-commerce Seller',
+    quote: "I sell on multiple marketplaces and never had time to make videos. With Zockto I just paste the product URL and get a polished ad ready to post. My listings finally look like the big brands.",
   },
   {
-    name: 'James Nair',
-    quote: "Zockto helped me 10x my ad output without hiring anyone. It's the easiest way to create high-performing product videos. This has changed product advertising forever!",
+    name: 'Sriniwasa',
+    role: 'Performance Marketer',
+    quote: "As a performance marketer, creative testing is the bottleneck. Zockto gives me 10+ ad variations in the time it used to take to brief one. Winning creatives now show up in days, not weeks.",
   },
   {
-    name: 'Marcus Lee',
-    quote: "It is incredible that we can now get studio quality ads of our products in just a few minutes 10x cheaper than before!",
-  },
-  {
-    name: 'Sarah Bond',
-    quote: "Since switching to Zockto, we have been finally able to create tens of ads per product to test different ad variations quickly for our e-commerce store. It has been a gamechanger!",
+    name: 'Tarun',
+    role: 'Founder',
+    quote: "We were burning money on agencies and freelancers for every new ad. Zockto replaced that entire workflow. Studio-quality UGC ads, instantly, at a fraction of the cost — it's a no-brainer for any founder.",
   },
 ];
 
@@ -34,7 +34,10 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
           {testimonial.name.split(' ').map(n => n[0]).join('')}
         </span>
       </div>
-      <span className="font-display font-semibold text-sm md:text-base">{testimonial.name}</span>
+      <div className="flex flex-col">
+        <span className="font-display font-semibold text-sm md:text-base leading-tight">{testimonial.name}</span>
+        <span className="text-xs text-muted-foreground">{testimonial.role}</span>
+      </div>
     </div>
   </div>
 );
