@@ -1,30 +1,30 @@
 import { motion } from 'framer-motion';
-import { Link, UserCircle, FileText, Video } from 'lucide-react';
+import { Upload, LayoutTemplate, FileText, Video } from 'lucide-react';
 
 const steps = [
   {
     number: '1',
-    icon: Link,
-    title: 'Paste Your Product URL',
-    description: 'Our AI analyzes your product details, features, benefits, and key selling points to understand what makes it special.',
+    icon: Upload,
+    title: 'Upload Your Product Image',
+    description: 'Our AI analyzes your product — visuals, features, and selling points — to understand what makes it stand out.',
   },
   {
     number: '2',
-    icon: UserCircle,
-    title: 'Choose AI Avatar',
-    description: 'Select from over 100+ realistic AI avatars. Pick the perfect spokesperson for your brand and audience, with support for 29 languages.',
+    icon: LayoutTemplate,
+    title: 'Choose an Ad Template',
+    description: 'Pick from dozens of high-performing video ad templates, or paste a reference video you want to recreate for your product.',
   },
   {
     number: '3',
     icon: FileText,
-    title: 'Scripting',
-    description: 'Choose one of the recommended video scripts or write your own.',
+    title: 'Add Product Details (Optional)',
+    description: 'Want more control? Tell us which benefits or features to highlight, or provide your own script.',
   },
   {
     number: '4',
     icon: Video,
-    title: 'Edited Video Ready',
-    description: 'Press "Generate", and receive your ready to post video with edited B-roll, background music, and captions already in the video.',
+    title: 'Your Video Is Ready',
+    description: 'Hit "Generate" and get a fully edited, ready-to-post video — with B-roll, music, and captions built in.',
   },
 ];
 
