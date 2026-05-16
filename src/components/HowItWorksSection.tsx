@@ -24,7 +24,7 @@ const steps = [
     number: '4',
     icon: Video,
     title: 'Your Video Is Ready',
-    description: 'Hit "Generate" and get a fully edited, ready-to-post video — with B-roll, music, and captions built in.',
+    description: 'Hit "Generate" and get a fully edited, ready-to-post video — with B-roll, music, and more built in.',
   },
 ];
 
