@@ -33,4 +33,18 @@ export const voiceTestimonials: VoiceTestimonial[] = [
     role: 'Founder',
     audio: '/testimonials/tarun.m4a',
   },
+  {
+    id: 'sahil-garments',
+    name: 'Sahil',
+    role: 'Founder, Garment Brand',
+    audio: '/testimonials/feedback7.m4a',
+    quote: 'Tried many AI video tools. Zockto is the easiest — one prompt and the video is ready in great quality.',
+  },
+  {
+    id: 'neha-beauty',
+    name: 'Neha',
+    role: 'Co-founder, Skincare Brand',
+    audio: '/testimonials/feedback8.m4a',
+    quote: 'Super easy to use. Upload the product, pick a template, and the videos come out original and on-brand.',
+  },
 ];
