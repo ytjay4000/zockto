@@ -22,6 +22,16 @@ const testimonials = [
     role: 'Founder',
     quote: "We were burning money on agencies and freelancers for every new ad. Zockto replaced that entire workflow. Studio-quality UGC ads, instantly, at a fraction of the cost — it's a no-brainer for any founder.",
   },
+  {
+    name: 'Sahil',
+    role: 'Founder, Garment Brand',
+    quote: "We represent a garments firm and our work is around making product showcases. We tried multiple AI video tools — Zockto stood out. The pricing is fair, you give one simple prompt and the video comes out exactly the way you want, in great quality and a short turnaround.",
+  },
+  {
+    name: 'Neha',
+    role: 'Co-founder, Skincare Brand',
+    quote: "Our category is skincare and beauty. I recently tried Zockto and it's genuinely the easiest AI video tool I've used. Most tools make you fight with prompts and image generation — here you just pick a template, upload your product, and you get original-looking videos right away.",
+  },
 ];
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (

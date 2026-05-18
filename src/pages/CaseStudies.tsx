@@ -74,6 +74,36 @@ const caseStudies: CaseStudy[] = [
       { label: 'CPA', before: '₹540', after: '₹245', delta: '-55%', positive: true, icon: DollarSign },
     ],
   },
+  {
+    client: 'Garment & Apparel Brand',
+    industry: 'Fashion & Apparel',
+    summary:
+      'Replaced expensive studio shoots with Zockto AI videos generated from a single product prompt. Pushed fresh creatives every week across Meta and Instagram Reels.',
+    duration: '40 days',
+    spend: '₹3.6L ad spend',
+    quote: '"One simple prompt and the video is ready — great quality, short turnaround, and the rate is genuinely fair." — Sahil',
+    metrics: [
+      { label: 'ROAS', before: '1.6x', after: '3.9x', delta: '+144%', positive: true, icon: TrendingUp },
+      { label: 'CTR', before: '0.8%', after: '2.4%', delta: '+200%', positive: true, icon: MousePointerClick },
+      { label: 'CPM', before: '₹380', after: '₹242', delta: '-36%', positive: true, icon: TrendingDown },
+      { label: 'CPA', before: '₹720', after: '₹305', delta: '-58%', positive: true, icon: DollarSign },
+    ],
+  },
+  {
+    client: 'Skincare & Beauty Brand',
+    industry: 'Beauty & Personal Care',
+    summary:
+      'Used Zockto templates to spin original-looking product videos from a single upload. Tested 15+ hooks per SKU on Meta without any shoots or editors.',
+    duration: '35 days',
+    spend: '₹2.8L ad spend',
+    quote: '"Super easy. Pick a template, upload the product, and the videos look genuinely original." — Neha',
+    metrics: [
+      { label: 'ROAS', before: '2.0x', after: '4.6x', delta: '+130%', positive: true, icon: TrendingUp },
+      { label: 'CTR', before: '1.0%', after: '3.1%', delta: '+210%', positive: true, icon: MousePointerClick },
+      { label: 'Impressions', before: '120K', after: '410K', delta: '+241%', positive: true, icon: Eye },
+      { label: 'CPA', before: '₹610', after: '₹248', delta: '-59%', positive: true, icon: DollarSign },
+    ],
+  },
 ];
 
 const faqs = [
