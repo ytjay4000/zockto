@@ -198,11 +198,11 @@ const CaseStudyAIVsTraditional = () => {
               className="bg-background text-foreground hover:bg-background/90 font-semibold px-8"
             >
               <a
-                href="https://wa.me/917610336917"
+                href="https://app.zockto.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Start free on WhatsApp
+                Start Creating
               </a>
             </Button>
           </div>
