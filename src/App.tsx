@@ -10,6 +10,7 @@ import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import CaseStudies from "./pages/CaseStudies";
+import CaseStudyAIVsTraditional from "./pages/CaseStudyAIVsTraditional";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
