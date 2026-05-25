@@ -18,6 +18,7 @@ import CaseStudyBrandU from "./pages/CaseStudyBrandU";
 import CaseStudyNielsen from "./pages/CaseStudyNielsen";
 import CaseStudyForrester from "./pages/CaseStudyForrester";
 import CaseStudyAdobeFirefly from "./pages/CaseStudyAdobeFirefly";
+import CaseStudyCustomerThink from "./pages/CaseStudyCustomerThink";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
