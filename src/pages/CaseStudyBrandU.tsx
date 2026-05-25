@@ -74,7 +74,7 @@ const CaseStudyBrandU = () => {
                 transition={{ delay: i * 0.08 }}
                 className="rounded-2xl border border-border bg-card p-8 text-center"
               >
-                <div className="font-display text-4xl md:text-5xl font-bold text-primary mb-3">
+                <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-3 break-words hyphens-none leading-tight">
                   {s.number}
                 </div>
                 <p className="text-sm text-muted-foreground leading-snug">{s.label}</p>
