@@ -72,9 +72,9 @@ const CaseStudyBrandU = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="rounded-2xl border border-border bg-card p-8 text-center"
+                className="rounded-2xl border border-border bg-card p-6 text-center flex flex-col justify-center min-h-[180px]"
               >
-                <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-3 break-words hyphens-none leading-tight">
+                <div className="font-display text-2xl md:text-3xl font-bold text-primary mb-3 leading-tight">
                   {s.number}
                 </div>
                 <p className="text-sm text-muted-foreground leading-snug">{s.label}</p>
