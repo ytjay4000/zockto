@@ -16,6 +16,7 @@ import CaseStudyLAIFE from "./pages/CaseStudyLAIFE";
 import CaseStudyHouse from "./pages/CaseStudyHouse";
 import CaseStudyBrandU from "./pages/CaseStudyBrandU";
 import CaseStudyNielsen from "./pages/CaseStudyNielsen";
+import CaseStudyForrester from "./pages/CaseStudyForrester";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
