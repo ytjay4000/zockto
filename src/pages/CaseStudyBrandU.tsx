@@ -1,4 +1,4 @@
-import { Link } from  'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -139,10 +139,10 @@ const CaseStudyBrandU = () => {
             </p>
             <ul className="space-y-3 rounded-2xl bg-primary/5 border border-primary/15 p-6">
               {[
-                '9 videos shipped per day with a 3-person team — a daily cadence most fashion brands can't hit with much larger teams',
-                '20K–80K views on the top-performing AI video, well into the range where organic content starts compounding through the algorithm',
-                '200+ direct orders driven by a single AI video — not assists, not contributions, direct orders',
-                'AI video outperformed traditionally filmed content in both reach and sales',
+                "9 videos shipped per day with a 3-person team — a daily cadence most fashion brands can't hit with much larger teams",
+                "20K–80K views on the top-performing AI video, well into the range where organic content starts compounding through the algorithm",
+                "200+ direct orders driven by a single AI video — not assists, not contributions, direct orders",
+                "AI video outperformed traditionally filmed content in both reach and sales",
               ].map((item) => (
                 <li key={item} className="flex gap-3 items-start">
                   <Check className="w-5 h-5 text-primary mt-1 shrink-0" />
