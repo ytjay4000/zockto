@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyAIVsTraditional from "./pages/CaseStudyAIVsTraditional";
 import CaseStudyZerorez from "./pages/CaseStudyZerorez";
+import CaseStudyLAIFE from "./pages/CaseStudyLAIFE";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
