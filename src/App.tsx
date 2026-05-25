@@ -37,6 +37,7 @@ const App = () => (
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />
           <Route path="/case-studies/laife-dtc-wellness" element={<CaseStudyLAIFE />} />
           <Route path="/case-studies/house-retail-seasonal" element={<CaseStudyHouse />} />
+          <Route path="/case-studies/brand-u-fashion" element={<CaseStudyBrandU />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
