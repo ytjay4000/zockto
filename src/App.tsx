@@ -13,6 +13,7 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudyAIVsTraditional from "./pages/CaseStudyAIVsTraditional";
 import CaseStudyZerorez from "./pages/CaseStudyZerorez";
 import CaseStudyLAIFE from "./pages/CaseStudyLAIFE";
+import CaseStudyHouse from "./pages/CaseStudyHouse";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/case-studies/ai-vs-traditional-video-ads" element={<CaseStudyAIVsTraditional />} />
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />
           <Route path="/case-studies/laife-dtc-wellness" element={<CaseStudyLAIFE />} />
+          <Route path="/case-studies/house-retail-seasonal" element={<CaseStudyHouse />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
