@@ -11,6 +11,7 @@ import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyAIVsTraditional from "./pages/CaseStudyAIVsTraditional";
+import CaseStudyZerorez from "./pages/CaseStudyZerorez";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
