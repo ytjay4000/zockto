@@ -126,7 +126,7 @@ const CaseStudies = () => {
             <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight">
               Real brands.{' '}
               <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
-                Real Meta ad results.
+                Real results with AI ads.
               </span>
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
