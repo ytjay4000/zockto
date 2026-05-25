@@ -45,6 +45,7 @@ const App = () => (
           <Route path="/case-studies/nielsen-ai-creatives-ctr-study" element={<CaseStudyNielsen />} />
           <Route path="/case-studies/forrester-ai-roas-research" element={<CaseStudyForrester />} />
           <Route path="/case-studies/adobe-firefly-prediction-benchmark" element={<CaseStudyAdobeFirefly />} />
+          <Route path="/case-studies/customerthink-personalized-ai-ctr" element={<CaseStudyCustomerThink />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
