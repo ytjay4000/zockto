@@ -17,6 +17,7 @@ import CaseStudyHouse from "./pages/CaseStudyHouse";
 import CaseStudyBrandU from "./pages/CaseStudyBrandU";
 import CaseStudyNielsen from "./pages/CaseStudyNielsen";
 import CaseStudyForrester from "./pages/CaseStudyForrester";
+import CaseStudyAdobeFirefly from "./pages/CaseStudyAdobeFirefly";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/case-studies/brand-u-fashion" element={<CaseStudyBrandU />} />
           <Route path="/case-studies/nielsen-ai-creatives-ctr-study" element={<CaseStudyNielsen />} />
           <Route path="/case-studies/forrester-ai-roas-research" element={<CaseStudyForrester />} />
+          <Route path="/case-studies/adobe-firefly-prediction-benchmark" element={<CaseStudyAdobeFirefly />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
