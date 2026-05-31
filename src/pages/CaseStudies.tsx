@@ -1,238 +1,113 @@
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import VoiceTestimonialsSection from '@/components/VoiceTestimonialsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import FAQAccordion from '@/components/blog/FAQAccordion';
-import AppLink from '@/components/AppLink';
-import { Button } from '@/components/ui/button';
+import HeroSection from '@/components/case-studies/HeroSection';
+import SampleVideoLibrarySection from '@/components/case-studies/SampleVideoLibrarySection';
+import FounderSection from '@/components/case-studies/FounderSection';
+import BeforeAfterBlock from '@/components/case-studies/BeforeAfterBlock';
+import UseCaseCards from '@/components/case-studies/UseCaseCards';
+import FinalCtaSection from '@/components/case-studies/FinalCtaSection';
+import { usePersonalizedCaseStudy, type PersonalizedCopy } from '@/hooks/usePersonalizedCaseStudy';
 
-type IndexCard = {
-  category: string;
-  headline: string;
-  href: string;
-  gradient: string;
+const defaults: PersonalizedCopy = {
+  hero: {
+    headline: 'Businesses Like Yours Are Creating AI Ads in Minutes',
+    subheadline:
+      'No creators. No agencies. No editing team. Just upload your product and generate UGC-style ads instantly.',
+    ctaLabel: 'Watch the full video',
+  },
+  library: {
+    heading: 'Real ads from real businesses',
+    subheading: 'Browse sample videos by category and hear the audio that converts.',
+    categoryOrder: [],
+  },
+  founder: {
+    heading: 'Why We Built Zockto',
+    body: "Most small businesses can't afford expensive ad shoots, creators, or agencies. We wanted to make high-quality video ads accessible for everyone.",
+  },
+  socialProof: {
+    heading: 'What customers are saying',
+  },
+  useCases: {
+    heading: 'What Businesses Are Actually Using Zockto For',
+    subheading: 'Every channel where your customers scroll, swipe, and buy.',
+  },
+  finalCta: {
+    headline: 'Get your first AI ads live today',
+    subheadline: 'Buy credits, generate your first 10 ads, and start testing this week.',
+    buttonLabel: 'Buy credits',
+    egoTrigger:
+      "Still thinking? Other businesses are already using Zockto and seeing 2x more sales on average.",
+  },
 };
 
-const indexCards: IndexCard[] = [
-  {
-    category: 'Performance Marketing',
-    headline: 'AI Video Ads Beat UGC and Studio Ads in a Head-to-Head A/B Test',
-    href: '/case-studies/ai-vs-traditional-video-ads',
-    gradient: 'from-indigo-600 via-blue-600 to-sky-500',
-  },
-  {
-    category: 'Local Services',
-    headline: 'How a Carpet Cleaning Franchise Cut Lead Costs by 28% With AI Ads',
-    href: '/case-studies/zerorez-local-services',
-    gradient: 'from-blue-700 via-indigo-600 to-purple-600',
-  },
-  {
-    category: 'D2C Wellness',
-    headline: 'How a Harvard-Founded Longevity Brand Hit $3.89 Cost Per Order With AI Avatar Ads',
-    href: '/case-studies/laife-dtc-wellness',
-    gradient: 'from-purple-600 via-violet-600 to-indigo-600',
-  },
-  {
-    category: 'Retail',
-    headline: 'How a Retail Brand Cut CPMs by 80% and Hit 1.9x ROAS on a Seasonal Promotion',
-    href: '/case-studies/house-retail-seasonal',
-    gradient: 'from-sky-600 via-blue-600 to-indigo-700',
-  },
-  {
-    category: 'Fashion Ecommerce',
-    headline: 'How a Fashion Brand Ships 9 Videos a Day With a 3-Person Team',
-    href: '/case-studies/brand-u-fashion',
-    gradient: 'from-fuchsia-600 via-purple-600 to-blue-700',
-  },
-  {
-    category: 'Research · Performance Data',
-    headline: 'Nielsen Study: AI Ad Creatives Delivered 2.1x Higher CTR Than Manual',
-    href: '/case-studies/nielsen-ai-creatives-ctr-study',
-    gradient: 'from-blue-600 via-cyan-600 to-teal-500',
-  },
-  {
-    category: 'Research · ROAS Data',
-    headline: 'Forrester: Enterprise Brands Using AI Creatives Saw a 45–58% ROAS Lift',
-    href: '/case-studies/forrester-ai-roas-research',
-    gradient: 'from-indigo-700 via-purple-700 to-fuchsia-600',
-  },
-  {
-    category: 'Research · Creative Prediction',
-    headline: 'Adobe Firefly: AI Predicts Winning Ads With 93.4% Accuracy',
-    href: '/case-studies/adobe-firefly-prediction-benchmark',
-    gradient: 'from-violet-700 via-indigo-600 to-blue-600',
-  },
-  {
-    category: 'Research · Customer Experience',
-    headline: 'Personalized AI Video Ads Hit 28% CTR vs 15% for Traditional',
-    href: '/case-studies/customerthink-personalized-ai-ctr',
-    gradient: 'from-purple-700 via-pink-600 to-rose-500',
-  },
-];
-
-const faqs = [
-  {
-    question: 'How quickly will I see results with Zockto?',
-    answer:
-      'Most brands launch their first AI-generated UGC video ads within an hour of signing up. Performance lift on Meta typically shows within the first 7-14 days of testing 5-10 creative variations.',
-  },
-  {
-    question: 'Do I need any video editing or design experience?',
-    answer:
-      'No. You paste a product URL or upload an image — Zockto generates the script, voiceover, avatar, and fully edited video automatically. No camera, no editor, no influencer needed.',
-  },
-  {
-    question: 'Will these results work for my industry?',
-    answer:
-      'Zockto powers D2C, e-commerce, beauty, food, fashion, tech, and home brands across India and the US. The platform adapts hooks, pacing, and avatars to your category automatically.',
-  },
-  {
-    question: 'How is this different from agencies or freelance editors?',
-    answer:
-      'Agencies take weeks per creative and cost thousands per ad. Zockto generates studio-quality videos in minutes at a fraction of the cost — and lets you test 10x more variations to find winners faster.',
-  },
-  {
-    question: 'Can I see how the videos look before I commit?',
-    answer:
-      'Yes — every plan includes free credits so you can generate real videos before paying. No card needed to try it.',
-  },
-];
+const merge = (override: PersonalizedCopy | null): PersonalizedCopy => {
+  if (!override) return defaults;
+  return {
+    hero: { ...defaults.hero, ...(override.hero ?? {}) },
+    library: { ...defaults.library, ...(override.library ?? {}) },
+    founder: { ...defaults.founder, ...(override.founder ?? {}) },
+    socialProof: { ...defaults.socialProof, ...(override.socialProof ?? {}) },
+    useCases: { ...defaults.useCases, ...(override.useCases ?? {}) },
+    finalCta: { ...defaults.finalCta, ...(override.finalCta ?? {}) },
+  };
+};
 
 const CaseStudies = () => {
+  const { copy: personalisedCopy } = usePersonalizedCaseStudy();
+  const copy = merge(personalisedCopy);
+  const libraryRef = useRef<HTMLDivElement>(null);
+
+  const scrollToLibrary = () => {
+    libraryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Customer Case Studies & Testimonials | Zockto"
-        description="Real results from D2C brands, e-commerce sellers, and performance marketers using Zockto AI to scale Meta ad creatives. Browse case studies and research by industry."
+        title="Customer Case Studies & Real AI Ad Results | Zockto"
+        description="See real businesses creating Meta and Instagram ads with Zockto AI — sample videos, before/after stories, and the use cases brands actually run."
         path="/case-studies"
       />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-28 md:pt-36 pb-12 md:pb-16">
-        <div className="container px-4 text-center max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-5">
-              Case Studies & Testimonials
-            </span>
-            <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight">
-              Real brands.{' '}
-              <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
-                Real results with AI ads.
-              </span>
-            </h1>
-            <p className="text-muted-foreground text-base md:text-lg">
-              See how D2C founders, e-commerce sellers, and performance marketers cut creative costs and scaled ROAS with Zockto AI.
-            </p>
-          </motion.div>
+      <HeroSection
+        headline={copy.hero.headline}
+        subheadline={copy.hero.subheadline}
+        ctaLabel={copy.hero.ctaLabel}
+        onCtaClick={scrollToLibrary}
+      />
+
+      <div ref={libraryRef}>
+        <SampleVideoLibrarySection
+          heading={copy.library.heading}
+          subheading={copy.library.subheading}
+          categoryOrder={copy.library.categoryOrder}
+        />
+      </div>
+
+      <FounderSection heading={copy.founder.heading} body={copy.founder.body} />
+
+      <section className="pt-4">
+        <div className="container px-4 text-center mb-2">
+          <h2 className="font-display text-2xl md:text-4xl font-bold">{copy.socialProof.heading}</h2>
         </div>
       </section>
-
-      {/* Case Studies Index */}
-      <section className="py-16 md:py-24">
-        <div className="container px-4">
-          <div className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-4">
-              Case Studies
-            </span>
-            <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">
-              Real results across every niche
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg">
-              Browse case studies and research by industry and objection. Find the proof point that matches your business.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {indexCards.map((card, idx) => (
-              <motion.div
-                key={card.href}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-              >
-                <Link
-                  to={card.href}
-                  className={`group relative block aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br ${card.gradient} p-6 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl`}
-                >
-                  {/* subtle texture overlay */}
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_60%)] pointer-events-none" />
-
-                  {/* Z mark */}
-                  <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                    <span className="text-white font-display font-bold text-sm">Z</span>
-                  </div>
-
-                  <div className="relative flex flex-col h-full">
-                    <span className="inline-flex self-start items-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 text-white text-[11px] font-medium tracking-wide">
-                      {card.category}
-                    </span>
-
-                    <h3 className="mt-auto font-display text-[18px] md:text-[20px] font-semibold text-white leading-snug">
-                      {card.headline}
-                    </h3>
-
-                    <div className="mt-4 inline-flex items-center gap-1.5 text-white/90 text-sm font-medium">
-                      Read case study
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Voice testimonials */}
       <VoiceTestimonialsSection />
-
-      {/* Written testimonials marquee */}
+      <BeforeAfterBlock />
       <TestimonialsSection />
 
-      {/* FAQ */}
-      <section className="py-8 md:py-16">
-        <div className="container px-4 max-w-3xl">
-          <FAQAccordion faqs={faqs} />
-        </div>
-      </section>
+      <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
 
-      {/* Soft CTA */}
-      <section className="py-16 md:py-24">
-        <div className="container px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto rounded-2xl gradient-card border border-border/50 p-8 md:p-12 text-center"
-          >
-            <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">
-              See what Zockto can do for{' '}
-              <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
-                your brand
-              </span>
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg mb-6 max-w-xl mx-auto">
-              Try it free. Generate your first AI UGC ad in under 60 seconds — no card needed.
-            </p>
-            <Button variant="hero" size="lg" asChild>
-              <AppLink appPath="/">
-                Try Zockto Free <ArrowRight className="w-4 h-4 ml-1" />
-              </AppLink>
-            </Button>
-            <p className="text-xs text-muted-foreground mt-4">No credit card · Free credits included</p>
-          </motion.div>
-        </div>
-      </section>
+      <FinalCtaSection
+        headline={copy.finalCta.headline}
+        subheadline={copy.finalCta.subheadline}
+        buttonLabel={copy.finalCta.buttonLabel}
+        egoTrigger={copy.finalCta.egoTrigger}
+      />
 
       <Footer />
     </div>
