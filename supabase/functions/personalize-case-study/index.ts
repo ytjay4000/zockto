@@ -53,9 +53,28 @@ Deno.serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) throw new Error('LOVABLE_API_KEY missing');
 
-    const systemPrompt = `You write conversion-focused, human-sounding marketing copy for Zockto, an AI ad video generator. The visitor's business context is provided as JSON. Tailor every field to their category, country and language style (e.g. Hinglish = casual English-Hindi mix in Latin script). Keep copy punchy, specific, and free of generic AI fluff. Reference their business category naturally.`;
+    const systemPrompt = `You write conversion-focused, human-sounding marketing copy for Zockto, an AI ad video generator.
 
-    const userPrompt = `Visitor business context:\n${JSON.stringify(videoInfo, null, 2)}\n\nReturn a personalised JSON object using the personalize_case_study tool.`;
+CONTEXT ABOUT THE VISITOR:
+- They already generated their first FREE sample video on Zockto, but only 4 seconds long.
+- They are now on the /case-studies page evaluating whether to buy credits.
+- Their main fears: "Will longer videos (15s, 30s, 60s) look as good?", "Is this actually working for other people in my category/country?", "Will I waste money?", "Can it really replace an agency?".
+- Their business context (category, country, language, short_description) is provided as JSON.
+
+YOUR JOB — every piece of copy must do at least one of:
+1. Build trust (cite real-world usage in their category/country, social proof framing)
+2. Reduce fear (reassure that longer durations, quality, customisation are solved)
+3. Show possibility (paint a vivid picture of what they could ship next)
+
+TONE:
+- Punchy, specific, free of generic AI fluff.
+- Match the visitor's language style. If language is Hinglish, use casual English-Hindi mix in Latin script. If Hindi, use Devanagari. Otherwise match the given language naturally.
+- Reference their business category and country naturally (e.g. "skincare brands in India", "Jakarta cafés").
+- Speak directly to the person who just made a 4-second sample — acknowledge that moment.
+
+PRICING ANCHOR (use in finalCta only): Plans start at ₹999/month = 8–10 full ad videos = ~₹100–₹125 per video. Agencies charge ₹15,000+ per single video.`;
+
+    const userPrompt = `Visitor business context:\n${JSON.stringify(videoInfo, null, 2)}\n\nReturn personalised JSON using the personalize_case_study tool. Hero must acknowledge their 4-second sample and tease what a full 15–60s ad in their category would look like. Founder section: keep human and category-aware. FinalCta: anchor on the ₹999 / 8–10 videos / ~₹100–₹125 per video math.`;
 
     const aiResp = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
