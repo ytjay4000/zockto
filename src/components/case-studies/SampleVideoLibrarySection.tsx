@@ -23,8 +23,14 @@ const VideoTile = ({ video, activeAudioId, onAudio }: {
 
   const toggle = () => {
     if (!el) return;
-    if (playing) { el.pause(); setPlaying(false); }
-    else { el.play().catch(() => {}); setPlaying(true); }
+    if (playing) {
+      el.pause();
+      setPlaying(false);
+    } else {
+      onAudio(video.id);
+      el.play().catch(() => {});
+      setPlaying(true);
+    }
   };
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
