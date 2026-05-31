@@ -37,7 +37,7 @@ const HeroSection = ({ headline, subheadline, ctaLabel, onCtaClick }: HeroSectio
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="relative aspect-video rounded-3xl overflow-hidden border border-border/60 shadow-card bg-black"
+          className="relative mx-auto w-full max-w-[280px] md:max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden border border-border/60 shadow-card bg-black"
         >
           <video
             src="https://storages.zockto.com/explainer_video/zockto_proof_video.mp4"
