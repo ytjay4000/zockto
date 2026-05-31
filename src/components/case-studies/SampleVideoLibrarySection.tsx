@@ -81,30 +81,26 @@ const SampleVideoLibrarySection = ({ heading, subheading, categoryOrder }: Props
   const { videos, loading } = useSampleVideoLibrary();
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
 
-  const grouped = useMemo(() => {
-    const map = new Map<string, SampleVideo[]>();
-    videos.forEach((v) => {
-      const cat = (v.category || 'Other').trim();
-      if (!map.has(cat)) map.set(cat, []);
-      map.get(cat)!.push(v);
-    });
-    const keys = Array.from(map.keys());
+  const sorted = useMemo(() => {
     const norm = (s: string) => s.toLowerCase().trim();
-    if (categoryOrder?.length) {
-      const order = categoryOrder.map(norm);
-      keys.sort((a, b) => {
-        const ia = order.indexOf(norm(a));
-        const ib = order.indexOf(norm(b));
-        if (ia === -1 && ib === -1) return a.localeCompare(b);
-        if (ia === -1) return 1;
-        if (ib === -1) return -1;
-        return ia - ib;
-      });
-    } else {
-      keys.sort((a, b) => a.localeCompare(b));
-    }
-    return keys.map((k) => ({ category: k, items: map.get(k)! }));
+    const order = (categoryOrder ?? []).map(norm);
+    const rank = (cat: string) => {
+      const i = order.indexOf(norm(cat));
+      return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+    };
+    return [...videos].sort((a, b) => {
+      const ca = (a.category || 'Other').trim();
+      const cb = (b.category || 'Other').trim();
+      const r = rank(ca) - rank(cb);
+      return r !== 0 ? r : ca.localeCompare(cb);
+    });
   }, [videos, categoryOrder]);
+
+  const INITIAL = 8;
+  const STEP = 6;
+  const [visible, setVisible] = useState(INITIAL);
+  const shown = sorted.slice(0, visible);
+  const hasMore = visible < sorted.length;
 
   return (
     <section className="py-16 md:py-24">
