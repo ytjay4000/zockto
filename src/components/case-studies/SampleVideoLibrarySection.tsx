@@ -123,21 +123,35 @@ const SampleVideoLibrarySection = ({ heading, subheading, categoryOrder }: Props
           <div className="flex justify-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
-        ) : grouped.length === 0 ? (
+        ) : sorted.length === 0 ? (
           <p className="text-center text-muted-foreground">No sample videos available yet.</p>
         ) : (
-          <div className="space-y-12">
-            {grouped.map(({ category, items }) => (
-              <div key={category}>
-                <h3 className="font-display text-xl md:text-2xl font-semibold mb-5 capitalize">{category}</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                  {items.map((v) => (
-                    <VideoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
-                  ))}
-                </div>
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              {shown.map((v, idx) => {
+                const cat = (v.category || 'Other').trim();
+                const prevCat = idx > 0 ? (shown[idx - 1].category || 'Other').trim() : null;
+                const showLabel = cat !== prevCat;
+                return (
+                  <div key={v.id} className="flex flex-col">
+                    {showLabel && (
+                      <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 capitalize">
+                        {cat}
+                      </span>
+                    )}
+                    <VideoTile video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
+                  </div>
+                );
+              })}
+            </div>
+            {hasMore && (
+              <div className="flex justify-center mt-10">
+                <Button variant="outline" size="lg" onClick={() => setVisible((v) => v + STEP)}>
+                  Load more
+                </Button>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>
