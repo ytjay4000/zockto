@@ -4,8 +4,10 @@ import { VoicePlaybackProvider } from '@/context/VoicePlaybackContext';
 import VoiceTestimonialCard from './VoiceTestimonialCard';
 
 const VoiceTestimonialsSection = () => {
+  const loop = [...voiceTestimonials, ...voiceTestimonials];
+
   return (
-    <section className="py-16 md:py-24 relative">
+    <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,15 +29,21 @@ const VoiceTestimonialsSection = () => {
             Real voices. Real results. Tap play to listen.
           </p>
         </motion.div>
+      </div>
 
-        <VoicePlaybackProvider>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {voiceTestimonials.map((t) => (
-              <VoiceTestimonialCard key={t.id} testimonial={t} />
+      <VoicePlaybackProvider>
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="flex gap-4 md:gap-6 animate-marquee-x px-4">
+            {loop.map((t, i) => (
+              <div key={`${t.id}-${i}`} className="w-[300px] md:w-[360px] shrink-0">
+                <VoiceTestimonialCard testimonial={t} />
+              </div>
             ))}
           </div>
-        </VoicePlaybackProvider>
-      </div>
+        </div>
+      </VoicePlaybackProvider>
     </section>
   );
 };
