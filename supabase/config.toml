@@ -1,1 +1,4 @@
 project_id = "ljcziwpohceaacdreugx"
+
+[functions.personalize-case-study]
+verify_jwt = false
