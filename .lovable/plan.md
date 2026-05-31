@@ -1,61 +1,78 @@
-## Plan: Voice Testimonials Section
 
-### Placement
-Insert a new `VoiceTestimonialsSection` in `src/pages/Index.tsx` directly **before** the existing `TestimonialsSection` (i.e. after `HowItWorksSection`). This keeps the proven text-marquee social proof and front-loads it with high-trust real client voices.
+# Rebuild /case-studies (dynamic + personalised)
 
-### Section design (minimal & clear)
-- Section heading: "Hear it from our clients" + small subline "Real voices. Real results."
-- Responsive grid of cards:
-  - Mobile: 1 column
-  - sm: 2 columns
-  - lg: 4 columns (scales naturally to more cards later)
-- Each card (clean, lots of whitespace, rounded-2xl, `gradient-card` + `border-border/50`):
-  - Circular headshot (64px) top-left
-  - Name (font-display, semibold) + role/business (muted-foreground, small) next to it
-  - Short pull-quote (2 lines, `line-clamp-2`) — optional, derived from transcript
-  - Audio player row: large circular Play/Pause button (primary gradient) + animated waveform bars + `MM:SS / MM:SS` time
-- Subtle "Verified client" check badge under the name for trust
+Replace the current /case-studies page entirely with a new 6-section layout. When `?video_id=` is present, fetch context from Supabase and personalise copy + content order via the Lovable AI Gateway (Gemini). Existing detail pages under `/case-studies/...` remain untouched.
 
-### Playback behavior
-- Single React Context (`VoiceTestimonialsProvider`) tracks the currently-playing card id.
-- When a card hits Play, it dispatches `setPlayingId(id)`; every other card listens and pauses its `<audio>` element if its id no longer matches.
-- Waveform animates only while that card is playing; bars freeze when paused.
-- Audio elements use `preload="metadata"` for fast load.
-- Tracks Meta Pixel `fbq('trackCustom', 'VoicePlay', { client })` on first play of each card (fits existing pixel setup, optional and non-blocking).
+## Data sources
 
-### Data model (easy to extend)
-`src/data/voiceTestimonials.ts`:
-```ts
-export type VoiceTestimonial = {
-  id: string;
-  name: string;
-  role: string;       // e.g. "Founder, Brand Name"
-  photo: string;      // /testimonials/<slug>.jpg
-  audio: string;      // /testimonials/<slug>.m4a
-  quote?: string;     // optional short pull-quote
-};
-export const voiceTestimonials: VoiceTestimonial[] = [ /* 4 entries */ ];
+- `result` table — read `video_info` (jsonb) where `video_id = :video_id` and current user owns the row (RLS already scopes to owner; for public visitors we'll use a server-side edge function with service role to read just `video_info` so unauthenticated visitors can also personalise).
+- `sample_video_libaray` table (note the existing spelling) — fetch all rows for Section 2.
+  - Currently has **no RLS policies and no GRANT to anon** — needs a small migration to allow public read.
+
+## Sections
+
+1. **Hero** — left: personalised headline + subheadline + "Watch the full video" CTA. Right: hero visual (reuse an existing asset for now).
+2. **Sample Video Library** — videos from `sample_video_libaray` grouped by `category`. When personalised, category order comes from Gemini; otherwise alphabetical with user's likely category guesses (geo-based fallback). Each card uses the existing `VideoCard` styling pattern (9:16, hover-play, mute toggle).
+3. **Founder / Why We Built Zockto** — static copy + placeholder founder image (user will swap later).
+4. **Social Proof** — three stacked blocks:
+   - `VoiceTestimonialsSection` (existing)
+   - Before/After block — derived synthetically from `testimonials` quote content (paired "before Zockto" vs "after Zockto" cards generated from existing testimonial copy)
+   - `TestimonialsSection` (existing written testimonials marquee)
+5. **Use Case Cards** — 8 static cards (Instagram ads, Festival offers, Product launches, WhatsApp marketing, Facebook ads, Reels content, Daily posting, Retargeting ads) with icons.
+6. **Final CTA** — links to `https://app.zockto.com/buy-credits` (note: this bypasses the standard `AppLink` path-rewrite memory; will hardcode this exact URL per request). Ego-trigger message personalised by Gemini.
+
+## Personalisation flow
+
+Client logic in `CaseStudies.tsx`:
+
+```text
+1. read ?video_id from URL
+2. if absent → render defaults
+3. else → POST { video_id } to edge function `personalize-case-study`
+4. edge function:
+     - service-role read of result.video_info for that video_id
+     - if video_info empty → return { personalized: false }
+     - else call Lovable AI Gateway (model: google/gemini-3.1-flash-lite-preview)
+       with a JSON-tool-call schema returning:
+         {
+           hero: { headline, subheadline, ctaLabel },
+           library: { heading, subheading, categoryOrder: string[] },
+           founder: { heading, body },
+           socialProof: { heading },
+           useCases: { heading, subheading },
+           finalCta: { headline, subheadline, buttonLabel, egoTrigger }
+         }
+     - return { personalized: true, video_info, copy }
+5. client merges copy over defaults; if any field missing, fall back to default.
 ```
-Adding a 5th, 6th, … client later = one entry + 2 files in `public/testimonials/`. No layout changes needed.
 
-### Files to create / modify
-1. **Create** `public/testimonials/` and copy:
-   - `meetshah.m4a`, `khushi.m4a`, `sriniwasa.m4a`, `tarun.m4a`
-   - `meetshah.jpg`, `khushi.jpg`, `sriniwasa.jpg`, `tarun.jpg` (you provide)
-2. **Create** `src/data/voiceTestimonials.ts` — data array
-3. **Create** `src/components/VoiceTestimonialsSection.tsx` — section + grid
-4. **Create** `src/components/VoiceTestimonialCard.tsx` — single card (audio + waveform + play state)
-5. **Create** `src/context/VoicePlaybackContext.tsx` — single-playing-at-a-time control
-6. **Modify** `src/pages/Index.tsx` — render `<VoiceTestimonialsSection />` before `<TestimonialsSection />`
+While the request is in flight, render defaults (no skeleton flash) and swap in personalised copy on resolve.
 
-### Blocker — I need two things from you
-I tried to transcribe the 4 voice notes inside the sandbox but no transcription API is available here, so I cannot extract names/businesses/quotes from the audio myself. Please share **either**:
+## Files
 
-**Option A (preferred — fastest):** reply with the following for each of the 4 clients, and attach a square headshot image:
-- Full name
-- Role / business name (e.g. "Founder, Acme Skincare")
-- Optional one-line pull-quote (2 lines max). If skipped, the card will just show name + role + audio.
+- `supabase/functions/personalize-case-study/index.ts` — new edge function, `verify_jwt = false`, structured tool-call output.
+- `src/hooks/usePersonalizedCaseStudy.ts` — fetches + caches in sessionStorage by video_id.
+- `src/hooks/useSampleVideoLibrary.ts` — fetches `sample_video_libaray` rows.
+- `src/pages/CaseStudies.tsx` — full rewrite into 6 sections.
+- `src/components/case-studies/` (new):
+  - `HeroSection.tsx`
+  - `SampleVideoLibrarySection.tsx`
+  - `FounderSection.tsx`
+  - `BeforeAfterBlock.tsx`
+  - `UseCaseCards.tsx`
+  - `FinalCtaSection.tsx`
+- Migration: add SELECT-to-anon RLS policy + GRANT on `sample_video_libaray`.
 
-**Option B:** add an `ELEVENLABS_API_KEY` to project secrets and I will transcribe the 4 clips during implementation, draft pull-quotes from the transcripts, and still ask you for the headshots + business names (since the audio likely won't include a verified business URL).
+## Out of scope
 
-Once I have the photos + names/roles, I'll implement everything in one pass.
+- Editing other case study detail pages.
+- New imagery for founder section (placeholder used).
+- Any change to navbar / footer.
+- The case study index grid (9 cards) — removed entirely per scope confirmation. Detail pages remain reachable by direct URL only.
+
+## Defaults (used when no video_id or video_info empty)
+
+- Hero: "Businesses Like Yours Are Creating AI Ads in Minutes" / "No creators. No agencies. No editing team. Just upload your product and generate UGC-style ads instantly."
+- Final CTA ego trigger: "Still thinking? Other businesses are already using Zockto and seeing 2x more sales on average."
+
+Approve to proceed — I'll start with the migration, then the edge function, then the page.
