@@ -106,6 +106,8 @@ const CaseStudies = () => {
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
 
+      <ValueBreakdownSection />
+
       <FinalCtaSection
         headline={copy.finalCta.headline}
         subheadline={copy.finalCta.subheadline}
