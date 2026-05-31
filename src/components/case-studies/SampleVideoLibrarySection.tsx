@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 import { Loader2, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useSampleVideoLibrary, type SampleVideo } from '@/hooks/useSampleVideoLibrary';
@@ -80,30 +81,26 @@ const SampleVideoLibrarySection = ({ heading, subheading, categoryOrder }: Props
   const { videos, loading } = useSampleVideoLibrary();
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
 
-  const grouped = useMemo(() => {
-    const map = new Map<string, SampleVideo[]>();
-    videos.forEach((v) => {
-      const cat = (v.category || 'Other').trim();
-      if (!map.has(cat)) map.set(cat, []);
-      map.get(cat)!.push(v);
-    });
-    const keys = Array.from(map.keys());
+  const sorted = useMemo(() => {
     const norm = (s: string) => s.toLowerCase().trim();
-    if (categoryOrder?.length) {
-      const order = categoryOrder.map(norm);
-      keys.sort((a, b) => {
-        const ia = order.indexOf(norm(a));
-        const ib = order.indexOf(norm(b));
-        if (ia === -1 && ib === -1) return a.localeCompare(b);
-        if (ia === -1) return 1;
-        if (ib === -1) return -1;
-        return ia - ib;
-      });
-    } else {
-      keys.sort((a, b) => a.localeCompare(b));
-    }
-    return keys.map((k) => ({ category: k, items: map.get(k)! }));
+    const order = (categoryOrder ?? []).map(norm);
+    const rank = (cat: string) => {
+      const i = order.indexOf(norm(cat));
+      return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+    };
+    return [...videos].sort((a, b) => {
+      const ca = (a.category || 'Other').trim();
+      const cb = (b.category || 'Other').trim();
+      const r = rank(ca) - rank(cb);
+      return r !== 0 ? r : ca.localeCompare(cb);
+    });
   }, [videos, categoryOrder]);
+
+  const INITIAL = 8;
+  const STEP = 6;
+  const [visible, setVisible] = useState(INITIAL);
+  const shown = sorted.slice(0, visible);
+  const hasMore = visible < sorted.length;
 
   return (
     <section className="py-16 md:py-24">
@@ -126,21 +123,35 @@ const SampleVideoLibrarySection = ({ heading, subheading, categoryOrder }: Props
           <div className="flex justify-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
-        ) : grouped.length === 0 ? (
+        ) : sorted.length === 0 ? (
           <p className="text-center text-muted-foreground">No sample videos available yet.</p>
         ) : (
-          <div className="space-y-12">
-            {grouped.map(({ category, items }) => (
-              <div key={category}>
-                <h3 className="font-display text-xl md:text-2xl font-semibold mb-5 capitalize">{category}</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                  {items.map((v) => (
-                    <VideoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
-                  ))}
-                </div>
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              {shown.map((v, idx) => {
+                const cat = (v.category || 'Other').trim();
+                const prevCat = idx > 0 ? (shown[idx - 1].category || 'Other').trim() : null;
+                const showLabel = cat !== prevCat;
+                return (
+                  <div key={v.id} className="flex flex-col">
+                    {showLabel && (
+                      <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-2 capitalize">
+                        {cat}
+                      </span>
+                    )}
+                    <VideoTile video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
+                  </div>
+                );
+              })}
+            </div>
+            {hasMore && (
+              <div className="flex justify-center mt-10">
+                <Button variant="outline" size="lg" onClick={() => setVisible((v) => v + STEP)}>
+                  Load more
+                </Button>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>

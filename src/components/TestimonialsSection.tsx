@@ -35,11 +35,11 @@ const testimonials = [
 ];
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
-  <div className="flex-shrink-0 w-[280px] md:w-[400px] p-4 md:p-6 rounded-2xl gradient-card border border-border/50 mx-2 md:mx-4">
+  <div className="w-full p-5 md:p-6 rounded-2xl gradient-card border border-border/50 mb-4 md:mb-6">
     <Quote className="w-6 h-6 md:w-8 md:h-8 text-primary/40 mb-3 md:mb-4" />
-    <p className="text-foreground/90 leading-relaxed mb-4 md:mb-6 text-sm md:text-base line-clamp-4 md:line-clamp-none">{testimonial.quote}</p>
+    <p className="text-foreground/90 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">{testimonial.quote}</p>
     <div className="flex items-center gap-3">
-      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full gradient-primary flex items-center justify-center">
+      <div className="w-9 h-9 md:w-10 md:h-10 rounded-full gradient-primary flex items-center justify-center">
         <span className="text-primary-foreground font-semibold text-xs md:text-sm">
           {testimonial.name.split(' ').map(n => n[0]).join('')}
         </span>
@@ -53,8 +53,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 );
 
 const TestimonialsSection = () => {
-  // Triple the testimonials for seamless loop on desktop
-  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const looped = [...testimonials, ...testimonials];
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
@@ -81,17 +80,15 @@ const TestimonialsSection = () => {
         </motion.div>
       </div>
 
-      {/* Mobile: Manual scroll, Desktop: Auto marquee */}
-      <div className="relative">
-        {/* Gradient masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        
-        {/* Mobile: Scrollable, Desktop: Auto-scroll marquee */}
-        <div className="flex overflow-x-auto scrollbar-hide md:overflow-visible md:animate-marquee px-4 md:px-0">
-          {extendedTestimonials.map((testimonial, index) => (
-            <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />
-          ))}
+      <div className="container px-4">
+        <div className="relative max-w-xl mx-auto h-[600px] overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+          <div className="animate-marquee-y">
+            {looped.map((testimonial, index) => (
+              <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
