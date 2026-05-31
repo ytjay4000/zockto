@@ -160,6 +160,29 @@
   animation-play-state: paused;
 }
 
+@keyframes marquee-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee-x {
+  animation: marquee-x 40s linear infinite;
+  width: max-content;
+}
+.animate-marquee-x:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-y {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.animate-marquee-y {
+  animation: marquee-y 40s linear infinite;
+}
+.animate-marquee-y:hover {
+  animation-play-state: paused;
+}
+
 /* Video card hover effect */
 .video-card {
   @apply relative overflow-hidden rounded-xl transition-all duration-300;
