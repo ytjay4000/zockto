@@ -37,14 +37,15 @@ const HeroSection = ({ headline, subheadline, ctaLabel, onCtaClick }: HeroSectio
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="relative aspect-[4/3] rounded-3xl overflow-hidden gradient-card border border-border/50 shadow-card"
+          className="relative aspect-video rounded-3xl overflow-hidden border border-border/60 shadow-card bg-black"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,hsl(var(--primary)/0.18),transparent_60%)]" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center shadow-glow">
-              <Play className="w-9 h-9 text-primary-foreground ml-1" fill="currentColor" />
-            </div>
-          </div>
+          <video
+            src="https://storages.zockto.com/explainer_video/zockto_proof_video.mp4"
+            controls
+            preload="metadata"
+            playsInline
+            className="w-full h-full object-cover"
+          />
         </motion.div>
       </div>
     </section>
