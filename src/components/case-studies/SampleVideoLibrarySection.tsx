@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 import { Loader2, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useSampleVideoLibrary, type SampleVideo } from '@/hooks/useSampleVideoLibrary';
