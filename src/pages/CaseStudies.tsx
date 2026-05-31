@@ -10,37 +10,41 @@ import FounderSection from '@/components/case-studies/FounderSection';
 import BeforeAfterBlock from '@/components/case-studies/BeforeAfterBlock';
 import UseCaseCards from '@/components/case-studies/UseCaseCards';
 import FinalCtaSection from '@/components/case-studies/FinalCtaSection';
+import ValueBreakdownSection from '@/components/case-studies/ValueBreakdownSection';
 import { usePersonalizedCaseStudy, type PersonalizedCopy } from '@/hooks/usePersonalizedCaseStudy';
 
 const defaults: PersonalizedCopy = {
   hero: {
-    headline: 'Businesses Like Yours Are Creating AI Ads in Minutes',
+    headline: 'You just saw 4 seconds. Imagine the full 30-second ad running for your brand.',
     subheadline:
-      'No creators. No agencies. No editing team. Just upload your product and generate UGC-style ads instantly.',
-    ctaLabel: 'Watch the full video',
+      "Your sample is only a tiny preview. Real Zockto ads are 15–60 seconds, 1080p, with full scripts, hooks and CTAs — already running for thousands of small businesses like yours.",
+    ctaLabel: 'See real ads businesses are running',
   },
   library: {
-    heading: 'Real ads from real businesses',
-    subheading: 'Browse sample videos by category and hear the audio that converts.',
+    heading: "Don't take our word for it — watch real ads from real businesses",
+    subheading:
+      'Every video below was generated on Zockto by a small business owner just like you. Different categories, different countries, same tool you just used.',
     categoryOrder: [],
   },
   founder: {
-    heading: 'Why We Built Zockto',
-    body: "Most small businesses can't afford expensive ad shoots, creators, or agencies. We wanted to make high-quality video ads accessible for everyone.",
+    heading: "We built Zockto because ad creators were eating small businesses alive",
+    body:
+      "₹20,000 for one video. Two-week waits. Endless revisions. Most small brands can't play that game — so they stay invisible. Zockto exists so a one-person business in Jaipur or Jakarta can ship ads that look like a Mumbai agency made them, in 10 minutes, for the price of a chai run.",
   },
   socialProof: {
-    heading: 'What customers are saying',
+    heading: 'Hear what others say about us',
   },
   useCases: {
-    heading: 'What Businesses Are Actually Using Zockto For',
-    subheading: 'Every channel where your customers scroll, swipe, and buy.',
+    heading: 'What businesses are actually using Zockto for',
+    subheading: 'Every channel where your customers scroll, swipe, and buy — covered.',
   },
   finalCta: {
-    headline: 'Get your first AI ads live today',
-    subheadline: 'Buy credits, generate your first 10 ads, and start testing this week.',
-    buttonLabel: 'Buy credits',
+    headline: 'Start at just ₹999 — get 8 to 10 full ad videos this week',
+    subheadline:
+      "That's roughly ₹100–₹125 per finished ad. One agency invoice = a full year on Zockto. No contracts, regenerate as many times as you want.",
+    buttonLabel: 'Buy credits & start creating',
     egoTrigger:
-      "Still thinking? Other businesses are already using Zockto and seeing 2x more sales on average.",
+      "Other small businesses like yours are already shipping ads daily with Zockto. Don't let your competitor's feed out-pace yours.",
   },
 };
 
@@ -101,6 +105,8 @@ const CaseStudies = () => {
       <TestimonialsSection />
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
+
+      <ValueBreakdownSection />
 
       <FinalCtaSection
         headline={copy.finalCta.headline}
