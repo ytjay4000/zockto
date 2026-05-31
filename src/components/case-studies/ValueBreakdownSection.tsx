@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Check, X, Sparkles } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Check, X, Sparkles } from "lucide-react";
 
 interface Props {
   heading?: string;
@@ -7,18 +7,26 @@ interface Props {
 }
 
 const rows = [
-  { label: 'Starting price', zockto: '₹999 / month', agency: '₹15,000 – ₹50,000 per video' },
-  { label: 'Per-video cost', zockto: '₹100 – ₹125 per video', agency: '₹15,000+ per video' },
-  { label: 'Turnaround', zockto: '5 – 10 minutes', agency: '2 – 4 weeks' },
-  { label: 'Video quality', zockto: '1080p, studio-grade AI', agency: 'Studio-grade (varies by team)' },
-  { label: 'Customisation', zockto: 'Unlimited regenerates, free A/B variants', agency: 'Paid revisions, extra invoices' },
-  { label: 'AI avatars & voices', zockto: '150+ avatars, 200+ voices, 48 languages', agency: 'Talent booking, single language' },
-  { label: 'Longer durations', zockto: '15s, 30s, 60s — same flow', agency: 'Pricier the longer it gets' },
-  { label: 'Risk', zockto: 'Cancel anytime, regenerate free', agency: 'Locked-in retainers, sunk cost' },
+  { label: "Starting price", zockto: "₹999 / month", agency: "₹15,000 – ₹50,000 per month" },
+  { label: "Per-video cost", zockto: "₹100 – ₹125 per video", agency: "₹2000+ per video" },
+  { label: "Turnaround", zockto: "5 – 10 minutes", agency: "2 – 4 weeks" },
+  { label: "Video quality", zockto: "1080p, studio-grade AI", agency: "Studio-grade (varies by team)" },
+  {
+    label: "Customisation",
+    zockto: "Unlimited regenerates, free A/B variants",
+    agency: "Paid revisions, extra invoices",
+  },
+  {
+    label: "AI avatars & voices",
+    zockto: "150+ avatars, 200+ voices, 48 languages",
+    agency: "Talent booking, single language",
+  },
+  { label: "Longer durations", zockto: "15s, 30s, 60s — same flow", agency: "Pricier the longer it gets" },
+  { label: "Risk", zockto: "Cancel anytime, regenerate free", agency: "Locked-in retainers, sunk cost" },
 ];
 
 const ValueBreakdownSection = ({
-  heading = 'Zockto vs hiring an agency — the honest math',
+  heading = "Zockto vs hiring an agency — the honest math",
   subheading = "You just made your first 4-second sample. Here's what scaling looks like — without burning a creator budget.",
 }: Props) => {
   return (
@@ -54,7 +62,7 @@ const ValueBreakdownSection = ({
             <div
               key={r.label}
               className={`grid grid-cols-[1.1fr_1.4fr_1.4fr] text-xs md:text-sm border-t border-border/50 ${
-                i % 2 === 0 ? 'bg-background' : 'bg-muted/20'
+                i % 2 === 0 ? "bg-background" : "bg-muted/20"
               }`}
             >
               <div className="px-4 py-3 md:px-6 md:py-4 font-medium">{r.label}</div>
@@ -78,9 +86,9 @@ const ValueBreakdownSection = ({
         >
           <div className="flex-1">
             <p className="text-sm md:text-base text-amber-900">
-              <span className="font-bold">Start at just ₹999/month</span> — that's{' '}
-              <span className="font-bold">8–10 full ad videos</span> at roughly{' '}
-              <span className="font-bold">₹100–₹125 per video</span>. The same money buys you{' '}
+              <span className="font-bold">Start at just ₹999/month</span> — that's{" "}
+              <span className="font-bold">8–10 full ad videos</span> at roughly{" "}
+              <span className="font-bold">₹100–₹125 per video</span>. The same money buys you{" "}
               <span className="underline decoration-amber-500">a fraction of one agency video</span>.
             </p>
           </div>
