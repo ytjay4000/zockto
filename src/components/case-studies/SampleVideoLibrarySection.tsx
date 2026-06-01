@@ -16,12 +16,19 @@ const VideoTile = ({ video, activeAudioId, onAudio }: {
   activeAudioId: number | null;
   onAudio: (id: number | null) => void;
 }) => {
+  const [activated, setActivated] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [el, setEl] = useState<HTMLVideoElement | null>(null);
   const muted = activeAudioId !== video.id;
 
-  const toggle = () => {
+  const activate = () => {
+    if (!activated) {
+      setActivated(true);
+      onAudio(video.id);
+      setPlaying(true);
+      return;
+    }
     if (!el) return;
     if (playing) {
       el.pause();
@@ -32,30 +39,56 @@ const VideoTile = ({ video, activeAudioId, onAudio }: {
       setPlaying(true);
     }
   };
+
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!activated) {
+      setActivated(true);
+      onAudio(video.id);
+      setPlaying(true);
+      return;
+    }
     onAudio(muted ? video.id : null);
   };
 
   return (
-    <div className="group cursor-pointer" onClick={toggle}>
+    <div className="group cursor-pointer" onClick={activate}>
       <div className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all">
-        {!loaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50 z-10">
-            <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-          </div>
+        {!activated && video.link && (
+          <>
+            <video
+              src={`${video.link}#t=0.1`}
+              className="w-full h-full object-cover"
+              muted
+              playsInline
+              preload="metadata"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+              <div className="w-14 h-14 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                <Play className="w-6 h-6 ml-0.5 text-foreground" fill="currentColor" />
+              </div>
+            </div>
+          </>
         )}
-        {video.link && (
-          <video
-            ref={setEl}
-            src={`${video.link}#t=0.1`}
-            className="w-full h-full object-cover"
-            muted={muted}
-            loop
-            playsInline
-            preload="auto"
-            onLoadedData={() => setLoaded(true)}
-          />
+        {activated && video.link && (
+          <>
+            {!loaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50 z-10">
+                <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+              </div>
+            )}
+            <video
+              ref={setEl}
+              src={video.link}
+              className="w-full h-full object-cover"
+              muted={muted}
+              loop
+              playsInline
+              autoPlay
+              preload="auto"
+              onLoadedData={() => setLoaded(true)}
+            />
+          </>
         )}
         <div className="absolute top-3 left-3 flex gap-2">
           {video.language && (
@@ -64,20 +97,22 @@ const VideoTile = ({ video, activeAudioId, onAudio }: {
             </Badge>
           )}
         </div>
-        <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
-          <button
-            onClick={(e) => { e.stopPropagation(); toggle(); }}
-            className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
-          >
-            {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" fill="currentColor" />}
-          </button>
-          <button
-            onClick={toggleMute}
-            className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
-          >
-            {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-          </button>
-        </div>
+        {activated && (
+          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
+            <button
+              onClick={(e) => { e.stopPropagation(); activate(); }}
+              className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+            >
+              {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" fill="currentColor" />}
+            </button>
+            <button
+              onClick={toggleMute}
+              className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+            >
+              {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
