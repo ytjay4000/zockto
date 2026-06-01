@@ -194,7 +194,7 @@ COPY RULES:
       const txt = await aiResp.text();
       console.error('AI gateway error', aiResp.status, txt);
       return new Response(
-        JSON.stringify({ personalized: false, video_info: videoInfo, error: 'ai_unavailable' }),
+        JSON.stringify({ personalized: false, video_info: videoInfo, user_id: userId, user_email: userEmail, error: 'ai_unavailable' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -220,7 +220,7 @@ COPY RULES:
     }
 
     return new Response(
-      JSON.stringify({ personalized: !!copy, video_info: videoInfo, copy }),
+      JSON.stringify({ personalized: !!copy, video_info: videoInfo, user_id: userId, user_email: userEmail, copy }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (e) {
