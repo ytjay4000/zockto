@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
     );
 
     const [resultRes, libRes] = await Promise.all([
-      supabase.from('result').select('video_info').eq('video_id', video_id).maybeSingle(),
+      supabase.from('result').select('video_info, id').eq('video_id', video_id).maybeSingle(),
       supabase
         .from('sample_video_libaray')
         .select('id, category, language, country, type, duration, description')
@@ -45,10 +45,21 @@ Deno.serve(async (req) => {
     if (resultRes.error) throw resultRes.error;
     if (libRes.error) throw libRes.error;
 
+    const userId = (resultRes.data as { id?: string } | null)?.id ?? null;
+    let userEmail: string | null = null;
+    if (userId) {
+      try {
+        const { data: emailData } = await supabase.rpc('get_auth_user_email', { p_user_id: userId });
+        if (typeof emailData === 'string') userEmail = emailData;
+      } catch (e) {
+        console.error('email lookup failed', e);
+      }
+    }
+
     const videoInfo = resultRes.data?.video_info as VideoInfo | null | undefined;
     if (!videoInfo || Object.keys(videoInfo).length === 0) {
       return new Response(
-        JSON.stringify({ personalized: false }),
+        JSON.stringify({ personalized: false, user_id: userId, user_email: userEmail }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -183,7 +194,7 @@ COPY RULES:
       const txt = await aiResp.text();
       console.error('AI gateway error', aiResp.status, txt);
       return new Response(
-        JSON.stringify({ personalized: false, video_info: videoInfo, error: 'ai_unavailable' }),
+        JSON.stringify({ personalized: false, video_info: videoInfo, user_id: userId, user_email: userEmail, error: 'ai_unavailable' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -209,7 +220,7 @@ COPY RULES:
     }
 
     return new Response(
-      JSON.stringify({ personalized: !!copy, video_info: videoInfo, copy }),
+      JSON.stringify({ personalized: !!copy, video_info: videoInfo, user_id: userId, user_email: userEmail, copy }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (e) {

@@ -1,6 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { posthog } from '@/lib/posthog';
+
+const identifyInPostHog = (userId: string | null, email: string | null, videoInfo: Record<string, unknown> | null) => {
+  if (!userId) return;
+  try {
+    posthog.identify(userId, {
+      ...(email ? { email } : {}),
+      ...(videoInfo ?? {}),
+      source: 'case-studies-video-id',
+    });
+  } catch (e) {
+    console.error('posthog identify failed', e);
+  }
+};
 
 export interface PersonalizedCopy {
   hero: { headline: string; subheadline: string; ctaLabel: string };
@@ -41,6 +55,7 @@ export const usePersonalizedCaseStudy = (): PersonalizationResult => {
       const cached = sessionStorage.getItem(cacheKey);
       if (cached) {
         const parsed = JSON.parse(cached);
+        identifyInPostHog(parsed.user_id ?? null, parsed.user_email ?? null, parsed.video_info ?? null);
         setState({
           personalized: !!parsed.personalized,
           copy: parsed.copy ?? null,
@@ -62,6 +77,7 @@ export const usePersonalizedCaseStudy = (): PersonalizationResult => {
         try {
           sessionStorage.setItem(cacheKey, JSON.stringify(data));
         } catch {}
+        identifyInPostHog(data?.user_id ?? null, data?.user_email ?? null, data?.video_info ?? null);
         setState({
           personalized: !!data?.personalized,
           copy: data?.copy ?? null,
