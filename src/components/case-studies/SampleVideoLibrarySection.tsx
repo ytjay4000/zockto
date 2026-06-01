@@ -8,7 +8,7 @@ import { useSampleVideoLibrary, type SampleVideo } from '@/hooks/useSampleVideoL
 interface Props {
   heading: string;
   subheading: string;
-  categoryOrder?: string[];
+  rankedVideoIds?: number[];
 }
 
 const VideoTile = ({ video, activeAudioId, onAudio }: {
@@ -83,24 +83,25 @@ const VideoTile = ({ video, activeAudioId, onAudio }: {
   );
 };
 
-const SampleVideoLibrarySection = ({ heading, subheading, categoryOrder }: Props) => {
+const SampleVideoLibrarySection = ({ heading, subheading, rankedVideoIds }: Props) => {
   const { videos, loading } = useSampleVideoLibrary();
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
 
   const sorted = useMemo(() => {
-    const norm = (s: string) => s.toLowerCase().trim();
-    const order = (categoryOrder ?? []).map(norm);
-    const rank = (cat: string) => {
-      const i = order.indexOf(norm(cat));
-      return i === -1 ? Number.MAX_SAFE_INTEGER : i;
-    };
+    if (rankedVideoIds && rankedVideoIds.length > 0) {
+      const rank = new Map(rankedVideoIds.map((id, i) => [id, i]));
+      return [...videos].sort((a, b) => {
+        const ra = rank.has(a.id) ? (rank.get(a.id) as number) : Number.MAX_SAFE_INTEGER;
+        const rb = rank.has(b.id) ? (rank.get(b.id) as number) : Number.MAX_SAFE_INTEGER;
+        return ra - rb;
+      });
+    }
     return [...videos].sort((a, b) => {
       const ca = (a.category || 'Other').trim();
       const cb = (b.category || 'Other').trim();
-      const r = rank(ca) - rank(cb);
-      return r !== 0 ? r : ca.localeCompare(cb);
+      return ca.localeCompare(cb);
     });
-  }, [videos, categoryOrder]);
+  }, [videos, rankedVideoIds]);
 
   const INITIAL = 8;
   const STEP = 6;
