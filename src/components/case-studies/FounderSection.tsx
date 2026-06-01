@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { motion } from 'framer-motion';
 
 interface Props {
   heading: string;
@@ -8,10 +7,10 @@ interface Props {
 
 const FounderSection = ({ heading, body }: Props) => {
   return (
-    <section className="py-16 md:py-24 bg-muted/30">
-      <div className="container px-4 grid md:grid-cols-2 gap-10 items-center max-w-5xl mx-auto">
+    <section className="py-8 md:py-12 bg-muted/30">
+      <div className="container px-4 flex justify-center max-w-3xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, x: 0 }}
+          initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
@@ -19,7 +18,7 @@ const FounderSection = ({ heading, body }: Props) => {
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium gradient-card border border-border/50 text-primary mb-3">
             From the founder
           </span>
-          <h2 className="font-display text-2xl md:text-4xl font-bold mb-4">{heading}</h2>
+          <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">{heading}</h2>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">{body}</p>
         </motion.div>
       </div>
@@ -28,3 +27,4 @@ const FounderSection = ({ heading, body }: Props) => {
 };
 
 export default FounderSection;
+```
