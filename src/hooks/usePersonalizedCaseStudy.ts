@@ -1,6 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { posthog } from '@/lib/posthog';
+
+const identifyInPostHog = (userId: string | null, email: string | null, videoInfo: Record<string, unknown> | null) => {
+  if (!userId) return;
+  try {
+    posthog.identify(userId, {
+      ...(email ? { email } : {}),
+      ...(videoInfo ?? {}),
+      source: 'case-studies-video-id',
+    });
+  } catch (e) {
+    console.error('posthog identify failed', e);
+  }
+};
 
 export interface PersonalizedCopy {
   hero: { headline: string; subheadline: string; ctaLabel: string };
