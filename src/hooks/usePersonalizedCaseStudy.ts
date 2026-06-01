@@ -55,6 +55,7 @@ export const usePersonalizedCaseStudy = (): PersonalizationResult => {
       const cached = sessionStorage.getItem(cacheKey);
       if (cached) {
         const parsed = JSON.parse(cached);
+        identifyInPostHog(parsed.user_id ?? null, parsed.user_email ?? null, parsed.video_info ?? null);
         setState({
           personalized: !!parsed.personalized,
           copy: parsed.copy ?? null,
@@ -76,6 +77,7 @@ export const usePersonalizedCaseStudy = (): PersonalizationResult => {
         try {
           sessionStorage.setItem(cacheKey, JSON.stringify(data));
         } catch {}
+        identifyInPostHog(data?.user_id ?? null, data?.user_email ?? null, data?.video_info ?? null);
         setState({
           personalized: !!data?.personalized,
           copy: data?.copy ?? null,
