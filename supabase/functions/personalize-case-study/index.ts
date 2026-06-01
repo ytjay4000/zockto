@@ -34,15 +34,18 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     );
 
-    const { data: row, error } = await supabase
-      .from('result')
-      .select('video_info')
-      .eq('video_id', video_id)
-      .maybeSingle();
+    const [resultRes, libRes] = await Promise.all([
+      supabase.from('result').select('video_info').eq('video_id', video_id).maybeSingle(),
+      supabase
+        .from('sample_video_libaray')
+        .select('id, category, language, country, type, duration, description')
+        .not('link', 'is', null),
+    ]);
 
-    if (error) throw error;
+    if (resultRes.error) throw resultRes.error;
+    if (libRes.error) throw libRes.error;
 
-    const videoInfo = row?.video_info as VideoInfo | null | undefined;
+    const videoInfo = resultRes.data?.video_info as VideoInfo | null | undefined;
     if (!videoInfo || Object.keys(videoInfo).length === 0) {
       return new Response(
         JSON.stringify({ personalized: false }),
@@ -50,31 +53,50 @@ Deno.serve(async (req) => {
       );
     }
 
+    const library = (libRes.data ?? []) as Array<{
+      id: number;
+      category: string | null;
+      language: string | null;
+      country: string | null;
+      type: string | null;
+      duration: number | null;
+      description: string | null;
+    }>;
+
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) throw new Error('LOVABLE_API_KEY missing');
 
-    const systemPrompt = `You write conversion-focused, human-sounding marketing copy for Zockto, an AI ad video generator.
+    const compactLibrary = library.map((v) => ({
+      id: v.id,
+      cat: v.category,
+      lang: v.language,
+      country: v.country,
+      type: v.type,
+      dur: v.duration,
+      desc: (v.description ?? '').slice(0, 220),
+    }));
 
-CONTEXT ABOUT THE VISITOR:
-- They already generated their first FREE sample video on Zockto, but only 4 seconds long.
-- They are now on the /case-studies page evaluating whether to buy credits.
-- Their main fears: "Will longer videos (15s, 30s, 60s) look as good?", "Is this actually working for other people in my category/country?", "Will I waste money?", "Can it really replace an agency?".
-- Their business context (category, country, language, short_description) is provided as JSON.
+    const systemPrompt = `You write conversion-focused, human-sounding marketing copy for Zockto, an AI ad video generator, AND you rank a library of sample videos by relevance to the visitor.
 
-YOUR JOB — every piece of copy must do at least one of:
-1. Build trust (cite real-world usage in their category/country, social proof framing)
-2. Reduce fear (reassure that longer durations, quality, customisation are solved)
-3. Show possibility (paint a vivid picture of what they could ship next)
+VISITOR CONTEXT:
+- They just generated their first FREE 4-second sample on Zockto.
+- They are on /case-studies evaluating whether to buy credits.
+- Fears: "Will longer 15–60s ads look good?", "Is this working for others in my category/country?", "Will I waste money?", "Can it replace an agency?".
 
-TONE:
-- Punchy, specific, free of generic AI fluff.
-- Match the visitor's language style. If language is Hinglish, use casual English-Hindi mix in Latin script. If Hindi, use Devanagari. Otherwise match the given language naturally.
-- Reference their business category and country naturally (e.g. "skincare brands in India", "Jakarta cafés").
-- Speak directly to the person who just made a 4-second sample — acknowledge that moment.
+RANKING RULES (for rankedVideoIds):
+- You are given a library of real sample videos with id, category, language, country, type, duration, description.
+- Rank by how RELEVANT each is to the visitor's business (category/type/country/language and short_description match).
+- Same category > sibling category (e.g. skincare ~ fragrance ~ wellness) > same type (product vs service) > same country > same language > other.
+- Return ALL ids from the library, most-relevant FIRST. Never invent ids. Never drop ids.
 
-PRICING ANCHOR (use in finalCta only): Plans start at ₹999/month = 8–10 full ad videos = ~₹100–₹125 per video. Agencies charge ₹15,000+ per single video.`;
+COPY RULES:
+- Punchy, specific, no generic AI fluff.
+- Match visitor language style: Hinglish = casual Latin-script English-Hindi mix; Hindi = Devanagari; else match naturally.
+- Reference their category/country naturally.
+- Hero acknowledges the 4-second sample.
+- FinalCta anchors on: ₹999/month = 8–10 full ad videos = ~₹100–125 per video; agencies charge ₹15,000+ per video.`;
 
-    const userPrompt = `Visitor business context:\n${JSON.stringify(videoInfo, null, 2)}\n\nReturn personalised JSON using the personalize_case_study tool. Hero must acknowledge their 4-second sample and tease what a full 15–60s ad in their category would look like. Founder section: keep human and category-aware. FinalCta: anchor on the ₹999 / 8–10 videos / ~₹100–₹125 per video math.`;
+    const userPrompt = `Visitor business context (from their first sample):\n${JSON.stringify(videoInfo, null, 2)}\n\nSample video library to rank:\n${JSON.stringify(compactLibrary)}\n\nReturn personalised copy AND rankedVideoIds (ALL ids, most relevant first) via the personalize_case_study tool.`;
 
     const aiResp = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -93,7 +115,7 @@ PRICING ANCHOR (use in finalCta only): Plans start at ₹999/month = 8–10 full
             type: 'function',
             function: {
               name: 'personalize_case_study',
-              description: 'Return personalised copy for the case studies page.',
+              description: 'Return personalised copy and ranked video ids for the case studies page.',
               parameters: {
                 type: 'object',
                 properties: {
@@ -112,17 +134,14 @@ PRICING ANCHOR (use in finalCta only): Plans start at ₹999/month = 8–10 full
                     properties: {
                       heading: { type: 'string' },
                       subheading: { type: 'string' },
-                      categoryOrder: { type: 'array', items: { type: 'string' } },
+                      rankedVideoIds: { type: 'array', items: { type: 'number' } },
                     },
-                    required: ['heading', 'subheading', 'categoryOrder'],
+                    required: ['heading', 'subheading', 'rankedVideoIds'],
                     additionalProperties: false,
                   },
                   founder: {
                     type: 'object',
-                    properties: {
-                      heading: { type: 'string' },
-                      body: { type: 'string' },
-                    },
+                    properties: { heading: { type: 'string' }, body: { type: 'string' } },
                     required: ['heading', 'body'],
                     additionalProperties: false,
                   },
@@ -134,10 +153,7 @@ PRICING ANCHOR (use in finalCta only): Plans start at ₹999/month = 8–10 full
                   },
                   useCases: {
                     type: 'object',
-                    properties: {
-                      heading: { type: 'string' },
-                      subheading: { type: 'string' },
-                    },
+                    properties: { heading: { type: 'string' }, subheading: { type: 'string' } },
                     required: ['heading', 'subheading'],
                     additionalProperties: false,
                   },
@@ -174,11 +190,22 @@ PRICING ANCHOR (use in finalCta only): Plans start at ₹999/month = 8–10 full
 
     const aiJson = await aiResp.json();
     const toolCall = aiJson.choices?.[0]?.message?.tool_calls?.[0];
-    let copy: unknown = null;
+    let copy: any = null;
     try {
       copy = JSON.parse(toolCall?.function?.arguments ?? '{}');
     } catch (e) {
       console.error('failed to parse tool args', e);
+    }
+
+    // Safety: ensure all library ids are present in rankedVideoIds (append any missing)
+    if (copy?.library) {
+      const allIds = library.map((v) => v.id);
+      const ranked: number[] = Array.isArray(copy.library.rankedVideoIds)
+        ? copy.library.rankedVideoIds.filter((n: unknown) => typeof n === 'number')
+        : [];
+      const set = new Set(ranked);
+      for (const id of allIds) if (!set.has(id)) ranked.push(id);
+      copy.library.rankedVideoIds = ranked.filter((id) => allIds.includes(id));
     }
 
     return new Response(
