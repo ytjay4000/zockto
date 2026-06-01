@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 export interface PersonalizedCopy {
   hero: { headline: string; subheadline: string; ctaLabel: string };
-  library: { heading: string; subheading: string; categoryOrder: string[] };
+  library: { heading: string; subheading: string; rankedVideoIds: number[] };
   founder: { heading: string; body: string };
   socialProof: { heading: string };
   useCases: { heading: string; subheading: string };
