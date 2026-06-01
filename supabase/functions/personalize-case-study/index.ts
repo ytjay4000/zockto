@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
     );
 
     const [resultRes, libRes] = await Promise.all([
-      supabase.from('result').select('video_info').eq('video_id', video_id).maybeSingle(),
+      supabase.from('result').select('video_info, id').eq('video_id', video_id).maybeSingle(),
       supabase
         .from('sample_video_libaray')
         .select('id, category, language, country, type, duration, description')
@@ -45,10 +45,21 @@ Deno.serve(async (req) => {
     if (resultRes.error) throw resultRes.error;
     if (libRes.error) throw libRes.error;
 
+    const userId = (resultRes.data as { id?: string } | null)?.id ?? null;
+    let userEmail: string | null = null;
+    if (userId) {
+      try {
+        const { data: emailData } = await supabase.rpc('get_auth_user_email', { p_user_id: userId });
+        if (typeof emailData === 'string') userEmail = emailData;
+      } catch (e) {
+        console.error('email lookup failed', e);
+      }
+    }
+
     const videoInfo = resultRes.data?.video_info as VideoInfo | null | undefined;
     if (!videoInfo || Object.keys(videoInfo).length === 0) {
       return new Response(
-        JSON.stringify({ personalized: false }),
+        JSON.stringify({ personalized: false, user_id: userId, user_email: userEmail }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
