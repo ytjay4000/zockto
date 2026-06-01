@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Heart } from "lucide-react";
 
 interface Props {
   heading: string;
@@ -16,14 +16,7 @@ const FounderSection = ({ heading, body }: Props) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 via-pink-500/10 to-amber-200/30 border border-border/50 flex items-center justify-center"
-        >
-          <div className="text-center px-6">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-full gradient-primary flex items-center justify-center shadow-glow">
-              <Heart className="w-9 h-9 text-primary-foreground" fill="currentColor" />
-            </div>
-            <p className="text-sm text-muted-foreground italic">Founder photo coming soon</p>
-          </div>
-        </motion.div>
+        ></motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: 20 }}
