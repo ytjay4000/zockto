@@ -24,7 +24,7 @@ const defaults: PersonalizedCopy = {
     heading: "Don't take our word for it — watch real ads from real businesses",
     subheading:
       'Every video below was generated on Zockto by a small business owner just like you. Different categories, different countries, same tool you just used.',
-    categoryOrder: [],
+    rankedVideoIds: [],
   },
   founder: {
     heading: "We built Zockto because ad creators were eating small businesses alive",
@@ -89,7 +89,7 @@ const CaseStudies = () => {
         <SampleVideoLibrarySection
           heading={copy.library.heading}
           subheading={copy.library.subheading}
-          categoryOrder={copy.library.categoryOrder}
+          rankedVideoIds={copy.library.rankedVideoIds}
         />
       </div>
 
