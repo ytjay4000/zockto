@@ -3,8 +3,10 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import "./index.css";
 import { captureLeadToken } from "./lib/leadToken";
+import { initPostHog } from "./lib/posthog";
 
 captureLeadToken();
+initPostHog();
 
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
