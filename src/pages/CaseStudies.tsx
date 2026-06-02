@@ -11,6 +11,7 @@ import BeforeAfterBlock from '@/components/case-studies/BeforeAfterBlock';
 import UseCaseCards from '@/components/case-studies/UseCaseCards';
 import FinalCtaSection from '@/components/case-studies/FinalCtaSection';
 import ValueBreakdownSection from '@/components/case-studies/ValueBreakdownSection';
+import InlineCtaBanner from '@/components/case-studies/InlineCtaBanner';
 import { usePersonalizedCaseStudy, type PersonalizedCopy } from '@/hooks/usePersonalizedCaseStudy';
 
 const defaults: PersonalizedCopy = {
@@ -79,9 +80,9 @@ const CaseStudies = () => {
       <Navbar />
 
       <HeroSection
-        headline={copy.hero.headline}
-        subheadline={copy.hero.subheadline}
-        ctaLabel={copy.hero.ctaLabel}
+        headline={defaults.hero.headline}
+        subheadline={defaults.hero.subheadline}
+        ctaLabel={defaults.hero.ctaLabel}
         onCtaClick={scrollToLibrary}
       />
 
@@ -93,6 +94,13 @@ const CaseStudies = () => {
         />
       </div>
 
+      <InlineCtaBanner
+        eyebrow="Ready when you are"
+        headline="Like what you see? Start shipping ads from ₹999"
+        subheadline="8–10 full ad videos a month — roughly ₹100–₹125 per finished ad."
+        buttonLabel="Buy credits"
+      />
+
       <FounderSection heading={copy.founder.heading} body={copy.founder.body} />
 
       <section className="pt-4">
@@ -103,6 +111,14 @@ const CaseStudies = () => {
       <VoiceTestimonialsSection />
       <BeforeAfterBlock />
       <TestimonialsSection />
+
+      <InlineCtaBanner
+        variant="amber"
+        eyebrow="Join them today"
+        headline="Your competitors are already running AI ads daily"
+        subheadline="Grab credits and ship your first full-length ad in the next 10 minutes."
+        buttonLabel="Buy credits now"
+      />
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
 
