@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Check, X, Sparkles } from "lucide-react";
+import { Check, X, Sparkles, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   heading?: string;
