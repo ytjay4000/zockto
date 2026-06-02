@@ -83,7 +83,7 @@ const ValueBreakdownSection = ({
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-5 md:px-7 md:py-6 flex flex-col md:flex-row md:items-center gap-3 md:gap-6"
+          className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-5 md:px-7 md:py-6 flex flex-col md:flex-row md:items-center gap-4 md:gap-6"
         >
           <div className="flex-1">
             <p className="text-sm md:text-base text-amber-900">
@@ -93,6 +93,11 @@ const ValueBreakdownSection = ({
               <span className="underline decoration-amber-500">a fraction of one agency video</span>.
             </p>
           </div>
+          <Button variant="hero" size="lg" asChild className="flex-shrink-0">
+            <a href="https://app.zockto.com/buy-credits" target="_blank" rel="noreferrer">
+              Buy credits <ArrowRight className="w-4 h-4 ml-1" />
+            </a>
+          </Button>
         </motion.div>
       </div>
     </section>
