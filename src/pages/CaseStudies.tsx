@@ -86,23 +86,6 @@ const CaseStudies = () => {
         onCtaClick={scrollToLibrary}
       />
 
-      <div ref={libraryRef}>
-        <SampleVideoLibrarySection
-          heading={copy.library.heading}
-          subheading={copy.library.subheading}
-          rankedVideoIds={copy.library.rankedVideoIds}
-        />
-      </div>
-
-      <InlineCtaBanner
-        eyebrow="Ready when you are"
-        headline="Like what you see? Start shipping ads from ₹999"
-        subheadline="8–10 full ad videos a month — roughly ₹100–₹125 per finished ad."
-        buttonLabel="Buy credits"
-      />
-
-      <FounderSection heading={copy.founder.heading} body={copy.founder.body} />
-
       <section className="pt-4">
         <div className="container px-4 text-center mb-2">
           <h2 className="font-display text-2xl md:text-4xl font-bold">{copy.socialProof.heading}</h2>
@@ -130,6 +113,23 @@ const CaseStudies = () => {
         buttonLabel={copy.finalCta.buttonLabel}
         egoTrigger={copy.finalCta.egoTrigger}
       />
+
+      <div ref={libraryRef}>
+        <SampleVideoLibrarySection
+          heading={copy.library.heading}
+          subheading={copy.library.subheading}
+          rankedVideoIds={copy.library.rankedVideoIds}
+        />
+      </div>
+
+      <InlineCtaBanner
+        eyebrow="Ready when you are"
+        headline="Like what you see? Start shipping ads from ₹999"
+        subheadline="8–10 full ad videos a month — roughly ₹100–₹125 per finished ad."
+        buttonLabel="Buy credits"
+      />
+
+      <FounderSection heading={copy.founder.heading} body={copy.founder.body} />
 
       <Footer />
     </div>
