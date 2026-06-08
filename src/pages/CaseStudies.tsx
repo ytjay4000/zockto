@@ -86,11 +86,6 @@ const CaseStudies = () => {
         onCtaClick={scrollToLibrary}
       />
 
-      <section className="pt-4">
-        <div className="container px-4 text-center mb-2">
-          <h2 className="font-display text-2xl md:text-4xl font-bold">{copy.socialProof.heading}</h2>
-        </div>
-      </section>
       <VoiceTestimonialsSection />
       <ValueBreakdownSection />
       <TestimonialsSection />
