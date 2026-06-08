@@ -94,19 +94,19 @@ const CaseStudies = () => {
         eyebrow="Join them today"
         headline="Your competitors are already running AI ads daily"
         subheadline="Grab credits and ship your first full-length ad in the next 10 minutes."
-        buttonLabel="Buy credits now"
+        buttonLabel="Buy credits"
       />
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
 
       <BeforeAfterBlock />
 
-
-      <FinalCtaSection
+      <InlineCtaBanner
+        variant="amber"
+        eyebrow={copy.finalCta.egoTrigger}
         headline={copy.finalCta.headline}
         subheadline={copy.finalCta.subheadline}
-        buttonLabel={copy.finalCta.buttonLabel}
-        egoTrigger={copy.finalCta.egoTrigger}
+        buttonLabel="Buy credits"
       />
 
       <div ref={libraryRef}>
