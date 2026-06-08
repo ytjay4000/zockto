@@ -9,7 +9,6 @@ import SampleVideoLibrarySection from '@/components/case-studies/SampleVideoLibr
 import FounderSection from '@/components/case-studies/FounderSection';
 import BeforeAfterBlock from '@/components/case-studies/BeforeAfterBlock';
 import UseCaseCards from '@/components/case-studies/UseCaseCards';
-import FinalCtaSection from '@/components/case-studies/FinalCtaSection';
 import ValueBreakdownSection from '@/components/case-studies/ValueBreakdownSection';
 import InlineCtaBanner from '@/components/case-studies/InlineCtaBanner';
 import { usePersonalizedCaseStudy, type PersonalizedCopy } from '@/hooks/usePersonalizedCaseStudy';
