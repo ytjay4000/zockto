@@ -9,7 +9,6 @@ import SampleVideoLibrarySection from '@/components/case-studies/SampleVideoLibr
 import FounderSection from '@/components/case-studies/FounderSection';
 import BeforeAfterBlock from '@/components/case-studies/BeforeAfterBlock';
 import UseCaseCards from '@/components/case-studies/UseCaseCards';
-import FinalCtaSection from '@/components/case-studies/FinalCtaSection';
 import ValueBreakdownSection from '@/components/case-studies/ValueBreakdownSection';
 import InlineCtaBanner from '@/components/case-studies/InlineCtaBanner';
 import { usePersonalizedCaseStudy, type PersonalizedCopy } from '@/hooks/usePersonalizedCaseStudy';
@@ -95,19 +94,19 @@ const CaseStudies = () => {
         eyebrow="Join them today"
         headline="Your competitors are already running AI ads daily"
         subheadline="Grab credits and ship your first full-length ad in the next 10 minutes."
-        buttonLabel="Buy credits now"
+        buttonLabel="Buy credits"
       />
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
 
       <BeforeAfterBlock />
 
-
-      <FinalCtaSection
+      <InlineCtaBanner
+        variant="amber"
+        eyebrow={copy.finalCta.egoTrigger}
         headline={copy.finalCta.headline}
         subheadline={copy.finalCta.subheadline}
-        buttonLabel={copy.finalCta.buttonLabel}
-        egoTrigger={copy.finalCta.egoTrigger}
+        buttonLabel="Buy credits"
       />
 
       <div ref={libraryRef}>
@@ -119,6 +118,7 @@ const CaseStudies = () => {
       </div>
 
       <InlineCtaBanner
+        variant="amber"
         eyebrow="Ready when you are"
         headline="Like what you see? Start shipping ads from ₹999"
         subheadline="8–10 full ad videos a month — roughly ₹100–₹125 per finished ad."
