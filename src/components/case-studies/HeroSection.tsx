@@ -27,10 +27,6 @@ const HeroSection = ({ headline, subheadline, ctaLabel, onCtaClick }: HeroSectio
           <p className="text-muted-foreground text-base md:text-lg mb-7 max-w-xl">
             {subheadline}
           </p>
-          <Button variant="hero" size="lg" onClick={onCtaClick}>
-            <Play className="w-4 h-4 mr-1" fill="currentColor" />
-            {ctaLabel}
-          </Button>
         </motion.div>
 
         <motion.div
