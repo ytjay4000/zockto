@@ -92,7 +92,7 @@ const CaseStudies = () => {
         </div>
       </section>
       <VoiceTestimonialsSection />
-      <BeforeAfterBlock />
+      <ValueBreakdownSection />
       <TestimonialsSection />
 
       <InlineCtaBanner
@@ -105,7 +105,8 @@ const CaseStudies = () => {
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
 
-      <ValueBreakdownSection />
+      <BeforeAfterBlock />
+
 
       <FinalCtaSection
         headline={copy.finalCta.headline}
