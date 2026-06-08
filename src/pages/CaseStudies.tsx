@@ -118,6 +118,7 @@ const CaseStudies = () => {
       </div>
 
       <InlineCtaBanner
+        variant="amber"
         eyebrow="Ready when you are"
         headline="Like what you see? Start shipping ads from ₹999"
         subheadline="8–10 full ad videos a month — roughly ₹100–₹125 per finished ad."
