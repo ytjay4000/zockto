@@ -85,8 +85,8 @@ const CaseStudies = () => {
         onCtaClick={scrollToLibrary}
       />
 
-      <VoiceTestimonialsSection />
       <ValueBreakdownSection />
+      <VoiceTestimonialsSection />
       <TestimonialsSection />
 
       <InlineCtaBanner
