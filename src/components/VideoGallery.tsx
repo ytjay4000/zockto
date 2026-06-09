@@ -38,56 +38,102 @@ interface MiniCardProps {
 const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+  const [activated, setActivated] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isMuted = false;
+  const isMuted = activeAudioId !== video.id;
 
   useEffect(() => {
     if (videoRef.current) videoRef.current.muted = isMuted;
   }, [isMuted]);
 
+  // Auto-play once the video element mounts after activation
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setIsInView(true); obs.disconnect(); } }, { rootMargin: '200px' });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+    if (activated && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+      setIsPlaying(true);
+    }
+  }, [activated]);
+
+  const handleClick = () => {
+    if (!activated) {
+      setActivated(true);
+      return;
+    }
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play().catch(() => {});
+        setIsPlaying(true);
+      }
+    }
+  };
 
   return (
     <div
-      ref={containerRef}
       className="group cursor-pointer"
-      onMouseEnter={() => { setIsHovered(true); if (videoRef.current && loaded) { videoRef.current.play().catch(() => {}); setIsPlaying(true); } }}
-      onMouseLeave={() => { setIsHovered(false); if (videoRef.current && isPlaying) { videoRef.current.pause(); setIsPlaying(false); } }}
-      onClick={() => { if (videoRef.current) { isPlaying ? videoRef.current.pause() : videoRef.current.play().catch(() => {}); setIsPlaying(!isPlaying); } }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       <div className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-300">
-        {!loaded && <div className="absolute inset-0 flex items-center justify-center bg-muted z-10"><div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>}
-        {isInView && (
-          <video ref={videoRef} src={`${video.link}#t=0.1`} className="w-full h-full object-cover" muted={isMuted} loop playsInline preload="auto" onLoadedData={() => setLoaded(true)} />
+        {activated && (
+          <video
+            ref={videoRef}
+            src={video.link}
+            className="w-full h-full object-cover"
+            muted={isMuted}
+            loop
+            playsInline
+            preload="auto"
+          />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <motion.div className="absolute inset-0 flex items-center justify-center" initial={false} animate={{ opacity: isHovered && !isPlaying ? 1 : 0 }}>
+
+        {/* Play button overlay — shown before activation and when paused */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center bg-black/20"
+          initial={false}
+          animate={{ opacity: !isPlaying ? 1 : 0 }}
+        >
           <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center shadow-glow">
             <Play className="w-6 h-6 text-primary-foreground ml-0.5" fill="currentColor" />
           </div>
         </motion.div>
-        <motion.div className="absolute bottom-0 left-0 right-0 p-3" initial={false} animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }} transition={{ duration: 0.2 }}>
-          <div className="flex items-center gap-2">
-            <button onClick={(e) => { e.stopPropagation(); if (videoRef.current) { isPlaying ? videoRef.current.pause() : videoRef.current.play().catch(() => {}); setIsPlaying(!isPlaying); } }} className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors">
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" fill="currentColor" />}
-            </button>
-            <button onClick={(e) => { e.stopPropagation(); if (isMuted) { onAudioActivate(video.id); if (videoRef.current) videoRef.current.muted = false; } else { onAudioActivate(null); if (videoRef.current) videoRef.current.muted = true; } }} className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors">
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-            </button>
-            <button onClick={(e) => { e.stopPropagation(); onExpand(video); }} className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors ml-auto">
-              <Maximize2 className="w-4 h-4" />
-            </button>
-          </div>
-        </motion.div>
+
+        {/* Bottom gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Controls */}
+        {activated && (
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 p-3"
+            initial={false}
+            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="flex items-center gap-2">
+              <button
+                onClick={(e) => { e.stopPropagation(); if (videoRef.current) { isPlaying ? videoRef.current.pause() : videoRef.current.play().catch(() => {}); setIsPlaying(!isPlaying); } }}
+                className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+              >
+                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" fill="currentColor" />}
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); if (isMuted) { onAudioActivate(video.id); if (videoRef.current) videoRef.current.muted = false; } else { onAudioActivate(null); if (videoRef.current) videoRef.current.muted = true; } }}
+                className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+              >
+                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); onExpand(video); }}
+                className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors ml-auto"
+              >
+                <Maximize2 className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
