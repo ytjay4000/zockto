@@ -39,60 +39,74 @@ const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardP
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [activated, setActivated] = useState(false);
+  const [inView, setInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isMuted = activeAudioId !== video.id;
 
   useEffect(() => {
     if (videoRef.current) videoRef.current.muted = isMuted;
   }, [isMuted]);
 
-  // Auto-play once the video element mounts after activation
+  // Lazy-mount video (metadata only) when card enters viewport — gives us a real first-frame thumbnail without loading the whole file
   useEffect(() => {
-    if (activated && videoRef.current) {
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
-    }
-  }, [activated]);
+    const el = containerRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   const handleClick = () => {
+    const v = videoRef.current;
+    if (!v) return;
     if (!activated) {
       setActivated(true);
+      // Upgrade preload so playback buffers fast
+      try { v.preload = 'auto'; } catch {}
+      v.play().then(() => setIsPlaying(true)).catch(() => {});
       return;
     }
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play().catch(() => {});
-        setIsPlaying(true);
-      }
+    if (isPlaying) {
+      v.pause();
+      setIsPlaying(false);
+    } else {
+      v.play().then(() => setIsPlaying(true)).catch(() => {});
     }
   };
 
   return (
     <div
+      ref={containerRef}
       className="group cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
       <div className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-300">
-        {activated && (
+        {inView && (
           <video
             ref={videoRef}
-            src={video.link}
+            src={`${video.link}#t=0.1`}
             className="w-full h-full object-cover"
             muted={isMuted}
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
           />
         )}
 
-        {/* Play button overlay — shown before activation and when paused */}
+        {/* Play button overlay — shown before/while paused */}
         <motion.div
-          className="absolute inset-0 flex items-center justify-center bg-black/20"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
           initial={false}
           animate={{ opacity: !isPlaying ? 1 : 0 }}
         >
