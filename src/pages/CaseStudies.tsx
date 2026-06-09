@@ -89,6 +89,8 @@ const CaseStudies = () => {
       <VoiceTestimonialsSection />
       <TestimonialsSection />
 
+      <BeforeAfterBlock />
+
       <InlineCtaBanner
         variant="amber"
         eyebrow="Join them today"
@@ -98,8 +100,6 @@ const CaseStudies = () => {
       />
 
       <UseCaseCards heading={copy.useCases.heading} subheading={copy.useCases.subheading} />
-
-      <BeforeAfterBlock />
 
       <InlineCtaBanner
         variant="amber"
