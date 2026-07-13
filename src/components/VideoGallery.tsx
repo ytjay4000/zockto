@@ -173,7 +173,7 @@ const VideoGallery = () => {
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
           <AppLink>
-            <Button variant="hero" size="lg">Start for Free</Button>
+            <Button variant="hero" size="lg">{ctaLabel}</Button>
           </AppLink>
         </motion.div>
       </div>
