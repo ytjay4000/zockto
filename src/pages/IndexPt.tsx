@@ -6,7 +6,6 @@ import VideoGallery from '@/components/VideoGallery';
 import ProblemsSectionPt from '@/components/pt/ProblemsSectionPt';
 import BenefitsSectionPt from '@/components/pt/BenefitsSectionPt';
 import HowItWorksSectionPt from '@/components/pt/HowItWorksSectionPt';
-import VoiceTestimonialsSectionPt from '@/components/pt/VoiceTestimonialsSectionPt';
 import TestimonialsSectionPt from '@/components/pt/TestimonialsSectionPt';
 import PricingSectionPt from '@/components/pt/PricingSectionPt';
 import FAQSectionPt from '@/components/pt/FAQSectionPt';
