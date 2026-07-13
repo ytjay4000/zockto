@@ -21,6 +21,7 @@ import CaseStudyForrester from "./pages/CaseStudyForrester";
 import CaseStudyAdobeFirefly from "./pages/CaseStudyAdobeFirefly";
 import CaseStudyCustomerThink from "./pages/CaseStudyCustomerThink";
 import NotFound from "./pages/NotFound";
+import AutoTranslateForBrazil from "./components/AutoTranslateForBrazil";
 
 const queryClient = new QueryClient();
 
