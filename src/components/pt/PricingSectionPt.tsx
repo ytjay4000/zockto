@@ -156,7 +156,7 @@ const PricingSectionPt = () => {
                     {currency}
                     {isAnnual ? formatBRL(plan.annualPrice / 12) : formatBRL(plan.monthlyPrice)}
                   </span>
-                  <span className="text-muted-foreground text-lg"> / mês</span>
+                  <span className="text-muted-foreground text-lg">/ mês</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-6">
                   cobrado {isAnnual ? 'anualmente' : 'mensalmente'}
