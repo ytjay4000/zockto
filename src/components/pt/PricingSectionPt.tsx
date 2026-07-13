@@ -7,8 +7,9 @@ import AppLink from '@/components/AppLink';
 const plans = [
   {
     name: 'Plano Básico',
-    monthlyPrice: 99.9,
-    annualPrice: 958.8,
+    monthlyPrice: 29,
+    annualMonthly: 23,
+    annualTotal: 276,
     credits: '600',
     description: 'Perfeito para começar',
     whatYouGet: [
@@ -28,8 +29,9 @@ const plans = [
   },
   {
     name: 'Plano Creator',
-    monthlyPrice: 249.9,
-    annualPrice: 2399.04,
+    monthlyPrice: 59,
+    annualMonthly: 47,
+    annualTotal: 564,
     credits: '2.400',
     description: 'Perfeito para criadores de conteúdo',
     whatYouGet: [
@@ -49,8 +51,9 @@ const plans = [
   },
   {
     name: 'Plano Business',
-    monthlyPrice: 899.9,
-    annualPrice: 8639.04,
+    monthlyPrice: 149,
+    annualMonthly: 119,
+    annualTotal: 1428,
     credits: '8.500',
     description: 'Melhor para empresas e agências',
     whatYouGet: [
@@ -70,12 +73,12 @@ const plans = [
   },
 ];
 
-const formatBRL = (value: number) =>
-  value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const formatUSD = (value: number) =>
+  value.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
 
 const PricingSectionPt = () => {
   const [isAnnual, setIsAnnual] = useState(false);
-  const currency = 'R$ ';
+  const currency = '$';
 
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
@@ -154,12 +157,14 @@ const PricingSectionPt = () => {
                 <div className="mb-1">
                   <span className="font-display text-5xl font-bold">
                     {currency}
-                    {isAnnual ? formatBRL(plan.annualPrice / 12) : formatBRL(plan.monthlyPrice)}
+                    {isAnnual ? formatUSD(plan.annualMonthly) : formatUSD(plan.monthlyPrice)}
                   </span>
                   <span className="text-muted-foreground text-lg">/ mês</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-6">
-                  cobrado {isAnnual ? 'anualmente' : 'mensalmente'}
+                  {isAnnual
+                    ? `cobrado ${currency}${formatUSD(plan.annualTotal)}/ano`
+                    : 'cobrado mensalmente'}
                 </p>
 
                 <div className="flex items-center justify-center gap-2 mb-6">
