@@ -8,23 +8,23 @@ import {
 
 const faqs = [
   {
-    question: 'Quanto tempo leva para criar um anúncio para minha marca com o Zockto?',
+    question: 'Quanto tempo leva para criar um anúncio para minha marca com a Zockto?',
     answer: 'Você cria um anúncio de qualquer produto em apenas 5 cliques. Depois disso, nosso software leva de 5 a 30 minutos para gerar o anúncio pronto para postar, com qualidade de estúdio.',
   },
   {
-    question: 'Preciso de conhecimento técnico para usar o Zockto?',
-    answer: 'De jeito nenhum. O Zockto foi feito para times de todos os tamanhos. Seja você de marketing, produto ou tocando seu negócio sozinho, a interface é intuitiva e muito fácil de usar.',
+    question: 'Preciso de conhecimento técnico para usar a Zockto?',
+    answer: 'De jeito nenhum. A Zockto foi feita para times de todos os tamanhos. Seja você de marketing, produto ou tocando seu negócio sozinho, a interface é intuitiva e muito fácil de usar.',
   },
   {
-    question: 'Que tipos de empresas usam o Zockto?',
-    answer: 'Empresas que vendem ou divulgam produtos físicos — como lojas de e-commerce — têm os melhores resultados com o recurso de anúncios UGC do Zockto.',
+    question: 'Que tipos de empresas usam a Zockto?',
+    answer: 'Empresas que vendem ou divulgam produtos físicos — como lojas de e-commerce — têm os melhores resultados com o recurso de anúncios UGC da Zockto.',
   },
   {
-    question: 'Meus dados estão seguros no Zockto?',
-    answer: 'Com certeza. Usamos criptografia de nível corporativo e seguimos as melhores práticas de privacidade e conformidade de dados.',
+    question: 'Meus dados estão seguros na Zockto?',
+    answer: 'Com certeza. Usamos criptografia de nível empresarial e seguimos as melhores práticas de privacidade e conformidade de dados, em conformidade com a LGPD.',
   },
   {
-    question: 'Posso testar o Zockto de graça antes de assinar?',
+    question: 'Posso testar a Zockto de graça antes de assinar?',
     answer: 'Sim, oferecemos teste grátis, então você pode explorar todos os recursos e criar um vídeo de amostra antes de partir para um plano pago.',
   },
 ];

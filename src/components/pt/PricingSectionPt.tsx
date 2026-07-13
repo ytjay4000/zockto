@@ -7,8 +7,8 @@ import AppLink from '@/components/AppLink';
 const plans = [
   {
     name: 'Plano Básico',
-    monthlyPrice: 39,
-    annualPrice: 372,
+    monthlyPrice: 99.9,
+    annualPrice: 958.8,
     credits: '600',
     description: 'Perfeito para começar',
     whatYouGet: [
@@ -28,8 +28,8 @@ const plans = [
   },
   {
     name: 'Plano Creator',
-    monthlyPrice: 99,
-    annualPrice: 948,
+    monthlyPrice: 249.9,
+    annualPrice: 2399.04,
     credits: '2.400',
     description: 'Perfeito para criadores de conteúdo',
     whatYouGet: [
@@ -49,8 +49,8 @@ const plans = [
   },
   {
     name: 'Plano Business',
-    monthlyPrice: 399,
-    annualPrice: 3828,
+    monthlyPrice: 899.9,
+    annualPrice: 8639.04,
     credits: '8.500',
     description: 'Melhor para empresas e agências',
     whatYouGet: [
@@ -70,9 +70,12 @@ const plans = [
   },
 ];
 
+const formatBRL = (value: number) =>
+  value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
 const PricingSectionPt = () => {
   const [isAnnual, setIsAnnual] = useState(false);
-  const currency = '$';
+  const currency = 'R$ ';
 
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
@@ -151,7 +154,7 @@ const PricingSectionPt = () => {
                 <div className="mb-1">
                   <span className="font-display text-5xl font-bold">
                     {currency}
-                    {isAnnual ? Math.round(plan.annualPrice / 12).toLocaleString() : plan.monthlyPrice.toLocaleString()}
+                    {isAnnual ? formatBRL(plan.annualPrice / 12) : formatBRL(plan.monthlyPrice)}
                   </span>
                   <span className="text-muted-foreground text-lg">/ mês</span>
                 </div>

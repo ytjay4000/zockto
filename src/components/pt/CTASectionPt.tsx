@@ -17,7 +17,7 @@ const features = [
   {
     icon: TrendingUp,
     title: 'Alta Conversão',
-    description: 'Comprovado para aumentar engajamento e taxas de conversão',
+    description: 'Feito para aumentar o engajamento e as taxas de conversão',
   },
 ];
 
