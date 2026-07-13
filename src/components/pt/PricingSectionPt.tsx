@@ -75,7 +75,7 @@ const formatBRL = (value: number) =>
 
 const PricingSectionPt = () => {
   const [isAnnual, setIsAnnual] = useState(false);
-  const currency = '$';
+  const currency = 'R$ ';
 
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
@@ -154,9 +154,9 @@ const PricingSectionPt = () => {
                 <div className="mb-1">
                   <span className="font-display text-5xl font-bold">
                     {currency}
-                    {isAnnual ? Math.round(plan.annualPrice / 12).toLocaleString() : plan.monthlyPrice.toLocaleString()}
+                    {isAnnual ? formatBRL(plan.annualPrice / 12) : formatBRL(plan.monthlyPrice)}
                   </span>
-                  <span className="text-muted-foreground text-lg">/ mês</span>
+                  <span className="text-muted-foreground text-lg"> / mês</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-6">
                   cobrado {isAnnual ? 'anualmente' : 'mensalmente'}
