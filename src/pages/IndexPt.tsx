@@ -35,11 +35,10 @@ const IndexPt = () => {
       />
       <NavbarPt />
       <HeroPt />
-      <VideoGallery />
+      <VideoGallery ctaLabel="Começar Grátis" />
       <ProblemsSectionPt />
       <BenefitsSectionPt />
       <HowItWorksSectionPt />
-      <VoiceTestimonialsSectionPt />
       <TestimonialsSectionPt />
       <PricingSectionPt />
       <FAQSectionPt />
