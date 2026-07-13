@@ -7,8 +7,8 @@ import AppLink from '@/components/AppLink';
 const plans = [
   {
     name: 'Plano Básico',
-    monthlyPrice: 39,
-    annualPrice: 372,
+    monthlyPrice: 99.9,
+    annualPrice: 958.8,
     credits: '600',
     description: 'Perfeito para começar',
     whatYouGet: [
@@ -28,8 +28,8 @@ const plans = [
   },
   {
     name: 'Plano Creator',
-    monthlyPrice: 99,
-    annualPrice: 948,
+    monthlyPrice: 249.9,
+    annualPrice: 2399.04,
     credits: '2.400',
     description: 'Perfeito para criadores de conteúdo',
     whatYouGet: [
@@ -49,8 +49,8 @@ const plans = [
   },
   {
     name: 'Plano Business',
-    monthlyPrice: 399,
-    annualPrice: 3828,
+    monthlyPrice: 899.9,
+    annualPrice: 8639.04,
     credits: '8.500',
     description: 'Melhor para empresas e agências',
     whatYouGet: [
@@ -69,6 +69,9 @@ const plans = [
     popular: false,
   },
 ];
+
+const formatBRL = (value: number) =>
+  value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 const PricingSectionPt = () => {
   const [isAnnual, setIsAnnual] = useState(false);
