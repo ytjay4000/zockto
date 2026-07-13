@@ -153,7 +153,7 @@ const MiniCard = ({ video, activeAudioId, onAudioActivate, onExpand }: MiniCardP
   );
 };
 
-const VideoGallery = () => {
+const VideoGallery = ({ ctaLabel = "Start for Free" }: { ctaLabel?: string } = {}) => {
   const { isIndia } = useGeoLocation();
   const VIDEOS = isIndia ? VIDEOS_INDIA : VIDEOS_GLOBAL;
   const [selectedVideo, setSelectedVideo] = useState<typeof VIDEOS_INDIA[0] | null>(null);
