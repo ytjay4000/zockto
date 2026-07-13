@@ -18,7 +18,7 @@ const steps = [
     number: '3',
     icon: FileText,
     title: 'Adicione Detalhes (Opcional)',
-    description: 'Quer mais controle? Nos diga quais benefícios ou features destacar, ou forneça seu próprio roteiro.',
+    description: 'Quer mais controle? Nos diga quais benefícios ou características destacar, ou forneça seu próprio roteiro.',
   },
   {
     number: '4',
