@@ -30,6 +30,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AutoTranslateForBrazil />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/pt" element={<IndexPt />} />
