@@ -348,12 +348,9 @@ export type Database = {
           billing_interval: string | null
           created_at: string
           current_plan: string | null
-          expiry_date: string | null
           id: string
           next_billing_date: string | null
           pending_plan_change: string | null
-          permanent_credit: number
-          plan_credit: number
           razorpay_subscription_id: string | null
           subscription_id: string | null
           subscription_provider: string | null
@@ -365,12 +362,9 @@ export type Database = {
           billing_interval?: string | null
           created_at?: string
           current_plan?: string | null
-          expiry_date?: string | null
           id?: string
           next_billing_date?: string | null
           pending_plan_change?: string | null
-          permanent_credit?: number
-          plan_credit?: number
           razorpay_subscription_id?: string | null
           subscription_id?: string | null
           subscription_provider?: string | null
@@ -382,12 +376,9 @@ export type Database = {
           billing_interval?: string | null
           created_at?: string
           current_plan?: string | null
-          expiry_date?: string | null
           id?: string
           next_billing_date?: string | null
           pending_plan_change?: string | null
-          permanent_credit?: number
-          plan_credit?: number
           razorpay_subscription_id?: string | null
           subscription_id?: string | null
           subscription_provider?: string | null
@@ -711,6 +702,54 @@ export type Database = {
         }
         Relationships: []
       }
+      plan_credits: {
+        Row: {
+          created_at: string
+          expired_at: string | null
+          expired_credits_removed: number
+          expiry_date: string
+          id: string
+          original_credit: number
+          payment_order_id: string | null
+          plan_credit: number
+          plan_name: string | null
+          provider: string | null
+          source: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expired_at?: string | null
+          expired_credits_removed?: number
+          expiry_date: string
+          id?: string
+          original_credit: number
+          payment_order_id?: string | null
+          plan_credit?: number
+          plan_name?: string | null
+          provider?: string | null
+          source?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expired_at?: string | null
+          expired_credits_removed?: number
+          expiry_date?: string
+          id?: string
+          original_credit?: number
+          payment_order_id?: string | null
+          plan_credit?: number
+          plan_name?: string | null
+          provider?: string | null
+          source?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       product_ad_templates: {
         Row: {
           category: string[]
@@ -884,12 +923,15 @@ export type Database = {
       }
       profiles: {
         Row: {
+          ad_id: number | null
           aibrainkey: string
           aichangescrpit: string | null
+          campain_name: string | null
           competitors: string[] | null
           counter: number
           created_at: string | null
           credit: number
+          ctwa_clid: string | null
           custom_script: string | null
           daily_image_credits: number
           email: string | null
@@ -940,12 +982,15 @@ export type Database = {
           whatsapp_number: string | null
         }
         Insert: {
+          ad_id?: number | null
           aibrainkey?: string
           aichangescrpit?: string | null
+          campain_name?: string | null
           competitors?: string[] | null
           counter?: number
           created_at?: string | null
           credit: number
+          ctwa_clid?: string | null
           custom_script?: string | null
           daily_image_credits?: number
           email?: string | null
@@ -996,12 +1041,15 @@ export type Database = {
           whatsapp_number?: string | null
         }
         Update: {
+          ad_id?: number | null
           aibrainkey?: string
           aichangescrpit?: string | null
+          campain_name?: string | null
           competitors?: string[] | null
           counter?: number
           created_at?: string | null
           credit?: number
+          ctwa_clid?: string | null
           custom_script?: string | null
           daily_image_credits?: number
           email?: string | null
@@ -1181,7 +1229,7 @@ export type Database = {
       result: {
         Row: {
           "1080p_url": string | null
-          "540p_url": string | null
+          "720p_url": string | null
           broll_image_url: string | null
           broll_json: Json[] | null
           caption_json: Json | null
@@ -1192,6 +1240,7 @@ export type Database = {
           face_detection: Json[] | null
           id: string
           logo_json: Json | null
+          model_used: string
           music_json: Json | null
           nanabannatimeout: number | null
           percentage: number | null
@@ -1209,7 +1258,7 @@ export type Database = {
         }
         Insert: {
           "1080p_url"?: string | null
-          "540p_url"?: string | null
+          "720p_url"?: string | null
           broll_image_url?: string | null
           broll_json?: Json[] | null
           caption_json?: Json | null
@@ -1220,6 +1269,7 @@ export type Database = {
           face_detection?: Json[] | null
           id: string
           logo_json?: Json | null
+          model_used?: string
           music_json?: Json | null
           nanabannatimeout?: number | null
           percentage?: number | null
@@ -1237,7 +1287,7 @@ export type Database = {
         }
         Update: {
           "1080p_url"?: string | null
-          "540p_url"?: string | null
+          "720p_url"?: string | null
           broll_image_url?: string | null
           broll_json?: Json[] | null
           caption_json?: Json | null
@@ -1248,6 +1298,7 @@ export type Database = {
           face_detection?: Json[] | null
           id?: string
           logo_json?: Json | null
+          model_used?: string
           music_json?: Json | null
           nanabannatimeout?: number | null
           percentage?: number | null
@@ -1729,6 +1780,18 @@ export type Database = {
         Args: { p_amount: number; p_user_id: string }
         Returns: undefined
       }
+      add_plan_credits: {
+        Args: {
+          p_amount: number
+          p_expiry: string
+          p_payment_order_id?: string
+          p_plan_name?: string
+          p_provider?: string
+          p_source?: string
+          p_user_id: string
+        }
+        Returns: string
+      }
       admin_get_user_identity: {
         Args: { p_user_ids: string[] }
         Returns: {
@@ -1754,6 +1817,7 @@ export type Database = {
         }[]
       }
       get_auth_user_email: { Args: { p_user_id: string }; Returns: string }
+      get_user_credit_balance: { Args: { p_user_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
