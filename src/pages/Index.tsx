@@ -13,6 +13,7 @@ import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
+import StickyMobileCTA from '@/components/StickyMobileCTA';
 
 const Index = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const Index = () => {
       <FAQSection />
       <CTASection />
       <Footer />
+      <StickyMobileCTA />
     </div>
   );
 };
