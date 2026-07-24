@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight, Star } from 'lucide-react';
-import AppLink from '@/components/AppLink';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useEffect, useState } from "react";
+import { ArrowRight, Star } from "lucide-react";
+import AppLink from "@/components/AppLink";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface StickyMobileCTAProps {
   label?: string;
@@ -9,8 +9,8 @@ interface StickyMobileCTAProps {
 }
 
 const StickyMobileCTA = ({
-  label = 'Start Creating Free',
-  trustText = 'Trusted by thousands of businesses',
+  label = "Start Creating Free",
+  trustText = "Trusted by thousands of businesses",
 }: StickyMobileCTAProps) => {
   const isMobile = useIsMobile();
   const [visible, setVisible] = useState(false);
@@ -21,12 +21,12 @@ const StickyMobileCTA = ({
     const onScroll = () => {
       if (window.scrollY > threshold) {
         setVisible(true);
-        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener("scroll", onScroll);
       }
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, [isMobile]);
 
   if (!isMobile) return null;
@@ -35,9 +35,9 @@ const StickyMobileCTA = ({
     <div
       aria-hidden={!visible}
       className={`md:hidden fixed left-0 right-0 bottom-0 z-50 pointer-events-none transition-all duration-300 ease-out ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"
       }`}
-      style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}
+      style={{ paddingBottom: "max(16px, env(safe-area-inset-bottom))" }}
     >
       <div className="px-4 pointer-events-auto">
         <div className="rounded-full bg-card/95 backdrop-blur-md shadow-card-hover border border-primary/20 p-2 pl-5 flex items-center gap-3">
@@ -48,15 +48,11 @@ const StickyMobileCTA = ({
                   <Star key={i} className="w-3 h-3 fill-current" />
                 ))}
               </span>
-              <span className="truncate">{trustText}</span>
+              <span className="truncate text-[9px]">{trustText}</span>
             </div>
-            <div className="font-display font-semibold text-sm text-foreground leading-tight truncate">
-              {label}
-            </div>
+            <div className="font-display font-semibold text-sm text-foreground leading-tight truncate">{label}</div>
           </div>
-          <AppLink
-            className="shrink-0 inline-flex items-center gap-1 gradient-primary text-primary-foreground font-semibold text-sm px-5 py-3 rounded-full shadow-glow active:scale-95 transition-transform"
-          >
+          <AppLink className="shrink-0 inline-flex items-center gap-1 gradient-primary text-primary-foreground font-semibold text-sm px-5 py-3 rounded-full shadow-glow active:scale-95 transition-transform">
             Start
             <ArrowRight className="w-4 h-4" />
           </AppLink>
