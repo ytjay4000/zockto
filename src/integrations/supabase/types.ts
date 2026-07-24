@@ -248,6 +248,72 @@ export type Database = {
         }
         Relationships: []
       }
+      campaign_rewards: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          id: string
+          original_phone: string
+          redeemed_at: string | null
+          reward_status: string
+          user_id: string | null
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          id?: string
+          original_phone: string
+          redeemed_at?: string | null
+          reward_status?: string
+          user_id?: string | null
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          id?: string
+          original_phone?: string
+          redeemed_at?: string | null
+          reward_status?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      campaigns: {
+        Row: {
+          active: boolean
+          campaign_id: string
+          created_at: string
+          id: string
+          name: string
+          reward_amount: number
+          reward_type: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          campaign_id: string
+          created_at?: string
+          id?: string
+          name: string
+          reward_amount?: number
+          reward_type: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          campaign_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          reward_amount?: number
+          reward_type?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       competitors: {
         Row: {
           created_at: string
@@ -974,6 +1040,7 @@ export type Database = {
           ugc_product_id: string | null
           updated_at: string | null
           user_country: string | null
+          user_feedback_json: Json | null
           user_query: string | null
           videodata: Json[] | null
           videos: Json[] | null
@@ -1033,6 +1100,7 @@ export type Database = {
           ugc_product_id?: string | null
           updated_at?: string | null
           user_country?: string | null
+          user_feedback_json?: Json | null
           user_query?: string | null
           videodata?: Json[] | null
           videos?: Json[] | null
@@ -1092,6 +1160,7 @@ export type Database = {
           ugc_product_id?: string | null
           updated_at?: string | null
           user_country?: string | null
+          user_feedback_json?: Json | null
           user_query?: string | null
           videodata?: Json[] | null
           videos?: Json[] | null
@@ -1551,6 +1620,72 @@ export type Database = {
           file_name?: string | null
           id?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      user_feedback: {
+        Row: {
+          avatar_id: string | null
+          country: string | null
+          created_at: string
+          credits_used: number | null
+          custom_feedback: string | null
+          feedback_milestone: number
+          goal_achieved: string | null
+          id: string
+          improvement_categories: string[] | null
+          language: string | null
+          rating: number
+          subscription_plan: string | null
+          updated_at: string
+          usage_result: string | null
+          user_id: string
+          video_duration: number | null
+          video_style: string | null
+          videos_generated: number
+          workspace_id: string | null
+        }
+        Insert: {
+          avatar_id?: string | null
+          country?: string | null
+          created_at?: string
+          credits_used?: number | null
+          custom_feedback?: string | null
+          feedback_milestone: number
+          goal_achieved?: string | null
+          id?: string
+          improvement_categories?: string[] | null
+          language?: string | null
+          rating: number
+          subscription_plan?: string | null
+          updated_at?: string
+          usage_result?: string | null
+          user_id: string
+          video_duration?: number | null
+          video_style?: string | null
+          videos_generated: number
+          workspace_id?: string | null
+        }
+        Update: {
+          avatar_id?: string | null
+          country?: string | null
+          created_at?: string
+          credits_used?: number | null
+          custom_feedback?: string | null
+          feedback_milestone?: number
+          goal_achieved?: string | null
+          id?: string
+          improvement_categories?: string[] | null
+          language?: string | null
+          rating?: number
+          subscription_plan?: string | null
+          updated_at?: string
+          usage_result?: string | null
+          user_id?: string
+          video_duration?: number | null
+          video_style?: string | null
+          videos_generated?: number
+          workspace_id?: string | null
         }
         Relationships: []
       }
