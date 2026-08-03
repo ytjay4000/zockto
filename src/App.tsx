@@ -42,7 +42,7 @@ const App = () => (
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/demo" element={<Demo />} />
-          <Route path="/case-studies" element={<CaseStudies />} />>
+          <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/ai-vs-traditional-video-ads" element={<CaseStudyAIVsTraditional />} />
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />
           <Route path="/case-studies/laife-dtc-wellness" element={<CaseStudyLAIFE />} />
