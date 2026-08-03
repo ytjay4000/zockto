@@ -511,6 +511,54 @@ export type Database = {
         }
         Relationships: []
       }
+      first_ad_entitlements: {
+        Row: {
+          amount: number
+          consumed_at: string | null
+          created_at: string
+          failed_video_ids: string[]
+          id: string
+          last_restored_at: string | null
+          payment_order_id: string | null
+          provider: string | null
+          purchased_at: string
+          restore_count: number
+          status: string
+          user_id: string
+          video_id: string | null
+        }
+        Insert: {
+          amount?: number
+          consumed_at?: string | null
+          created_at?: string
+          failed_video_ids?: string[]
+          id?: string
+          last_restored_at?: string | null
+          payment_order_id?: string | null
+          provider?: string | null
+          purchased_at?: string
+          restore_count?: number
+          status?: string
+          user_id: string
+          video_id?: string | null
+        }
+        Update: {
+          amount?: number
+          consumed_at?: string | null
+          created_at?: string
+          failed_video_ids?: string[]
+          id?: string
+          last_restored_at?: string | null
+          payment_order_id?: string | null
+          provider?: string | null
+          purchased_at?: string
+          restore_count?: number
+          status?: string
+          user_id?: string
+          video_id?: string | null
+        }
+        Relationships: []
+      }
       imgresult: {
         Row: {
           aspect_ratio: string | null
@@ -1934,6 +1982,10 @@ export type Database = {
           user_id: string
         }[]
       }
+      consume_first_ad_entitlement: {
+        Args: { p_user_id: string; p_video_id: string }
+        Returns: Json
+      }
       create_payment_table: { Args: never; Returns: undefined }
       deduct_credits: {
         Args: { p_amount: number; p_user_id: string }
@@ -1952,6 +2004,7 @@ export type Database = {
         }[]
       }
       get_auth_user_email: { Args: { p_user_id: string }; Returns: string }
+      get_first_ad_state: { Args: { p_user_id: string }; Returns: Json }
       get_user_credit_balance: { Args: { p_user_id: string }; Returns: Json }
       has_role: {
         Args: {
@@ -1967,6 +2020,10 @@ export type Database = {
       }
       remove_plan_credits: { Args: { p_user_id: string }; Returns: undefined }
       reset_freepoint: { Args: never; Returns: undefined }
+      restore_first_ad_entitlement: {
+        Args: { p_user_id: string; p_video_id: string }
+        Returns: Json
+      }
       set_plan_credits: {
         Args: { p_plan_credits: number; p_user_id: string }
         Returns: undefined
