@@ -169,23 +169,25 @@ const DemoVideoGrid = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {demoCategories.map((c) => (
-            <button
-              key={c}
-              onClick={() => {
-                setCategory(c);
-                setVisible(INITIAL);
-              }}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-                category === c
-                  ? 'bg-primary text-primary-foreground border-primary shadow-card'
-                  : 'border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/50'
-              }`}
-            >
-              {c}
-            </button>
-          ))}
+        <div className="-mx-4 px-4 mb-10 overflow-x-auto md:overflow-visible md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex flex-nowrap md:flex-wrap md:justify-center gap-2 w-max md:w-auto">
+            {demoCategories.map((c) => (
+              <button
+                key={c}
+                onClick={() => {
+                  setCategory(c);
+                  setVisible(INITIAL);
+                }}
+                className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+                  category === c
+                    ? 'bg-primary text-primary-foreground border-primary shadow-card'
+                    : 'border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/50'
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
