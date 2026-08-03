@@ -158,7 +158,7 @@ const DemoVideoGrid = () => {
           className="text-center mb-8 md:mb-12 max-w-2xl mx-auto"
         >
           <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-4">
-            {demoVideos.length}+ real Zockto ads
+            Trusted by 1000+ businesses
           </span>
           <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">
             Watch the actual quality — nothing staged, nothing cherry-picked
