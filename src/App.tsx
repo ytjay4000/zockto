@@ -11,6 +11,7 @@ import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import CaseStudies from "./pages/CaseStudies";
+import Demo from "./pages/Demo";
 import CaseStudyAIVsTraditional from "./pages/CaseStudyAIVsTraditional";
 import CaseStudyZerorez from "./pages/CaseStudyZerorez";
 import CaseStudyLAIFE from "./pages/CaseStudyLAIFE";
@@ -40,7 +41,8 @@ const App = () => (
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/demo" element={<Demo />} />
+          <Route path="/case-studies" element={<CaseStudies />} />>
           <Route path="/case-studies/ai-vs-traditional-video-ads" element={<CaseStudyAIVsTraditional />} />
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />
           <Route path="/case-studies/laife-dtc-wellness" element={<CaseStudyLAIFE />} />
