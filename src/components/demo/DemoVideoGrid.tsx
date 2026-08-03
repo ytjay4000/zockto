@@ -139,10 +139,11 @@ const DemoVideoGrid = () => {
   const [visible, setVisible] = useState(INITIAL);
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
 
-  const filtered = useMemo(
-    () => (category === 'All' ? demoVideos : demoVideos.filter((v) => v.category === category)),
-    [category],
-  );
+  const filtered = useMemo(() => {
+    const list = category === 'All' ? demoVideos : demoVideos.filter((v) => v.category === category);
+    return [...list].reverse();
+  }, [category]);
+
 
   const shown = filtered.slice(0, visible);
   const hasMore = visible < filtered.length;
