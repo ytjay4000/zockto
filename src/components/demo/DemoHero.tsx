@@ -6,7 +6,7 @@ import { demoVideos } from '@/data/demoVideos';
 const BUY_CREDITS_URL = 'https://app.zockto.com/buy-credits';
 
 const stats = [
-  { icon: Sparkles, label: `${demoVideos.length}+ real ads`, sub: 'made by real businesses' },
+  { icon: Sparkles, label: 'Trusted by 1000+', sub: 'businesses creating real ads' },
   { icon: Clock, label: '5–10 minutes', sub: 'from product to finished ad' },
   { icon: Languages, label: '48 languages', sub: 'Hinglish, Hindi, English & more' },
   { icon: IndianRupee, label: '₹100–₹125', sub: 'per finished ad video' },
