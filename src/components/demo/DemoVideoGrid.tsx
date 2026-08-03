@@ -125,7 +125,7 @@ const DemoTile = ({
 
       <div className="mt-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-primary">{video.category}</p>
-        <p className="text-sm text-muted-foreground mt-1 line-clamp-3">{video.description}</p>
+        
       </div>
     </div>
   );
