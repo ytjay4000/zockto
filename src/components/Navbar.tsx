@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import AppLink from '@/components/AppLink';
 
 const navLinks = [
-  { label: 'Demo', href: '#demos' },
+  { label: 'Demo', href: '/demo' },
   { label: 'Benefits', href: '#benefits' },
   { label: 'Features', href: '#features' },
   { label: 'Pricing', href: '#pricing' },
