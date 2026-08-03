@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Clock, Languages, IndianRupee } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { demoVideos } from '@/data/demoVideos';
+
 
 const BUY_CREDITS_URL = 'https://app.zockto.com/buy-credits';
 
