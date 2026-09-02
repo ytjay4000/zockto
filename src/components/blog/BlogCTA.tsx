@@ -32,7 +32,7 @@ const BlogCTA = () => {
         asChild
       >
         <a href="https://app.zockto.com" target="_blank" rel="noopener noreferrer" onClick={handleClick}>
-          Start Creating Free <ArrowRight className="w-4 h-4 ml-1" />
+          Start Creating <ArrowRight className="w-4 h-4 ml-1" />
         </a>
       </Button>
     </motion.div>
