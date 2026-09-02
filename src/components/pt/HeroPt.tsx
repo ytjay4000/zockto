@@ -54,7 +54,7 @@ const HeroPt = () => {
           >
             <Button size="lg" variant="hero" asChild>
               <AppLink>
-                Começar Grátis
+                Começar
                 <ArrowRight className="w-5 h-5 ml-2" />
               </AppLink>
             </Button>

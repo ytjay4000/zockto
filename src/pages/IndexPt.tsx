@@ -35,7 +35,7 @@ const IndexPt = () => {
       />
       <NavbarPt />
       <HeroPt />
-      <VideoGallery ctaLabel="Começar Grátis" />
+      <VideoGallery ctaLabel="Começar" />
       <ProblemsSectionPt />
       <BenefitsSectionPt />
       <HowItWorksSectionPt />

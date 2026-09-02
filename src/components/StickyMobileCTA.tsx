@@ -9,7 +9,7 @@ interface StickyMobileCTAProps {
 }
 
 const StickyMobileCTA = ({
-  label = "Start Creating Free",
+  label = "Start Creating",
   trustText = "Trusted by thousands of businesses",
 }: StickyMobileCTAProps) => {
   const isMobile = useIsMobile();

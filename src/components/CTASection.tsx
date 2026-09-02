@@ -72,7 +72,7 @@ const CTASection = () => {
             </p>
             <Button size="lg" variant="hero" asChild>
               <AppLink>
-                Start Creating For Free
+                Start Creating
                 <ArrowRight className="w-5 h-5 ml-2" />
               </AppLink>
             </Button>

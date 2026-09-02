@@ -137,7 +137,7 @@ const CaseStudyZerorez = () => {
                 'Cost per click fell by 73% on their Meta campaigns',
                 'Hook rates improved by 35%, meaning more people stopped scrolling and watched the ad',
                 'Monthly creative output tripled, from 6–12 to 30+ ads per month',
-                'Production time per asset dropped 70%, freeing up the team for actual marketing strategy',
+                'Production time per asset dropped 70%, opening up time for actual marketing strategy',
               ].map((item) => (
                 <li key={item} className="flex gap-3 items-start">
                   <Check className="w-5 h-5 text-primary mt-1 shrink-0" />
@@ -185,7 +185,7 @@ const CaseStudyZerorez = () => {
               See what Zockto can do for your brand
             </h2>
             <p className="text-lg md:text-xl opacity-90 mb-10 max-w-xl mx-auto">
-              Try it free. Generate your first AI UGC ad in under 60 seconds — no card needed.
+              Generate your first AI video ad in under 60 seconds — no card needed.
             </p>
             <Button
               asChild
@@ -197,7 +197,7 @@ const CaseStudyZerorez = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Try Zockto Free
+                Try Zockto
               </a>
             </Button>
           </div>

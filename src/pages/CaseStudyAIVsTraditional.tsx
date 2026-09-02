@@ -174,7 +174,7 @@ const CaseStudyAIVsTraditional = () => {
             <ul className="space-y-3 pl-6 list-disc marker:text-primary">
               <li>Lower your cost per result and cost per click</li>
               <li>Multiply the number of fresh variations you can test each week</li>
-              <li>Free up budget that's currently locked into production fees</li>
+              <li>Reallocate budget that's currently locked into production fees</li>
             </ul>
             <p>
               The AI ads in this test weren't just "good enough." They beat the best human-made creatives the
@@ -190,7 +190,7 @@ const CaseStudyAIVsTraditional = () => {
               Create your first AI ad video in 60 seconds
             </h2>
             <p className="text-lg md:text-xl opacity-90 mb-10 max-w-xl mx-auto">
-              Free to try. No credit card. Made for Indian brands running Meta and Instagram ads.
+              No credit card needed. Made for Indian brands running Meta and Instagram ads.
             </p>
             <Button
               asChild

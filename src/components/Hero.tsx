@@ -54,7 +54,7 @@ const Hero = () => {
           {/* Main headline */}
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
             Create High-Converting{' '}
-            <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">UGC Ads</span>{' '}
+            <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">Video Ads</span>{' '}
             in Minutes
           </h1>
 
@@ -75,7 +75,7 @@ const Hero = () => {
         }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" variant="hero" asChild>
               <AppLink>
-                Get Started for Free
+                Get Started
                 <ArrowRight className="w-5 h-5 ml-2" />
               </AppLink>
             </Button>

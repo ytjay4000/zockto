@@ -24,8 +24,8 @@ const faqs = [
     answer: 'Com certeza. Usamos criptografia de nível empresarial e seguimos as melhores práticas de privacidade e conformidade de dados, em conformidade com a LGPD.',
   },
   {
-    question: 'Posso testar a Zockto de graça antes de assinar?',
-    answer: 'Sim, oferecemos teste grátis, então você pode explorar todos os recursos e criar um vídeo de amostra antes de partir para um plano pago.',
+    question: 'Posso testar a Zockto antes de assinar?',
+    answer: 'Sim, você pode explorar todos os recursos e criar um vídeo de amostra antes de partir para um plano pago.',
   },
 ];
 

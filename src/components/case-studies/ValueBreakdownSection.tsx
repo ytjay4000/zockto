@@ -14,7 +14,7 @@ const rows = [
   { label: "Video quality", zockto: "1080p, studio-grade AI", agency: "Studio-grade (varies by team)" },
   {
     label: "Customisation",
-    zockto: "Unlimited regenerates, free A/B variants",
+    zockto: "Unlimited regenerates and A/B variants",
     agency: "Paid revisions, extra invoices",
   },
   {
@@ -23,7 +23,7 @@ const rows = [
     agency: "Talent booking, single language",
   },
   { label: "Longer durations", zockto: "15s, 30s, 60s — same flow", agency: "Pricier the longer it gets" },
-  { label: "Risk", zockto: "Cancel anytime, regenerate free", agency: "Locked-in retainers, sunk cost" },
+  { label: "Risk", zockto: "Cancel anytime, regenerate at no extra cost", agency: "Locked-in retainers, sunk cost" },
 ];
 
 const ValueBreakdownSection = ({

@@ -59,7 +59,7 @@ export const demoVideos: DemoVideo[] = [
     "link": "https://storages.zockto.com/product_ads_shot_output/2a2be4cf-0028-4c18-801b-ef750e0c0be4/e467e9b3-fc62-42db-b645-4b3a6e5b88ba1.mp4",
     "category": "Apps & SaaS",
     "language": "English",
-    "description": "the video promotes the \\\"Indians in Phú Quốc Community,\\\" a networking and support group for Indian entrepreneurs in Phú Quốc, Vietnam. The male presenter shares his positive experience, highlighting instant support and access to over 250 local Indian members, and encourages other entrepreneurs to join the free community.",
+    "description": "the video promotes the \\\"Indians in Phú Quốc Community,\\\" a networking and support group for Indian entrepreneurs in Phú Quốc, Vietnam. The male presenter shares his positive experience, highlighting instant support and access to over 250 local Indian members, and encourages other entrepreneurs to join the community.",
     "duration": 12,
     "country": null
   },

@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+    PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
@@ -224,6 +224,24 @@ export type Database = {
           is_completed?: boolean | null
           super_consumer_profile?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      app_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: string
         }
         Relationships: []
       }
@@ -1040,6 +1058,7 @@ export type Database = {
           ad_id: number | null
           aibrainkey: string
           aichangescrpit: string | null
+          blueprint_prefilled: boolean
           campain_name: string | null
           competitors: string[] | null
           counter: number
@@ -1075,6 +1094,7 @@ export type Database = {
           reel_url: string | null
           reference_videos: string[] | null
           result: Json | null
+          saved_blueprint: string | null
           script_option: string | null
           scrpitpreviewerror: string | null
           selected_niches: string[] | null
@@ -1100,6 +1120,7 @@ export type Database = {
           ad_id?: number | null
           aibrainkey?: string
           aichangescrpit?: string | null
+          blueprint_prefilled?: boolean
           campain_name?: string | null
           competitors?: string[] | null
           counter?: number
@@ -1135,6 +1156,7 @@ export type Database = {
           reel_url?: string | null
           reference_videos?: string[] | null
           result?: Json | null
+          saved_blueprint?: string | null
           script_option?: string | null
           scrpitpreviewerror?: string | null
           selected_niches?: string[] | null
@@ -1160,6 +1182,7 @@ export type Database = {
           ad_id?: number | null
           aibrainkey?: string
           aichangescrpit?: string | null
+          blueprint_prefilled?: boolean
           campain_name?: string | null
           competitors?: string[] | null
           counter?: number
@@ -1195,6 +1218,7 @@ export type Database = {
           reel_url?: string | null
           reference_videos?: string[] | null
           result?: Json | null
+          saved_blueprint?: string | null
           script_option?: string | null
           scrpitpreviewerror?: string | null
           selected_niches?: string[] | null
@@ -1354,18 +1378,28 @@ export type Database = {
           created_at: string
           credits_charged: number | null
           display_message: string | null
+          edit_type: string | null
           face_detection: Json[] | null
           id: string
+          langauge: string | null
+          language_code: string | null
           logo_json: Json | null
           model_used: string
           music_json: Json | null
           nanabannatimeout: number | null
           percentage: number | null
+          product_description: string | null
+          product_image_urls: Json | null
           raw_video_json: Json | null
           resolution: string | null
           size: number | null
+          source_video_id: string | null
           status: string
           timetaken: number | null
+          transcript_data: Json | null
+          transcript_original: string | null
+          transcript_status: string
+          transcript_updated: string | null
           type: string | null
           user_type: string | null
           video_duration: number | null
@@ -1383,18 +1417,28 @@ export type Database = {
           created_at?: string
           credits_charged?: number | null
           display_message?: string | null
+          edit_type?: string | null
           face_detection?: Json[] | null
           id: string
+          langauge?: string | null
+          language_code?: string | null
           logo_json?: Json | null
           model_used?: string
           music_json?: Json | null
           nanabannatimeout?: number | null
           percentage?: number | null
+          product_description?: string | null
+          product_image_urls?: Json | null
           raw_video_json?: Json | null
           resolution?: string | null
           size?: number | null
+          source_video_id?: string | null
           status?: string
           timetaken?: number | null
+          transcript_data?: Json | null
+          transcript_original?: string | null
+          transcript_status?: string
+          transcript_updated?: string | null
           type?: string | null
           user_type?: string | null
           video_duration?: number | null
@@ -1412,18 +1456,28 @@ export type Database = {
           created_at?: string
           credits_charged?: number | null
           display_message?: string | null
+          edit_type?: string | null
           face_detection?: Json[] | null
           id?: string
+          langauge?: string | null
+          language_code?: string | null
           logo_json?: Json | null
           model_used?: string
           music_json?: Json | null
           nanabannatimeout?: number | null
           percentage?: number | null
+          product_description?: string | null
+          product_image_urls?: Json | null
           raw_video_json?: Json | null
           resolution?: string | null
           size?: number | null
+          source_video_id?: string | null
           status?: string
           timetaken?: number | null
+          transcript_data?: Json | null
+          transcript_original?: string | null
+          transcript_status?: string
+          transcript_updated?: string | null
           type?: string | null
           user_type?: string | null
           video_duration?: number | null
@@ -1505,6 +1559,169 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      support_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          event_type: string
+          from_value: string | null
+          id: string
+          ticket_id: string
+          to_value: string | null
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          event_type: string
+          from_value?: string | null
+          id?: string
+          ticket_id: string
+          to_value?: string | null
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          event_type?: string
+          from_value?: string | null
+          id?: string
+          ticket_id?: string
+          to_value?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_events_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "support_tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      support_messages: {
+        Row: {
+          attachment_url: string | null
+          body: string
+          created_at: string
+          id: string
+          is_internal_note: boolean
+          sender_id: string | null
+          sender_role: string
+          ticket_id: string
+        }
+        Insert: {
+          attachment_url?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          is_internal_note?: boolean
+          sender_id?: string | null
+          sender_role: string
+          ticket_id: string
+        }
+        Update: {
+          attachment_url?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          is_internal_note?: boolean
+          sender_id?: string | null
+          sender_role?: string
+          ticket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_messages_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "support_tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      support_tickets: {
+        Row: {
+          category: string
+          completed_at: string | null
+          created_at: string
+          description: string
+          id: string
+          issue_detail: string | null
+          issue_type: string | null
+          last_admin_reply_at: string | null
+          priority: string
+          status: string
+          ticket_number: string
+          updated_at: string
+          user_id: string
+          user_last_seen_at: string | null
+          video_id: string | null
+        }
+        Insert: {
+          category: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          issue_detail?: string | null
+          issue_type?: string | null
+          last_admin_reply_at?: string | null
+          priority?: string
+          status?: string
+          ticket_number: string
+          updated_at?: string
+          user_id: string
+          user_last_seen_at?: string | null
+          video_id?: string | null
+        }
+        Update: {
+          category?: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          issue_detail?: string | null
+          issue_type?: string | null
+          last_admin_reply_at?: string | null
+          priority?: string
+          status?: string
+          ticket_number?: string
+          updated_at?: string
+          user_id?: string
+          user_last_seen_at?: string | null
+          video_id?: string | null
+        }
+        Relationships: []
+      }
+      transcript_changes: {
+        Row: {
+          changes: Json
+          created_at: string
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+          video_id: string
+        }
+        Insert: {
+          changes?: Json
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          video_id: string
+        }
+        Update: {
+          changes?: Json
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          video_id?: string
+        }
+        Relationships: []
       }
       ugc_avatar_bg: {
         Row: {
@@ -2062,12 +2279,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -2091,11 +2308,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -2116,11 +2333,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -2141,11 +2358,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -2158,11 +2375,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
