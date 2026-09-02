@@ -137,7 +137,7 @@ const CaseStudyZerorez = () => {
                 'Cost per click fell by 73% on their Meta campaigns',
                 'Hook rates improved by 35%, meaning more people stopped scrolling and watched the ad',
                 'Monthly creative output tripled, from 6–12 to 30+ ads per month',
-                'Production time per asset dropped 70%, freeing up the team for actual marketing strategy',
+                'Production time per asset dropped 70%, opening up time for actual marketing strategy',
               ].map((item) => (
                 <li key={item} className="flex gap-3 items-start">
                   <Check className="w-5 h-5 text-primary mt-1 shrink-0" />
