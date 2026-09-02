@@ -190,7 +190,7 @@ const CaseStudyAIVsTraditional = () => {
               Create your first AI ad video in 60 seconds
             </h2>
             <p className="text-lg md:text-xl opacity-90 mb-10 max-w-xl mx-auto">
-              Free to try. No credit card. Made for Indian brands running Meta and Instagram ads.
+              No credit card needed. Made for Indian brands running Meta and Instagram ads.
             </p>
             <Button
               asChild
