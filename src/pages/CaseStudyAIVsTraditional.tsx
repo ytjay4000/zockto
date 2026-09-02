@@ -174,7 +174,7 @@ const CaseStudyAIVsTraditional = () => {
             <ul className="space-y-3 pl-6 list-disc marker:text-primary">
               <li>Lower your cost per result and cost per click</li>
               <li>Multiply the number of fresh variations you can test each week</li>
-              <li>Free up budget that's currently locked into production fees</li>
+              <li>Reallocate budget that's currently locked into production fees</li>
             </ul>
             <p>
               The AI ads in this test weren't just "good enough." They beat the best human-made creatives the

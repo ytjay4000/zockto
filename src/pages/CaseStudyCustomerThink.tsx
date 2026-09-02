@@ -168,7 +168,7 @@ const CaseStudyCustomerThink = () => {
               See what Zockto can do for your brand
             </h2>
             <p className="text-lg md:text-xl opacity-90 mb-10 max-w-xl mx-auto">
-              Try it free. Generate your first AI UGC ad in under 60 seconds — no card needed.
+              Generate your first AI video ad in under 60 seconds — no card needed.
             </p>
             <Button
               asChild
@@ -180,7 +180,7 @@ const CaseStudyCustomerThink = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Try Zockto Free
+                Try Zockto
               </a>
             </Button>
           </div>
