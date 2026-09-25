@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
-import { posthog } from '@/lib/posthog';
-import VslCta from './VslCta';
-import vslAsset from '@/assets/zockto_vsl_final.mp4.asset.json';
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Play } from "lucide-react";
+import { posthog } from "@/lib/posthog";
+import VslCta from "./VslCta";
+import vslAsset from "@/assets/zockto_vsl_final.mp4.asset.json";
 
 // Final ~70s VSL master video.
 const VSL_SRC = vslAsset.url;
@@ -18,7 +18,7 @@ const VslHero = () => {
     const v = videoRef.current;
     if (!v) return;
     v.play().catch(() => {});
-    posthog.capture('vsl_play');
+    posthog.capture("vsl_play");
   };
 
   const handleTimeUpdate = () => {
@@ -50,7 +50,7 @@ const VslHero = () => {
           transition={{ delay: 0.05 }}
           className="font-display text-[28px] leading-[1.15] sm:text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight mb-5"
         >
-          Stop Paying ₹10,000–₹15,000 for a Single Video Ad.
+          Stop Paying ₹10–₹15k for a Video Ad.
         </motion.h1>
 
         <motion.p
@@ -59,7 +59,7 @@ const VslHero = () => {
           transition={{ delay: 0.1 }}
           className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[680px] mx-auto mb-9 md:mb-12"
         >
-          Create a complete storytelling-based video ad with Zockto — starting at just ₹299.
+          Create a complete 30sec storytelling-based video ad with Zockto — starting at just ₹299.
         </motion.p>
 
         <motion.div
@@ -77,7 +77,7 @@ const VslHero = () => {
             preload="metadata"
             poster=""
             onTimeUpdate={handleTimeUpdate}
-            onEnded={() => posthog.capture('vsl_complete')}
+            onEnded={() => posthog.capture("vsl_complete")}
           />
           {!started && (
             <button
