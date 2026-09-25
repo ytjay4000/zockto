@@ -1072,6 +1072,7 @@ export type Database = {
           finalscript: string | null
           freepoint: number
           has_completed_onboarding: boolean | null
+          has_generated_storyboard: boolean | null
           has_seen_tutorial: boolean | null
           id: string
           images: Json[] | null
@@ -1134,6 +1135,7 @@ export type Database = {
           finalscript?: string | null
           freepoint?: number
           has_completed_onboarding?: boolean | null
+          has_generated_storyboard?: boolean | null
           has_seen_tutorial?: boolean | null
           id: string
           images?: Json[] | null
@@ -1196,6 +1198,7 @@ export type Database = {
           finalscript?: string | null
           freepoint?: number
           has_completed_onboarding?: boolean | null
+          has_generated_storyboard?: boolean | null
           has_seen_tutorial?: boolean | null
           id?: string
           images?: Json[] | null
@@ -1390,6 +1393,7 @@ export type Database = {
           percentage: number | null
           product_description: string | null
           product_image_urls: Json | null
+          prompt_json: Json | null
           raw_video_json: Json | null
           resolution: string | null
           size: number | null
@@ -1429,6 +1433,7 @@ export type Database = {
           percentage?: number | null
           product_description?: string | null
           product_image_urls?: Json | null
+          prompt_json?: Json | null
           raw_video_json?: Json | null
           resolution?: string | null
           size?: number | null
@@ -1468,6 +1473,7 @@ export type Database = {
           percentage?: number | null
           product_description?: string | null
           product_image_urls?: Json | null
+          prompt_json?: Json | null
           raw_video_json?: Json | null
           resolution?: string | null
           size?: number | null
@@ -1559,6 +1565,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      storyboard_results: {
+        Row: {
+          created_at: string
+          error: string | null
+          request_id: string
+          result: Json | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          error?: string | null
+          request_id: string
+          result?: Json | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          error?: string | null
+          request_id?: string
+          result?: Json | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       support_events: {
         Row: {
