@@ -159,8 +159,9 @@ const VslOldVsNew = () => (
         </div>
 
         <div className="flex justify-center mt-10">
-          <VslCta event="primary_cta_click" className="w-full sm:w-auto" />
+          <VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />
         </div>
+
       </div>
     </div>
   </section>

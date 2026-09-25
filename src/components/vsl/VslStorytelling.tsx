@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Sparkles, X } from 'lucide-react';
 import VslSectionHeading from './VslSectionHeading';
+import VslCta from './VslCta';
+
 
 const chain = [
   { step: 'Hook', desc: 'Stop the scroll in the first two seconds.' },
@@ -79,8 +81,13 @@ const VslStorytelling = () => (
           ))}
         </div>
       </div>
+
+      <div className="flex justify-center mt-12">
+        <VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />
+      </div>
     </div>
   </section>
+
 );
 
 export default VslStorytelling;

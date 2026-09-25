@@ -31,6 +31,8 @@ const VslStickyCta = () => {
           Try Your First Ad — ₹299
           <ArrowRight className="w-4 h-4" />
         </AppLink>
+        <p className="text-[11px] text-muted-foreground text-center mt-1.5">7-day refund if you don’t love it</p>
+
         <button
           onClick={() => setDismissed(true)}
           aria-label="Dismiss"
