@@ -84,15 +84,24 @@ const DemoTile = ({
       >
         {!activated ? (
           <>
+            {/* Real poster frame extracted from each ad, so no card ever looks empty. */}
+            <img
+              src={`/demo-posters/${video.id}.jpg`}
+              alt={`${video.category} video ad by Zockto`}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
             {nearView && (
               <video
                 src={`${video.link}#t=0.6`}
-                className="w-full h-full object-cover"
+                className="relative w-full h-full object-cover"
                 muted
                 playsInline
                 preload="metadata"
               />
             )}
+
 
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
               <div className="w-14 h-14 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
