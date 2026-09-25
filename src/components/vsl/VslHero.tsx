@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { posthog } from '@/lib/posthog';
 import VslCta from './VslCta';
+import vslAsset from '@/assets/zockto_vsl_final.mp4.asset.json';
 
-// Final ~70s VSL. Replace this URL when the final master file is uploaded.
-const VSL_SRC = 'https://storages.zockto.com/explainer_video/zockto_proof_video.mp4';
+// Final ~70s VSL master video.
+const VSL_SRC = vslAsset.url;
 
 const VslHero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
