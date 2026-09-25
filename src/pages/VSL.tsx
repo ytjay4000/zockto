@@ -1,10 +1,8 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import SEO from "@/components/SEO";
-import DemoVideoGrid from "@/components/demo/DemoVideoGrid";
-import VoiceTestimonialsSection from "@/components/VoiceTestimonialsSection";
-import UseCaseCards from "@/components/case-studies/UseCaseCards";
 import VslHeader from "@/components/vsl/VslHeader";
 import VslHero from "@/components/vsl/VslHero";
+import VslLogoMarquee from "@/components/vsl/VslLogoMarquee";
 import VslTrustStrip from "@/components/vsl/VslTrustStrip";
 import VslStorytelling from "@/components/vsl/VslStorytelling";
 import VslOldVsNew from "@/components/vsl/VslOldVsNew";
@@ -13,12 +11,21 @@ import VslWrittenTestimonials from "@/components/vsl/VslWrittenTestimonials";
 import VslPerformance from "@/components/vsl/VslPerformance";
 import VslOffer from "@/components/vsl/VslOffer";
 import VslRiskReversal from "@/components/vsl/VslRiskReversal";
-import VslFaq from "@/components/vsl/VslFaq";
 import VslFinalCta from "@/components/vsl/VslFinalCta";
 import VslFooter from "@/components/vsl/VslFooter";
 import VslStickyCta from "@/components/vsl/VslStickyCta";
+import VslReturnNudge from "@/components/vsl/VslReturnNudge";
+import VslWhatsappOptIn from "@/components/vsl/VslWhatsappOptIn";
 import VslCta from "@/components/vsl/VslCta";
 import { posthog } from "@/lib/posthog";
+
+// Deferred so the hero paints first on mobile connections.
+const DemoVideoGrid = lazy(() => import("@/components/demo/DemoVideoGrid"));
+const VoiceTestimonialsSection = lazy(() => import("@/components/VoiceTestimonialsSection"));
+const UseCaseCards = lazy(() => import("@/components/case-studies/UseCaseCards"));
+const VslFaq = lazy(() => import("@/components/vsl/VslFaq"));
+
+const Blank = <div className="py-16" />;
 
 const VSL = () => {
   useEffect(() => {
@@ -28,41 +35,61 @@ const VSL = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <SEO
-        title="Try Your First AI Video Ad for ₹299 | Zockto"
-        description="Stop paying ₹10–₹15k for a video ad. Upload product photo and get a complete 30sec storytelling-based video ad with Zockto — starting at ₹299."
+        title="Turn One Product Photo Into an Ad That Sells | Zockto"
+        description="Zockto builds a complete 30sec storytelling video ad — voiceover, music, captions, fully edited — starting at ₹299, ready in 10 minutes."
         path="/vsl"
       />
       <VslHeader />
       <main className="pt-16 md:pt-20">
         <VslHero />
+        <VslLogoMarquee />
         <VslTrustStrip />
 
-        <DemoVideoGrid
-          eyebrow="Real ads. Real businesses."
-          heading="See What Zockto Actually Creates."
-          footer={<VslCta event="primary_cta_click" label="Create My First Ad for ₹299" className="w-full sm:w-auto" />}
-        />
+        <Suspense fallback={Blank}>
+          <DemoVideoGrid
+            eyebrow="Real ads. Real businesses."
+            heading="See What Zockto Actually Creates."
+            footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />}
+          />
+        </Suspense>
 
         <VslStorytelling />
         <VslOldVsNew />
         <VslHowItWorks />
 
-        <VoiceTestimonialsSection
-          eyebrow="Heard from real users"
-          heading="Listen to Business Owners Using Zockto."
-          sub="Real voices from real businesses. Tap play to listen."
-        />
+        <Suspense fallback={Blank}>
+          <VoiceTestimonialsSection
+            eyebrow="Heard from real users"
+            heading="Listen to Business Owners Using Zockto."
+            sub="Real voices from real businesses. Tap play to listen."
+          />
+        </Suspense>
 
         <VslWrittenTestimonials />
+
+        <div className="flex justify-center pb-16 md:pb-20 px-4">
+          <VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />
+        </div>
+
         <VslPerformance />
-        <UseCaseCards heading="What Businesses Use Zockto For" subheading="One product photo, many places to run it." />
+
+        <Suspense fallback={Blank}>
+          <UseCaseCards heading="What Businesses Use Zockto For" subheading="One product photo, many places to run it." />
+        </Suspense>
+
         <VslOffer />
         <VslRiskReversal />
-        <VslFaq />
+        <VslWhatsappOptIn />
+
+        <Suspense fallback={Blank}>
+          <VslFaq />
+        </Suspense>
+
         <VslFinalCta />
       </main>
       <VslFooter />
       <VslStickyCta />
+      <VslReturnNudge />
       <div className="h-20 md:hidden" />
     </div>
   );
