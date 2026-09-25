@@ -3,7 +3,13 @@ import { voiceTestimonials } from '@/data/voiceTestimonials';
 import { VoicePlaybackProvider } from '@/context/VoicePlaybackContext';
 import VoiceTestimonialCard from './VoiceTestimonialCard';
 
-const VoiceTestimonialsSection = () => {
+interface VoiceTestimonialsSectionProps {
+  eyebrow?: string;
+  heading?: React.ReactNode;
+  sub?: string;
+}
+
+const VoiceTestimonialsSection = ({ eyebrow, heading, sub }: VoiceTestimonialsSectionProps = {}) => {
   const loop = [...voiceTestimonials, ...voiceTestimonials];
 
   return (
@@ -17,16 +23,20 @@ const VoiceTestimonialsSection = () => {
           className="text-center mb-10 md:mb-14"
         >
           <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-4">
-            Voice Testimonials
+            {eyebrow ?? 'Voice Testimonials'}
           </span>
           <h2 className="font-display text-2xl md:text-5xl font-bold mb-3">
-            Hear it from{' '}
-            <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
-              our clients
-            </span>
+            {heading ?? (
+              <>
+                Hear it from{' '}
+                <span className="bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
+                  our clients
+                </span>
+              </>
+            )}
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-            Real voices. Real results. Tap play to listen.
+            {sub ?? 'Real voices. Real results. Tap play to listen.'}
           </p>
         </motion.div>
       </div>
