@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Loader2, Play, Pause, Volume2, VolumeX, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,26 @@ const DemoTile = ({
   const [loaded, setLoaded] = useState(false);
   const [el, setEl] = useState<HTMLVideoElement | null>(null);
   const muted = activeAudioId !== video.id;
+  const tileRef = useRef<HTMLDivElement>(null);
+  const [nearView, setNearView] = useState(false);
+
+  // Only fetch a preview frame once the tile is close to the viewport.
+  useEffect(() => {
+    const node = tileRef.current;
+    if (!node) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNearView(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    obs.observe(node);
+    return () => obs.disconnect();
+  }, []);
+
 
   const activate = () => {
     if (!activated) {
