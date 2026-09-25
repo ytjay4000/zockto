@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const stats = [
-  { value: '1,000+', label: 'Businesses using Zockto' },
-  { value: '48', label: 'Languages supported' },
-  { value: '5–10 min', label: 'Typical creation time' },
-  { value: '₹299', label: 'First ad trial' },
+  { value: "1,000+", label: "Businesses using Zockto" },
+  { value: "48", label: "Languages supported" },
+  { value: "5–10 min", label: "Typical creation time" },
+  { value: "2.5x", label: "ROAS Improve" },
 ];
 
 const VslTrustStrip = () => (
