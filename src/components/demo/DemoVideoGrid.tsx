@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Loader2, Play, Pause, Volume2, VolumeX, Clock } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { demoVideos, demoCategories, type DemoVideo } from '@/data/demoVideos';
-import { posthog } from '@/lib/posthog';
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Loader2, Play, Pause, Volume2, VolumeX, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { demoVideos, demoCategories, type DemoVideo } from "@/data/demoVideos";
+import { posthog } from "@/lib/posthog";
 
 const DemoTile = ({
   video,
@@ -26,7 +26,7 @@ const DemoTile = ({
       setActivated(true);
       onAudio(video.id);
       setPlaying(true);
-      posthog.capture('demo_video_play', {
+      posthog.capture("demo_video_play", {
         video_id: video.id,
         category: video.category,
         path: window.location.pathname,
@@ -131,7 +131,6 @@ const DemoTile = ({
 
       <div className="mt-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-primary">{video.category}</p>
-        
       </div>
     </div>
   );
@@ -148,15 +147,14 @@ interface DemoVideoGridProps {
 }
 
 const DemoVideoGrid = ({ eyebrow, heading, sub, footer }: DemoVideoGridProps) => {
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState("All");
   const [visible, setVisible] = useState(INITIAL);
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
 
   const filtered = useMemo(() => {
-    const list = category === 'All' ? demoVideos : demoVideos.filter((v) => v.category === category);
+    const list = category === "All" ? demoVideos : demoVideos.filter((v) => v.category === category);
     return [...list].reverse();
   }, [category]);
-
 
   const shown = filtered.slice(0, visible);
   const hasMore = visible < filtered.length;
@@ -172,15 +170,11 @@ const DemoVideoGrid = ({ eyebrow, heading, sub, footer }: DemoVideoGridProps) =>
           className="text-center mb-8 md:mb-12 max-w-2xl mx-auto"
         >
           <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-4">
-            {eyebrow ?? 'Trusted by 1000+ businesses'}
+            {eyebrow ?? "Trusted by 1000+ businesses"}
           </span>
           <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">
-            {heading ?? 'Watch the actual quality — nothing staged, nothing cherry-picked'}
+            {heading ?? "Watch the actual quality — nothing staged, nothing cherry-picked"}
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg">
-            {sub ??
-              'Every video below was generated on Zockto by a real business: skincare, food, apparel, apps and more — in Hinglish, Hindi, English and Gujarati.'}
-          </p>
         </motion.div>
 
         <div className="-mx-4 px-4 mb-10 overflow-x-auto md:overflow-visible md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -194,8 +188,8 @@ const DemoVideoGrid = ({ eyebrow, heading, sub, footer }: DemoVideoGridProps) =>
                 }}
                 className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium border transition-all ${
                   category === c
-                    ? 'bg-primary text-primary-foreground border-primary shadow-card'
-                    : 'border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/50'
+                    ? "bg-primary text-primary-foreground border-primary shadow-card"
+                    : "border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/50"
                 }`}
               >
                 {c}
