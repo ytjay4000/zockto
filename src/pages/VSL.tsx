@@ -1,35 +1,35 @@
-import { useEffect } from 'react';
-import SEO from '@/components/SEO';
-import DemoVideoGrid from '@/components/demo/DemoVideoGrid';
-import VoiceTestimonialsSection from '@/components/VoiceTestimonialsSection';
-import UseCaseCards from '@/components/case-studies/UseCaseCards';
-import VslHeader from '@/components/vsl/VslHeader';
-import VslHero from '@/components/vsl/VslHero';
-import VslTrustStrip from '@/components/vsl/VslTrustStrip';
-import VslStorytelling from '@/components/vsl/VslStorytelling';
-import VslOldVsNew from '@/components/vsl/VslOldVsNew';
-import VslHowItWorks from '@/components/vsl/VslHowItWorks';
-import VslWrittenTestimonials from '@/components/vsl/VslWrittenTestimonials';
-import VslPerformance from '@/components/vsl/VslPerformance';
-import VslOffer from '@/components/vsl/VslOffer';
-import VslRiskReversal from '@/components/vsl/VslRiskReversal';
-import VslFaq from '@/components/vsl/VslFaq';
-import VslFinalCta from '@/components/vsl/VslFinalCta';
-import VslFooter from '@/components/vsl/VslFooter';
-import VslStickyCta from '@/components/vsl/VslStickyCta';
-import VslCta from '@/components/vsl/VslCta';
-import { posthog } from '@/lib/posthog';
+import { useEffect } from "react";
+import SEO from "@/components/SEO";
+import DemoVideoGrid from "@/components/demo/DemoVideoGrid";
+import VoiceTestimonialsSection from "@/components/VoiceTestimonialsSection";
+import UseCaseCards from "@/components/case-studies/UseCaseCards";
+import VslHeader from "@/components/vsl/VslHeader";
+import VslHero from "@/components/vsl/VslHero";
+import VslTrustStrip from "@/components/vsl/VslTrustStrip";
+import VslStorytelling from "@/components/vsl/VslStorytelling";
+import VslOldVsNew from "@/components/vsl/VslOldVsNew";
+import VslHowItWorks from "@/components/vsl/VslHowItWorks";
+import VslWrittenTestimonials from "@/components/vsl/VslWrittenTestimonials";
+import VslPerformance from "@/components/vsl/VslPerformance";
+import VslOffer from "@/components/vsl/VslOffer";
+import VslRiskReversal from "@/components/vsl/VslRiskReversal";
+import VslFaq from "@/components/vsl/VslFaq";
+import VslFinalCta from "@/components/vsl/VslFinalCta";
+import VslFooter from "@/components/vsl/VslFooter";
+import VslStickyCta from "@/components/vsl/VslStickyCta";
+import VslCta from "@/components/vsl/VslCta";
+import { posthog } from "@/lib/posthog";
 
 const VSL = () => {
   useEffect(() => {
-    posthog.capture('vsl_page_view');
+    posthog.capture("vsl_page_view");
   }, []);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <SEO
         title="Try Your First AI Video Ad for ₹299 | Zockto"
-        description="Stop paying ₹10,000–₹15,000 for a single video ad. Upload one product photo and get a complete storytelling-based video ad with Zockto — starting at ₹299."
+        description="Stop paying ₹10–₹15k for a video ad. Upload product photo and get a complete 30sec storytelling-based video ad with Zockto — starting at ₹299."
         path="/vsl"
       />
       <VslHeader />
@@ -56,10 +56,7 @@ const VSL = () => {
 
         <VslWrittenTestimonials />
         <VslPerformance />
-        <UseCaseCards
-          heading="What Businesses Use Zockto For"
-          subheading="One product photo, many places to run it."
-        />
+        <UseCaseCards heading="What Businesses Use Zockto For" subheading="One product photo, many places to run it." />
         <VslOffer />
         <VslRiskReversal />
         <VslFaq />
