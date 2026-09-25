@@ -4,6 +4,7 @@ import { Loader2, Play, Pause, Volume2, VolumeX, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { demoVideos, demoCategories, type DemoVideo } from '@/data/demoVideos';
+import { posthog } from '@/lib/posthog';
 
 const DemoTile = ({
   video,
@@ -25,6 +26,11 @@ const DemoTile = ({
       setActivated(true);
       onAudio(video.id);
       setPlaying(true);
+      posthog.capture('demo_video_play', {
+        video_id: video.id,
+        category: video.category,
+        path: window.location.pathname,
+      });
       return;
     }
     if (!el) return;
@@ -134,7 +140,14 @@ const DemoTile = ({
 const INITIAL = 8;
 const STEP = 8;
 
-const DemoVideoGrid = () => {
+interface DemoVideoGridProps {
+  eyebrow?: string;
+  heading?: string;
+  sub?: string;
+  footer?: React.ReactNode;
+}
+
+const DemoVideoGrid = ({ eyebrow, heading, sub, footer }: DemoVideoGridProps) => {
   const [category, setCategory] = useState('All');
   const [visible, setVisible] = useState(INITIAL);
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
@@ -159,14 +172,14 @@ const DemoVideoGrid = () => {
           className="text-center mb-8 md:mb-12 max-w-2xl mx-auto"
         >
           <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-4">
-            Trusted by 1000+ businesses
+            {eyebrow ?? 'Trusted by 1000+ businesses'}
           </span>
           <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">
-            Watch the actual quality — nothing staged, nothing cherry-picked
+            {heading ?? 'Watch the actual quality — nothing staged, nothing cherry-picked'}
           </h2>
           <p className="text-muted-foreground text-base md:text-lg">
-            Every video below was generated on Zockto by a real business: skincare, food, apparel, apps and more — in
-            Hinglish, Hindi, English and Gujarati.
+            {sub ??
+              'Every video below was generated on Zockto by a real business: skincare, food, apparel, apps and more — in Hinglish, Hindi, English and Gujarati.'}
           </p>
         </motion.div>
 
@@ -204,6 +217,8 @@ const DemoVideoGrid = () => {
             </Button>
           </div>
         )}
+
+        {footer && <div className="flex justify-center mt-10">{footer}</div>}
       </div>
     </section>
   );
