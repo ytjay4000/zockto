@@ -30,6 +30,7 @@ const VSL = () => {
       <SEO
         title="Try Your First AI Video Ad for ₹299 | Zockto"
         description="Stop paying ₹10,000–₹15,000 for a single video ad. Upload one product photo and get a complete storytelling-based video ad with Zockto — starting at ₹299."
+        path="/vsl"
       />
       <VslHeader />
       <main className="pt-16 md:pt-20">
@@ -55,7 +56,10 @@ const VSL = () => {
 
         <VslWrittenTestimonials />
         <VslPerformance />
-        <UseCaseCards />
+        <UseCaseCards
+          heading="What Businesses Use Zockto For"
+          subheading="One product photo, many places to run it."
+        />
         <VslOffer />
         <VslRiskReversal />
         <VslFaq />

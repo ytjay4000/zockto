@@ -21,6 +21,7 @@ import CaseStudyNielsen from "./pages/CaseStudyNielsen";
 import CaseStudyForrester from "./pages/CaseStudyForrester";
 import CaseStudyAdobeFirefly from "./pages/CaseStudyAdobeFirefly";
 import CaseStudyCustomerThink from "./pages/CaseStudyCustomerThink";
+import VSL from "./pages/VSL";
 import NotFound from "./pages/NotFound";
 import AutoTranslateForBrazil from "./components/AutoTranslateForBrazil";
 
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/demo" element={<Demo />} />
+          <Route path="/vsl" element={<VSL />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/ai-vs-traditional-video-ads" element={<CaseStudyAIVsTraditional />} />
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />
