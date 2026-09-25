@@ -40,7 +40,6 @@ const VSL = () => {
         <DemoVideoGrid
           eyebrow="Real ads. Real businesses."
           heading="See What Zockto Actually Creates."
-          sub="Every video below was generated on Zockto by a real business — skincare, food, apparel, apps and more, in Hinglish, Hindi, English and Gujarati."
           footer={<VslCta event="primary_cta_click" label="Create My First Ad for ₹299" className="w-full sm:w-auto" />}
         />
 
