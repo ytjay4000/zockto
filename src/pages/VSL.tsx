@@ -13,8 +13,6 @@ import VslOffer from "@/components/vsl/VslOffer";
 import VslRiskReversal from "@/components/vsl/VslRiskReversal";
 import VslFinalCta from "@/components/vsl/VslFinalCta";
 import VslFooter from "@/components/vsl/VslFooter";
-import VslStickyCta from "@/components/vsl/VslStickyCta";
-import VslReturnNudge from "@/components/vsl/VslReturnNudge";
 import VslWhatsappOptIn from "@/components/vsl/VslWhatsappOptIn";
 import VslCta from "@/components/vsl/VslCta";
 import { posthog } from "@/lib/posthog";
