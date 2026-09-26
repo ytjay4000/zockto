@@ -189,7 +189,7 @@ const VslHero = () => {
         <div className="mt-8 md:mt-10 flex flex-col items-center gap-3">
           <VslCta
             event="primary_cta_click"
-            className="w-full sm:w-auto text-base min-h-[52px]"
+            className="w-full sm:w-auto text-base"
             note="1,000+ Indian businesses • 7-day refund"
           />
           <p className="text-sm text-muted-foreground">

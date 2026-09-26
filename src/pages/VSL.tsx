@@ -13,8 +13,6 @@ import VslOffer from "@/components/vsl/VslOffer";
 import VslRiskReversal from "@/components/vsl/VslRiskReversal";
 import VslFinalCta from "@/components/vsl/VslFinalCta";
 import VslFooter from "@/components/vsl/VslFooter";
-import VslStickyCta from "@/components/vsl/VslStickyCta";
-import VslReturnNudge from "@/components/vsl/VslReturnNudge";
 import VslWhatsappOptIn from "@/components/vsl/VslWhatsappOptIn";
 import VslCta from "@/components/vsl/VslCta";
 import { posthog } from "@/lib/posthog";
@@ -49,7 +47,7 @@ const VSL = () => {
           <DemoVideoGrid
             eyebrow="Real ads. Real businesses."
             heading="See What Zockto Actually Creates."
-            footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />}
+            footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto" />}
           />
         </Suspense>
 
@@ -68,7 +66,7 @@ const VSL = () => {
         <VslWrittenTestimonials />
 
         <div className="flex justify-center pb-16 md:pb-20 px-4">
-          <VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />
+          <VslCta event="primary_cta_click" className="w-full sm:w-auto" />
         </div>
 
         <VslPerformance />
@@ -88,9 +86,6 @@ const VSL = () => {
         <VslFinalCta />
       </main>
       <VslFooter />
-      <VslStickyCta />
-      <VslReturnNudge />
-      <div className="h-20 md:hidden" />
     </div>
   );
 };
