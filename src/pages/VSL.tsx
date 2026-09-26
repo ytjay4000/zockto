@@ -47,7 +47,7 @@ const VSL = () => {
           <DemoVideoGrid
             eyebrow="Real ads. Real businesses."
             heading="See What Zockto Actually Creates."
-            footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />}
+            footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto" />}
           />
         </Suspense>
 
@@ -66,7 +66,7 @@ const VSL = () => {
         <VslWrittenTestimonials />
 
         <div className="flex justify-center pb-16 md:pb-20 px-4">
-          <VslCta event="primary_cta_click" className="w-full sm:w-auto min-h-[52px]" />
+          <VslCta event="primary_cta_click" className="w-full sm:w-auto" />
         </div>
 
         <VslPerformance />
