@@ -35,7 +35,7 @@ const VSL = () => {
       <SEO
         title="Turn One Product Photo Into an Ad That Sells | Zockto"
         description="Zockto builds a complete 30sec storytelling video ad — voiceover, music, captions, fully edited — starting at ₹299, ready in 10 minutes."
-        path="/vsl"
+        path="/"
       />
       <VslHeader />
       <main className="pt-16 md:pt-20">
