@@ -56,9 +56,12 @@ const VslCta = ({
         ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
         : 'gradient-primary text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.55)] hover:shadow-[0_14px_34px_-12px_hsl(var(--primary)/0.65)]';
 
-  // Icon circle inverts on solid buttons; on outline buttons it uses the
-  // foreground so it stays visible against the light background.
-  const circle = solid ? 'bg-background text-foreground' : 'bg-foreground text-background';
+  // Icon circle inverts on the primary gradient; on outline/secondary buttons
+  // it uses the foreground so it stays visible against the light background.
+  const circle =
+    variant === 'outline' || variant === 'secondary'
+      ? 'bg-foreground text-background'
+      : 'bg-background text-foreground';
 
   const button = (
     <AppLink
