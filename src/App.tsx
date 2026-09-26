@@ -35,7 +35,8 @@ const App = () => (
       <BrowserRouter>
         <AutoTranslateForBrazil />
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<VSL />} />
+          <Route path="/home" element={<Index />} />
           <Route path="/pt" element={<IndexPt />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

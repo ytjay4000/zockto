@@ -18,7 +18,7 @@ const VslHeader = () => {
       }`}
     >
       <div className="container px-4 max-w-[1200px] h-14 md:h-16 flex items-center justify-between">
-        <a href="/vsl" className="font-display text-xl md:text-2xl font-bold tracking-tight">
+        <a href="/" className="font-display text-xl md:text-2xl font-bold tracking-tight">
           Zockto
         </a>
         <VslCta
