@@ -49,13 +49,12 @@ const VslCta = ({
   note = REFUND_NOTE,
 }: VslCtaProps) => {
   const s = sizes[size];
-  const solid = variant === 'hero' || variant === 'default';
-
-  const surface = solid
-    ? variant === 'secondary'
-      ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
-      : 'gradient-primary text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.55)] hover:shadow-[0_14px_34px_-12px_hsl(var(--primary)/0.65)]'
-    : 'border border-border bg-background/70 text-foreground backdrop-blur-sm hover:bg-muted/60';
+  const surface =
+    variant === 'outline'
+      ? 'border border-border bg-background/70 text-foreground backdrop-blur-sm hover:bg-muted/60'
+      : variant === 'secondary'
+        ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
+        : 'gradient-primary text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.55)] hover:shadow-[0_14px_34px_-12px_hsl(var(--primary)/0.65)]';
 
   // Icon circle inverts on solid buttons; on outline buttons it uses the
   // foreground so it stays visible against the light background.
