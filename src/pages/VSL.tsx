@@ -31,7 +31,7 @@ const VSL = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
         title="Turn One Product Photo Into an Ad That Sells | Zockto"
         description="Zockto builds a complete 30sec storytelling video ad — voiceover, music, captions, fully edited — starting at ₹299, ready in 10 minutes."
