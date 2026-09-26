@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import AppLink from '@/components/AppLink';
 import { posthog } from '@/lib/posthog';
 import { cn } from '@/lib/utils';
@@ -16,11 +16,29 @@ interface VslCtaProps {
   note?: string | null;
 }
 
+// Pill button with a circular icon badge that slides across and spins on hover.
+// Box: height + paddings; the end/start paddings swap on hover so the text
+// glides out of the icon's way while the circle travels to the other side.
 const sizes = {
-  sm: 'h-10 px-5 text-[13px]',
-  default: 'h-11 px-6 text-sm',
-  lg: 'h-12 px-7 text-[15px]',
-};
+  sm: {
+    box: 'h-10 p-1 ps-4 pe-12 text-[13px] hover:ps-12 hover:pe-4',
+    icon: 'w-8 h-8',
+    travel: 'group-hover:right-[calc(100%-36px)]',
+    glyph: 15,
+  },
+  default: {
+    box: 'h-11 p-1 ps-5 pe-[52px] text-sm hover:ps-[52px] hover:pe-5',
+    icon: 'w-9 h-9',
+    travel: 'group-hover:right-[calc(100%-40px)]',
+    glyph: 16,
+  },
+  lg: {
+    box: 'h-12 p-1 ps-6 pe-14 text-[15px] hover:ps-14 hover:pe-6',
+    icon: 'w-10 h-10',
+    travel: 'group-hover:right-[calc(100%-44px)]',
+    glyph: 16,
+  },
+} as const;
 
 const VslCta = ({
   label = 'Create My First Ad for ₹299 →',
@@ -30,35 +48,48 @@ const VslCta = ({
   variant = 'hero',
   note = REFUND_NOTE,
 }: VslCtaProps) => {
+  const s = sizes[size];
   const surface =
     variant === 'outline'
       ? 'border border-border bg-background/70 text-foreground backdrop-blur-sm hover:bg-muted/60'
       : variant === 'secondary'
-        ? 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+        ? 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
         : 'gradient-primary text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.55)] hover:shadow-[0_14px_34px_-12px_hsl(var(--primary)/0.65)]';
+
+  // Icon circle inverts on the primary gradient; on outline/secondary buttons
+  // it uses the foreground so it stays visible against the light background.
+  const circle =
+    variant === 'outline' || variant === 'secondary'
+      ? 'bg-foreground text-background'
+      : 'bg-background text-foreground';
 
   const button = (
     <AppLink
       onClick={() => posthog.capture(event, { price_inr: 299 })}
       className={cn(
-        // Apple-style: soft pill, springy press, subtle light sweep on hover
-        'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-semibold tracking-[-0.01em] antialiased',
+        'group relative inline-flex items-center justify-center w-fit overflow-hidden rounded-full font-semibold tracking-[-0.01em] antialiased cursor-pointer select-none',
+        // Apple-style spring for the press + smooth padding/icon choreography
         'transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
-        'will-change-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]',
+        'active:translate-y-0 active:scale-[0.97]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-        sizes[size],
+        s.box,
         surface,
         className,
       )}
     >
-      {/* light sweep */}
+      <span className="relative z-10 whitespace-nowrap">{label.replace(' →', '')}</span>
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_25%,hsl(0_0%_100%/0.28)_50%,transparent_75%)] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-full"
-      />
-      <span className="relative inline-flex items-center gap-2">
-        {label.replace(' →', '')}
-        <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
+        className={cn(
+          'absolute right-1 flex items-center justify-center rounded-full',
+          'transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+          'group-hover:rotate-45',
+          s.icon,
+          s.travel,
+          circle,
+        )}
+      >
+        <ArrowUpRight size={s.glyph} />
       </span>
     </AppLink>
   );
