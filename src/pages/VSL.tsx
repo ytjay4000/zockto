@@ -86,9 +86,6 @@ const VSL = () => {
         <VslFinalCta />
       </main>
       <VslFooter />
-      <VslStickyCta />
-      <VslReturnNudge />
-      <div className="h-20 md:hidden" />
     </div>
   );
 };
