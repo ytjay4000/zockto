@@ -190,7 +190,11 @@ const VslHero = () => {
                 Ready to see your own product as an ad?
               </p>
               <AppLink
-                onClick={() => posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_endscreen" })}
+                onClick={() => {
+                  posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_endscreen" });
+                  trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "vsl_endscreen" });
+                }}
+
                 className="inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground font-semibold text-sm md:text-base px-6 py-3 shadow-glow"
               >
                 Create My First Ad for ₹299
