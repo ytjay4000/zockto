@@ -1,7 +1,9 @@
 import { ArrowUpRight } from 'lucide-react';
 import AppLink from '@/components/AppLink';
 import { posthog } from '@/lib/posthog';
+import { trackMetaCustomEvent } from '@/lib/metaPixel';
 import { cn } from '@/lib/utils';
+
 
 export const TRIAL_PRICE = '₹299';
 export const REFUND_NOTE = '7-day refund if you don’t love it';
