@@ -1,0 +1,20 @@
+# Zockto
+
+> Zockto creates high-converting, fully edited UGC video ads with AI — no camera, no influencer, no editing required. Turn one product photo into a 30-second storytelling ad with voiceover, music, and captions, starting at ₹299.
+
+## Pages
+
+- [Home](/): Turn one product photo into an ad that sells — AI UGC video ads in minutes.
+- [Home (Portuguese)](/pt): Versão em português da página inicial.
+- [Demo Gallery](/demo): Browse 51 real AI-generated video ads across categories and languages.
+- [Case Studies](/case-studies): Results and use cases from businesses using Zockto.
+- [Blog](/blog): Guides on AI video ads, UGC marketing, and ad creative strategy.
+- [Contact](/contact): Reach the Zockto team by phone, WhatsApp, or email.
+- [Privacy Policy](/privacy): How Zockto handles user data and generated content.
+- [Terms of Service](/terms-of-service): Subscriptions, content rights, and refund policy.
+
+## Blog
+
+- [AI UGC Video Generator](/blog/ai-ugc-video-generator): How AI UGC video generators work and when to use them.
+- [Best AI UGC Tools 2026](/blog/best-ai-ugc-tools-2026): Comparison of the leading AI UGC ad tools.
+- [How to Create UGC Ads](/blog/how-to-create-ugc-ads): Step-by-step guide to creating UGC-style ads without creators.

@@ -47,6 +47,10 @@ const BlogSEO = ({ post, faqs = [] }: BlogSEOProps) => {
       'og:site_name': 'Zockto',
     };
 
+    if (post.image) {
+      ogTags['og:image'] = `https://zockto.com${post.image}`;
+    }
+
     Object.entries(ogTags).forEach(([property, content]) => {
       let tag = document.querySelector(`meta[property="${property}"]`);
       if (!tag) {
