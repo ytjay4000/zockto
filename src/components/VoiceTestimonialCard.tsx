@@ -138,10 +138,8 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
         onPlay={() => {
           setIsPlaying(true);
           setPlayingId(testimonial.id);
-          if (typeof window !== 'undefined' && (window as any).fbq) {
-            (window as any).fbq('trackCustom', 'VoicePlay', { client: testimonial.name });
-          }
         }}
+
         onPause={() => setIsPlaying(false)}
         onEnded={() => {
           setIsPlaying(false);
