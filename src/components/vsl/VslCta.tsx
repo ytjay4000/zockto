@@ -67,7 +67,12 @@ const VslCta = ({
 
   const button = (
     <AppLink
-      onClick={() => posthog.capture(event, { price_inr: 299 })}
+      onClick={() => {
+        posthog.capture(event, { price_inr: 299 });
+        // Meta Pixel: every signup/checkout-bound CTA.
+        trackMetaCustomEvent('VSLOfferClick', { price_inr: 299, placement: event });
+      }}
+
       className={cn(
         'group relative inline-flex items-center justify-center w-fit overflow-hidden rounded-full font-semibold tracking-[-0.01em] antialiased cursor-pointer select-none',
         // Apple-style spring for the press + smooth padding/icon choreography
