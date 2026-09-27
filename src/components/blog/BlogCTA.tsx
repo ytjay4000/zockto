@@ -5,13 +5,11 @@ import { Button } from '@/components/ui/button';
 const BlogCTA = () => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'Lead');
-    }
     setTimeout(() => {
       window.open('https://app.zockto.com', '_blank', 'noopener,noreferrer');
     }, 300);
   };
+
 
   return (
     <motion.div

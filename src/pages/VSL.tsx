@@ -16,6 +16,7 @@ import VslFooter from "@/components/vsl/VslFooter";
 import VslWhatsappOptIn from "@/components/vsl/VslWhatsappOptIn";
 import VslCta from "@/components/vsl/VslCta";
 import { posthog } from "@/lib/posthog";
+import { trackMetaEvent } from "@/lib/metaPixel";
 
 // Deferred so the hero paints first on mobile connections.
 const DemoVideoGrid = lazy(() => import("@/components/demo/DemoVideoGrid"));
@@ -28,7 +29,10 @@ const Blank = <div className="py-16" />;
 const VSL = () => {
   useEffect(() => {
     posthog.capture("vsl_page_view");
+    // Meta Pixel: the homepage IS the VSL / sales page.
+    trackMetaEvent("ViewContent", { content_name: "VSL homepage" });
   }, []);
+
 
   return (
     <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">

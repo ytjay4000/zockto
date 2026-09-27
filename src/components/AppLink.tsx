@@ -12,14 +12,11 @@ const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
       e.preventDefault();
       if (onClick) onClick(e);
 
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead');
-      }
-
       setTimeout(() => {
         window.open(getAppUrl(appPath), '_blank', 'noopener,noreferrer');
       }, 300);
     };
+
 
     return (
       <a

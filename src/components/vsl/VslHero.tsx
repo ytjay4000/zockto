@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, RotateCcw, Star } from "lucide-react";
 import { posthog } from "@/lib/posthog";
+import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import AppLink from "@/components/AppLink";
 import VslCta from "./VslCta";
 import vslAsset from "@/assets/zockto_vsl_h264.mp4.asset.json";
@@ -18,6 +19,14 @@ const VslHero = () => {
   const [showMidRoll, setShowMidRoll] = useState(false);
   const [ended, setEnded] = useState(false);
   const milestones = useRef<Record<number, boolean>>({});
+  // Meta Pixel video events fire at most once per page view.
+  const metaFired = useRef<Record<string, boolean>>({});
+
+  const fireMetaOnce = (name: string, params?: Record<string, unknown>) => {
+    if (metaFired.current[name]) return;
+    metaFired.current[name] = true;
+    trackMetaCustomEvent(name, params);
+  };
 
   const handlePlay = useCallback(() => {
     setStarted(true);
@@ -46,9 +55,13 @@ const VslHero = () => {
         posthog.capture(`vsl_${m}_percent`);
       }
     });
+    // Meta Pixel watch milestones — each fires only once per page view.
+    if (pct >= 50) fireMetaOnce("VSLVideo50", { content_name: "VSL homepage" });
+    if (pct >= 95) fireMetaOnce("VSLVideo95", { content_name: "VSL homepage" });
     // Mid-roll offer appears at the halfway point for ~8 seconds.
     setShowMidRoll(pct >= 50 && pct < 62);
   };
+
 
   return (
     <section className="pt-24 md:pt-32 pb-14 md:pb-20">
@@ -122,7 +135,11 @@ const VslHero = () => {
             preload="metadata"
             poster={VSL_POSTER}
             onTimeUpdate={handleTimeUpdate}
-            onPlay={() => setEnded(false)}
+            onPlay={() => {
+              setEnded(false);
+              fireMetaOnce("VSLVideoPlay", { content_name: "VSL homepage" });
+            }}
+
             onEnded={() => {
               setEnded(true);
               setShowMidRoll(false);
@@ -153,7 +170,11 @@ const VslHero = () => {
               className="absolute left-3 right-3 bottom-14 md:bottom-16 flex justify-center pointer-events-none"
             >
               <AppLink
-                onClick={() => posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_midroll" })}
+                onClick={() => {
+                  posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_midroll" });
+                  trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "vsl_midroll" });
+                }}
+
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
               >
                 Get this for ₹299
@@ -169,7 +190,11 @@ const VslHero = () => {
                 Ready to see your own product as an ad?
               </p>
               <AppLink
-                onClick={() => posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_endscreen" })}
+                onClick={() => {
+                  posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_endscreen" });
+                  trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "vsl_endscreen" });
+                }}
+
                 className="inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground font-semibold text-sm md:text-base px-6 py-3 shadow-glow"
               >
                 Create My First Ad for ₹299
