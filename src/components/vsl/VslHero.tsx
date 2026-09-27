@@ -135,7 +135,11 @@ const VslHero = () => {
             preload="metadata"
             poster={VSL_POSTER}
             onTimeUpdate={handleTimeUpdate}
-            onPlay={() => setEnded(false)}
+            onPlay={() => {
+              setEnded(false);
+              fireMetaOnce("VSLVideoPlay", { content_name: "VSL homepage" });
+            }}
+
             onEnded={() => {
               setEnded(true);
               setShowMidRoll(false);
@@ -166,7 +170,11 @@ const VslHero = () => {
               className="absolute left-3 right-3 bottom-14 md:bottom-16 flex justify-center pointer-events-none"
             >
               <AppLink
-                onClick={() => posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_midroll" })}
+                onClick={() => {
+                  posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_midroll" });
+                  trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "vsl_midroll" });
+                }}
+
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
               >
                 Get this for ₹299
