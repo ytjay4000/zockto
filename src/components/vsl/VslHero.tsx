@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, RotateCcw, Star } from "lucide-react";
 import { posthog } from "@/lib/posthog";
+import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import AppLink from "@/components/AppLink";
 import VslCta from "./VslCta";
 import vslAsset from "@/assets/zockto_vsl_h264.mp4.asset.json";
@@ -18,6 +19,14 @@ const VslHero = () => {
   const [showMidRoll, setShowMidRoll] = useState(false);
   const [ended, setEnded] = useState(false);
   const milestones = useRef<Record<number, boolean>>({});
+  // Meta Pixel video events fire at most once per page view.
+  const metaFired = useRef<Record<string, boolean>>({});
+
+  const fireMetaOnce = (name: string, params?: Record<string, unknown>) => {
+    if (metaFired.current[name]) return;
+    metaFired.current[name] = true;
+    trackMetaCustomEvent(name, params);
+  };
 
   const handlePlay = useCallback(() => {
     setStarted(true);
@@ -46,9 +55,13 @@ const VslHero = () => {
         posthog.capture(`vsl_${m}_percent`);
       }
     });
+    // Meta Pixel watch milestones — each fires only once per page view.
+    if (pct >= 50) fireMetaOnce("VSLVideo50", { content_name: "VSL homepage" });
+    if (pct >= 95) fireMetaOnce("VSLVideo95", { content_name: "VSL homepage" });
     // Mid-roll offer appears at the halfway point for ~8 seconds.
     setShowMidRoll(pct >= 50 && pct < 62);
   };
+
 
   return (
     <section className="pt-24 md:pt-32 pb-14 md:pb-20">
