@@ -15,6 +15,7 @@ import VslFinalCta from "@/components/vsl/VslFinalCta";
 import VslFooter from "@/components/vsl/VslFooter";
 import VslWhatsappOptIn from "@/components/vsl/VslWhatsappOptIn";
 import VslCta from "@/components/vsl/VslCta";
+import VslStickyCta from "@/components/vsl/VslStickyCta";
 import { posthog } from "@/lib/posthog";
 import { trackMetaEvent } from "@/lib/metaPixel";
 
@@ -90,6 +91,9 @@ const VSL = () => {
         <VslFinalCta />
       </main>
       <VslFooter />
+      {/* Room for the sticky bar so it never covers the footer links on phones. */}
+      <div className="h-24 md:hidden" aria-hidden />
+      <VslStickyCta />
     </div>
   );
 };

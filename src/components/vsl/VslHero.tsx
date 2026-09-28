@@ -177,7 +177,7 @@ const VslHero = () => {
 
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
               >
-                Get this for ₹299
+                Create My First Ad for ₹299
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
             </motion.div>
