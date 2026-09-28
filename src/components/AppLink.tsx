@@ -12,8 +12,11 @@ const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
       e.preventDefault();
       if (onClick) onClick(e);
 
+      // Same-tab navigation: on mobile / in-app browsers (Facebook, Instagram,
+      // WhatsApp) a new tab opens silently in the background and users never
+      // find it. The short delay lets Meta Pixel / PostHog flush first.
       setTimeout(() => {
-        window.open(getAppUrl(appPath), '_blank', 'noopener,noreferrer');
+        window.location.href = getAppUrl(appPath);
       }, 300);
     };
 
@@ -22,8 +25,7 @@ const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
       <a
         ref={ref}
         href={`https://app.zockto.com${appPath}`}
-        target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
         onClick={handleClick}
         {...props}
       >

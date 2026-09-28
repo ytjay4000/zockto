@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 
 export const TRIAL_PRICE = '₹299';
-export const REFUND_NOTE = '7-day refund if you don’t love it';
+export const REFUND_NOTE = '1 full video ad • 7-day money-back guarantee';
 
 interface VslCtaProps {
   label?: string;

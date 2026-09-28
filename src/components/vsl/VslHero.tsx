@@ -4,7 +4,7 @@ import { ArrowRight, Play, RotateCcw, Star } from "lucide-react";
 import { posthog } from "@/lib/posthog";
 import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import AppLink from "@/components/AppLink";
-import VslCta from "./VslCta";
+import VslCta, { REFUND_NOTE } from "./VslCta";
 import vslAsset from "@/assets/zockto_vsl_h264.mp4.asset.json";
 import posterAsset from "@/assets/zockto_vsl_poster.jpg.asset.json";
 
@@ -177,7 +177,7 @@ const VslHero = () => {
 
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
               >
-                Get this for ₹299
+                Create My First Ad for ₹299
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
             </motion.div>
@@ -200,7 +200,7 @@ const VslHero = () => {
                 Create My First Ad for ₹299
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
-              <p className="text-xs text-muted-foreground">7-day refund if you don’t love it</p>
+              <p className="text-xs text-muted-foreground">{REFUND_NOTE}</p>
               <button
                 onClick={replay}
                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -215,7 +215,7 @@ const VslHero = () => {
           <VslCta
             event="primary_cta_click"
             className="w-full sm:w-auto text-base"
-            note="1,000+ Indian businesses • 7-day refund"
+            note={REFUND_NOTE}
           />
           <p className="text-sm text-muted-foreground">
             Upload your product. Choose your concept. Let Zockto create the ad.
