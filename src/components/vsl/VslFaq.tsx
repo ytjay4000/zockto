@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: 'What do I need to provide to create an ad?',
-    a: 'A product image is enough to start. Adding a short description or your product page helps Zockto write a sharper concept.',
+    a: 'A product image is enough — nothing to write. If you have a product page link, paste it and Zockto will use it to sharpen the concept.',
   },
   {
     q: 'How does Zockto create the video?',

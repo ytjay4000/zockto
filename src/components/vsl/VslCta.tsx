@@ -6,7 +6,8 @@ import { cn } from '@/lib/utils';
 
 
 export const TRIAL_PRICE = '₹299';
-export const REFUND_NOTE = '1 full video ad • 7-day money-back guarantee';
+export const CTA_LABEL = 'Get Started With Your Ad';
+export const REFUND_NOTE = 'Free to start • See your ad preview before you pay anything';
 
 interface VslCtaProps {
   label?: string;
@@ -43,7 +44,7 @@ const sizes = {
 } as const;
 
 const VslCta = ({
-  label = 'Create My First Ad for ₹299 →',
+  label = CTA_LABEL,
   event,
   size = 'lg',
   className = '',

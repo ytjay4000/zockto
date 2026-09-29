@@ -19,8 +19,9 @@ const steps = [
   {
     n: '04',
     icon: MousePointerClick,
-    title: 'Choose your concept',
-    desc: 'Pick the direction you want to turn into a video.',
+    title: 'Pick your favourite',
+    desc:
+      'Zockto creates ready-made ad concepts for your product; you just tap the one you like. Nothing to write, nothing to figure out.',
   },
   {
     n: '05',
