@@ -89,8 +89,8 @@ const VslHero = () => {
           transition={{ delay: 0.1 }}
           className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[720px] mx-auto mb-6"
         >
-          Zockto builds you a complete 30sec storytelling video ad — voiceover, music, captions, fully edited —
-          starting at just ₹299. Ready in 10 minutes.
+          Zockto builds you a complete 30sec storytelling video ad — voiceover, music, captions, fully edited.
+          Start free and see your preview in 10 minutes.
         </motion.p>
 
         {/* Above-the-fold credibility */}
@@ -177,7 +177,7 @@ const VslHero = () => {
 
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
               >
-                Create My First Ad for ₹299
+                Get Started With Your Ad
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
             </motion.div>
@@ -197,7 +197,7 @@ const VslHero = () => {
 
                 className="inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground font-semibold text-sm md:text-base px-6 py-3 shadow-glow"
               >
-                Create My First Ad for ₹299
+                Get Started With Your Ad
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
               <p className="text-xs text-muted-foreground">{REFUND_NOTE}</p>
@@ -211,15 +211,23 @@ const VslHero = () => {
           )}
         </motion.div>
 
-        <div className="mt-8 md:mt-10 flex flex-col items-center gap-3">
+        <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
           <VslCta
             event="primary_cta_click"
             className="w-full sm:w-auto text-base"
             note={REFUND_NOTE}
           />
-          <p className="text-sm text-muted-foreground">
-            Upload your product. Choose your concept. Let Zockto create the ad.
-          </p>
+
+          {/* No-skills reassurance — the single clearest promise on the page. */}
+          <div className="w-full max-w-[640px] rounded-2xl border border-border/60 bg-muted/30 px-5 py-4 text-center">
+            <p className="font-display text-sm md:text-base font-semibold mb-1.5">
+              No skills needed. Just upload a product photo — we do the rest.
+            </p>
+            <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+              No editing, no script writing, no camera, no agency. Zockto writes the concept, makes the voiceover,
+              adds music and captions, and hands you a finished ad.
+            </p>
+          </div>
         </div>
       </div>
     </section>

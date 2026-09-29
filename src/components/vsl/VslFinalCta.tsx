@@ -12,7 +12,7 @@ const VslFinalCta = () => (
           Your Next Video Ad Could Cost ₹299 — Not ₹10,000+.
         </h2>
         <p className="text-muted-foreground text-base md:text-lg mb-8">
-          Upload your product. Choose your concept. Let Zockto create your ad.
+          Upload your product. Tap a concept. Zockto creates the ad for you.
         </p>
         <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" />
         <p className="text-sm text-muted-foreground mt-4">

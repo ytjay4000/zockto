@@ -50,9 +50,9 @@ const VslOffer = () => (
             ))}
           </ul>
 
-          <VslCta event="offer_cta_click" label="Create My First Ad for ₹299" className="w-full text-base" />
+          <VslCta event="offer_cta_click" label="Get Started With Your Ad" className="w-full text-base" />
           <p className="text-xs md:text-sm text-muted-foreground text-center mt-3">
-            Upload your product → choose your concept → get your ad.
+            Upload your product → tap a concept → get your ad.
           </p>
         </div>
       </motion.div>
