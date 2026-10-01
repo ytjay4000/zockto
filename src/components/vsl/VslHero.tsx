@@ -62,7 +62,6 @@ const VslHero = () => {
     setShowMidRoll(pct >= 50 && pct < 62);
   };
 
-
   return (
     <section className="pt-24 md:pt-32 pb-14 md:pb-20">
       <div className="container px-4 max-w-[1100px] text-center">
@@ -177,7 +176,7 @@ const VslHero = () => {
 
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
               >
-                Create My Ad — Free
+                Create My Story Based Ad
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
             </motion.div>
@@ -197,7 +196,7 @@ const VslHero = () => {
 
                 className="inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground font-semibold text-sm md:text-base px-6 py-3 shadow-glow"
               >
-                Create My Ad — Free
+                Create My Story Based Ad
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
               <p className="text-xs text-muted-foreground">{REFUND_NOTE}</p>
@@ -212,11 +211,7 @@ const VslHero = () => {
         </motion.div>
 
         <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
-          <VslCta
-            event="primary_cta_click"
-            className="w-full sm:w-auto text-base"
-            note={REFUND_NOTE}
-          />
+          <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={REFUND_NOTE} />
         </div>
       </div>
     </section>
