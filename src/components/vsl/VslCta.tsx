@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils';
 
 
 export const TRIAL_PRICE = '₹299';
-export const CTA_LABEL = 'Get Started With Your Ad';
-export const REFUND_NOTE = 'Free to start • See your ad preview before you pay anything';
+export const CTA_LABEL = 'Create My Ad — Free →';
+export const REFUND_NOTE = 'See your ad preview before paying ₹299.';
 
 interface VslCtaProps {
   label?: string;
