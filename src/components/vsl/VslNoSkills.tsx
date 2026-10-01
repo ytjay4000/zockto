@@ -49,7 +49,7 @@ const VslNoSkills = () => (
                   <span className="text-[13px] md:text-sm font-medium leading-snug">{f.label}</span>
                 </div>
                 {i < flow.length - 1 && (
-                  <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 rotate-90 md:rotate-0 md:hidden lg:block" />
+                  <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 rotate-90 md:hidden" />
                 )}
               </div>
             );
