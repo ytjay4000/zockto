@@ -4,6 +4,7 @@ import VslHeader from "@/components/vsl/VslHeader";
 import VslHero from "@/components/vsl/VslHero";
 import VslLogoMarquee from "@/components/vsl/VslLogoMarquee";
 import VslNoSkills from "@/components/vsl/VslNoSkills";
+import VslTrustStrip from "@/components/vsl/VslTrustStrip";
 import VslHowItWorks from "@/components/vsl/VslHowItWorks";
 import VslWrittenTestimonials from "@/components/vsl/VslWrittenTestimonials";
 import VslOffer from "@/components/vsl/VslOffer";
@@ -43,6 +44,7 @@ const VSL = () => {
 
         {/* Removes the "I need to know AI" fear right after the hero. */}
         <VslNoSkills />
+        <VslTrustStrip />
 
         {/* Real output, early. */}
         <Suspense fallback={Blank}>
