@@ -25,7 +25,7 @@ const VslHeader = () => {
           event="header_cta_click"
           size="sm"
           className="text-xs md:text-sm min-h-[44px] px-4"
-          label="Get Started With Your Ad"
+          label="Create My Ad — Free →"
           note={null}
         />
 

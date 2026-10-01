@@ -10,44 +10,40 @@ import VslSectionHeading from './VslSectionHeading';
 
 const faqs = [
   {
-    q: 'Do I need video editing skills?',
-    a: 'No. You upload your product, pick a concept, and Zockto handles the storyboard, editing, music, captions and transitions.',
+    q: 'Do I need any AI or video editing skills?',
+    a: 'No. There is nothing to prompt, write or edit. You upload a product photo, tap the concept you like, and Zockto creates the finished video.',
   },
   {
-    q: 'What do I need to provide to create an ad?',
-    a: 'A product image is enough — nothing to write. If you have a product page link, paste it and Zockto will use it to sharpen the concept.',
+    q: 'What do I need to provide?',
+    a: 'A product image is enough. If you have a product page link, paste it and Zockto will use it to sharpen the concept.',
   },
   {
-    q: 'How does Zockto create the video?',
-    a: 'Zockto analyses your product, generates storytelling-based ad concepts, builds a storyboard from the concept you choose, then assembles the final video with B-rolls, voiceover, music, captions and transitions.',
+    q: 'Does Zockto create the script and storyboard?',
+    a: 'Yes. Zockto finds the ad angle, writes the hook and script, builds the storyboard, and assembles the final video for you.',
   },
   {
-    q: 'How long does it take?',
-    a: 'Most videos are ready in about 5–10 minutes. Longer or more complex videos can take up to 30 minutes.',
-  },
-  {
-    q: 'Can I create ads in Hindi and other Indian languages?',
+    q: 'Can I make ads in Hindi/Hinglish and other Indian languages?',
     a: 'Yes. Zockto supports 48 languages, including Hindi, Hinglish, English and other regional options.',
   },
   {
-    q: 'Can I use Zockto videos for Instagram and Facebook ads?',
+    q: 'How long does the video take?',
+    a: 'Most videos are ready in about 5–10 minutes. Longer or more complex videos can take up to 30 minutes.',
+  },
+  {
+    q: 'Can I use the video for Instagram/Facebook ads?',
     a: 'Yes. Videos are exported ready to upload to Instagram, Facebook, WhatsApp, YouTube Shorts and marketplace listings.',
   },
   {
     q: 'What exactly do I get for ₹299?',
-    a: 'A complete, fully edited video ad built from a storytelling concept — including B-rolls, voiceover, music, captions and transitions.',
+    a: 'A complete, fully edited 30-second video ad built from a storytelling concept — including B-rolls, voiceover, music, captions and transitions.',
   },
   {
-    q: 'What happens if I don’t like my video?',
+    q: 'What happens if I don’t like the video?',
     a: 'You can generate a new version with a different concept. Refunds are handled according to our current refund policy, which you can read on the Terms of Service page.',
   },
   {
-    q: 'Do I need to buy a monthly plan after the trial?',
-    a: 'No. The ₹299 first ad is a starting point. A monthly plan only makes sense if you want to create ads regularly at a lower cost per video.',
-  },
-  {
-    q: 'Can I create multiple versions of the same ad?',
-    a: 'Yes. You can generate different concepts and variants of the same product to test which hook performs best.',
+    q: 'Do I need a monthly subscription?',
+    a: 'No. The ₹299 first ad is a one-time payment with no auto-pay. A monthly plan only makes sense if you want to create ads regularly at a lower cost per video.',
   },
 ];
 
