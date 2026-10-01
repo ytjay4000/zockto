@@ -44,7 +44,7 @@ const VslNoSkills = () => (
               <div key={f.label} className="flex md:flex-col md:flex-1 items-center gap-2 md:gap-3">
                 <div className="flex-1 md:w-full flex md:flex-col items-center gap-3 rounded-2xl border border-border/60 bg-background px-4 py-3 md:py-5 text-left md:text-center">
                   <span className="w-9 h-9 flex-shrink-0 rounded-xl gradient-primary flex items-center justify-center">
-                    <Icon className="w-4.5 h-4.5 w-[18px] h-[18px] text-primary-foreground" />
+                    <Icon className="w-[18px] h-[18px] text-primary-foreground" />
                   </span>
                   <span className="text-[13px] md:text-sm font-medium leading-snug">{f.label}</span>
                 </div>
