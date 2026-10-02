@@ -92,15 +92,6 @@ const DemoTile = ({
               loading="lazy"
               decoding="async"
             />
-            {nearView && (
-              <video
-                src={`${video.link}#t=0.6`}
-                className="relative w-full h-full object-cover"
-                muted
-                playsInline
-                preload="metadata"
-              />
-            )}
 
 
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
