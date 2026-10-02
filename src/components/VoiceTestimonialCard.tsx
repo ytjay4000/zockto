@@ -132,7 +132,7 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
       <audio
         ref={audioRef}
         src={testimonial.audio}
-        preload="metadata"
+        preload="none"
         onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
         onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
         onPlay={() => {

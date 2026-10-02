@@ -3,25 +3,42 @@
   <head>
     <link rel="preconnect" href="https://storages.zockto.com" crossorigin />
     <link rel="dns-prefetch" href="https://storages.zockto.com" />
+    <!-- LCP: hero video poster -->
+    <link rel="preload" as="image" href="/__l5e/assets-v1/72a2dd40-21a2-4c65-8174-4e54803d2905/zockto_vsl_poster.jpg" fetchpriority="high" />
+    <!-- Fonts: non-blocking, font-display swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'" />
 
-    <!-- Google Tag Manager -->
+    <!-- Third-party scripts load after the page has painted (load event + idle). -->
+    <script>
+      (function (w) {
+        function later(fn) {
+          var run = function () { (w.requestIdleCallback || setTimeout)(fn, { timeout: 2000 }); };
+          if (document.readyState === 'complete') run(); else w.addEventListener('load', run, { once: true });
+        }
+        w.__zLater = later;
+      })(window);
+    </script>
+    <!-- Google Tag Manager (deferred) -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          new Date().getTime(),event:'gtm.js'});
+          w.__zLater(function(){var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);});
           })(window,document,'script','dataLayer','GTM-52DNWDVB');
     </script>
     <!-- End Google Tag Manager -->
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code (queue is ready immediately; library loads after paint) -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
+      n.queue=[];f.__zLater(function(){t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      s.parentNode.insertBefore(t,s)});}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '1578969419918704');
       fbq('track', 'PageView');

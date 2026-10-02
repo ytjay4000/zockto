@@ -33,6 +33,8 @@ const VslHero = () => {
     setEnded(false);
     const v = videoRef.current;
     if (!v) return;
+    // Video source is attached only on tap — nothing downloads before that.
+    if (!v.getAttribute("src")) v.src = VSL_SRC;
     v.play().catch(() => {});
     posthog.capture("vsl_play");
   }, []);
@@ -125,13 +127,12 @@ const VslHero = () => {
           />
           <video
             ref={videoRef}
-            src={VSL_SRC}
             className={`relative w-full h-full object-contain bg-black transition-opacity duration-300 ${
               started ? "opacity-100" : "opacity-0"
             }`}
             controls={started}
             playsInline
-            preload="metadata"
+            preload="none"
             poster={VSL_POSTER}
             onTimeUpdate={handleTimeUpdate}
             onPlay={() => {
