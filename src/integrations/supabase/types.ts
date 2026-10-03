@@ -1083,6 +1083,7 @@ export type Database = {
           last_daily_reset: string | null
           message: string | null
           mobile_number: string | null
+          mobile_verification_deferred_at: string | null
           mobile_verified: boolean | null
           mode: string | null
           model: string | null
@@ -1146,6 +1147,7 @@ export type Database = {
           last_daily_reset?: string | null
           message?: string | null
           mobile_number?: string | null
+          mobile_verification_deferred_at?: string | null
           mobile_verified?: boolean | null
           mode?: string | null
           model?: string | null
@@ -1209,6 +1211,7 @@ export type Database = {
           last_daily_reset?: string | null
           message?: string | null
           mobile_number?: string | null
+          mobile_verification_deferred_at?: string | null
           mobile_verified?: boolean | null
           mode?: string | null
           model?: string | null
