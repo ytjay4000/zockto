@@ -45,6 +45,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/vsl" element={<VSL />} />
+          <Route path="/vsl99" element={<VSL variant="99" />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/ai-vs-traditional-video-ads" element={<CaseStudyAIVsTraditional />} />
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />

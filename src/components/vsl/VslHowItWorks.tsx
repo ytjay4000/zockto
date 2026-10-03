@@ -73,5 +73,6 @@ const VslHowItWorks = () => {
     </div>
   </section>
 );
+};
 
 export default VslHowItWorks;

@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { Check, ShieldCheck } from 'lucide-react';
 import VslCta from './VslCta';
+import { useVslVariant } from '@/context/VslVariant';
 
-const includes = [
+const getIncludes = (sec: number) => [
   'Storytelling-based ad concept',
-  'Complete 30-sec video ad',
+  `Complete ${sec}-sec video ad`,
   'Voiceover',
   'B-rolls & product visuals',
   'Music',
@@ -13,7 +14,10 @@ const includes = [
   'Fully edited final video',
 ];
 
-const VslOffer = () => (
+const VslOffer = () => {
+  const vv = useVslVariant();
+  const includes = getIncludes(vv.seconds);
+  return (
   <section className="py-12 md:py-20">
     <div className="container px-4 max-w-[1100px]">
       <motion.div
@@ -27,7 +31,7 @@ const VslOffer = () => (
             Your first video ad
           </p>
           <h2 className="font-display text-2xl md:text-4xl font-bold tracking-tight mb-3">
-            Get Your First Video Ad for ₹299.
+            Get Your First Video Ad for {vv.priceLabel}.
           </h2>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
             Start with one ad. See what Zockto creates for your business before committing to a monthly plan.
@@ -36,7 +40,7 @@ const VslOffer = () => (
 
         <div className="max-w-[560px] mx-auto rounded-2xl border border-border/60 bg-card p-6 md:p-8">
           <div className="text-center mb-6">
-            <div className="font-display text-4xl md:text-5xl font-bold text-primary">₹299</div>
+            <div className="font-display text-4xl md:text-5xl font-bold text-primary">{vv.priceLabel}</div>
             <p className="text-[11px] tracking-[0.18em] uppercase font-semibold text-muted-foreground mt-1.5">
               One-time payment
             </p>
@@ -61,7 +65,7 @@ const VslOffer = () => (
 
           <VslCta
             event="offer_cta_click"
-            label="Create My First Ad — ₹299 →"
+            label={`Create My First Ad — ${vv.priceLabel} →`}
             className="w-full text-base"
             note={null}
           />
@@ -70,5 +74,6 @@ const VslOffer = () => (
     </div>
   </section>
 );
+};
 
 export default VslOffer;

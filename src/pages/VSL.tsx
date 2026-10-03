@@ -15,6 +15,7 @@ import VslCta from "@/components/vsl/VslCta";
 import VslStickyCta from "@/components/vsl/VslStickyCta";
 import { posthog } from "@/lib/posthog";
 import { trackMetaEvent } from "@/lib/metaPixel";
+import { VSL_VARIANTS, VslVariantProvider } from "@/context/VslVariant";
 
 // Deferred so the hero paints first on mobile connections.
 const DemoVideoGrid = lazy(() => import("@/components/demo/DemoVideoGrid"));
@@ -23,19 +24,21 @@ const VslFaq = lazy(() => import("@/components/vsl/VslFaq"));
 
 const Blank = <div className="py-16" />;
 
-const VSL = () => {
+const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
+  const vv = VSL_VARIANTS[variant];
   useEffect(() => {
-    posthog.capture("vsl_page_view");
+    posthog.capture("vsl_page_view", { source: vv.source });
     // Meta Pixel: the homepage IS the VSL / sales page.
     trackMetaEvent("ViewContent", { content_name: "VSL homepage" });
-  }, []);
+  }, [vv.source]);
 
   return (
+    <VslVariantProvider value={vv}>
     <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
         title="Upload 1 Product Photo. Get a Complete Video Ad | Zockto"
-        description="No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete 30-second video ad with voiceover, music and captions. First ad ₹299."
-        path="/"
+        description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
+        path={variant === "99" ? "/vsl99" : "/"}
       />
       <VslHeader />
       <main className="pt-16 md:pt-20">
@@ -82,6 +85,7 @@ const VSL = () => {
       <div className="h-24 md:hidden" aria-hidden />
       <VslStickyCta />
     </div>
+    </VslVariantProvider>
   );
 };
 
