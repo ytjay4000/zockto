@@ -36,7 +36,7 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
     <VslVariantProvider value={vv}>
       <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">
         <SEO
-          title="Turn 1 Product Photo into a Complete Video Ad | Zockto"
+          title="Turn 1 Product Photo into a Video Ad that Convert | Zockto"
           description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
           path={variant === "99" ? "/vsl99" : "/"}
         />
