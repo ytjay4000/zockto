@@ -83,7 +83,7 @@ const VslHero = () => {
           transition={{ delay: 0.05 }}
           className="font-display text-[28px] leading-[1.15] sm:text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight mb-5 max-w-[900px] mx-auto"
         >
-          Turn 1 Product Photo into a Complete Video Ad.
+          Turn 1 Product Photo into a Video Ad that Convert.
         </motion.h1>
 
         <motion.p
