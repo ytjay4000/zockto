@@ -34,57 +34,57 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
 
   return (
     <VslVariantProvider value={vv}>
-    <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">
-      <SEO
-        title="Upload 1 Product Photo. Get a Complete Video Ad | Zockto"
-        description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
-        path={variant === "99" ? "/vsl99" : "/"}
-      />
-      <VslHeader />
-      <main className="pt-16 md:pt-20">
-        <VslHero />
-        <VslLogoMarquee />
+      <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">
+        <SEO
+          title="Turn 1 Product Photo into a Complete Video Ad | Zockto"
+          description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
+          path={variant === "99" ? "/vsl99" : "/"}
+        />
+        <VslHeader />
+        <main className="pt-16 md:pt-20">
+          <VslHero />
+          <VslLogoMarquee />
 
-        {/* Removes the "I need to know AI" fear right after the hero. */}
-        <VslNoSkills />
-        <VslTrustStrip />
+          {/* Removes the "I need to know AI" fear right after the hero. */}
+          <VslNoSkills />
+          <VslTrustStrip />
 
-        {/* Real output, early. */}
-        <Suspense fallback={Blank}>
-          <DemoVideoGrid
-            eyebrow="Real ads. Real businesses."
-            heading="See the Ads Zockto Actually Creates."
-            sub="Real video ads created for real businesses."
-            footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto" />}
-          />
-        </Suspense>
+          {/* Real output, early. */}
+          <Suspense fallback={Blank}>
+            <DemoVideoGrid
+              eyebrow="Real ads. Real businesses."
+              heading="See the Ads Zockto Actually Creates."
+              sub="Real video ads created for real businesses."
+              footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto" />}
+            />
+          </Suspense>
 
-        <VslHowItWorks />
+          <VslHowItWorks />
 
-        <Suspense fallback={Blank}>
-          <VoiceTestimonialsSection
-            eyebrow="Heard from real users"
-            heading="Listen to Business Owners Using Zockto."
-            sub="Real voices from real businesses. Tap play to listen."
-          />
-        </Suspense>
+          <Suspense fallback={Blank}>
+            <VoiceTestimonialsSection
+              eyebrow="Heard from real users"
+              heading="Listen to Business Owners Using Zockto."
+              sub="Real voices from real businesses. Tap play to listen."
+            />
+          </Suspense>
 
-        <VslWrittenTestimonials />
+          <VslWrittenTestimonials />
 
-        <VslOffer />
-        <VslWhatsappOptIn />
+          <VslOffer />
+          <VslWhatsappOptIn />
 
-        <Suspense fallback={Blank}>
-          <VslFaq />
-        </Suspense>
+          <Suspense fallback={Blank}>
+            <VslFaq />
+          </Suspense>
 
-        <VslFinalCta />
-      </main>
-      <VslFooter />
-      {/* Room for the sticky bar so it never covers the footer links on phones. */}
-      <div className="h-24 md:hidden" aria-hidden />
-      <VslStickyCta />
-    </div>
+          <VslFinalCta />
+        </main>
+        <VslFooter />
+        {/* Room for the sticky bar so it never covers the footer links on phones. */}
+        <div className="h-24 md:hidden" aria-hidden />
+        <VslStickyCta />
+      </div>
     </VslVariantProvider>
   );
 };
