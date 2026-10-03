@@ -3,10 +3,12 @@ import { ArrowRight, X } from "lucide-react";
 import AppLink from "@/components/AppLink";
 import { posthog } from "@/lib/posthog";
 import { trackMetaCustomEvent } from "@/lib/metaPixel";
+import { useVslVariant } from "@/context/VslVariant";
 
 const VslStickyCta = () => {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const vv = useVslVariant();
 
   useEffect(() => {
     // Appears once the hero (video + first CTA) has scrolled out of view.
@@ -28,15 +30,15 @@ const VslStickyCta = () => {
       <div className="relative rounded-2xl bg-background/85 backdrop-blur-md border border-border/60 shadow-card px-3 pt-3 pb-2.5">
         <AppLink
           onClick={() => {
-            posthog.capture("sticky_cta_click", { price_inr: 299 });
-            trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "sticky_cta_click" });
+            posthog.capture("sticky_cta_click", { price_inr: vv.price, source: vv.source });
+            trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, placement: "sticky_cta_click" });
           }}
           className="flex items-center justify-center gap-2 w-full min-h-[52px] rounded-full gradient-primary text-primary-foreground font-semibold text-[15px] py-3.5 shadow-glow active:scale-[0.98] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]"
         >
           Create My Story Based Ad
           <ArrowRight className="w-4 h-4" />
         </AppLink>
-        <p className="text-[11px] text-muted-foreground text-center mt-1.5">See your ad preview before paying ₹299.</p>
+        <p className="text-[11px] text-muted-foreground text-center mt-1.5">{vv.refundNote}</p>
 
         <button
           onClick={() => setDismissed(true)}

@@ -4,7 +4,8 @@ import { ArrowRight, Play, RotateCcw, Star } from "lucide-react";
 import { posthog } from "@/lib/posthog";
 import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import AppLink from "@/components/AppLink";
-import VslCta, { REFUND_NOTE } from "./VslCta";
+import VslCta from "./VslCta";
+import { useVslVariant } from "@/context/VslVariant";
 import vslAsset from "@/assets/zockto_vsl_h264.mp4.asset.json";
 import posterAsset from "@/assets/zockto_vsl_poster.jpg.asset.json";
 
@@ -14,6 +15,7 @@ const VSL_POSTER = posterAsset.url;
 const VSL_LENGTH = "1:10";
 
 const VslHero = () => {
+  const vv = useVslVariant();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
   const [showMidRoll, setShowMidRoll] = useState(false);
@@ -91,7 +93,7 @@ const VslHero = () => {
           className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[720px] mx-auto mb-6"
         >
           You don't need AI skills, prompting or editing skills. Zockto comes up with the ad idea, hook, script and
-          storyboard — then creates the finished 30-sec video with voiceover, B-rolls, music and captions.
+          storyboard — then creates the finished {vv.seconds}-sec video with voiceover, B-rolls, music and captions.
         </motion.p>
 
         {/* Above-the-fold credibility */}
@@ -171,8 +173,8 @@ const VslHero = () => {
             >
               <AppLink
                 onClick={() => {
-                  posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_midroll" });
-                  trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "vsl_midroll" });
+                  posthog.capture("primary_cta_click", { price_inr: vv.price, source: vv.source, placement: "vsl_midroll" });
+                  trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, source: vv.source, placement: "vsl_midroll" });
                 }}
 
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
@@ -191,8 +193,8 @@ const VslHero = () => {
               </p>
               <AppLink
                 onClick={() => {
-                  posthog.capture("primary_cta_click", { price_inr: 299, placement: "vsl_endscreen" });
-                  trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: "vsl_endscreen" });
+                  posthog.capture("primary_cta_click", { price_inr: vv.price, source: vv.source, placement: "vsl_endscreen" });
+                  trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, source: vv.source, placement: "vsl_endscreen" });
                 }}
 
                 className="inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground font-semibold text-sm md:text-base px-6 py-3 shadow-glow"
@@ -200,7 +202,7 @@ const VslHero = () => {
                 Create My Story Based Ad
                 <ArrowRight className="w-4 h-4" />
               </AppLink>
-              <p className="text-xs text-muted-foreground">{REFUND_NOTE}</p>
+              <p className="text-xs text-muted-foreground">{vv.refundNote}</p>
               <button
                 onClick={replay}
                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -212,7 +214,7 @@ const VslHero = () => {
         </motion.div>
 
         <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
-          <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={REFUND_NOTE} />
+          <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={vv.refundNote} />
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@ import AppLink from "@/components/AppLink";
 import { posthog } from "@/lib/posthog";
 import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import { cn } from "@/lib/utils";
+import { useVslVariant } from "@/context/VslVariant";
 
 export const TRIAL_PRICE = "₹299";
 export const CTA_LABEL = "Create My Story Based Ad";
@@ -48,8 +49,10 @@ const VslCta = ({
   size = "lg",
   className = "",
   variant = "hero",
-  note = REFUND_NOTE,
+  note,
 }: VslCtaProps) => {
+  const vv = useVslVariant();
+  if (note === undefined) note = vv.refundNote;
   const s = sizes[size];
   const surface =
     variant === "outline"
@@ -68,9 +71,9 @@ const VslCta = ({
   const button = (
     <AppLink
       onClick={() => {
-        posthog.capture(event, { price_inr: 299 });
+        posthog.capture(event, { price_inr: vv.price, source: vv.source });
         // Meta Pixel: every signup/checkout-bound CTA.
-        trackMetaCustomEvent("VSLOfferClick", { price_inr: 299, placement: event });
+        trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, placement: event });
       }}
 
       className={cn(

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Upload, MousePointerClick, Film } from 'lucide-react';
 import VslSectionHeading from './VslSectionHeading';
+import { useVslVariant } from '@/context/VslVariant';
 
-const steps = [
+const getSteps = (sec: number) => [
   {
     n: '01',
     icon: Upload,
@@ -21,11 +22,13 @@ const steps = [
     icon: Film,
     title: 'Get the Finished Video',
     desc:
-      'Zockto creates the complete 30-second ad with voiceover, B-rolls, music, captions and transitions.',
+      `Zockto creates the complete ${sec}-second ad with voiceover, B-rolls, music, captions and transitions.`,
   },
 ];
 
-const VslHowItWorks = () => (
+const VslHowItWorks = () => {
+  const steps = getSteps(useVslVariant().seconds);
+  return (
   <section className="py-12 md:py-20">
     <div className="container px-4 max-w-[1100px]">
       <VslSectionHeading
