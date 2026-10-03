@@ -93,7 +93,7 @@ const VslHero = () => {
           className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[720px] mx-auto mb-6"
         >
           You don't need AI skills, prompting or editing skills. Zockto comes up with the ad idea, hook, script and
-          storyboard — then creates the finished {vv.seconds}-sec video with voiceover, B-rolls, music and captions.
+          storyboard — then creates the finished video with voiceover, B-rolls, music and captions.
         </motion.p>
 
         {/* Above-the-fold credibility */}
