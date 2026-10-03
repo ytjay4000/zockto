@@ -83,7 +83,7 @@ const VslHero = () => {
           transition={{ delay: 0.05 }}
           className="font-display text-[28px] leading-[1.15] sm:text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight mb-5 max-w-[900px] mx-auto"
         >
-          Upload 1 Product Photo. Get a Complete Video Ad.
+          Turn 1 Product Photo into a Complete Video Ad.
         </motion.h1>
 
         <motion.p
@@ -173,8 +173,16 @@ const VslHero = () => {
             >
               <AppLink
                 onClick={() => {
-                  posthog.capture("primary_cta_click", { price_inr: vv.price, source: vv.source, placement: "vsl_midroll" });
-                  trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, source: vv.source, placement: "vsl_midroll" });
+                  posthog.capture("primary_cta_click", {
+                    price_inr: vv.price,
+                    source: vv.source,
+                    placement: "vsl_midroll",
+                  });
+                  trackMetaCustomEvent("VSLOfferClick", {
+                    price_inr: vv.price,
+                    source: vv.source,
+                    placement: "vsl_midroll",
+                  });
                 }}
 
                 className="pointer-events-auto inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground text-xs md:text-sm font-semibold px-4 py-2.5 shadow-glow"
@@ -193,8 +201,16 @@ const VslHero = () => {
               </p>
               <AppLink
                 onClick={() => {
-                  posthog.capture("primary_cta_click", { price_inr: vv.price, source: vv.source, placement: "vsl_endscreen" });
-                  trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, source: vv.source, placement: "vsl_endscreen" });
+                  posthog.capture("primary_cta_click", {
+                    price_inr: vv.price,
+                    source: vv.source,
+                    placement: "vsl_endscreen",
+                  });
+                  trackMetaCustomEvent("VSLOfferClick", {
+                    price_inr: vv.price,
+                    source: vv.source,
+                    placement: "vsl_endscreen",
+                  });
                 }}
 
                 className="inline-flex items-center gap-2 rounded-full gradient-primary text-primary-foreground font-semibold text-sm md:text-base px-6 py-3 shadow-glow"
