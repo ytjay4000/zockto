@@ -7,8 +7,9 @@ import {
 } from '@/components/ui/accordion';
 import { posthog } from '@/lib/posthog';
 import VslSectionHeading from './VslSectionHeading';
+import { useVslVariant } from '@/context/VslVariant';
 
-const faqs = [
+const getFaqs = (p: string, sec: number) => [
   {
     q: 'Do I need any AI or video editing skills?',
     a: 'No. There is nothing to prompt, write or edit. You upload a product photo, tap the concept you like, and Zockto creates the finished video.',
@@ -34,8 +35,8 @@ const faqs = [
     a: 'Yes. Videos are exported ready to upload to Instagram, Facebook, WhatsApp, YouTube Shorts and marketplace listings.',
   },
   {
-    q: 'What exactly do I get for ₹299?',
-    a: 'A complete, fully edited 30-second video ad built from a storytelling concept — including B-rolls, voiceover, music, captions and transitions.',
+    q: `What exactly do I get for ${p}?`,
+    a: `A complete, fully edited ${sec}-second video ad built from a storytelling concept — including B-rolls, voiceover, music, captions and transitions.`,
   },
   {
     q: 'What happens if I don’t like the video?',
@@ -43,11 +44,14 @@ const faqs = [
   },
   {
     q: 'Do I need a monthly subscription?',
-    a: 'No. The ₹299 first ad is a one-time payment with no auto-pay. A monthly plan only makes sense if you want to create ads regularly at a lower cost per video.',
+    a: `No. The ${p} first ad is a one-time payment with no auto-pay. A monthly plan only makes sense if you want to create ads regularly at a lower cost per video.`,
   },
 ];
 
-const VslFaq = () => (
+const VslFaq = () => {
+  const vv = useVslVariant();
+  const faqs = getFaqs(vv.priceLabel, vv.seconds);
+  return (
   <section className="py-16 md:py-24">
     <div className="container px-4 max-w-[760px]">
       <VslSectionHeading eyebrow="Questions before you start" headline="Everything You Might Be Wondering." />
@@ -76,5 +80,6 @@ const VslFaq = () => (
     </div>
   </section>
 );
+};
 
 export default VslFaq;
