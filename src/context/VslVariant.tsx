@@ -10,19 +10,30 @@ export interface VslVariant {
   /** Passed to app.zockto.com as ?source= */
   source: string;
   refundNote: string;
+  /** Main button text */
+  ctaLabel: string;
+  /** Button text in the pricing card */
+  offerLabel: string;
 }
 
-const make = (price: number, seconds: number): VslVariant => ({
+const make = (price: number, seconds: number, extra: Partial<VslVariant> = {}): VslVariant => ({
   price,
   priceLabel: `₹${price}`,
   seconds,
   source: String(price),
   refundNote: `See your ad preview before paying ₹${price}.`,
+  ctaLabel: "Create My Story Based Ad",
+  offerLabel: `Create My First Ad — ₹${price} →`,
+  ...extra,
 });
 
 export const VSL_VARIANTS = {
   "299": make(299, 30),
-  "99": make(99, 15),
+  "99": make(99, 15, {
+    ctaLabel: "Get My First Ad for ₹99",
+    offerLabel: "Get My First Ad for ₹99",
+    refundNote: "One-time payment · No subscription · 7-day money-back guarantee",
+  }),
 } as const;
 
 const Ctx = createContext<VslVariant | null>(null);

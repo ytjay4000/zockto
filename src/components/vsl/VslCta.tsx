@@ -44,7 +44,7 @@ const sizes = {
 } as const;
 
 const VslCta = ({
-  label = CTA_LABEL,
+  label,
   event,
   size = "lg",
   className = "",
@@ -53,6 +53,7 @@ const VslCta = ({
 }: VslCtaProps) => {
   const vv = useVslVariant();
   if (note === undefined) note = vv.refundNote;
+  if (!label) label = vv.ctaLabel;
   const s = sizes[size];
   const surface =
     variant === "outline"

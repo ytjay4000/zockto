@@ -65,7 +65,7 @@ const VslOffer = () => {
 
           <VslCta
             event="offer_cta_click"
-            label={`Create My First Ad — ${vv.priceLabel} →`}
+            label={vv.offerLabel}
             className="w-full text-base"
             note={null}
           />
