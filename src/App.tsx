@@ -24,6 +24,7 @@ import CaseStudyCustomerThink from "./pages/CaseStudyCustomerThink";
 import VSL from "./pages/VSL";
 import NotFound from "./pages/NotFound";
 import AutoTranslateForBrazil from "./components/AutoTranslateForBrazil";
+import InAppBrowserPrompt from "./components/InAppBrowserPrompt";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AutoTranslateForBrazil />
+        <InAppBrowserPrompt />
         <Routes>
           <Route path="/" element={<VSL />} />
           <Route path="/home" element={<Index />} />
