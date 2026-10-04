@@ -1081,6 +1081,7 @@ export type Database = {
           imgstatus: string | null
           is_indian_user: boolean | null
           last_daily_reset: string | null
+          lead_type: string
           message: string | null
           mobile_number: string | null
           mobile_verification_deferred_at: string | null
@@ -1145,6 +1146,7 @@ export type Database = {
           imgstatus?: string | null
           is_indian_user?: boolean | null
           last_daily_reset?: string | null
+          lead_type?: string
           message?: string | null
           mobile_number?: string | null
           mobile_verification_deferred_at?: string | null
@@ -1209,6 +1211,7 @@ export type Database = {
           imgstatus?: string | null
           is_indian_user?: boolean | null
           last_daily_reset?: string | null
+          lead_type?: string
           message?: string | null
           mobile_number?: string | null
           mobile_verification_deferred_at?: string | null
@@ -2280,6 +2283,7 @@ export type Database = {
         Args: { p_user_id: string; p_video_id: string }
         Returns: Json
       }
+      set_my_lead_type: { Args: { p_lead_type: string }; Returns: string }
       set_plan_credits: {
         Args: { p_plan_credits: number; p_user_id: string }
         Returns: undefined
