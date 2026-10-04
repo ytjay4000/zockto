@@ -35,7 +35,7 @@ const VslStickyCta = () => {
           }}
           className="flex items-center justify-center gap-2 w-full min-h-[52px] rounded-full gradient-primary text-primary-foreground font-semibold text-[15px] py-3.5 shadow-glow active:scale-[0.98] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]"
         >
-          Create My Story Based Ad
+          {vv.ctaLabel}
           <ArrowRight className="w-4 h-4" />
         </AppLink>
         <p className="text-[11px] text-muted-foreground text-center mt-1.5">{vv.refundNote}</p>
