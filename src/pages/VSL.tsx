@@ -19,7 +19,6 @@ import { trackMetaEvent } from "@/lib/metaPixel";
 import { VSL_VARIANTS, VslVariantProvider } from "@/context/VslVariant";
 
 // Deferred so the hero paints first on mobile connections.
-const DemoVideoGrid = lazy(() => import("@/components/demo/DemoVideoGrid"));
 const VoiceTestimonialsSection = lazy(() => import("@/components/VoiceTestimonialsSection"));
 const VslFaq = lazy(() => import("@/components/vsl/VslFaq"));
 
