@@ -7,6 +7,7 @@ import VslNoSkills from "@/components/vsl/VslNoSkills";
 import VslTrustStrip from "@/components/vsl/VslTrustStrip";
 import VslHowItWorks from "@/components/vsl/VslHowItWorks";
 import VslWrittenTestimonials from "@/components/vsl/VslWrittenTestimonials";
+import VslVideoSection from "@/components/vsl/VslVideoSection";
 import VslOffer from "@/components/vsl/VslOffer";
 import VslFinalCta from "@/components/vsl/VslFinalCta";
 import VslFooter from "@/components/vsl/VslFooter";
@@ -71,6 +72,7 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
 
           <VslWrittenTestimonials />
 
+          <VslVideoSection />
           <VslOffer />
           <VslWhatsappOptIn />
 
