@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { demoVideos, demoCategories, type DemoVideo } from "@/data/demoVideos";
 import { posthog } from "@/lib/posthog";
 
-const DemoTile = ({
+export const DemoTile = ({
   video,
   activeAudioId,
   onAudio,
