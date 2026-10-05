@@ -7,11 +7,18 @@ import { DemoTile } from "@/components/demo/DemoVideoGrid";
 import { demoVideos } from "@/data/demoVideos";
 
 // Newest four ads, shown as posters until tapped.
-const HERO_ADS = [...demoVideos].reverse().slice(0, 4);
+const HERO_ADS = [...demoVideos].reverse();
+const batchSize = () => {
+  if (typeof window === "undefined") return 8;
+  const w = window.innerWidth;
+  return w >= 1024 ? 8 : w >= 768 ? 6 : 4;
+};
 
 const VslHero = () => {
   const vv = useVslVariant();
   const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
+  const [step] = useState(batchSize);
+  const [visible, setVisible] = useState(step);
 
   return (
     <section className="pt-24 md:pt-32 pb-14 md:pb-20">
@@ -64,11 +71,19 @@ const VslHero = () => {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="max-w-[960px] mx-auto"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 text-left">
-            {HERO_ADS.map((v) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 text-left">
+            {HERO_ADS.slice(0, visible).map((v) => (
               <DemoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
             ))}
           </div>
+          {visible < HERO_ADS.length && (
+            <button
+              onClick={() => setVisible((v) => v + step)}
+              className="mt-6 inline-flex items-center rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:border-primary/50 transition-colors"
+            >
+              Load more videos
+            </button>
+          )}
           <p className="mt-4 text-xs md:text-sm text-muted-foreground">
             Real ads made by Zockto from one product photo. Tap any ad to play.
           </p>
