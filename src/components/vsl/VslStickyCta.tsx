@@ -27,18 +27,18 @@ const VslStickyCta = () => {
       }`}
       style={{ bottom: "calc(12px + env(safe-area-inset-bottom))" }}
     >
-      <div className="relative rounded-2xl bg-background/85 backdrop-blur-md border border-border/60 shadow-card px-3 pt-3 pb-2.5">
+      <div className="relative rounded-2xl bg-background/85 backdrop-blur-md border border-border/60 shadow-card px-3 pt-2.5 pb-2">
         <AppLink
           onClick={() => {
             posthog.capture("sticky_cta_click", { price_inr: vv.price, source: vv.source });
             trackMetaCustomEvent("VSLOfferClick", { price_inr: vv.price, placement: "sticky_cta_click" });
           }}
-          className="flex items-center justify-center gap-2 w-full min-h-[52px] rounded-full gradient-primary text-primary-foreground font-semibold text-[15px] py-3.5 shadow-glow active:scale-[0.98] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          className="flex items-center justify-center gap-1.5 w-full min-h-[42px] rounded-full gradient-primary text-primary-foreground font-semibold text-[13.5px] py-2 shadow-glow active:scale-[0.98] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]"
         >
           {vv.ctaLabel}
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-3.5 h-3.5" />
         </AppLink>
-        <p className="text-[11px] text-muted-foreground text-center mt-1.5">{vv.refundNote}</p>
+        <p className="text-[10.5px] text-muted-foreground text-center mt-1">{vv.refundNote}</p>
 
         <button
           onClick={() => setDismissed(true)}
