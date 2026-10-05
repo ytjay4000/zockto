@@ -51,14 +51,6 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
           <VslTrustStrip />
 
           {/* Real output, early. */}
-          <Suspense fallback={Blank}>
-            <DemoVideoGrid
-              eyebrow="Real ads. Real businesses."
-              heading="See the Ads Zockto Actually Creates."
-              sub="Real video ads created for real businesses."
-              footer={<VslCta event="primary_cta_click" className="w-full sm:w-auto" />}
-            />
-          </Suspense>
 
           <VslHowItWorks />
 
