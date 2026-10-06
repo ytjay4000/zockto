@@ -40,16 +40,6 @@ const VslHero = () => {
           Turn 1 Product Photo into a Video Ad that Convert.
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[720px] mx-auto mb-6"
-        >
-          You don't need AI skills, prompting or editing skills. Zockto comes up with the ad idea, hook, script and
-          storyboard — then creates the finished video with voiceover, B-rolls, music and captions.
-        </motion.p>
-
         {/* Above-the-fold credibility */}
         <motion.div
           initial={{ opacity: 0 }}
