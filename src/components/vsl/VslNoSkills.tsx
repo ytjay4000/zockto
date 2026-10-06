@@ -1,13 +1,21 @@
-import { motion } from "framer-motion";
-import { Check, ArrowRight, Image, Target, PenLine, Film, CheckCircle2 } from "lucide-react";
+import { motion } from 'framer-motion';
+import { Check, ArrowRight, Image, Target, PenLine, Film, CheckCircle2 } from 'lucide-react';
+
+const flow = [
+  { icon: Image, label: 'Your product photo' },
+  { icon: Target, label: 'Zockto finds the best ad angle' },
+  { icon: PenLine, label: 'Zockto writes the story' },
+  { icon: Film, label: 'Zockto builds the video' },
+  { icon: CheckCircle2, label: 'Your finished ad' },
+];
 
 const nots = [
-  "No prompting",
-  "No script writing",
-  "No storyboard writing",
-  "No video editing",
-  "No camera",
-  "No AI experience",
+  'No prompting',
+  'No script writing',
+  'No storyboard writing',
+  'No video editing',
+  'No camera',
+  'No AI experience',
 ];
 
 const VslNoSkills = () => (
