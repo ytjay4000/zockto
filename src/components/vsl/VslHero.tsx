@@ -75,7 +75,7 @@ const VslHero = () => {
             </button>
           )}
           <p className="mt-4 text-xs md:text-sm text-muted-foreground">
-            Real ads made by Zockto from one product photo. Tap any ad to play.
+            Real ads made by Zockto from 1 product photo. Tap to play.
           </p>
         </motion.div>
 
