@@ -37,7 +37,7 @@ const App = () => (
         <AutoTranslateForBrazil />
         <InAppBrowserPrompt />
         <Routes>
-          <Route path="/" element={<VSL />} />
+          <Route path="/" element={<VSL variant="99" />} />
           <Route path="/home" element={<Index />} />
           <Route path="/pt" element={<IndexPt />} />
           <Route path="/blog" element={<Blog />} />
