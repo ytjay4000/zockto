@@ -10,18 +10,28 @@ export const DemoTile = ({
   video,
   activeAudioId,
   onAudio,
+  autoStart = false,
 }: {
   video: DemoVideo;
   activeAudioId: number | null;
   onAudio: (id: number | null) => void;
+  /** Plays muted on load; the visitor can tap the speaker to turn sound on. */
+  autoStart?: boolean;
 }) => {
-  const [activated, setActivated] = useState(false);
-  const [playing, setPlaying] = useState(false);
+  const [activated, setActivated] = useState(autoStart);
+  const [playing, setPlaying] = useState(autoStart);
   const [loaded, setLoaded] = useState(false);
   const [el, setEl] = useState<HTMLVideoElement | null>(null);
   const muted = activeAudioId !== video.id;
   const tileRef = useRef<HTMLDivElement>(null);
   const [nearView, setNearView] = useState(false);
+
+  // React doesn't reliably set the `muted` attribute; mobile autoplay needs it.
+  useEffect(() => {
+    if (!el) return;
+    el.muted = muted;
+    if (autoStart && muted && el.paused && playing) el.play().catch(() => {});
+  }, [el, muted, autoStart, playing]);
 
   // Only fetch a preview frame once the tile is close to the viewport.
   useEffect(() => {
