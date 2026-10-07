@@ -62,8 +62,8 @@ const VslHero = () => {
           className="max-w-[960px] mx-auto"
         >
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 text-left">
-            {HERO_ADS.slice(0, visible).map((v) => (
-              <DemoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} autoStart />
+            {HERO_ADS.slice(0, visible).map((v, i) => (
+              <DemoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} autoStart={i === 0} />
             ))}
           </div>
           {visible < HERO_ADS.length && (
