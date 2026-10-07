@@ -29,10 +29,6 @@ const VslOffer = () => {
             <p className="text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">
               Your first video ad
             </p>
-
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              Start with one ad. See what Zockto creates for your business before committing to a monthly plan.
-            </p>
           </div>
 
           <div className="max-w-[560px] mx-auto rounded-2xl border border-border/60 bg-card p-6 md:p-8">
