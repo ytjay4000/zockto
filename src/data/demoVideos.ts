@@ -519,6 +519,46 @@ export const demoVideos: DemoVideo[] = [
     duration: 26,
     country: "India",
   },
+  {
+    id: 189,
+    link: "https://storage.googleapis.com/zockto-demo-videos/demo-189.mp4",
+    category: "Food & Beverage",
+    language: "Hinglish",
+    description:
+      "The video promotes 'Sol' carrot powder drink mix, showing a scoop of the vibrant orange powder being added to milk as a vitamin-rich drink.",
+    duration: 15,
+    country: "India",
+  },
+  {
+    id: 190,
+    link: "https://storage.googleapis.com/zockto-demo-videos/demo-190.mp4",
+    category: "Home & Interior",
+    language: "Hinglish",
+    description:
+      "The video showcases a squishy panda night lamp glowing softly on a study desk, highlighting its cute design and cozy warm light for room decor.",
+    duration: 20,
+    country: "India",
+  },
+  {
+    id: 191,
+    link: "https://storage.googleapis.com/zockto-demo-videos/demo-191.mp4",
+    category: "Haircare",
+    language: "Hindi",
+    description:
+      "The video promotes 'Purane Nuskhe' herbal onion hair oil, featuring a slow close-up pour of the oil while highlighting how onion nourishes the hair.",
+    duration: 15,
+    country: "India",
+  },
+  {
+    id: 192,
+    link: "https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4",
+    category: "Skincare",
+    language: "Hinglish",
+    description:
+      "The video promotes 'KFD Beauty Hub' de-tan face mask, showing the mulethi-based powder being mixed into a solution for brighter, tan-free skin.",
+    duration: 15,
+    country: "India",
+  },
 ];
 
 export const demoCategories = ["All", ...Array.from(new Set(demoVideos.map((v) => v.category))).sort()];
