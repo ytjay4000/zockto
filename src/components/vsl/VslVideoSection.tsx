@@ -67,7 +67,7 @@ const VslVideoSection = () => {
   };
 
   return (
-    <section id="how-video" className="py-12 md:py-20">
+    <section id="how-video" className="pt-12 pb-2 md:py-20">
       <div className="container px-4 max-w-[1100px] text-center">
         <p className="text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">
           Watch how it works
@@ -194,7 +194,7 @@ const VslVideoSection = () => {
           )}
         </motion.div>
 
-        <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
+        <div className="hidden md:flex mt-10 flex-col items-center gap-4">
           <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={vv.refundNote} />
         </div>
       </div>

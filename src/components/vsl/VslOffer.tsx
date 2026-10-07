@@ -3,9 +3,9 @@ import { Check, ShieldCheck } from 'lucide-react';
 import VslCta from './VslCta';
 import { useVslVariant } from '@/context/VslVariant';
 
-const getIncludes = (sec: number) => [
+const includes = [
   'Storytelling-based ad concept',
-  `Complete ${sec}-sec video ad`,
+  'Complete video ad',
   'Voiceover',
   'B-rolls & product visuals',
   'Music',
@@ -16,9 +16,8 @@ const getIncludes = (sec: number) => [
 
 const VslOffer = () => {
   const vv = useVslVariant();
-  const includes = getIncludes(vv.seconds);
   return (
-  <section className="py-12 md:py-20">
+  <section className="pt-4 pb-12 md:py-20">
     <div className="container px-4 max-w-[1100px]">
       <motion.div
         initial={{ opacity: 0, y: 16 }}

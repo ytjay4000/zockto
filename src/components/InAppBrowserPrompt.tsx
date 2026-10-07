@@ -9,11 +9,15 @@ const isIOS = () =>
   /iphone|ipad|ipod/i.test(navigator.userAgent) ||
   (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
+// Disabled for now: CTA clicks open the app in the main browser instead.
+// Flip to true to bring the dialog back.
+const PROMPT_ENABLED = false;
+
 const InAppBrowserPrompt = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!isInApp()) return;
+    if (!PROMPT_ENABLED || !isInApp()) return;
     try {
       if (sessionStorage.getItem(KEY)) return;
     } catch {

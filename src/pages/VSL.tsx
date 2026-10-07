@@ -44,10 +44,10 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
         <main className="pt-16 md:pt-20">
           <VslHero />
           <VslLogoMarquee />
+          <VslTrustStrip />
 
           {/* Removes the "I need to know AI" fear right after the hero. */}
           <VslNoSkills />
-          <VslTrustStrip />
 
           {/* Real output, early. */}
 

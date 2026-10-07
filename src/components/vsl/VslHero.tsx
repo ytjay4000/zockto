@@ -62,8 +62,14 @@ const VslHero = () => {
           className="max-w-[960px] mx-auto"
         >
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 text-left">
-            {HERO_ADS.slice(0, visible).map((v) => (
-              <DemoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
+            {HERO_ADS.slice(0, visible).map((v, i) => (
+              <DemoTile
+                key={v.id}
+                video={v}
+                activeAudioId={activeAudioId}
+                onAudio={setActiveAudioId}
+                autoStart={i === 0}
+              />
             ))}
           </div>
           {visible < HERO_ADS.length && (
@@ -79,7 +85,8 @@ const VslHero = () => {
           </p>
         </motion.div>
 
-        <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
+        {/* Desktop only — on phones the sticky bar carries the CTA. */}
+        <div className="hidden md:flex mt-10 flex-col items-center gap-4">
           <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={vv.refundNote} />
         </div>
       </div>
