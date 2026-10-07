@@ -18,13 +18,21 @@ export const DemoTile = ({
   /** Plays muted on load; the visitor can tap the speaker to turn sound on. */
   autoStart?: boolean;
 }) => {
-  const [activated, setActivated] = useState(autoStart);
-  const [playing, setPlaying] = useState(autoStart);
+  const [activated, setActivated] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [el, setEl] = useState<HTMLVideoElement | null>(null);
   const muted = activeAudioId !== video.id;
   const tileRef = useRef<HTMLDivElement>(null);
   const [nearView, setNearView] = useState(false);
+
+  // Autoplay (muted) only once the tile scrolls near the screen, to save data.
+  useEffect(() => {
+    if (autoStart && nearView && !activated) {
+      setActivated(true);
+      setPlaying(true);
+    }
+  }, [autoStart, nearView, activated]);
 
   // React doesn't reliably set the `muted` attribute; mobile autoplay needs it.
   useEffect(() => {
@@ -64,6 +72,12 @@ export const DemoTile = ({
       return;
     }
     if (!el) return;
+    // Tapping a silently autoplaying ad turns its sound on.
+    if (playing && muted) {
+      onAudio(video.id);
+      posthog.capture("demo_video_play", { video_id: video.id, category: video.category, path: window.location.pathname });
+      return;
+    }
     if (playing) {
       el.pause();
       setPlaying(false);
