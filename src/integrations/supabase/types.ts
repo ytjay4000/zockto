@@ -938,6 +938,7 @@ export type Database = {
       }
       product_ad_video: {
         Row: {
+          business_type: string
           category: string | null
           created_at: string
           global_video_url: string | null
@@ -947,12 +948,18 @@ export type Database = {
           preview_image: string | null
           priority: number | null
           prompt: string | null
+          style: string
           tags: string | null
           top_name: string | null
+          trend_rank: number
+          trend_source: string | null
+          trending_since: string | null
           type: string | null
+          updated_at: string
           video_url: string | null
         }
         Insert: {
+          business_type?: string
           category?: string | null
           created_at?: string
           global_video_url?: string | null
@@ -962,12 +969,18 @@ export type Database = {
           preview_image?: string | null
           priority?: number | null
           prompt?: string | null
+          style?: string
           tags?: string | null
           top_name?: string | null
+          trend_rank?: number
+          trend_source?: string | null
+          trending_since?: string | null
           type?: string | null
+          updated_at?: string
           video_url?: string | null
         }
         Update: {
+          business_type?: string
           category?: string | null
           created_at?: string
           global_video_url?: string | null
@@ -977,9 +990,14 @@ export type Database = {
           preview_image?: string | null
           priority?: number | null
           prompt?: string | null
+          style?: string
           tags?: string | null
           top_name?: string | null
+          trend_rank?: number
+          trend_source?: string | null
+          trending_since?: string | null
           type?: string | null
+          updated_at?: string
           video_url?: string | null
         }
         Relationships: []
