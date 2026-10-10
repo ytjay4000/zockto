@@ -153,7 +153,7 @@ Ready to save money on ads? Here's a practical migration path:
 
 ### Week 1: Test the Waters
 
-1. Sign up for [Zockto](https://app.zockto.com) (or any AI video tool — but at ₹999/month, Zockto is the lowest-risk entry point)
+1. Sign up for [Zockto](https://app.zockto.com/product-ad-shot) (or any AI video tool — but at ₹999/month, Zockto is the lowest-risk entry point)
 2. Pick your top 3 best-selling products
 3. Create 3 AI video ads per product (9 total)
 4. Run them alongside your existing ads as a split test
@@ -231,4 +231,4 @@ A: Not entirely, but AI is rapidly taking over performance ad creative productio
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

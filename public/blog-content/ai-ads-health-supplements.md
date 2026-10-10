@@ -187,4 +187,4 @@ A: Instagram and Facebook are the top performers for supplement brands, followed
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

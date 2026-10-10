@@ -204,4 +204,4 @@ A: AI avatars for ads use consenting, licensed digital personas — either from 
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

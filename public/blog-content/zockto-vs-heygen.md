@@ -200,4 +200,4 @@ A: HeyGen starts at $24/month while Zockto starts at ₹999/month (~$12). While 
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

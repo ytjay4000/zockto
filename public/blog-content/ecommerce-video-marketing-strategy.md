@@ -216,4 +216,4 @@ A: For paid ads: Meta (Facebook/Instagram) and YouTube deliver the best ROAS for
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

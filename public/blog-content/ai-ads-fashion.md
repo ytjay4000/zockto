@@ -184,4 +184,4 @@ A: Yes. AI video tools like Zockto support 48 languages with 200+ AI voices. You
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

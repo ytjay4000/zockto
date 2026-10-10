@@ -184,4 +184,4 @@ A: A regular video editor requires you to have raw footage, know how to edit, an
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

@@ -187,4 +187,4 @@ A: No — different platforms have different sweet spots. TikTok and Instagram S
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

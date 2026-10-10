@@ -225,4 +225,4 @@ A: JoggAI has historically been strong for TikTok-style short content with featu
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

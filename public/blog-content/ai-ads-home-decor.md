@@ -182,4 +182,4 @@ A: AI video tools like Zockto start at ₹999/month for 600 credits, which is en
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

@@ -176,4 +176,4 @@ A: With tools like Zockto, you can go from product image to finished video ad in
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

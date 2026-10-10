@@ -293,4 +293,4 @@ A: Sponsored Brand Video ads on Amazon use a cost-per-click (CPC) model, typical
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

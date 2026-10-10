@@ -301,4 +301,4 @@ A: Refresh every 1-3 weeks depending on audience size and ad spend. Higher spend
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

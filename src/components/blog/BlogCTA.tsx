@@ -6,7 +6,7 @@ const BlogCTA = () => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setTimeout(() => {
-      window.open('https://app.zockto.com', '_blank', 'noopener,noreferrer');
+      window.open('https://app.zockto.com/product-ad-shot', '_blank', 'noopener,noreferrer');
     }, 300);
   };
 
@@ -29,7 +29,7 @@ const BlogCTA = () => {
         className="bg-white text-primary hover:bg-white/90 font-semibold"
         asChild
       >
-        <a href="https://app.zockto.com" target="_blank" rel="noopener noreferrer" onClick={handleClick}>
+        <a href="https://app.zockto.com/product-ad-shot" target="_blank" rel="noopener noreferrer" onClick={handleClick}>
           Start Creating <ArrowRight className="w-4 h-4 ml-1" />
         </a>
       </Button>

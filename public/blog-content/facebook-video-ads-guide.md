@@ -224,4 +224,4 @@ A: Facebook video ads appear in the main news feed and are typically horizontal 
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*
