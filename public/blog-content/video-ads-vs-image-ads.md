@@ -193,4 +193,4 @@ A: Brands that switch from image-only to video-inclusive ad strategies typically
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

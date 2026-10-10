@@ -202,7 +202,7 @@ Ready to go multilingual? Here's a step-by-step plan:
 ### Week 1: Foundation
 
 1. Identify your top 3 performing English video ads (the proven winners)
-2. Sign up for [Zockto](https://app.zockto.com) or your preferred AI video tool
+2. Sign up for [Zockto](https://app.zockto.com/product-ad-shot) or your preferred AI video tool
 3. Recreate those winning ads in 2-3 target languages (start with Hindi + one regional language if you're India-focused)
 4. Set up separate ad sets per language with equal budgets
 
@@ -251,4 +251,4 @@ A: For Indian brands going global: start with Hindi and English for domestic rea
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

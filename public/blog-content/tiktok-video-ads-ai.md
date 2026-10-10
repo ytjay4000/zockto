@@ -240,4 +240,4 @@ A: Yes, you need a TikTok Business Account (free to create) and access to TikTok
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

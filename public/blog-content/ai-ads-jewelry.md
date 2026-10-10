@@ -165,4 +165,4 @@ A: No. AI video platforms provide virtual avatars that present your jewelry natu
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

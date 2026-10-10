@@ -190,4 +190,4 @@ A: Flipkart accepts MP4 format videos with a minimum resolution of 720p. For bes
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

@@ -191,4 +191,4 @@ A: AI video tools like Zockto let you create professional Google Display video a
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

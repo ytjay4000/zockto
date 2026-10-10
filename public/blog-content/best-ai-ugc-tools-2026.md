@@ -263,4 +263,4 @@ A: HeyGen leads in avatar count with 200+ options, followed closely by Zockto wi
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

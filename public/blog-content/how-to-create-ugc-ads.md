@@ -245,4 +245,4 @@ A: The ideal UGC ad length depends on the platform. For TikTok and Reels: 15-30 
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

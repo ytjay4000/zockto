@@ -198,7 +198,7 @@ const CaseStudyHouse = () => {
               className="bg-background text-foreground hover:bg-background/90 font-semibold px-8"
             >
               <a
-                href="https://app.zockto.com/"
+                href="https://app.zockto.com/product-ad-shot"
                 target="_blank"
                 rel="noopener noreferrer"
               >

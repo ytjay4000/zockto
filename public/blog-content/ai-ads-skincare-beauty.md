@@ -224,4 +224,4 @@ A: Instagram is the #1 platform for skincare video ads, followed by YouTube (for
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

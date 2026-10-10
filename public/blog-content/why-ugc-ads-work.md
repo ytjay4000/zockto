@@ -199,4 +199,4 @@ A: Brands should aim for at least 10-20 UGC-style ad creatives per month to prop
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

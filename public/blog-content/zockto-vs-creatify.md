@@ -203,4 +203,4 @@ A: Zockto offers Instant Avatar Clone as one of its four core features — you c
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

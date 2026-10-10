@@ -173,4 +173,4 @@ A: Performance marketers recommend testing at least 5-10 creative variations per
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

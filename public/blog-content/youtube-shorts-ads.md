@@ -241,4 +241,4 @@ A: You can use AI video tools like Zockto to create Shorts-ready ads in minutes.
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*

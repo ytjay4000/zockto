@@ -210,4 +210,4 @@ A: For Indian businesses, Indian AI video tools often provide better value — I
 
 ---
 
-*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com*
+*Ready to create scroll-stopping ads? Try Zockto free at https://app.zockto.com/product-ad-shot*
