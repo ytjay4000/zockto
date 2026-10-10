@@ -8,7 +8,7 @@ interface AppLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
-  ({ appPath = '/', onClick, children, ...props }, ref) => {
+  ({ appPath = '/product-ad-shot', onClick, children, ...props }, ref) => {
     const source = useVslSource();
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
