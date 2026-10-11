@@ -61,7 +61,6 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
 
           <VslVideoSection />
           <VslOffer />
-          <VslWhatsappOptIn />
 
           <Suspense fallback={Blank}>
             <VslFaq />
