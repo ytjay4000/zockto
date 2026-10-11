@@ -52,7 +52,7 @@ const VslHero = () => {
         </motion.div>
 
         {/* Desktop only — on phones the sticky bar carries the CTA. */}
-        <div className="hidden md:flex mt-10 flex-col items-center gap-4">
+        <div className="flex mt-8 md:mt-10 flex-col items-center gap-4">
           <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={vv.refundNote} />
         </div>
       </div>
