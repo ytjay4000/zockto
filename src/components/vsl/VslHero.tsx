@@ -1,24 +1,11 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import VslCta from "./VslCta";
 import { useVslVariant } from "@/context/VslVariant";
-import { DemoTile } from "@/components/demo/DemoVideoGrid";
-import { demoVideos } from "@/data/demoVideos";
-
-// Newest four ads, shown as posters until tapped.
-const HERO_ADS = [...demoVideos].reverse();
-const batchSize = () => {
-  if (typeof window === "undefined") return 8;
-  const w = window.innerWidth;
-  return w >= 1024 ? 8 : w >= 768 ? 6 : 4;
-};
+import VslShowcaseRows from "./VslShowcaseRows";
 
 const VslHero = () => {
   const vv = useVslVariant();
-  const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
-  const [step] = useState(batchSize);
-  const [visible, setVisible] = useState(step);
 
   return (
     <section className="pt-24 md:pt-32 pb-14 md:pb-20">
@@ -47,7 +34,7 @@ const VslHero = () => {
           transition={{ delay: 0.15 }}
           className="inline-flex items-center gap-2.5 rounded-full border border-border/60 bg-muted/40 px-4 py-2 mb-8 md:mb-10"
         >
-          <span className="flex items-center gap-0.5 text-amber-500">
+          <span className="flex items-center gap-0.5 text-primary">
             {[0, 1, 2, 3, 4].map((i) => (
               <Star key={i} className="w-3.5 h-3.5" fill="currentColor" />
             ))}
@@ -59,21 +46,9 @@ const VslHero = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="max-w-[960px] mx-auto"
+          className="max-w-[1200px] mx-auto"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 text-left">
-            {HERO_ADS.slice(0, visible).map((v, i) => (
-              <DemoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} autoStart={i === 0} />
-            ))}
-          </div>
-          {visible < HERO_ADS.length && (
-            <button
-              onClick={() => setVisible((v) => v + step)}
-              className="mt-6 inline-flex items-center rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:border-primary/50 transition-colors"
-            >
-              Load more videos
-            </button>
-          )}
+          <VslShowcaseRows />
         </motion.div>
 
         {/* Desktop only — on phones the sticky bar carries the CTA. */}
