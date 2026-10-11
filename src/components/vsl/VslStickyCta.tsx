@@ -18,7 +18,7 @@ const VslStickyCta = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (dismissed) return null;
+  return null;
 
   return (
     <div
