@@ -3,6 +3,7 @@ import { Play, X, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { demoVideos } from "@/data/demoVideos";
 import { useVslSource } from "@/context/VslVariant";
+import { getAppUrl } from "@/lib/leadToken";
 import { posthog } from "@/lib/posthog";
 
 type Card = { key: string; title: string; poster: string; video: string; templateId?: number };
@@ -122,7 +123,7 @@ const VslShowcaseRows = () => {
           <MarqueeRow>
             {trending.map((c) => (
               <ShowCard key={c.key} c={c} onPlay={play}
-                useHref={`https://app.zockto.com/?source=${encodeURIComponent(source)}&template_id=${c.templateId}`} />
+                useHref={`${getAppUrl("/product-ad-shot", source)}&template_id=${c.templateId}`} />
             ))}
           </MarqueeRow>
         </div>
