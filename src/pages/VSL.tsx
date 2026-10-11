@@ -46,12 +46,8 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
           <VslLogoMarquee />
           <VslTrustStrip />
 
-          {/* Removes the "I need to know AI" fear right after the hero. */}
-          <VslNoSkills />
-
-          {/* Real output, early. */}
-
           <VslHowItWorks />
+          <VslNoSkills />
 
           <Suspense fallback={Blank}>
             <VoiceTestimonialsSection

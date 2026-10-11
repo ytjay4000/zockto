@@ -28,7 +28,7 @@ const Waveform = ({ progress }: { active: boolean; progress: number }) => {
             key={i}
             className={cn(
               'w-[3px] rounded-full transition-colors duration-150',
-              filled ? 'bg-amber-500' : 'bg-slate-200',
+              filled ? 'bg-primary' : 'bg-slate-200',
             )}
             style={{ height: `${h}%` }}
           />
@@ -113,7 +113,7 @@ const VoiceTestimonialCard = ({ testimonial }: Props) => {
         <button
           onClick={toggle}
           aria-label={isPlaying ? 'Pause testimonial' : 'Play testimonial'}
-          className="shrink-0 w-11 h-11 rounded-full bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center shadow-lg shadow-amber-500/20 hover:scale-105 transition-all"
+          className="shrink-0 w-11 h-11 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 transition-all"
         >
           {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
         </button>
