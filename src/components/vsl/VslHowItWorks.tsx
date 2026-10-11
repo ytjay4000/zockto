@@ -5,8 +5,6 @@ import VslSectionHeading from "./VslSectionHeading";
 import productImg from "@/assets/kfd-product.jpg.asset.json";
 import storyboardImg from "@/assets/kfd-storyboard.jpg.asset.json";
 import { posthog } from "@/lib/posthog";
-import { VslCta } from "./VslCta";
-import { useVslVariant } from "@/context/VslVariant";
 
 const FINAL_VIDEO = "https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4";
 
@@ -82,49 +80,40 @@ const steps = [
   },
 ];
 
-const VslHowItWorks = () => {
-  const vv = useVslVariant();
+const VslHowItWorks = () => (
+  <section className="py-12 md:py-20 bg-secondary/40">
+    <div className="container px-4 max-w-[1100px]">
+      <VslSectionHeading eyebrow="How Zockto works" headline="From One Product Photo to a Finished Ad." />
 
-  return (
-    <section className="py-12 md:py-20 bg-secondary/40">
-      <div className="container px-4 max-w-[1100px]">
-        <VslSectionHeading eyebrow="How Zockto works" headline="From One Product Photo to a Finished Ad." />
-
-        <ol className="relative grid md:grid-cols-3 gap-8 md:gap-6">
-          {steps.map((s, i) => (
-            <motion.li
-              key={s.n}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="relative rounded-3xl border border-border/60 bg-card p-4 md:p-5 shadow-card flex flex-col"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-9 h-9 shrink-0 rounded-full gradient-primary text-primary-foreground font-display font-bold flex items-center justify-center shadow-glow">
-                  {s.n}
-                </span>
-                <div>
-                  <h3 className="font-display font-semibold text-base md:text-lg leading-tight">{s.title}</h3>
-                  <p className="text-[13px] text-muted-foreground leading-snug mt-0.5">{s.desc}</p>
-                </div>
+      <ol className="relative grid md:grid-cols-3 gap-8 md:gap-6">
+        {steps.map((s, i) => (
+          <motion.li
+            key={s.n}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.06 }}
+            className="relative rounded-3xl border border-border/60 bg-card p-4 md:p-5 shadow-card flex flex-col"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-9 h-9 shrink-0 rounded-full gradient-primary text-primary-foreground font-display font-bold flex items-center justify-center shadow-glow">
+                {s.n}
+              </span>
+              <div>
+                <h3 className="font-display font-semibold text-base md:text-lg leading-tight">{s.title}</h3>
+                <p className="text-[13px] text-muted-foreground leading-snug mt-0.5">{s.desc}</p>
               </div>
-              <div className="flex-1 flex items-center">{s.media}</div>
-            </motion.li>
-          ))}
-        </ol>
+            </div>
+            <div className="flex-1 flex items-center">{s.media}</div>
+          </motion.li>
+        ))}
+      </ol>
 
-        <p className="mt-8 text-center font-display text-sm md:text-lg font-bold tracking-tight">
-          You provide the product. <span className="text-primary">Zockto does the work.</span>
-        </p>
-
-        {/* CTA button */}
-        <div className="flex mt-8 flex-col items-center gap-4">
-          <VslCta event="primary_cta_click" className="w-full sm:w-auto text-base" note={vv.refundNote} />
-        </div>
-      </div>
-    </section>
-  );
-};
+      <p className="mt-8 text-center font-display text-sm md:text-lg font-bold tracking-tight">
+        You provide the product. <span className="text-primary">Zockto does the work.</span>
+      </p>
+    </div>
+  </section>
+);
 
 export default VslHowItWorks;
