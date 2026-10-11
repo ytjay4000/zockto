@@ -1,12 +1,12 @@
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
-import VslSectionHeading from './VslSectionHeading';
-import productImg from '@/assets/kfd-product.jpg.asset.json';
-import storyboardImg from '@/assets/kfd-storyboard.jpg.asset.json';
-import { posthog } from '@/lib/posthog';
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Play } from "lucide-react";
+import VslSectionHeading from "./VslSectionHeading";
+import productImg from "@/assets/kfd-product.jpg.asset.json";
+import storyboardImg from "@/assets/kfd-storyboard.jpg.asset.json";
+import { posthog } from "@/lib/posthog";
 
-const FINAL_VIDEO = 'https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4';
+const FINAL_VIDEO = "https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4";
 
 const FinalVideo = () => {
   const ref = useRef<HTMLVideoElement>(null);
@@ -24,7 +24,11 @@ const FinalVideo = () => {
       />
       {!started && (
         <button
-          onClick={() => { setStarted(true); ref.current?.play().catch(() => {}); posthog.capture('how_it_works_video_play'); }}
+          onClick={() => {
+            setStarted(true);
+            ref.current?.play().catch(() => {});
+            posthog.capture("how_it_works_video_play");
+          }}
           className="absolute inset-0 flex items-center justify-center bg-foreground/20"
           aria-label="Play finished ad"
         >
@@ -38,17 +42,42 @@ const FinalVideo = () => {
 };
 
 const steps = [
-  { n: 1, title: 'Upload your product', desc: 'One clear photo is all Zockto needs.', media: (
-    <div className="mx-auto w-full max-w-[300px] aspect-square rounded-2xl bg-background border border-border/60 p-5 flex items-center justify-center">
-      <img src={productImg.url} alt="Product photo uploaded to Zockto" loading="lazy" className="max-h-full max-w-full object-contain" />
-    </div>
-  ) },
-  { n: 2, title: 'Choose a style + add your line', desc: 'Zockto plans every scene of your ad. You pick what you like.', media: (
-    <a href={storyboardImg.url} target="_blank" rel="noopener" className="block mx-auto w-full max-w-[420px] rounded-2xl overflow-hidden border border-border/60 bg-foreground">
-      <img src={storyboardImg.url} alt="Storyboard created by Zockto" loading="lazy" className="w-full h-auto" />
-    </a>
-  ) },
-  { n: 3, title: 'Get your finished ad', desc: 'Voiceover, music, captions — fully edited. Tap to watch.', media: <FinalVideo /> },
+  {
+    n: 1,
+    title: "Upload your product",
+    desc: "One clear photo is all Zockto needs.",
+    media: (
+      <div className="mx-auto w-full max-w-[300px] aspect-square rounded-2xl bg-background border border-border/60 p-5 flex items-center justify-center">
+        <img
+          src={productImg.url}
+          alt="Product photo uploaded to Zockto"
+          loading="lazy"
+          className="max-h-full max-w-full object-contain"
+        />
+      </div>
+    ),
+  },
+  {
+    n: 2,
+    title: "Choose a style",
+    desc: "Zockto plans every scene of your ad. You pick what you like.",
+    media: (
+      <a
+        href={storyboardImg.url}
+        target="_blank"
+        rel="noopener"
+        className="block mx-auto w-full max-w-[420px] rounded-2xl overflow-hidden border border-border/60 bg-foreground"
+      >
+        <img src={storyboardImg.url} alt="Storyboard created by Zockto" loading="lazy" className="w-full h-auto" />
+      </a>
+    ),
+  },
+  {
+    n: 3,
+    title: "Get your finished ad",
+    desc: "Voiceover, music, captions — fully edited. Tap to watch.",
+    media: <FinalVideo />,
+  },
 ];
 
 const VslHowItWorks = () => (
