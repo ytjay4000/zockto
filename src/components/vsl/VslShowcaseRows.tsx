@@ -27,10 +27,7 @@ const MarqueeRow = ({ children, speed = 0.35 }: { children: ReactNode; speed?: n
         el.scrollLeft = pos;
       } else {
         pos = el.scrollLeft;
-        if (pos >= half && half > 0) {
-          pos -= half;
-          el.scrollLeft = pos;
-        }
+        if (pos >= half && half > 0) { pos -= half; el.scrollLeft = pos; }
       }
       raf = requestAnimationFrame(tick);
     };
@@ -38,10 +35,7 @@ const MarqueeRow = ({ children, speed = 0.35 }: { children: ReactNode; speed?: n
     return () => cancelAnimationFrame(raf);
   }, [speed]);
 
-  const pause = () => {
-    paused.current = true;
-    window.clearTimeout(resumeT.current);
-  };
+  const pause = () => { paused.current = true; window.clearTimeout(resumeT.current); };
   const resume = (ms = 1500) => {
     window.clearTimeout(resumeT.current);
     resumeT.current = window.setTimeout(() => (paused.current = false), ms);
@@ -56,10 +50,7 @@ const MarqueeRow = ({ children, speed = 0.35 }: { children: ReactNode; speed?: n
       onTouchEnd={() => resume()}
       onPointerDown={pause}
       onPointerUp={() => resume()}
-      onWheel={() => {
-        pause();
-        resume();
-      }}
+      onWheel={() => { pause(); resume(); }}
       className="flex gap-3 md:gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {children}
@@ -114,13 +105,7 @@ const VslShowcaseRows = () => {
         setTrending(
           (data ?? [])
             .filter((r) => r.preview_image && r.video_url)
-            .map((r) => ({
-              key: `t${r.id}`,
-              title: r.name ?? "Template",
-              poster: r.preview_image!,
-              video: r.video_url!,
-              templateId: r.id,
-            })),
+            .map((r) => ({ key: `t${r.id}`, title: r.name ?? "Template", poster: r.preview_image!, video: r.video_url!, templateId: r.id })),
         ),
       );
   }, []);
@@ -134,43 +119,33 @@ const VslShowcaseRows = () => {
     <div className="space-y-8 md:space-y-10 -mx-4">
       {trending.length > 0 && (
         <div>
-          <h2 className="px-4 mb-3 text-left font-display text-lg md:text-xl font-bold tracking-tight">
-            Trending styles
-          </h2>
+          <h2 className="px-4 mb-3 text-left font-display text-lg md:text-xl font-bold tracking-tight">Trending styles</h2>
           <MarqueeRow>
             {trending.map((c) => (
-              <ShowCard
-                key={c.key}
-                c={c}
-                onPlay={play}
-                useHref={`${getAppUrl("/product-ad-shot", source)}&template_id=${c.templateId}`}
-              />
+              <ShowCard key={c.key} c={c} onPlay={play}
+                useHref={`${getAppUrl("/product-ad-shot", source)}&template_id=${c.templateId}`} />
             ))}
           </MarqueeRow>
         </div>
       )}
+      <div>
+        <h2 className="px-4 mb-3 text-left font-display text-lg md:text-xl font-bold tracking-tight">
+          Made with Zockto, for real businesses
+        </h2>
+        <MarqueeRow speed={0.3}>
+          {BUSINESS.map((c) => <ShowCard key={c.key} c={c} onPlay={play} />)}
+        </MarqueeRow>
+      </div>
 
       {active && (
-        <div
-          className="fixed inset-0 z-[70] bg-foreground/80 flex items-center justify-center p-4"
-          onClick={() => setActive(null)}
-        >
+        <div className="fixed inset-0 z-[70] bg-foreground/80 flex items-center justify-center p-4" onClick={() => setActive(null)}>
           <div className="relative w-full max-w-[360px]" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setActive(null)}
-              aria-label="Close"
-              className="absolute -top-11 right-0 w-9 h-9 rounded-full bg-background flex items-center justify-center"
-            >
+            <button onClick={() => setActive(null)} aria-label="Close"
+              className="absolute -top-11 right-0 w-9 h-9 rounded-full bg-background flex items-center justify-center">
               <X className="w-4 h-4" />
             </button>
-            <video
-              src={active.video}
-              poster={active.poster}
-              autoPlay
-              controls
-              playsInline
-              className="w-full aspect-[9/16] rounded-2xl bg-foreground object-contain"
-            />
+            <video src={active.video} poster={active.poster} autoPlay controls playsInline
+              className="w-full aspect-[9/16] rounded-2xl bg-foreground object-contain" />
           </div>
         </div>
       )}
