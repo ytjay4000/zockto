@@ -24,22 +24,22 @@ interface VslCtaProps {
 // glides out of the icon's way while the circle travels to the other side.
 const sizes = {
   sm: {
-    box: "h-10 p-1 ps-4 pe-12 text-[13px] hover:ps-12 hover:pe-4",
+    box: "h-9 p-0.5 ps-3.5 pe-10 text-xs hover:ps-10 hover:pe-3.5",
+    icon: "w-7 h-7",
+    travel: "group-hover:right-[calc(100%-32px)]",
+    glyph: 14,
+  },
+  default: {
+    box: "h-10 p-1 ps-4 pe-11 text-[13px] hover:ps-11 hover:pe-4",
     icon: "w-8 h-8",
     travel: "group-hover:right-[calc(100%-36px)]",
     glyph: 15,
   },
-  default: {
-    box: "h-11 p-1 ps-5 pe-[52px] text-sm hover:ps-[52px] hover:pe-5",
+  lg: {
+    box: "h-11 p-1 ps-5 pe-12 text-sm hover:ps-12 hover:pe-5",
     icon: "w-9 h-9",
     travel: "group-hover:right-[calc(100%-40px)]",
-    glyph: 16,
-  },
-  lg: {
-    box: "h-12 p-1 ps-6 pe-14 text-[15px] hover:ps-14 hover:pe-6",
-    icon: "w-10 h-10",
-    travel: "group-hover:right-[calc(100%-44px)]",
-    glyph: 16,
+    glyph: 15,
   },
 } as const;
 
