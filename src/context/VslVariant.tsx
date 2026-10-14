@@ -29,7 +29,7 @@ const make = (price: number, seconds: number, extra: Partial<VslVariant> = {}): 
 
 export const VSL_VARIANTS = {
   "299": make(299, 30),
-  "199": make(199, 15, {
+  "99": make(199, 15, {
     ctaLabel: "Get Started",
     offerLabel: "Get Started",
     refundNote: "One-time payment · No subscription · 7-day money-back guarantee",
