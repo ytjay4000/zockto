@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "14.15"
   }
   public: {
     Tables: {
@@ -535,6 +535,8 @@ export type Database = {
           consumed_at: string | null
           created_at: string
           failed_video_ids: string[]
+          free_images_total: number
+          free_images_used: number
           id: string
           last_restored_at: string | null
           payment_order_id: string | null
@@ -550,6 +552,8 @@ export type Database = {
           consumed_at?: string | null
           created_at?: string
           failed_video_ids?: string[]
+          free_images_total?: number
+          free_images_used?: number
           id?: string
           last_restored_at?: string | null
           payment_order_id?: string | null
@@ -565,6 +569,8 @@ export type Database = {
           consumed_at?: string | null
           created_at?: string
           failed_video_ids?: string[]
+          free_images_total?: number
+          free_images_used?: number
           id?: string
           last_restored_at?: string | null
           payment_order_id?: string | null
@@ -749,6 +755,57 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      magnific_templates: {
+        Row: {
+          business_type: string | null
+          created_at: string
+          creative_image_url: string | null
+          detail_url: string | null
+          id: number
+          license: string | null
+          notes: string | null
+          prompt: string
+          style: string
+          template_image_url: string
+          trend_rank: number
+          trend_source: string
+          trending_since: string | null
+          updated_at: string
+        }
+        Insert: {
+          business_type?: string | null
+          created_at?: string
+          creative_image_url?: string | null
+          detail_url?: string | null
+          id?: never
+          license?: string | null
+          notes?: string | null
+          prompt: string
+          style: string
+          template_image_url: string
+          trend_rank: number
+          trend_source?: string
+          trending_since?: string | null
+          updated_at?: string
+        }
+        Update: {
+          business_type?: string | null
+          created_at?: string
+          creative_image_url?: string | null
+          detail_url?: string | null
+          id?: never
+          license?: string | null
+          notes?: string | null
+          prompt?: string
+          style?: string
+          template_image_url?: string
+          trend_rank?: number
+          trend_source?: string
+          trending_since?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       mobile_verifications: {
         Row: {
@@ -2262,6 +2319,10 @@ export type Database = {
       consume_first_ad_entitlement: {
         Args: { p_user_id: string; p_video_id: string }
         Returns: Json
+      }
+      consume_free_trial_image: {
+        Args: { p_user_id: string }
+        Returns: boolean
       }
       create_payment_table: { Args: never; Returns: undefined }
       deduct_credits: {
