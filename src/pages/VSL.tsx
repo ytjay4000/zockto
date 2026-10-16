@@ -29,7 +29,7 @@ interface VslProps {
   variant?: VslVariantKey;
 }
 
-const VSL = ({ variant = "299" }: VslProps) => {
+const VSL = ({ variant = "199" }: VslProps) => {
   const [searchParams] = useSearchParams();
   const sourceParam = searchParams.get("source");
 
