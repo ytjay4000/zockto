@@ -583,6 +583,44 @@ export type Database = {
         }
         Relationships: []
       }
+      followup_log: {
+        Row: {
+          id: string
+          idempotency_key: string | null
+          scenario: string
+          sent_at: string
+          step: number
+          user_id: string
+          webhook_status: string
+        }
+        Insert: {
+          id?: string
+          idempotency_key?: string | null
+          scenario: string
+          sent_at?: string
+          step: number
+          user_id: string
+          webhook_status?: string
+        }
+        Update: {
+          id?: string
+          idempotency_key?: string | null
+          scenario?: string
+          sent_at?: string
+          step?: number
+          user_id?: string
+          webhook_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "followup_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       imgresult: {
         Row: {
           aspect_ratio: string | null
@@ -1193,6 +1231,8 @@ export type Database = {
           voice_files: Json[] | null
           websitetoscripturl: string | null
           whatsapp_number: string | null
+          whatsapp_opted_out: boolean | null
+          whatsapp_opted_out_at: string | null
         }
         Insert: {
           ad_id?: number | null
@@ -1258,6 +1298,8 @@ export type Database = {
           voice_files?: Json[] | null
           websitetoscripturl?: string | null
           whatsapp_number?: string | null
+          whatsapp_opted_out?: boolean | null
+          whatsapp_opted_out_at?: string | null
         }
         Update: {
           ad_id?: number | null
@@ -1323,6 +1365,8 @@ export type Database = {
           voice_files?: Json[] | null
           websitetoscripturl?: string | null
           whatsapp_number?: string | null
+          whatsapp_opted_out?: boolean | null
+          whatsapp_opted_out_at?: string | null
         }
         Relationships: [
           {
