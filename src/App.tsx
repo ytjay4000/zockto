@@ -48,6 +48,8 @@ const App = () => (
           <Route path="/demo" element={<Demo />} />
           <Route path="/vsl" element={<VSL />} />
           <Route path="/vsl99" element={<VSL variant="99" />} />
+          <Route path="/vsl199" element={<VSL variant="199" />} />
+          <Route path="/vsl999" element={<VSL variant="999" />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/ai-vs-traditional-video-ads" element={<CaseStudyAIVsTraditional />} />
           <Route path="/case-studies/zerorez-local-services" element={<CaseStudyZerorez />} />
