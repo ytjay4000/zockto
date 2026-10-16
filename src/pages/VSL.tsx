@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import SEO from "@/components/SEO";
 import VslHeader from "@/components/vsl/VslHeader";
 import VslHero from "@/components/vsl/VslHero";
@@ -11,12 +12,10 @@ import VslVideoSection from "@/components/vsl/VslVideoSection";
 import VslOffer from "@/components/vsl/VslOffer";
 import VslFinalCta from "@/components/vsl/VslFinalCta";
 import VslFooter from "@/components/vsl/VslFooter";
-import VslWhatsappOptIn from "@/components/vsl/VslWhatsappOptIn";
-import VslCta from "@/components/vsl/VslCta";
 import VslStickyCta from "@/components/vsl/VslStickyCta";
 import { posthog } from "@/lib/posthog";
 import { trackMetaEvent } from "@/lib/metaPixel";
-import { VSL_VARIANTS, VslVariantProvider } from "@/context/VslVariant";
+import { VSL_VARIANTS, VslVariantProvider, VslVariant } from "@/context/VslVariant";
 
 // Deferred so the hero paints first on mobile connections.
 const VoiceTestimonialsSection = lazy(() => import("@/components/VoiceTestimonialsSection"));
@@ -24,13 +23,30 @@ const VslFaq = lazy(() => import("@/components/vsl/VslFaq"));
 
 const Blank = <div className="py-16" />;
 
-const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
-  const vv = VSL_VARIANTS[variant];
+export type VslVariantKey = "99" | "199" | "299" | "999";
+
+interface VslProps {
+  variant?: VslVariantKey;
+}
+
+const VSL = ({ variant = "299" }: VslProps) => {
+  const [searchParams] = useSearchParams();
+  const sourceParam = searchParams.get("source");
+
+  // If ?source= matches a valid variant key (e.g. "999"), switch to it; otherwise fall back to the prop
+  const activeVariantKey: string = sourceParam && VSL_VARIANTS[sourceParam] ? sourceParam : variant;
+
+  const vv: VslVariant = VSL_VARIANTS[activeVariantKey] ?? VSL_VARIANTS["299"];
+
   useEffect(() => {
     posthog.capture("vsl_page_view", { source: vv.source });
     // Meta Pixel: the homepage IS the VSL / sales page.
     trackMetaEvent("ViewContent", { content_name: "VSL homepage" });
   }, [vv.source]);
+
+  // Generate canonical path
+  const canonicalPath =
+    activeVariantKey === "99" ? "/" : activeVariantKey === "299" ? "/vsl" : `/vsl${activeVariantKey}`;
 
   return (
     <VslVariantProvider value={vv}>
@@ -38,7 +54,7 @@ const VSL = ({ variant = "299" }: { variant?: "299" | "99" }) => {
         <SEO
           title="Turn 1 Product Photo into a Video Ad that Convert | Zockto"
           description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
-          path={variant === "99" ? "/" : "/vsl"}
+          path={canonicalPath}
         />
         <VslHeader />
         <main className="pt-16 md:pt-20">
