@@ -69,8 +69,8 @@ export const VSL_VARIANTS: Record<string, VslVariant> = {
   },
 };
 
-const DEFAULT_VARIANT_KEY = "299";
-const STORAGE_KEY = "vsl_source";
+const DEFAULT_VARIANT_KEY = "199";
+const STORAGE_KEY = "zockto_source";
 
 /** Resolves the initial variant key from URL search query or localStorage. */
 const resolveInitialVariantKey = (): string => {
