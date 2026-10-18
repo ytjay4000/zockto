@@ -1,27 +1,14 @@
-import { Suspense, lazy, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import SEO from "@/components/SEO";
-import VslHeader from "@/components/vsl/VslHeader";
-import VslHero from "@/components/vsl/VslHero";
-import VslLogoMarquee from "@/components/vsl/VslLogoMarquee";
-import VslNoSkills from "@/components/vsl/VslNoSkills";
-import VslTrustStrip from "@/components/vsl/VslTrustStrip";
-import VslHowItWorks from "@/components/vsl/VslHowItWorks";
-import VslWrittenTestimonials from "@/components/vsl/VslWrittenTestimonials";
-import VslVideoSection from "@/components/vsl/VslVideoSection";
-import VslOffer from "@/components/vsl/VslOffer";
-import VslFinalCta from "@/components/vsl/VslFinalCta";
-import VslFooter from "@/components/vsl/VslFooter";
-import VslStickyCta from "@/components/vsl/VslStickyCta";
+import PremiumLanding from "@/components/landing/PremiumLanding";
 import { posthog } from "@/lib/posthog";
 import { trackMetaEvent } from "@/lib/metaPixel";
-import { VSL_VARIANTS, VslVariantProvider, VslVariant } from "@/context/VslVariant";
-
-// Deferred so the hero paints first on mobile connections.
-const VoiceTestimonialsSection = lazy(() => import("@/components/VoiceTestimonialsSection"));
-const VslFaq = lazy(() => import("@/components/vsl/VslFaq"));
-
-const Blank = <div className="py-16" />;
+import {
+  VSL_VARIANTS,
+  VslVariantProvider,
+  VslVariant,
+} from "@/context/VslVariant";
 
 export type VslVariantKey = "99" | "199" | "299" | "999";
 
@@ -31,10 +18,12 @@ interface VslProps {
 
 const VSL = ({ variant = "199" }: VslProps) => {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const sourceParam = searchParams.get("source");
 
   // If ?source= matches a valid variant key (e.g. "999"), switch to it; otherwise fall back to the prop
-  const activeVariantKey: string = sourceParam && VSL_VARIANTS[sourceParam] ? sourceParam : variant;
+  const activeVariantKey: string =
+    sourceParam && VSL_VARIANTS[sourceParam] ? sourceParam : variant;
 
   const vv: VslVariant = VSL_VARIANTS[activeVariantKey] ?? VSL_VARIANTS["299"];
 
@@ -45,50 +34,16 @@ const VSL = ({ variant = "199" }: VslProps) => {
   }, [vv.source]);
 
   // Generate canonical path
-  const canonicalPath =
-    activeVariantKey === "99" ? "/" : activeVariantKey === "299" ? "/vsl" : `/vsl${activeVariantKey}`;
+  const canonicalPath = location.pathname;
 
   return (
     <VslVariantProvider value={vv}>
-      <div className="vsl-theme min-h-screen bg-background text-foreground overflow-x-hidden">
-        <SEO
-          title="Turn 1 Product Photo into a Video Ad that Convert | Zockto"
-          description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
-          path={canonicalPath}
-        />
-        <VslHeader />
-        <main className="pt-16 md:pt-20">
-          <VslHero />
-          <VslLogoMarquee />
-          <VslTrustStrip />
-
-          <VslHowItWorks />
-          <VslNoSkills />
-
-          <Suspense fallback={Blank}>
-            <VoiceTestimonialsSection
-              eyebrow="Heard from real users"
-              heading="Listen to Business Owners Using Zockto."
-              sub="Real voices from real businesses. Tap play to listen."
-            />
-          </Suspense>
-
-          <VslWrittenTestimonials />
-
-          <VslVideoSection />
-          <VslOffer />
-
-          <Suspense fallback={Blank}>
-            <VslFaq />
-          </Suspense>
-
-          <VslFinalCta />
-        </main>
-        <VslFooter />
-        {/* Room for the sticky bar so it never covers the footer links on phones. */}
-        <div className="h-24 md:hidden" aria-hidden />
-        <VslStickyCta />
-      </div>
+      <SEO
+        title="A product photo. A whole new story. | Zockto"
+        description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a complete ${vv.seconds}-second video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
+        path={canonicalPath}
+      />
+      <PremiumLanding />
     </VslVariantProvider>
   );
 };
