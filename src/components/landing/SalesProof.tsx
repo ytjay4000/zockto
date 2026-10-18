@@ -1,20 +1,9 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Check, Play, RotateCcw } from "lucide-react";
-import productImage from "@/assets/kfd-product.jpg.asset.json";
-import storyboardImage from "@/assets/kfd-storyboard.jpg.asset.json";
-import { posthog } from "@/lib/posthog";
+import { Check } from "lucide-react";
 import "./sales-proof.css";
 import TestimonialRow from "./TestimonialRow";
-
-const FINAL_VIDEO =
-  "https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4";
+import HowItWorks from "./HowItWorks";
 
 function Reveal({
   children,
@@ -34,146 +23,6 @@ function Reveal({
     >
       {children}
     </motion.div>
-  );
-}
-
-function ProductProof({
-  activeMedia,
-  onMedia,
-  onStop,
-}: {
-  activeMedia: string | null;
-  onMedia: (id: string | null) => void;
-  onStop: (id: string) => void;
-}) {
-  const video = useRef<HTMLVideoElement>(null);
-  const [started, setStarted] = useState(false);
-  const [failed, setFailed] = useState(false);
-  useEffect(() => {
-    if (activeMedia !== "finished-ad") video.current?.pause();
-  }, [activeMedia]);
-  const play = () => {
-    const player = video.current;
-    if (!player) return;
-    if (!player.getAttribute("src")) player.src = FINAL_VIDEO;
-    if (failed) player.load();
-    if (player.ended) player.currentTime = 0;
-    setStarted(true);
-    setFailed(false);
-    player.play().catch(() => setFailed(true));
-    posthog.capture("how_it_works_video_play");
-  };
-  return (
-    <section id="process" className="studio-section studio-proof-demo">
-      <div className="studio-container">
-        <Reveal className="studio-proof-heading">
-          <p className="studio-eyebrow">How Zockto works</p>
-          <h2>
-            From one product photo
-            <br />
-            to a <em>finished ad.</em>
-          </h2>
-          <p>
-            One product. The actual storyboard. The finished video. See the
-            whole journey.
-          </p>
-        </Reveal>
-        <ol className="studio-proof-steps">
-          <li>
-            <div className="studio-proof-step-title">
-              <span>01</span>
-              <div>
-                <h3>Upload your product</h3>
-                <p>One clear photo is all Zockto needs.</p>
-              </div>
-            </div>
-            <div className="studio-proof-media studio-proof-product">
-              <img
-                src={productImage.url}
-                alt="Original KFD Beauty Hub product photo used to create this ad"
-                loading="lazy"
-              />
-            </div>
-          </li>
-          <li>
-            <div className="studio-proof-step-title">
-              <span>02</span>
-              <div>
-                <h3>Choose a style</h3>
-                <p>Zockto plans every scene. You pick what you like.</p>
-              </div>
-            </div>
-            <a
-              className="studio-proof-media studio-proof-storyboard"
-              href={storyboardImage.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open the complete storyboard created for this product"
-            >
-              <img
-                src={storyboardImage.url}
-                alt="The original scene-by-scene storyboard Zockto created for the KFD product"
-                loading="lazy"
-              />
-              <span>
-                View full storyboard <ArrowUpRight size={14} />
-              </span>
-            </a>
-          </li>
-          <li>
-            <div className="studio-proof-step-title">
-              <span>03</span>
-              <div>
-                <h3>Get your finished ad</h3>
-                <p>Voiceover, music, captions — fully edited.</p>
-              </div>
-            </div>
-            <div className="studio-proof-media studio-proof-final">
-              <video
-                ref={video}
-                poster="/demo-posters/192.jpg"
-                preload="none"
-                playsInline
-                controls={started && !failed}
-                aria-label="Finished KFD product video ad"
-                onPlay={() => onMedia("finished-ad")}
-                onPause={() => onStop("finished-ad")}
-                onError={() => setFailed(true)}
-                onEnded={() => {
-                  setStarted(false);
-                  onMedia(null);
-                }}
-              />
-              {(!started || failed) && (
-                <button
-                  onClick={play}
-                  aria-label={
-                    failed
-                      ? "Retry finished product ad"
-                      : "Play finished product ad"
-                  }
-                >
-                  {failed ? (
-                    <RotateCcw size={25} />
-                  ) : (
-                    <Play size={25} fill="currentColor" />
-                  )}
-                </button>
-              )}
-              {failed && (
-                <p className="studio-proof-video-error" role="status">
-                  Couldn’t load the video. Tap to retry.
-                </p>
-              )}
-            </div>
-          </li>
-        </ol>
-        <p className="studio-proof-caption">
-          You provide the product.{" "}
-          <strong>Zockto does the creative work.</strong>
-        </p>
-      </div>
-    </section>
   );
 }
 
@@ -205,7 +54,7 @@ export default function SalesProof({
   }, []);
   return (
     <>
-      <ProductProof
+      <HowItWorks
         activeMedia={activeMedia}
         onMedia={setActiveMedia}
         onStop={stopMedia}

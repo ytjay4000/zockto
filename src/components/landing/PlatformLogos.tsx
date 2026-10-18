@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import "./platform-logos.css";
 
@@ -16,7 +16,6 @@ const platforms = [
 ];
 
 export default function PlatformLogos() {
-  const headingId = useId();
   const sectionRef = useRef<HTMLElement>(null);
   const [paused, setPaused] = useState(false);
   const [inView, setInView] = useState(false);
@@ -40,27 +39,24 @@ export default function PlatformLogos() {
     <section
       ref={sectionRef}
       className="studio-platform-strip"
-      aria-labelledby={headingId}
+      aria-label="Platforms for your content"
       data-paused={paused || !inView || !pageVisible}
     >
-      <div className="studio-container studio-platform-heading">
-        <p id={headingId}>Create for your ads, socials & product listings</p>
-        <button
-          type="button"
-          className="studio-platform-toggle"
-          onClick={() => setPaused(!paused)}
-          aria-label={
-            paused ? "Resume platform scrolling" : "Pause platform scrolling"
-          }
-          aria-pressed={paused}
-        >
-          {paused ? (
-            <Play size={13} aria-hidden="true" />
-          ) : (
-            <Pause size={13} aria-hidden="true" />
-          )}
-        </button>
-      </div>
+      <button
+        type="button"
+        className="studio-platform-toggle"
+        onClick={() => setPaused(!paused)}
+        aria-label={
+          paused ? "Resume platform scrolling" : "Pause platform scrolling"
+        }
+        aria-pressed={paused}
+      >
+        {paused ? (
+          <Play size={13} aria-hidden="true" />
+        ) : (
+          <Pause size={13} aria-hidden="true" />
+        )}
+      </button>
       <div
         className="studio-platform-viewport"
         tabIndex={0}

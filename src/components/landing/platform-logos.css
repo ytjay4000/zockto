@@ -1,30 +1,23 @@
 .studio-platform-strip {
-  padding: 30px 0 38px;
+  position: relative;
+  padding: 24px 0;
   border-block: 1px solid var(--studio-line);
 }
-.studio-platform-heading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-.studio-platform-heading p {
-  color: var(--studio-muted);
-  font-size: 12px;
-  line-height: 1.6;
-  text-align: center;
-}
 .studio-platform-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--studio-line);
   border-radius: 50%;
   color: var(--studio-muted);
-  background: transparent;
+  background: var(--studio-paper);
   cursor: pointer;
 }
 .studio-platform-toggle:hover {
@@ -103,14 +96,7 @@
 }
 @media (max-width: 640px) {
   .studio-platform-strip {
-    padding: 24px 0 28px;
-  }
-  .studio-platform-heading {
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-  .studio-platform-heading p {
-    font-size: 11px;
+    padding: 18px 0;
   }
   .studio-platform-group {
     gap: 36px;
