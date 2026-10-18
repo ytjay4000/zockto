@@ -24,10 +24,10 @@ import { useVslVariant } from "@/context/VslVariant";
 import { demoVideos, type DemoVideo } from "@/data/demoVideos";
 import { posthog } from "@/lib/posthog";
 import { trackMetaCustomEvent } from "@/lib/metaPixel";
+import TrendingStyles from "./TrendingStyles";
 import "./premium-landing.css";
 
 const getDemo = (id: number) => demoVideos.find((video) => video.id === id)!;
-const heroDemos = [139, 140, 172, 187, 181].map(getDemo);
 const featuredDemos = [187, 140, 172, 186, 181, 164].map(getDemo);
 const filters = ["All work", "Beauty", "Lifestyle", "Food & drink"] as const;
 type Filter = (typeof filters)[number];
@@ -366,7 +366,6 @@ function PremiumLanding() {
   const videoTrigger = useRef<HTMLButtonElement | null>(null);
   const [filter, setFilter] = useState<Filter>("All work");
   const [style, setStyle] = useState(0);
-  const [motionPaused, setMotionPaused] = useState(false);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const variant = useVslVariant();
@@ -448,50 +447,7 @@ function PremiumLanding() {
                   <p className="studio-hero-note">{variant.refundNote}</p>
                 </Reveal>
               </div>
-              <div
-                className={`studio-hero-reel ${motionPaused ? "is-paused" : ""}`}
-              >
-                <div className="studio-reel-caption">
-                  <span className="studio-micro-label">
-                    <span className="studio-status-dot" /> THE POSSIBILITIES, IN
-                    MOTION
-                  </span>
-                  <button
-                    className="studio-motion-toggle"
-                    onClick={() => setMotionPaused(!motionPaused)}
-                    aria-pressed={motionPaused}
-                  >
-                    {motionPaused ? "Resume motion" : "Pause motion"}
-                  </button>
-                </div>
-                <div className="studio-reel-track">
-                  {heroDemos.map((video, index) => (
-                    <motion.div
-                      className={`studio-reel-item studio-reel-item-${index}`}
-                      key={video.id}
-                      initial={
-                        reduced ? false : { opacity: 0, y: 50, rotate: 0 }
-                      }
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        rotate: [-9, -4, 0, 4, 9][index],
-                      }}
-                      transition={{
-                        duration: 0.95,
-                        delay: 0.18 + index * 0.08,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      <VideoButton
-                        video={video}
-                        priority={index === 2}
-                        onSelect={selectVideo}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              <TrendingStyles />
               <div className="studio-container studio-hero-end">
                 <p>
                   REAL PRODUCTS. <span>AI-MADE POSSIBILITIES.</span>
