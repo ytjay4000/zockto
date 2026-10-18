@@ -22,12 +22,16 @@ export interface VslVariant {
   features?: string[];
 }
 
-const make = (price: number, seconds: number, extra: Partial<VslVariant> = {}): VslVariant => ({
+const make = (
+  price: number,
+  seconds: number,
+  extra: Partial<VslVariant> = {},
+): VslVariant => ({
   price,
   priceLabel: `₹${price}`,
   seconds,
   source: String(price),
-  refundNote: `See your ad preview before paying ₹${price}.`,
+  refundNote: "One-time payment · No subscription · 7-day money-back guarantee",
   ctaLabel: "Create My Story Based Ad",
   offerLabel: `Create My First Ad — ₹${price} →`,
   ...extra,
@@ -39,7 +43,8 @@ export const VSL_VARIANTS: Record<string, VslVariant> = {
   "99": make(99, 15, {
     ctaLabel: "Get Started",
     offerLabel: "Get Started",
-    refundNote: "One-time payment · No subscription · 7-day money-back guarantee",
+    refundNote:
+      "One-time payment · No subscription · 7-day money-back guarantee",
   }),
   "999": {
     price: 999,
@@ -104,8 +109,13 @@ export interface VslVariantProviderProps {
   value?: VslVariant;
 }
 
-export const VslVariantProvider: React.FC<VslVariantProviderProps> = ({ children, value }) => {
-  const [variant, setVariant] = useState<VslVariant>(() => value ?? VSL_VARIANTS[resolveInitialVariantKey()]);
+export const VslVariantProvider: React.FC<VslVariantProviderProps> = ({
+  children,
+  value,
+}) => {
+  const [variant, setVariant] = useState<VslVariant>(
+    () => value ?? VSL_VARIANTS[resolveInitialVariantKey()],
+  );
 
   useEffect(() => {
     if (value) {
@@ -123,7 +133,9 @@ export const VslVariantProvider: React.FC<VslVariantProviderProps> = ({ children
 };
 
 /** Variant for VSL components; defaults to the ₹299 offer. */
-export const useVslVariant = (): VslVariant => useContext(Ctx) ?? VSL_VARIANTS[DEFAULT_VARIANT_KEY];
+export const useVslVariant = (): VslVariant =>
+  useContext(Ctx) ?? VSL_VARIANTS[DEFAULT_VARIANT_KEY];
 
 /** Raw source (null outside VSL pages) — used by AppLink. */
-export const useVslSource = (): string | null => useContext(Ctx)?.source ?? null;
+export const useVslSource = (): string | null =>
+  useContext(Ctx)?.source ?? null;

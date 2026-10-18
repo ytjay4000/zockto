@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useReducedMotion } from "framer-motion";
 import {
-  ArrowLeft,
   ArrowRight,
   Pause,
   Play,
@@ -137,7 +136,6 @@ function TrendingCard({
           }}
         />
         <span className="studio-trending-shade" aria-hidden="true" />
-        <span className="studio-trending-tag">TRENDING STYLE</span>
         {(blocked || !playing || failed) && (
           <button
             className="studio-trending-play"
@@ -345,44 +343,26 @@ export default function TrendingStyles() {
   return (
     <section
       ref={section}
+      id="work"
       className="studio-trending"
-      aria-labelledby="studio-trending-title"
+      aria-label="Video styles created with Zockto"
     >
-      <div className="studio-trending-heading">
-        <div>
-          <p className="studio-micro-label">
-            <span className="studio-status-dot" /> FRESH DIRECTIONS FOR YOUR
-            NEXT AD
-          </p>
-          <h2 id="studio-trending-title">
-            Trending <em>styles.</em>
-          </h2>
-        </div>
-        <div className="studio-trending-actions">
-          <button
-            onClick={() => {
-              setPaused(!paused);
-              setAudible(null);
-            }}
-            aria-pressed={paused}
-            aria-label={
-              paused ? "Play trending previews" : "Pause trending previews"
-            }
-          >
-            {paused ? <Play size={13} /> : <Pause size={13} />}
-            <span>{paused ? "Play" : "Pause"}</span>
-          </button>
-          <button
-            onClick={() => move(-1)}
-            aria-label="Previous trending styles"
-          >
-            <ArrowLeft size={17} />
-          </button>
-          <button onClick={() => move(1)} aria-label="Next trending styles">
-            <ArrowRight size={17} />
-          </button>
-        </div>
-      </div>
+      {templates.length > 0 && (
+        <button
+          className="studio-trending-pause"
+          onClick={() => {
+            setPaused(!paused);
+            setAudible(null);
+          }}
+          aria-pressed={paused}
+          aria-label={
+            paused ? "Play trending previews" : "Pause trending previews"
+          }
+        >
+          {paused ? <Play size={13} /> : <Pause size={13} />}
+          <span>{paused ? "Play" : "Pause"}</span>
+        </button>
+      )}
       {isPending ? (
         <div
           className="studio-trending-loading"
@@ -402,7 +382,8 @@ export default function TrendingStyles() {
         </div>
       ) : templates.length === 0 ? (
         <p className="studio-trending-empty">
-          Fresh styles are on their way. Explore more examples below.
+          New styles are on their way. See how one product becomes a finished ad
+          below.
         </p>
       ) : (
         <>
@@ -468,13 +449,6 @@ export default function TrendingStyles() {
               ))}
             </div>
           </div>
-          <p className="studio-trending-hint">
-            <VolumeX size={12} /> Autoplaying on mute. Tap the speaker to
-            listen.
-            <span>
-              Swipe or scroll to explore <ArrowRight size={12} />
-            </span>
-          </p>
         </>
       )}
     </section>

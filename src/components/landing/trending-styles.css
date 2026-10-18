@@ -1,7 +1,24 @@
 .studio-trending {
+  position: relative;
   max-width: 1440px;
   margin: 44px auto 0;
   padding-bottom: 25px;
+}
+.studio-trending-pause {
+  position: absolute;
+  right: 20px;
+  top: 16px;
+  z-index: 2;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 5px;
+  padding: 7px 10px;
+  background: rgb(15 17 12 / 55%);
+  backdrop-filter: blur(6px);
+  color: white;
+  font-size: 10px;
 }
 .studio-trending-heading {
   display: flex;
