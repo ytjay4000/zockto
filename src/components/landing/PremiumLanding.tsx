@@ -339,8 +339,6 @@ function Questions() {
 export default function PremiumLanding() {
   const { scrollYProgress } = useScroll();
   const variant = useVslVariant();
-  const subscription =
-    variant.source === "999" || Boolean(variant.features?.length);
   return (
     <MotionConfig reducedMotion="user">
       <div className="studio-landing studio-sales" id="top">
@@ -371,9 +369,9 @@ export default function PremiumLanding() {
                   </div>
                 </dl>
                 <h1>
-                  Make your product look
+                  AI Ads that
                   <br />
-                  <em>as good as it is.</em>
+                  look <em>Real.</em>
                 </h1>
                 <p className="studio-hero-description">
                   Turn one product photo into a fully edited video ad.
@@ -391,10 +389,6 @@ export default function PremiumLanding() {
                     <ArrowRight size={14} />
                   </a>
                 </div>
-                <p className="studio-hero-price">
-                  {subscription ? "Your plan: " : "First video ad: "}
-                  <strong>{variant.priceLabel}</strong>
-                </p>
                 <p className="studio-hero-note">{variant.refundNote}</p>
               </Reveal>
             </div>

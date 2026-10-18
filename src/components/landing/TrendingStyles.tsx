@@ -136,6 +136,7 @@ function TrendingCard({
           }}
         />
         <span className="studio-trending-shade" aria-hidden="true" />
+        <span className="studio-trending-proof">Made with Zockto</span>
         {(blocked || !playing || failed) && (
           <button
             className="studio-trending-play"
@@ -186,11 +187,17 @@ function TrendingCard({
       <a
         href={templateUrl.toString()}
         className="studio-trending-use"
+        aria-label={`Use this style: ${template.name}`}
         onClick={() =>
-          posthog.capture("template_use_click", { template_id: template.id })
+          posthog.capture("template_use_click", {
+            template_id: template.id,
+            template_name: template.name,
+            source,
+            placement: "trending_styles",
+          })
         }
       >
-        Use this style <ArrowRight size={14} />
+        Use this style <ArrowRight size={16} aria-hidden="true" />
       </a>
     </article>
   );

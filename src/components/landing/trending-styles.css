@@ -82,6 +82,18 @@
 .studio-trending-card {
   flex: 0 0 224px;
   width: 224px;
+  padding: 5px;
+  border: 1px solid var(--studio-line);
+  border-radius: 14px;
+  background: #fdfcf9;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+.studio-trending-card:hover,
+.studio-trending-card:focus-within {
+  border-color: #aab8ed;
+  box-shadow: 0 8px 22px -16px rgb(52 89 215 / 40%);
 }
 .studio-trending-media {
   position: relative;
@@ -109,13 +121,20 @@
   );
   pointer-events: none;
 }
-.studio-trending-tag {
+.studio-trending-proof {
   position: absolute;
-  top: 15px;
-  left: 14px;
-  color: white;
-  font-size: 7px;
-  letter-spacing: 1.3px;
+  top: 12px;
+  left: 10px;
+  padding: 5px 8px;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 5px;
+  background: rgb(15 17 12 / 60%);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.4;
+  pointer-events: none;
 }
 .studio-trending-overlay {
   position: absolute;
@@ -181,13 +200,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 13px 3px;
-  font-size: 11px;
-  color: #64695b;
-  transition: color 180ms;
+  min-height: 44px;
+  margin-top: 6px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  background: var(--studio-blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  transition: background 180ms ease;
 }
 .studio-trending-use:hover {
-  color: var(--studio-blue);
+  background: #2748b5;
+}
+.studio-trending-use > svg {
+  flex-shrink: 0;
+  transition: transform 180ms ease;
+}
+.studio-trending-use:hover > svg,
+.studio-trending-use:focus-visible > svg {
+  transform: translateX(3px);
 }
 .studio-trending-hint {
   display: flex;
@@ -284,9 +317,11 @@
   .studio-trending-overlay p {
     font-size: 11px;
   }
-  .studio-trending-tag {
-    font-size: 6px;
-    left: 12px;
+  .studio-trending-proof {
+    top: 10px;
+    left: 8px;
+    padding: 4px 6px;
+    font-size: 8px;
   }
   .studio-trending-sound {
     width: 36px;

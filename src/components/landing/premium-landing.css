@@ -237,18 +237,6 @@
   max-width: 720px;
   margin-inline: auto;
 }
-.studio-landing .studio-hero-price {
-  margin-top: 16px;
-  color: var(--studio-ink);
-  font-size: 12px;
-  line-height: 1.7;
-}
-.studio-hero-price strong {
-  font-weight: 600;
-}
-.studio-landing .studio-hero-price + .studio-hero-note {
-  margin-top: 4px !important;
-}
 .studio-hero-actions {
   display: flex;
   justify-content: center;
@@ -1312,8 +1300,8 @@
     gap: 7px;
   }
   .studio-hero h1 {
-    font-size: clamp(30px, 8.4vw, 62px);
-    letter-spacing: -1.7px;
+    font-size: clamp(43px, 9.6vw, 69px);
+    letter-spacing: -2.9px;
     line-height: 1.08;
     margin-top: 22px;
   }
@@ -1626,8 +1614,8 @@
 }
 @media (max-width: 380px) {
   .studio-hero h1 {
-    font-size: clamp(27px, 8.2vw, 31px);
-    letter-spacing: -1.6px;
+    font-size: 40px;
+    letter-spacing: -2.5px;
   }
   .studio-hero-actions {
     gap: 12px;

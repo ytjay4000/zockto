@@ -40,7 +40,7 @@ const VSL = ({ variant = "199" }: VslProps) => {
   return (
     <VslVariantProvider value={vv}>
       <SEO
-        title="Make your product look as good as it is. | Zockto"
+        title="AI Ads that look Real. | Zockto"
         description={`Turn one product photo into a fully edited video ad with script, voiceover, music and captions. No filming or editing skills needed. ${subscription ? `Plan ${vv.priceLabel}. No auto-pay.` : `First ad ${vv.priceLabel}. One-time payment.`}`}
         path={canonicalPath}
       />
