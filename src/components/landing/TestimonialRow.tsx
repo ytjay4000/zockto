@@ -181,35 +181,32 @@ const writtenStories = [
   },
 ];
 
-const stories = voiceTestimonials.flatMap((testimonial) => {
-  const written = writtenStories.find(
-    (story) => story.name === testimonial.name,
-  );
-  return [
-    { kind: "voice" as const, key: testimonial.id, testimonial },
-    ...(written
-      ? [
-          {
-            kind: "written" as const,
-            key: "written-" + testimonial.id,
-            testimonial: written,
-          },
-        ]
-      : []),
-  ];
-});
+const voiceEntries = voiceTestimonials.map((testimonial) => ({
+  kind: "voice" as const,
+  key: testimonial.id,
+  testimonial,
+}));
+const writtenEntries = writtenStories.map((testimonial) => ({
+  kind: "written" as const,
+  key: testimonial.name,
+  testimonial,
+}));
 
-export default function TestimonialRow({
-  activeMedia,
-  onMedia,
-  onStop,
-  renderCta,
-}: {
+interface TestimonialProps {
   activeMedia: string | null;
   onMedia: (id: string | null) => void;
   onStop: (id: string) => void;
   renderCta: (placement: string) => ReactNode;
-}) {
+}
+
+function TestimonialRow({
+  activeMedia,
+  onMedia,
+  onStop,
+  renderCta,
+  kind,
+}: TestimonialProps & { kind: "voice" | "written" }) {
+  const stories = kind === "voice" ? voiceEntries : writtenEntries;
   const viewport = useRef<HTMLDivElement>(null);
   const firstGroup = useRef<HTMLDivElement>(null);
   const section = useRef<HTMLElement>(null);
@@ -256,7 +253,7 @@ export default function TestimonialRow({
       hovered ||
       focused ||
       interacting ||
-      activeMedia
+      (kind === "voice" && activeMedia)
     )
       return;
     let frame = 0;
@@ -283,6 +280,7 @@ export default function TestimonialRow({
     focused,
     interacting,
     activeMedia,
+    kind,
   ]);
 
   const pauseInteraction = () => {
@@ -308,20 +306,29 @@ export default function TestimonialRow({
   };
   return (
     <section
-      id="stories"
+      id={kind === "voice" ? "stories" : "written-stories"}
       ref={section}
-      className="studio-section studio-testimonial-section"
+      className={
+        "studio-section studio-testimonial-section studio-testimonial-section-" +
+        kind
+      }
     >
       <div className="studio-container">
         <div className="studio-proof-heading">
-          <p className="studio-eyebrow">Heard from real users</p>
+          <p className="studio-eyebrow">
+            {kind === "voice" ? "Heard from real users" : "In their own words"}
+          </p>
           <h2>
-            Real voices.
+            {kind === "voice"
+              ? "Listen to Business Owners"
+              : "Real experiences."}
             <br />
-            <em>Real experiences.</em>
+            <em>{kind === "voice" ? "Using Zockto." : "Real businesses."}</em>
           </h2>
           <p>
-            Listen to their voice notes or read their experiences with Zockto.
+            {kind === "voice"
+              ? "Real voices from real businesses. Tap play to listen."
+              : "A few words from founders, sellers, and marketers using Zockto."}
           </p>
         </div>
       </div>
@@ -329,7 +336,10 @@ export default function TestimonialRow({
         ref={viewport}
         className="studio-testimonial-viewport"
         role="region"
-        aria-label="Voice and written customer testimonials, scroll horizontally"
+        aria-label={
+          (kind === "voice" ? "Voice" : "Written") +
+          " customer testimonials, scroll horizontally"
+        }
         tabIndex={0}
         onPointerEnter={(event) => {
           if (event.pointerType === "mouse") setHovered(true);
@@ -404,14 +414,14 @@ export default function TestimonialRow({
         </div>
       </div>
       <div className="studio-container studio-testimonial-footer">
-        {renderCta("testimonials_cta_click")}
+        {kind === "written" && renderCta("testimonials_cta_click")}
         <button
           className="studio-testimonial-pause"
           aria-pressed={paused}
           aria-label={
             paused
-              ? "Resume testimonial scrolling"
-              : "Pause testimonial scrolling"
+              ? "Resume " + kind + " testimonial scrolling"
+              : "Pause " + kind + " testimonial scrolling"
           }
           onClick={() => setPaused(!paused)}
         >
@@ -420,5 +430,14 @@ export default function TestimonialRow({
         </button>
       </div>
     </section>
+  );
+}
+
+export default function TestimonialSections(props: TestimonialProps) {
+  return (
+    <>
+      <TestimonialRow {...props} kind="voice" />
+      <TestimonialRow {...props} kind="written" />
+    </>
   );
 }

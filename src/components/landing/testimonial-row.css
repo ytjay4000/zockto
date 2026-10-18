@@ -1,6 +1,21 @@
 .studio-testimonial-section {
   overflow: hidden;
 }
+.studio-testimonial-section-voice {
+  padding-bottom: 28px;
+}
+.studio-testimonial-section-written {
+  padding-top: 28px;
+}
+.studio-testimonial-section-voice .studio-testimonial-item .studio-voice-story {
+  min-height: 154px;
+}
+.studio-testimonial-section-voice .studio-testimonial-pause {
+  position: static;
+}
+.studio-testimonial-section-voice .studio-testimonial-footer {
+  margin-top: 14px;
+}
 .studio-testimonial-viewport {
   width: min(1440px, 100%);
   margin-inline: auto;

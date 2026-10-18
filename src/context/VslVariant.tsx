@@ -66,7 +66,6 @@ export const VSL_VARIANTS: Record<string, VslVariant> = {
       "1080p quality",
       "200 Natural AI Actors",
       "Use your custom avatar",
-      "Up to 30s per video",
       "Access to all templates",
       "48 languages",
       "Commercial rights",

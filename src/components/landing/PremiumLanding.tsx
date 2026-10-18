@@ -25,18 +25,12 @@ import TrendingStyles from "./TrendingStyles";
 import SalesProof from "./SalesProof";
 
 const Brand = () => (
-  <a className="studio-brand" href="#top" aria-label="Zockto home">
-    <span className="studio-brand-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path
-          d="M6 6h12L8 18h10M6 12h12"
-          stroke="currentColor"
-          strokeWidth="2.6"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
-    zockto<span className="studio-brand-dot">®</span>
+  <a
+    className="studio-brand studio-brand-original"
+    href="#top"
+    aria-label="Zockto home"
+  >
+    Zockto
   </a>
 );
 
@@ -150,7 +144,7 @@ const includes = [
   "Product visuals & B-roll",
   "Natural AI voiceover",
   "Music, captions & transitions",
-  "Fully edited final video",
+  "Fully edited video ad",
   "Ready for your social channels",
 ];
 
@@ -207,7 +201,7 @@ function Offer() {
             <span>
               {subscription
                 ? "start creating more"
-                : "for a fully edited " + variant.seconds + "-second video ad"}
+                : "for a fully edited video ad"}
             </span>
           </div>
           {variant.creditsLabel && (
@@ -263,9 +257,7 @@ function Questions() {
           ". " +
           variant.refundNote +
           "."
-        : "A complete " +
-          variant.seconds +
-          "-second storytelling video ad, including product visuals, B-roll, voiceover, music, captions, and transitions.",
+        : "A fully edited storytelling video ad, including product visuals, B-roll, voiceover, music, captions, and transitions.",
     ],
     [
       "Is this a subscription?",
