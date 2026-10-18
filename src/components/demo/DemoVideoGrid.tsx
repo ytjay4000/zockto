@@ -1,269 +1,253 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { Loader2, Play, Pause, Volume2, VolumeX, Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { Loader2, Play, RotateCcw, ArrowDown } from "lucide-react";
 import { demoVideos, demoCategories, type DemoVideo } from "@/data/demoVideos";
 import { posthog } from "@/lib/posthog";
+import "./demo-gallery.css";
 
-export const DemoTile = ({
+export function DemoTile({
   video,
-  activeAudioId,
-  onAudio,
-  autoStart = false,
+  activeVideoId,
+  onPlayVideo,
+  onStopVideo,
 }: {
   video: DemoVideo;
-  activeAudioId: number | null;
-  onAudio: (id: number | null) => void;
-  /** Plays muted on load; the visitor can tap the speaker to turn sound on. */
-  autoStart?: boolean;
-}) => {
+  activeVideoId: number | null;
+  onPlayVideo: (id: number) => void;
+  onStopVideo: (id: number) => void;
+}) {
+  const player = useRef<HTMLVideoElement>(null);
+  const tile = useRef<HTMLElement>(null);
   const [activated, setActivated] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [el, setEl] = useState<HTMLVideoElement | null>(null);
-  const muted = activeAudioId !== video.id;
-  const tileRef = useRef<HTMLDivElement>(null);
-  const [nearView, setNearView] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const label = video.category + " ad " + video.id;
 
-  // Autoplay (muted) only once the tile scrolls near the screen, to save data.
   useEffect(() => {
-    if (autoStart && nearView && !activated) {
-      setActivated(true);
-      setPlaying(true);
-    }
-  }, [autoStart, nearView, activated]);
+    if (activeVideoId !== video.id) player.current?.pause();
+  }, [activeVideoId, video.id]);
 
-  // React doesn't reliably set the `muted` attribute; mobile autoplay needs it.
   useEffect(() => {
-    if (!el) return;
-    el.muted = muted;
-    if (autoStart && muted && el.paused && playing) el.play().catch(() => {});
-  }, [el, muted, autoStart, playing]);
-
-  // Only fetch a preview frame once the tile is close to the viewport.
-  useEffect(() => {
-    const node = tileRef.current;
-    if (!node) return;
-    const obs = new IntersectionObserver(
+    if (!tile.current) return;
+    const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setNearView(true);
-          obs.disconnect();
+        if (!entry.isIntersecting) {
+          player.current?.pause();
+          onStopVideo(video.id);
         }
       },
-      { rootMargin: "300px" },
+      { threshold: 0.05 },
     );
-    obs.observe(node);
-    return () => obs.disconnect();
-  }, []);
+    observer.observe(tile.current);
+    return () => observer.disconnect();
+  }, [onStopVideo, video.id]);
 
-
-  const activate = () => {
-    if (!activated) {
-      setActivated(true);
-      onAudio(video.id);
-      setPlaying(true);
-      posthog.capture("demo_video_play", {
-        video_id: video.id,
-        category: video.category,
-        path: window.location.pathname,
-      });
-      return;
+  const start = () => {
+    const element = player.current;
+    if (!element) return;
+    setActivated(true);
+    setFailed(false);
+    onPlayVideo(video.id);
+    if (!element.getAttribute("src")) element.src = video.link;
+    if (failed) {
+      setLoaded(false);
+      element.load();
     }
-    if (!el) return;
-    // Tapping a silently autoplaying ad turns its sound on.
-    if (playing && muted) {
-      onAudio(video.id);
-      posthog.capture("demo_video_play", { video_id: video.id, category: video.category, path: window.location.pathname });
-      return;
-    }
-    if (playing) {
-      el.pause();
-      setPlaying(false);
-    } else {
-      onAudio(video.id);
-      el.play().catch(() => {});
-      setPlaying(true);
-    }
-  };
-
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!activated) {
-      setActivated(true);
-      onAudio(video.id);
-      setPlaying(true);
-      return;
-    }
-    onAudio(muted ? video.id : null);
+    element.play().catch((error: DOMException) => {
+      if (error.name !== "AbortError") {
+        setFailed(true);
+        onStopVideo(video.id);
+      }
+    });
+    posthog.capture("demo_video_play", {
+      video_id: video.id,
+      category: video.category,
+      path: window.location.pathname,
+    });
   };
 
   return (
-    <div className="group flex flex-col">
-      <div
-        ref={tileRef}
-        className="relative aspect-[9/16] bg-muted rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all cursor-pointer"
-        onClick={activate}
-      >
-        {!activated ? (
-          <>
-            {/* Real poster frame extracted from each ad, so no card ever looks empty. */}
-            <img
-              src={`/demo-posters/${video.id}.jpg`}
-              alt={`${video.category} video ad by Zockto`}
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-
-
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
-              <div className="w-14 h-14 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                <Play className="w-6 h-6 ml-0.5 text-foreground" fill="currentColor" />
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            {!loaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50 z-10">
-                <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-              </div>
+    <article ref={tile} className="studio-demo-tile" aria-label={label}>
+      <div className="studio-demo-media">
+        <video
+          ref={player}
+          poster={"/demo-posters/" + video.id + ".jpg"}
+          controls={activated && !failed}
+          preload="none"
+          playsInline
+          loop
+          aria-label={label}
+          onLoadedData={() => setLoaded(true)}
+          onPlay={() => {
+            setPlaying(true);
+            onPlayVideo(video.id);
+          }}
+          onPause={() => {
+            setPlaying(false);
+            onStopVideo(video.id);
+          }}
+          onError={() => {
+            setFailed(true);
+            setPlaying(false);
+            onStopVideo(video.id);
+          }}
+        />
+        {!activated && (
+          <img
+            src={"/demo-posters/" + video.id + ".jpg"}
+            alt={video.category + " video ad in " + video.language}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <span className="studio-demo-language">{video.language}</span>
+        {!playing && (
+          <button
+            type="button"
+            className="studio-demo-play"
+            onClick={start}
+            aria-label={(failed ? "Retry " : "Play ") + label}
+          >
+            {failed ? (
+              <RotateCcw size={22} aria-hidden="true" />
+            ) : (
+              <Play size={22} fill="currentColor" aria-hidden="true" />
             )}
-            <video
-              ref={setEl}
-              src={video.link}
-              className="w-full h-full object-cover"
-              muted={muted}
-              loop
-              playsInline
-              autoPlay
-              preload="auto"
-              onLoadedData={() => setLoaded(true)}
-            />
-          </>
+          </button>
         )}
-
-        <div className="absolute top-3 left-3 flex flex-wrap gap-2 max-w-[85%]">
-          <Badge variant="outline" className="bg-background/70 backdrop-blur-sm border-border/50 text-xs">
-            {video.language}
-          </Badge>
-          {video.duration && (
-            <Badge variant="outline" className="bg-background/70 backdrop-blur-sm border-border/50 text-xs gap-1">
-              <Clock className="w-3 h-3" /> {video.duration}s
-            </Badge>
-          )}
-        </div>
-
-        {activated && (
-          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                activate();
-              }}
-              className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
-            >
-              {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" fill="currentColor" />}
-            </button>
-            <button
-              onClick={toggleMute}
-              className="w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
-            >
-              {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-            </button>
-          </div>
+        {activated && !loaded && !failed && (
+          <span
+            className="studio-demo-loading"
+            role="status"
+            aria-label="Loading video"
+          >
+            <Loader2 size={22} aria-hidden="true" />
+          </span>
+        )}
+        {failed && (
+          <p className="studio-demo-error" role="status">
+            Couldn’t load this ad. Tap to retry.
+          </p>
         )}
       </div>
-
-      <div className="mt-3">
-        <p className="text-xs font-semibold uppercase tracking-wider text-primary">{video.category}</p>
+      <div className="studio-demo-tile-caption">
+        <h3>{video.category}</h3>
+        <span aria-hidden="true">{String(video.id).padStart(3, "0")}</span>
       </div>
-    </div>
+    </article>
   );
-};
+}
 
 const INITIAL = 8;
 const STEP = 8;
 
-interface DemoVideoGridProps {
+export default function DemoVideoGrid({
+  eyebrow,
+  heading,
+  sub,
+  footer,
+}: {
   eyebrow?: string;
   heading?: string;
   sub?: string;
-  footer?: React.ReactNode;
-}
-
-const DemoVideoGrid = ({ eyebrow, heading, sub, footer }: DemoVideoGridProps) => {
+  footer?: ReactNode;
+}) {
   const [category, setCategory] = useState("All");
   const [visible, setVisible] = useState(INITIAL);
-  const [activeAudioId, setActiveAudioId] = useState<number | null>(null);
+  const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
+  const stopVideo = useCallback(
+    (id: number) =>
+      setActiveVideoId((current) => (current === id ? null : current)),
+    [],
+  );
 
-  const filtered = useMemo(() => {
-    const list = category === "All" ? demoVideos : demoVideos.filter((v) => v.category === category);
-    return [...list].reverse();
-  }, [category]);
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.hidden) setActiveVideoId(null);
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
 
+  const filtered = useMemo(
+    () =>
+      [
+        ...(category === "All"
+          ? demoVideos
+          : demoVideos.filter((video) => video.category === category)),
+      ].reverse(),
+    [category],
+  );
   const shown = filtered.slice(0, visible);
-  const hasMore = visible < filtered.length;
-
   return (
-    <section id="demo-videos" className="py-16 md:py-24">
-      <div className="container px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8 md:mb-12 max-w-2xl mx-auto"
-        >
-          <span className="inline-block px-4 py-2 rounded-full text-sm font-medium gradient-card border border-border/50 text-primary mb-4">
-            {eyebrow ?? "Trusted by 1000+ businesses"}
-          </span>
-          <h2 className="font-display text-2xl md:text-4xl font-bold mb-3">
-            {heading ?? "Watch the actual quality — nothing staged, nothing cherry-picked"}
-          </h2>
-        </motion.div>
-
-        <div className="-mx-4 px-4 mb-10 overflow-x-auto md:overflow-visible md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex flex-nowrap md:flex-wrap md:justify-center gap-2 w-max md:w-auto">
-            {demoCategories.map((c) => (
-              <button
-                key={c}
-                onClick={() => {
-                  setCategory(c);
-                  setVisible(INITIAL);
-                }}
-                className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-                  category === c
-                    ? "bg-primary text-primary-foreground border-primary shadow-card"
-                    : "border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/50"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
+    <section
+      id="demo-videos"
+      className="studio-demo-library studio-container"
+      aria-labelledby="demo-gallery-title"
+    >
+      <div className="studio-demo-library-heading">
+        <div>
+          {eyebrow && <p className="studio-eyebrow">{eyebrow}</p>}
+          <h2 id="demo-gallery-title">{heading ?? "Find your next look."}</h2>
+          {sub && <p className="studio-page-description">{sub}</p>}
         </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {shown.map((v) => (
-            <DemoTile key={v.id} video={v} activeAudioId={activeAudioId} onAudio={setActiveAudioId} />
+        <p role="status" aria-live="polite">
+          Showing {shown.length} of {filtered.length} ads
+        </p>
+      </div>
+      <div className="studio-demo-filter-scroll">
+        <div
+          className="studio-demo-filters"
+          role="group"
+          aria-label="Filter videos by product category"
+        >
+          {demoCategories.map((item) => (
+            <button
+              type="button"
+              key={item}
+              aria-pressed={category === item}
+              onClick={() => {
+                setCategory(item);
+                setVisible(INITIAL);
+                setActiveVideoId(null);
+              }}
+            >
+              {item}
+            </button>
           ))}
         </div>
-
-        {hasMore && (
-          <div className="flex justify-center mt-10">
-            <Button variant="outline" size="lg" onClick={() => setVisible((v) => v + STEP)}>
-              Load more videos
-            </Button>
-          </div>
-        )}
-
-        {footer && <div className="flex justify-center mt-10">{footer}</div>}
       </div>
+      <div className="studio-demo-grid">
+        {shown.map((video) => (
+          <DemoTile
+            key={video.id}
+            video={video}
+            activeVideoId={activeVideoId}
+            onPlayVideo={setActiveVideoId}
+            onStopVideo={stopVideo}
+          />
+        ))}
+      </div>
+      {visible < filtered.length && (
+        <div className="studio-demo-more">
+          <button
+            type="button"
+            className="studio-button studio-button-outline"
+            onClick={() => setVisible((count) => count + STEP)}
+          >
+            Load more videos <ArrowDown size={16} aria-hidden="true" />
+          </button>
+        </div>
+      )}
+      {footer && <div className="studio-demo-more">{footer}</div>}
     </section>
   );
-};
-
-export default DemoVideoGrid;
+}

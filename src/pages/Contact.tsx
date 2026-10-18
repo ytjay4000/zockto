@@ -1,93 +1,116 @@
-import { useEffect } from 'react';
-import { Phone, MessageCircle, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import SEO from '@/components/SEO';
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Phone,
+  MessageCircle,
+  Mail,
+} from "lucide-react";
+import SEO from "@/components/SEO";
+import StudioPageLayout from "@/components/landing/StudioPageLayout";
 
-const Contact = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const channels = [
+  {
+    title: "WhatsApp us",
+    icon: MessageCircle,
+    description: "A question about your first ad? Send us a message.",
+    href: "https://wa.me/917610336917",
+    label: "Chat on WhatsApp",
+    external: true,
+  },
+  {
+    title: "Give us a call",
+    icon: Phone,
+    description: "Monday–Saturday, 10 AM–6 PM IST.",
+    href: "tel:+917610336917",
+    label: "+91 7610336917",
+    external: false,
+  },
+  {
+    title: "Drop us an email",
+    icon: Mail,
+    description: "For detailed questions, feedback or help with your account.",
+    href: "mailto:arpitdayma1@gmail.com",
+    label: "arpitdayma1@gmail.com",
+    external: false,
+  },
+];
 
+export default function Contact() {
   return (
-    <div className="min-h-screen bg-background">
+    <StudioPageLayout className="studio-contact-page">
       <SEO
-        title="Contact Zockto — Talk to Our AI UGC Team"
-        description="Reach the Zockto team by phone, WhatsApp, or email. We help D2C brands and sellers ship AI-powered UGC video ads, fast."
+        title="Contact Zockto — Let’s talk about your next ad"
+        description="Questions about Zockto or your next video ad? Contact our team on WhatsApp, by phone or by email."
         path="/contact"
       />
-      <Navbar />
-      <main className="pt-32 pb-20">
-        <div className="container px-4">
-          <div className="text-center mb-12">
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
-              Contact Us
-            </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Have a question about our AI video creation tools? We're here to help you create amazing content!
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Call Us Card */}
-            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm flex flex-col">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <Phone className="w-7 h-7 text-primary" />
-              </div>
-              <h2 className="font-display text-xl font-semibold mb-2">Call Us</h2>
-              <p className="text-muted-foreground text-sm mb-6">
-                Available Mon-Sat, 10AM-6PM IST
-              </p>
-              <a 
-                href="tel:+917610336917"
-                className="mt-auto w-full h-11 flex items-center justify-center bg-muted/50 hover:bg-muted rounded-lg text-sm font-medium text-foreground hover:text-primary transition-colors"
-              >
-                +91 7610336917
-              </a>
+      <section className="studio-page-hero studio-container">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+        >
+          <p className="studio-eyebrow">A real conversation</p>
+          <h1>
+            Good questions.
+            <br />
+            <em>Let’s talk.</em>
+          </h1>
+          <p className="studio-page-description">
+            Your first ad, an existing order, or just a quick question.
+            <br className="studio-desktop-break" /> Choose the way that works
+            for you.
+          </p>
+        </motion.div>
+      </section>
+      <section
+        className="studio-container studio-contact-channels"
+        aria-label="Ways to contact Zockto"
+      >
+        {channels.map((channel, index) => (
+          <motion.article
+            className="studio-contact-card"
+            key={channel.href}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: index * 0.06 }}
+          >
+            <div className="studio-contact-card-top">
+              <span className="studio-contact-icon">
+                <channel.icon size={21} aria-hidden="true" />
+              </span>
+              <span aria-hidden="true">0{index + 1}</span>
             </div>
-
-            {/* WhatsApp Card */}
-            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm flex flex-col">
-              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-                <MessageCircle className="w-7 h-7 text-green-600" />
-              </div>
-              <h2 className="font-display text-xl font-semibold mb-2">WhatsApp</h2>
-              <p className="text-muted-foreground text-sm mb-6">
-                Quick responses within 24 hours
-              </p>
-              <a 
-                href="https://wa.me/917610336917"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto w-full h-11 flex items-center justify-center bg-green-500 hover:bg-green-600 rounded-lg text-sm font-medium text-white transition-colors"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
-
-            {/* Email Card */}
-            <div className="bg-card rounded-2xl p-8 text-center border border-border/50 shadow-sm flex flex-col">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <Mail className="w-7 h-7 text-primary" />
-              </div>
-              <h2 className="font-display text-xl font-semibold mb-2">Email Us</h2>
-              <p className="text-muted-foreground text-sm mb-6">
-                For detailed inquiries & support
-              </p>
-              <a 
-                href="mailto:arpitdayma1@gmail.com"
-                className="mt-auto w-full h-11 flex items-center justify-center bg-muted/50 hover:bg-muted rounded-lg text-sm font-medium text-foreground hover:text-primary transition-colors"
-              >
-                arpitdayma1@gmail.com
-              </a>
-            </div>
-          </div>
+            <h2>{channel.title}</h2>
+            <p>{channel.description}</p>
+            <a
+              href={channel.href}
+              target={channel.external ? "_blank" : undefined}
+              rel={channel.external ? "noopener noreferrer" : undefined}
+            >
+              {channel.label}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </motion.article>
+        ))}
+      </section>
+      <section
+        className="studio-container studio-contact-note"
+        aria-label="Help with an existing purchase"
+      >
+        <div>
+          <h2>Already made an ad?</h2>
+          <p>
+            Include your account email and purchase reference when you contact
+            us, so we can find your order.
+          </p>
         </div>
-      </main>
-      <Footer />
-    </div>
+        <Link to="/demo">
+          Explore the demos <ArrowRight size={15} aria-hidden="true" />
+        </Link>
+      </section>
+    </StudioPageLayout>
   );
-};
-
-export default Contact;
+}

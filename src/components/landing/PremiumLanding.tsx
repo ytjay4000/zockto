@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
@@ -10,30 +10,21 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Menu,
   Play,
   Plus,
   ShieldCheck,
-  X,
 } from "lucide-react";
-import AppLink from "@/components/AppLink";
 import { useVslVariant } from "@/context/VslVariant";
 import { posthog } from "@/lib/posthog";
-import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import "./premium-landing.css";
 import TrendingStyles from "./TrendingStyles";
 import SalesProof from "./SalesProof";
 import PlatformLogos from "./PlatformLogos";
-
-const Brand = () => (
-  <a
-    className="studio-brand studio-brand-original"
-    href="#top"
-    aria-label="Zockto home"
-  >
-    Zockto
-  </a>
-);
+import {
+  StudioHeader as Header,
+  StudioFooter,
+  StudioCreateButton as CreateButton,
+} from "./StudioChrome";
 
 const SUPPORT_WHATSAPP_URL = "https://wa.me/917610336917";
 
@@ -55,90 +46,6 @@ function Reveal({
     >
       {children}
     </motion.div>
-  );
-}
-
-function CreateButton({
-  children,
-  placement,
-  className = "",
-}: {
-  children?: ReactNode;
-  placement: string;
-  className?: string;
-}) {
-  const variant = useVslVariant();
-  return (
-    <AppLink
-      className={"studio-button " + className}
-      onClick={() => {
-        posthog.capture(placement, {
-          price_inr: variant.price,
-          source: variant.source,
-        });
-        trackMetaCustomEvent("VSLOfferClick", {
-          price_inr: variant.price,
-          source: variant.source,
-          placement,
-        });
-      }}
-    >
-      {children ?? "Get started"}
-      <ArrowUpRight size={17} aria-hidden="true" />
-    </AppLink>
-  );
-}
-
-function Header() {
-  const [open, setOpen] = useState(false);
-  const links = [
-    ["See example ads", "#work"],
-    ["How it works", "#process"],
-    ["Customer stories", "#stories"],
-    ["Pricing", "#pricing"],
-  ];
-  return (
-    <header className="studio-header">
-      <div className="studio-container studio-header-inner">
-        <Brand />
-        <nav className="studio-desktop-nav" aria-label="Main navigation">
-          {links.map(([label, href]) => (
-            <a key={href} href={href}>
-              {label}
-            </a>
-          ))}
-        </nav>
-        <div className="studio-header-actions">
-          <CreateButton placement="header_cta_click">Get started</CreateButton>
-          <button
-            className="studio-menu-button"
-            aria-label={open ? "Close navigation" : "Open navigation"}
-            aria-expanded={open}
-            aria-controls="studio-mobile-nav"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-      {open && (
-        <nav
-          id="studio-mobile-nav"
-          className="studio-mobile-nav"
-          aria-label="Mobile navigation"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") setOpen(false);
-          }}
-        >
-          {links.map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setOpen(false)}>
-              {label}
-              <ArrowUpRight size={18} />
-            </a>
-          ))}
-        </nav>
-      )}
-    </header>
   );
 }
 
@@ -422,28 +329,7 @@ export default function PremiumLanding() {
             </div>
           </section>
         </main>
-        <footer className="studio-footer">
-          <div className="studio-container">
-            <div className="studio-footer-top">
-              <Brand />
-              <p>Small input. Standout stories.</p>
-              <Link to="/contact" className="studio-footer-contact">
-                Let’s talk <ArrowUpRight size={15} />
-              </Link>
-            </div>
-            <div className="studio-footer-bottom">
-              <span>© {new Date().getFullYear()} Zockto</span>
-              <nav aria-label="Footer navigation">
-                <Link to="/demo">Demos</Link>
-                <Link to="/blog">Journal</Link>
-                <Link to="/privacy">Privacy</Link>
-                <Link to="/terms-of-service">Terms & refunds</Link>
-                <Link to="/contact">Contact</Link>
-              </nav>
-              <span>Made for your next big thing.</span>
-            </div>
-          </div>
-        </footer>
+        <StudioFooter />
       </div>
     </MotionConfig>
   );
