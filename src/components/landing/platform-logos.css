@@ -1,0 +1,141 @@
+.studio-platform-strip {
+  padding: 30px 0 38px;
+  border-block: 1px solid var(--studio-line);
+}
+.studio-platform-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.studio-platform-heading p {
+  color: var(--studio-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+.studio-platform-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--studio-line);
+  border-radius: 50%;
+  color: var(--studio-muted);
+  background: transparent;
+  cursor: pointer;
+}
+.studio-platform-toggle:hover {
+  color: var(--studio-ink);
+  border-color: var(--studio-muted);
+}
+.studio-platform-viewport {
+  max-width: 1440px;
+  margin-inline: auto;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+.studio-platform-track {
+  display: flex;
+  width: max-content;
+  animation: studio-platform-marquee 46s linear infinite;
+  will-change: transform;
+}
+.studio-platform-group {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  flex: 0 0 auto;
+  list-style: none;
+  margin: 0;
+  padding: 5px 64px 5px 0;
+}
+.studio-platform-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  height: 36px;
+  color: var(--studio-ink);
+  opacity: 0.62;
+  white-space: nowrap;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  transition: opacity 180ms ease;
+}
+.studio-platform-logo img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.studio-platform-logo:hover {
+  opacity: 1;
+}
+.studio-platform-logo-meesho {
+  font-size: 29px;
+  font-weight: 750;
+  letter-spacing: -1.6px;
+}
+.studio-platform-logo-myntra {
+  font-size: 27px;
+  font-weight: 750;
+  letter-spacing: -1.2px;
+}
+.studio-platform-strip[data-paused="true"] .studio-platform-track,
+.studio-platform-viewport:hover .studio-platform-track,
+.studio-platform-viewport:focus-within .studio-platform-track {
+  animation-play-state: paused;
+}
+@keyframes studio-platform-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 640px) {
+  .studio-platform-strip {
+    padding: 24px 0 28px;
+  }
+  .studio-platform-heading {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .studio-platform-heading p {
+    font-size: 11px;
+  }
+  .studio-platform-group {
+    gap: 36px;
+    padding-right: 36px;
+  }
+  .studio-platform-logo {
+    font-size: 19px;
+  }
+  .studio-platform-logo-meesho,
+  .studio-platform-logo-myntra {
+    font-size: 25px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-platform-track {
+    animation: none;
+    will-change: auto;
+  }
+  .studio-platform-group[aria-hidden="true"],
+  .studio-platform-toggle {
+    display: none;
+  }
+  .studio-platform-viewport {
+    overflow-x: auto;
+    padding-inline: 20px;
+    scrollbar-width: thin;
+  }
+}

@@ -23,6 +23,7 @@ import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import "./premium-landing.css";
 import TrendingStyles from "./TrendingStyles";
 import SalesProof from "./SalesProof";
+import PlatformLogos from "./PlatformLogos";
 
 const Brand = () => (
   <a
@@ -371,6 +372,7 @@ export default function PremiumLanding() {
             </div>
             <TrendingStyles />
           </section>
+          <PlatformLogos />
           <SalesProof
             renderCta={(placement) => <CreateButton placement={placement} />}
           />
