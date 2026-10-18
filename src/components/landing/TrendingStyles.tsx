@@ -174,7 +174,7 @@ function TrendingCard({
           aria-label={`Avg. ROAS ${template.exampleRoas}, illustrative only, not a measured campaign result`}
           title="Illustrative example only—not a measured campaign result."
         >
-          <span className="studio-trending-metric-example">Example</span> <strong>{template.exampleRoas}</strong> ROAS
+          <span className="studio-trending-metric-example">Avg.</span> <strong>{template.exampleRoas}</strong> ROAS
         </span>
         <a
           href={templateUrl.toString()}
