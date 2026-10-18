@@ -22,6 +22,10 @@ interface TrendingTemplate {
   video: string;
 }
 
+// Layout placeholder only, not measured campaign performance. Keep the visible
+// "Example" label until this is replaced with verified per-style campaign data.
+const EXAMPLE_ROAS = "3.4×";
+
 function TrendingCard({
   template,
   instance,
@@ -184,21 +188,31 @@ function TrendingCard({
           </span>
         )}
       </div>
-      <a
-        href={templateUrl.toString()}
-        className="studio-trending-use"
-        aria-label={`Use this style: ${template.name}`}
-        onClick={() =>
-          posthog.capture("template_use_click", {
-            template_id: template.id,
-            template_name: template.name,
-            source,
-            placement: "trending_styles",
-          })
-        }
-      >
-        Use this style <ArrowRight size={16} aria-hidden="true" />
-      </a>
+      <div className="studio-trending-footer">
+        <span
+          className="studio-trending-metric"
+          aria-label={`Example ROAS ${EXAMPLE_ROAS}, illustrative only, not a measured campaign result`}
+          title="Illustrative example only—not a measured campaign result."
+        >
+          <span className="studio-trending-metric-example">Example</span>{" "}
+          <strong>{EXAMPLE_ROAS}</strong> ROAS
+        </span>
+        <a
+          href={templateUrl.toString()}
+          className="studio-trending-use"
+          aria-label={`Use this style: ${template.name}`}
+          onClick={() =>
+            posthog.capture("template_use_click", {
+              template_id: template.id,
+              template_name: template.name,
+              source,
+              placement: "trending_styles",
+            })
+          }
+        >
+          Use this style <ArrowRight size={12} aria-hidden="true" />
+        </a>
+      </div>
     </article>
   );
 }
