@@ -49,8 +49,10 @@
 }
 .studio-how-tab-label {
   position: relative;
+  min-width: 0;
   font-size: 15px;
   font-weight: 500;
+  line-height: 1.25;
 }
 .studio-how-step-number {
   position: relative;
@@ -195,17 +197,19 @@
     padding: 7px;
   }
   .studio-how-tab {
+    flex-direction: column;
     min-height: 54px;
-    padding: 8px;
-    gap: 7px;
+    padding: 7px 5px;
+    gap: 4px;
     border-radius: 10px;
   }
   .studio-how-tab-label {
     font-size: 12px;
+    white-space: nowrap;
   }
   .studio-how-step-number {
-    width: 23px;
-    height: 23px;
+    width: 20px;
+    height: 20px;
     font-size: 9px;
   }
   .studio-how-stage {

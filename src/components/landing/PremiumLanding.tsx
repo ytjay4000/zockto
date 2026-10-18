@@ -35,6 +35,8 @@ const Brand = () => (
   </a>
 );
 
+const SUPPORT_WHATSAPP_URL = "https://wa.me/917610336917";
+
 function Reveal({
   children,
   className = "",
@@ -90,7 +92,7 @@ function CreateButton({
 function Header() {
   const [open, setOpen] = useState(false);
   const links = [
-    ["Made with Zockto", "#work"],
+    ["See example ads", "#work"],
     ["How it works", "#process"],
     ["Customer stories", "#stories"],
     ["Pricing", "#pricing"],
@@ -141,8 +143,8 @@ function Header() {
 }
 
 const includes = [
-  "Storytelling concept & script",
-  "Product visuals & B-roll",
+  "Ad idea & script",
+  "Product scenes & supporting visuals",
   "Natural AI voiceover",
   "Music, captions & transitions",
   "Fully edited video ad",
@@ -157,18 +159,16 @@ function Offer() {
     <section id="pricing" className="studio-section studio-pricing">
       <div className="studio-container studio-pricing-grid">
         <Reveal>
-          <p className="studio-eyebrow">
-            Everything you need. One clear price.
-          </p>
+          <p className="studio-eyebrow">Everything included</p>
           <h2>
-            Your next ad.
+            {subscription ? "Your video ad plan." : "Your first video ad."}
             <br />
-            <em>Without the overhead.</em>
+            <em>One clear price.</em>
           </h2>
           <p className="studio-section-copy">
-            A complete video ad, with the script, visuals, voiceover, and
-            editing taken care of. Know exactly what you’re getting before you
-            start.
+            {subscription
+              ? "Choose the plan that fits your business. See what’s included, how long it lasts, and what it costs before you start."
+              : "One product photo is your starting point. Your ad includes the script, visuals, voiceover, music, captions and editing."}
           </p>
           <div className="studio-risk-details">
             <h3>
@@ -187,6 +187,16 @@ function Offer() {
               Read the refund policy <ArrowUpRight size={13} />
             </Link>
           </div>
+          <a
+            className="studio-pricing-support"
+            href={SUPPORT_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => posthog.capture("pricing_whatsapp_click")}
+          >
+            Questions? Chat on WhatsApp{" "}
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
         </Reveal>
         <Reveal className="studio-price-card">
           <div className="studio-price-top">
@@ -232,25 +242,13 @@ function Questions() {
     variant.source === "999" || Boolean(variant.features?.length);
   const questions = [
     [
-      "What do I need to get started?",
-      "Just one clear product photo. You can also add your product page link for more context. No studio, camera, or editing software required.",
-    ],
-    [
-      "Will I have to write a script or prompts?",
-      "No. Zockto develops the concept, hook, script, and storyboard. Pick a direction you like, and it assembles your video with visuals, voiceover, music, and captions.",
-    ],
-    [
-      "How long does it take?",
-      "Most videos are ready in about 5–10 minutes. Longer or more complex videos can take up to 30 minutes.",
-    ],
-    [
-      "Can I create in my own language?",
-      "Yes. Choose from 48 languages, including English, Hindi, Hinglish, and other regional options.",
+      "Will the video actually look like my product?",
+      "Zockto uses your product photo as a reference—watch the photo-to-ad example above to see a finished result. AI can change details such as labels, packaging or colours, so review your own ad before posting.",
     ],
     [
       subscription
         ? "What’s included in the " + variant.priceLabel + " plan?"
-        : "What do I get for " + variant.priceLabel + "?",
+        : "What exactly do I get for " + variant.priceLabel + "?",
       subscription
         ? (variant.creditsLabel ?? "") +
           ". " +
@@ -258,23 +256,45 @@ function Questions() {
           ". " +
           variant.refundNote +
           "."
-        : "A fully edited storytelling video ad, including product visuals, B-roll, voiceover, music, captions, and transitions.",
+        : "One fully edited video ad, including the script, product scenes, supporting visuals, voiceover, music, captions and transitions.",
     ],
     [
-      "Is this a subscription?",
+      "Will I be charged again automatically?",
       subscription
-        ? "This plan is a one-time payment with 30-day validity and no auto-pay. You choose whether to purchase it again."
+        ? "No. This plan is a one-time payment with 30-day validity and no auto-pay. You choose whether to purchase it again."
         : "No. Your first ad is a one-time payment. There’s no subscription or automatic renewal.",
     ],
     [
-      "What if the first ad isn’t right for me?",
       subscription
-        ? "You can try another concept. This plan follows the refund terms on our Terms of Service page."
-        : "Your first-ad purchase comes with a 7-day money-back guarantee. Contact us within 7 days of purchase to request a refund. You can read the details in our refund policy.",
+        ? "What if this plan isn’t right for me?"
+        : "What if I don’t like my first ad?",
+      subscription
+        ? "This plan follows the refund terms on our Terms of Service page. The first-ad 7-day money-back guarantee does not apply to this plan unless your checkout offer expressly includes it."
+        : "Your first-ad purchase comes with a 7-day money-back guarantee. Contact us within 7 days of purchase and include your purchase details to request a refund. See our refund policy for the full terms.",
+    ],
+    [
+      "What do I need to get started?",
+      "Just one clear product photo. You can also add your product page link for more context. No studio, camera, or editing software required.",
+    ],
+    [
+      "Will I have to write a script or prompts?",
+      "No. Zockto comes up with the ad idea, writes the script and plans the scenes. You choose a style, and it puts the video together with visuals, voiceover, music and captions.",
+    ],
+    [
+      "How long does it take?",
+      "Most videos are ready in about 5–10 minutes. Longer or more complex videos can take up to 30 minutes.",
+    ],
+    [
+      "Can I create in my own language?",
+      "Yes. Hindi, Hinglish and English are included, alongside other supported languages.",
     ],
     [
       "Where can I use my finished video?",
-      "Upload it to Instagram, Facebook, WhatsApp, YouTube Shorts, or your marketplace listings — wherever your customers are.",
+      "Use it on Instagram, Facebook, WhatsApp or YouTube Shorts. Marketplace listings and paid ads have their own content rules, so check the requirements before uploading.",
+    ],
+    [
+      "Will this guarantee more orders?",
+      "No. Zockto helps you create the video ad; sales also depend on your product, price, offer, audience and how you run your campaign. Ad creation does not include running or managing your paid ads.",
     ],
   ];
   return (
@@ -319,6 +339,8 @@ function Questions() {
 export default function PremiumLanding() {
   const { scrollYProgress } = useScroll();
   const variant = useVslVariant();
+  const subscription =
+    variant.source === "999" || Boolean(variant.features?.length);
   return (
     <MotionConfig reducedMotion="user">
       <div className="studio-landing studio-sales" id="top">
@@ -349,13 +371,15 @@ export default function PremiumLanding() {
                   </div>
                 </dl>
                 <h1>
-                  A product photo.
-                  <br />A whole <em>new story.</em>
+                  Make your product look
+                  <br />
+                  <em>as good as it is.</em>
                 </h1>
                 <p className="studio-hero-description">
-                  Upload a product photo. Get a fully edited video ad.
-                  <br className="studio-desktop-break" /> Voiceover, music, and
-                  captions included.
+                  Turn one product photo into a fully edited video ad.
+                  <br className="studio-desktop-break" /> Script, voiceover,
+                  music and captions included—no filming or editing skills
+                  needed.
                 </p>
                 <div className="studio-hero-actions">
                   <CreateButton placement="primary_cta_click" />
@@ -367,6 +391,10 @@ export default function PremiumLanding() {
                     <ArrowRight size={14} />
                   </a>
                 </div>
+                <p className="studio-hero-price">
+                  {subscription ? "Your plan: " : "First video ad: "}
+                  <strong>{variant.priceLabel}</strong>
+                </p>
                 <p className="studio-hero-note">{variant.refundNote}</p>
               </Reveal>
             </div>
@@ -383,9 +411,9 @@ export default function PremiumLanding() {
               <Reveal>
                 <p className="studio-eyebrow">You’ve seen what’s possible.</p>
                 <h2>
-                  Now make it
+                  Now picture
                   <br />
-                  <em>your product’s turn.</em>
+                  <em>your product here.</em>
                 </h2>
                 <CreateButton placement="final_cta_click" />
                 <p>{variant.refundNote}</p>

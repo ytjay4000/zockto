@@ -308,27 +308,31 @@ function TestimonialRow({
     <section
       id={kind === "voice" ? "stories" : "written-stories"}
       ref={section}
+      aria-labelledby={kind + "-stories-title"}
       className={
         "studio-section studio-testimonial-section studio-testimonial-section-" +
         kind
       }
     >
       <div className="studio-container">
-        <div className="studio-proof-heading">
-          <p className="studio-eyebrow">
-            {kind === "voice" ? "Heard from real users" : "In their own words"}
-          </p>
-          <h2>
-            {kind === "voice"
-              ? "Listen to Business Owners"
-              : "Real experiences."}
-            <br />
-            <em>{kind === "voice" ? "Using Zockto." : "Real businesses."}</em>
+        <div className="studio-testimonial-heading">
+          <h2 id={kind + "-stories-title"}>
+            {kind === "voice" ? (
+              <>
+                Hear from business owners
+                <br />
+                <em>like you.</em>
+              </>
+            ) : (
+              <>
+                What <em>customers say.</em>
+              </>
+            )}
           </h2>
           <p>
             {kind === "voice"
-              ? "Real voices from real businesses. Tap play to listen."
-              : "A few words from founders, sellers, and marketers using Zockto."}
+              ? "Tap a voice note to hear their experience."
+              : "Feedback from founders, sellers and marketers."}
           </p>
         </div>
       </div>

@@ -26,6 +26,7 @@ const VSL = ({ variant = "199" }: VslProps) => {
     sourceParam && VSL_VARIANTS[sourceParam] ? sourceParam : variant;
 
   const vv: VslVariant = VSL_VARIANTS[activeVariantKey] ?? VSL_VARIANTS["299"];
+  const subscription = vv.source === "999" || Boolean(vv.features?.length);
 
   useEffect(() => {
     posthog.capture("vsl_page_view", { source: vv.source });
@@ -39,8 +40,8 @@ const VSL = ({ variant = "199" }: VslProps) => {
   return (
     <VslVariantProvider value={vv}>
       <SEO
-        title="A product photo. A whole new story. | Zockto"
-        description={`No prompting, no script writing, no editing. Upload your product photo and Zockto creates a fully edited video ad with voiceover, music and captions. First ad ${vv.priceLabel}.`}
+        title="Make your product look as good as it is. | Zockto"
+        description={`Turn one product photo into a fully edited video ad with script, voiceover, music and captions. No filming or editing skills needed. ${subscription ? `Plan ${vv.priceLabel}. No auto-pay.` : `First ad ${vv.priceLabel}. One-time payment.`}`}
         path={canonicalPath}
       />
       <PremiumLanding />

@@ -10,17 +10,17 @@ const FINAL_VIDEO =
   "https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4";
 const steps = [
   {
-    label: "Upload",
+    label: "Your photo",
     title: "Upload your product",
     copy: "Start with one clear product photo.",
   },
   {
-    label: "Choose",
+    label: "Your style",
     title: "Choose a style",
     copy: "Pick your look. Zockto plans the scenes.",
   },
   {
-    label: "Watch",
+    label: "Your ad",
     title: "Get your finished ad",
     copy: "Voiceover, music, captions. All edited for you.",
   },

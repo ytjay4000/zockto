@@ -1,6 +1,17 @@
 .studio-testimonial-section {
   overflow: hidden;
 }
+.studio-testimonial-heading {
+  max-width: 850px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.studio-testimonial-heading > p {
+  margin-top: 16px;
+  color: var(--studio-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
 .studio-testimonial-section-voice {
   padding-bottom: 28px;
 }
@@ -111,6 +122,12 @@
   color: #74756f;
 }
 @media (max-width: 760px) {
+  .studio-testimonial-heading {
+    margin-bottom: 24px;
+  }
+  .studio-testimonial-heading > p {
+    font-size: 12px;
+  }
   .studio-testimonial-item {
     flex-basis: 290px;
     width: 290px;
