@@ -259,7 +259,10 @@
   margin-top: 23px !important;
   letter-spacing: -0.15px;
   max-width: 720px;
+}
+.studio-landing .studio-hero-description {
   margin-inline: auto;
+  text-align: center;
 }
 .studio-hero-actions {
   display: flex;

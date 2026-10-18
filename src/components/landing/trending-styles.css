@@ -324,8 +324,8 @@
     display: none;
   }
   .studio-trending-card {
-    width: 208px;
-    flex-basis: 208px;
+    width: clamp(232px, 64vw, 264px);
+    flex-basis: clamp(232px, 64vw, 264px);
   }
   .studio-trending-group {
     gap: 12px;
@@ -361,6 +361,6 @@
     padding: 35px 16px;
   }
   .studio-trending-loading > div {
-    flex-basis: 208px;
+    flex-basis: clamp(232px, 64vw, 264px);
   }
 }
