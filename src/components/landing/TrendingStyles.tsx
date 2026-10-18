@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useReducedMotion } from "framer-motion";
-import {
-  ArrowRight,
-  Pause,
-  Play,
-  RotateCcw,
-  Volume2,
-  VolumeX,
-} from "lucide-react";
+import { ArrowRight, Pause, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useVslSource } from "@/context/VslVariant";
 import { getAppUrl } from "@/lib/leadToken";
@@ -105,11 +98,7 @@ function TrendingCard({
   };
 
   return (
-    <article
-      ref={card}
-      className="studio-trending-card"
-      aria-label={template.name}
-    >
+    <article ref={card} className="studio-trending-card" aria-label={template.name}>
       <div className="studio-trending-media">
         <video
           ref={player}
@@ -144,15 +133,9 @@ function TrendingCard({
           <button
             className="studio-trending-play"
             onClick={start}
-            aria-label={
-              failed ? `Retry ${template.name}` : `Play ${template.name}`
-            }
+            aria-label={failed ? `Retry ${template.name}` : `Play ${template.name}`}
           >
-            {failed ? (
-              <RotateCcw size={19} />
-            ) : (
-              <Play size={19} fill="currentColor" />
-            )}
+            {failed ? <RotateCcw size={19} /> : <Play size={19} fill="currentColor" />}
           </button>
         )}
         <div className="studio-trending-overlay">
@@ -160,9 +143,7 @@ function TrendingCard({
           <button
             className="studio-trending-sound"
             disabled={failed}
-            aria-label={
-              audible ? `Mute ${template.name}` : `Unmute ${template.name}`
-            }
+            aria-label={audible ? `Mute ${template.name}` : `Unmute ${template.name}`}
             aria-pressed={audible}
             onClick={() => {
               const video = player.current;
@@ -190,11 +171,10 @@ function TrendingCard({
       <div className="studio-trending-footer">
         <span
           className="studio-trending-metric"
-          aria-label={`Example ROAS ${template.exampleRoas}, illustrative only, not a measured campaign result`}
+          aria-label={`Avg. ROAS ${template.exampleRoas}, illustrative only, not a measured campaign result`}
           title="Illustrative example only—not a measured campaign result."
         >
-          <span className="studio-trending-metric-example">Example</span>{" "}
-          <strong>{template.exampleRoas}</strong> ROAS
+          <span className="studio-trending-metric-example">Example</span> <strong>{template.exampleRoas}</strong> ROAS
         </span>
         <a
           href={templateUrl.toString()}
@@ -267,19 +247,14 @@ export default function TrendingStyles() {
   });
   // Fill narrow feeds before duplicating the row, so its loop never exposes a gap.
   const row = templates.length
-    ? Array.from(
-        { length: Math.max(templates.length, 6) },
-        (_, index) => templates[index % templates.length],
-      )
+    ? Array.from({ length: Math.max(templates.length, 6) }, (_, index) => templates[index % templates.length])
     : [];
   const silence = useCallback(
-    (instance: string) =>
-      setAudible((current) => (current === instance ? null : current)),
+    (instance: string) => setAudible((current) => (current === instance ? null : current)),
     [],
   );
   const toggleSound = useCallback(
-    (instance: string) =>
-      setAudible((current) => (current === instance ? null : instance)),
+    (instance: string) => setAudible((current) => (current === instance ? null : instance)),
     [],
   );
 
@@ -306,17 +281,7 @@ export default function TrendingStyles() {
 
   useEffect(() => {
     const node = viewport.current;
-    if (
-      !node ||
-      !playing ||
-      reduced ||
-      hovered ||
-      focused ||
-      interacting ||
-      audible ||
-      !templates.length
-    )
-      return;
+    if (!node || !playing || reduced || hovered || focused || interacting || audible || !templates.length) return;
     let frame = 0;
     let last = 0;
     let position = node.scrollLeft;
@@ -332,15 +297,7 @@ export default function TrendingStyles() {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [
-    playing,
-    reduced,
-    hovered,
-    focused,
-    interacting,
-    audible,
-    templates.length,
-  ]);
+  }, [playing, reduced, hovered, focused, interacting, audible, templates.length]);
 
   const pauseInteraction = () => {
     clearTimeout(resumeTimer.current);
@@ -364,12 +321,7 @@ export default function TrendingStyles() {
   };
 
   return (
-    <section
-      ref={section}
-      id="work"
-      className="studio-trending"
-      aria-label="Video styles created with Zockto"
-    >
+    <section ref={section} id="work" className="studio-trending" aria-label="Video styles created with Zockto">
       {templates.length > 0 && (
         <button
           className="studio-trending-pause"
@@ -378,20 +330,14 @@ export default function TrendingStyles() {
             setAudible(null);
           }}
           aria-pressed={paused}
-          aria-label={
-            paused ? "Play trending previews" : "Pause trending previews"
-          }
+          aria-label={paused ? "Play trending previews" : "Pause trending previews"}
         >
           {paused ? <Play size={13} /> : <Pause size={13} />}
           <span>{paused ? "Play" : "Pause"}</span>
         </button>
       )}
       {isPending ? (
-        <div
-          className="studio-trending-loading"
-          role="status"
-          aria-label="Loading trending styles"
-        >
+        <div className="studio-trending-loading" role="status" aria-label="Loading trending styles">
           {[0, 1, 2, 3, 4, 5].map((index) => (
             <div key={index} />
           ))}
@@ -405,8 +351,7 @@ export default function TrendingStyles() {
         </div>
       ) : templates.length === 0 ? (
         <p className="studio-trending-empty">
-          New styles are on their way. See how one product becomes a finished ad
-          below.
+          New styles are on their way. See how one product becomes a finished ad below.
         </p>
       ) : (
         <>
@@ -432,14 +377,10 @@ export default function TrendingStyles() {
             }}
             onFocusCapture={() => setFocused(true)}
             onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget))
-                setFocused(false);
+              if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
             }}
             onKeyDown={(event) => {
-              if (
-                event.target === event.currentTarget &&
-                ["ArrowLeft", "ArrowRight"].includes(event.key)
-              ) {
+              if (event.target === event.currentTarget && ["ArrowLeft", "ArrowRight"].includes(event.key)) {
                 event.preventDefault();
                 move(event.key === "ArrowLeft" ? -1 : 1);
               }
@@ -447,11 +388,7 @@ export default function TrendingStyles() {
           >
             <div className="studio-trending-track">
               {[0, 1].map((group) => (
-                <div
-                  ref={group === 0 ? firstGroup : undefined}
-                  key={group}
-                  className="studio-trending-group"
-                >
+                <div ref={group === 0 ? firstGroup : undefined} key={group} className="studio-trending-group">
                   {row.map((template, index) => {
                     const instance = `${group}-${index}-${template.id}`;
                     return (
