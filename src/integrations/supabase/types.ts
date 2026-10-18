@@ -266,6 +266,74 @@ export type Database = {
         }
         Relationships: []
       }
+      brand_memories: {
+        Row: {
+          ai_analysis: Json
+          asset_urls: string[]
+          business_name: string | null
+          business_type: string | null
+          category: string | null
+          city: string | null
+          contact_channels: Json
+          created_at: string
+          differentiators: string[]
+          id: string
+          logo_url: string | null
+          onboarding_completed: boolean
+          onboarding_skipped: boolean
+          target_audiences: string[]
+          tone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_analysis?: Json
+          asset_urls?: string[]
+          business_name?: string | null
+          business_type?: string | null
+          category?: string | null
+          city?: string | null
+          contact_channels?: Json
+          created_at?: string
+          differentiators?: string[]
+          id?: string
+          logo_url?: string | null
+          onboarding_completed?: boolean
+          onboarding_skipped?: boolean
+          target_audiences?: string[]
+          tone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_analysis?: Json
+          asset_urls?: string[]
+          business_name?: string | null
+          business_type?: string | null
+          category?: string | null
+          city?: string | null
+          contact_channels?: Json
+          created_at?: string
+          differentiators?: string[]
+          id?: string
+          logo_url?: string | null
+          onboarding_completed?: boolean
+          onboarding_skipped?: boolean
+          target_audiences?: string[]
+          tone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "brand_memories_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       campaign_rewards: {
         Row: {
           campaign_id: string
@@ -2353,6 +2421,10 @@ export type Database = {
         }
         Returns: string
       }
+      admin_credit_utilization: {
+        Args: { p_from?: string; p_to?: string }
+        Returns: Json
+      }
       admin_get_user_identity: {
         Args: { p_user_ids: string[] }
         Returns: {
@@ -2419,6 +2491,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      should_show_brand_onboarding: { Args: never; Returns: boolean }
       update_combined_credit: {
         Args: { p_user_id: string }
         Returns: undefined
