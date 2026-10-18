@@ -71,10 +71,6 @@ function CreateButton({
   className?: string;
 }) {
   const variant = useVslVariant();
-  const label =
-    variant.source === "999"
-      ? "Start creating — " + variant.priceLabel
-      : "Create my first ad — " + variant.priceLabel;
   return (
     <AppLink
       className={"studio-button " + className}
@@ -90,7 +86,7 @@ function CreateButton({
         });
       }}
     >
-      {children ?? label}
+      {children ?? "Get started"}
       <ArrowUpRight size={17} aria-hidden="true" />
     </AppLink>
   );
@@ -116,9 +112,7 @@ function Header() {
           ))}
         </nav>
         <div className="studio-header-actions">
-          <CreateButton placement="header_cta_click">
-            Start creating
-          </CreateButton>
+          <CreateButton placement="header_cta_click">Get started</CreateButton>
           <button
             className="studio-menu-button"
             aria-label={open ? "Close navigation" : "Open navigation"}
@@ -348,6 +342,19 @@ export default function PremiumLanding() {
           <section className="studio-hero">
             <div className="studio-container">
               <Reveal className="studio-hero-copy">
+                <dl
+                  className="studio-trust-counts"
+                  aria-label="Businesses and creatives made with Zockto"
+                >
+                  <div>
+                    <dt>1,000+</dt>
+                    <dd>businesses</dd>
+                  </div>
+                  <div>
+                    <dt>12,000+</dt>
+                    <dd>creatives made</dd>
+                  </div>
+                </dl>
                 <h1>
                   A product photo.
                   <br />A whole <em>new story.</em>
@@ -368,19 +375,6 @@ export default function PremiumLanding() {
                   </a>
                 </div>
                 <p className="studio-hero-note">{variant.refundNote}</p>
-                <dl
-                  className="studio-trust-counts"
-                  aria-label="Businesses and creatives made with Zockto"
-                >
-                  <div>
-                    <dt>1,000+</dt>
-                    <dd>businesses using Zockto</dd>
-                  </div>
-                  <div>
-                    <dt>12,000+</dt>
-                    <dd>creatives made</dd>
-                  </div>
-                </dl>
               </Reveal>
             </div>
             <TrendingStyles />

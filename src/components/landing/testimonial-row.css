@@ -1,0 +1,121 @@
+.studio-testimonial-section {
+  overflow: hidden;
+}
+.studio-testimonial-viewport {
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0 12px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  scroll-behavior: auto;
+}
+.studio-testimonial-viewport::-webkit-scrollbar {
+  display: none;
+}
+.studio-testimonial-track {
+  display: flex;
+  width: max-content;
+}
+.studio-testimonial-group {
+  display: flex;
+  gap: 18px;
+  padding-right: 18px;
+  align-items: stretch;
+}
+.studio-testimonial-item {
+  display: flex;
+  flex: 0 0 350px;
+  width: 350px;
+}
+.studio-testimonial-item .studio-voice-story {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 290px;
+}
+.studio-testimonial-item .studio-voice-player {
+  margin-top: auto;
+}
+.studio-testimonial-quote {
+  display: flex;
+  flex-direction: column;
+  background: #fdfcf9;
+  border: 1px solid #dfdfd7;
+  border-radius: 8px;
+  padding: 23px;
+  width: 100%;
+  min-height: 290px;
+}
+.studio-text-review-label {
+  font-size: 9px;
+  color: #8a907e;
+  margin-bottom: 15px;
+}
+.studio-testimonial-quote blockquote {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #5a5e51;
+  margin: 0;
+}
+.studio-testimonial-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+.studio-testimonial-quote strong {
+  display: block;
+  font-weight: 500;
+  font-size: 12px;
+}
+.studio-testimonial-quote small {
+  display: block;
+  font-size: 10px;
+  color: #74756f;
+  margin-top: 3px;
+}
+.studio-testimonial-footer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;
+}
+.studio-testimonial-pause {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  min-height: 36px;
+  font-size: 10px;
+  color: #74756f;
+}
+@media (max-width: 760px) {
+  .studio-testimonial-item {
+    flex-basis: 290px;
+    width: 290px;
+  }
+  .studio-testimonial-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+  .studio-testimonial-quote {
+    padding: 20px;
+  }
+  .studio-testimonial-quote blockquote {
+    font-size: 13px;
+  }
+  .studio-testimonial-footer {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .studio-testimonial-pause {
+    position: static;
+  }
+}

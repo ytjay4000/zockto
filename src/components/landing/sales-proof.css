@@ -294,21 +294,22 @@
 .studio-trust-counts {
   display: flex;
   justify-content: center;
-  gap: 35px;
-  margin: 28px 0 0;
+  gap: 18px;
+  margin: 0 0 18px;
+  align-items: center;
 }
 .studio-trust-counts > div {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 6px;
 }
 .studio-trust-counts dt {
-  font-size: 19px;
-  letter-spacing: -0.6px;
+  font-size: 13px;
+  letter-spacing: -0.2px;
   font-weight: 500;
 }
 .studio-trust-counts dd {
-  font-size: 11px;
+  font-size: 10px;
   color: #73776a;
   margin: 0;
 }
@@ -398,8 +399,8 @@
     padding-top: 30px;
   }
   .studio-sales .studio-hero-actions {
-    flex-direction: column;
-    gap: 17px;
+    flex-direction: row;
+    gap: 20px;
   }
   .studio-sales .studio-hero-actions .studio-button {
     font-size: 12px;
@@ -483,18 +484,18 @@
     font-size: 9px;
   }
   .studio-trust-counts {
-    gap: 18px;
-    margin-top: 23px;
+    gap: 14px;
+    margin: 0 0 16px;
   }
   .studio-trust-counts > div {
-    flex-direction: column;
-    gap: 3px;
+    flex-direction: row;
+    gap: 5px;
   }
   .studio-trust-counts dt {
-    font-size: 21px;
+    font-size: 12px;
   }
   .studio-trust-counts dd {
-    font-size: 10px;
+    font-size: 9px;
   }
   .studio-landing .studio-hero-note {
     max-width: 330px;
@@ -511,4 +512,10 @@
 }
 .studio-sales .studio-hero {
   padding-top: 40px;
+}
+.studio-sales .studio-hero h1 {
+  margin-top: 0;
+}
+.studio-sales .studio-trending {
+  margin-top: 24px;
 }
