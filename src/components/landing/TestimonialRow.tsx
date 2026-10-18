@@ -329,11 +329,9 @@ function TestimonialRow({
               </>
             )}
           </h2>
-          <p>
-            {kind === "voice"
-              ? "Tap a voice note to hear their experience."
-              : "Feedback from founders, sellers and marketers."}
-          </p>
+          {kind === "written" && (
+            <p>Feedback from founders, sellers and marketers.</p>
+          )}
         </div>
       </div>
       <div

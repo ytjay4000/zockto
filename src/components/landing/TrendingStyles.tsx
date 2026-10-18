@@ -20,11 +20,10 @@ interface TrendingTemplate {
   name: string;
   poster: string;
   video: string;
+  // Illustrative layout value only. Keep the visible "Example" label until
+  // this is replaced with verified per-style campaign performance.
+  exampleRoas: string;
 }
-
-// Layout placeholder only, not measured campaign performance. Keep the visible
-// "Example" label until this is replaced with verified per-style campaign data.
-const EXAMPLE_ROAS = "3.4×";
 
 function TrendingCard({
   template,
@@ -191,11 +190,11 @@ function TrendingCard({
       <div className="studio-trending-footer">
         <span
           className="studio-trending-metric"
-          aria-label={`Example ROAS ${EXAMPLE_ROAS}, illustrative only, not a measured campaign result`}
+          aria-label={`Example ROAS ${template.exampleRoas}, illustrative only, not a measured campaign result`}
           title="Illustrative example only—not a measured campaign result."
         >
           <span className="studio-trending-metric-example">Example</span>{" "}
-          <strong>{EXAMPLE_ROAS}</strong> ROAS
+          <strong>{template.exampleRoas}</strong> ROAS
         </span>
         <a
           href={templateUrl.toString()}
@@ -247,7 +246,7 @@ export default function TrendingStyles() {
         .order("trend_rank", { ascending: true })
         .abortSignal(signal);
       if (error) throw error;
-      return (data ?? []).flatMap((row) =>
+      return (data ?? []).flatMap((row, index) =>
         row.preview_image && row.video_url
           ? [
               {
@@ -255,6 +254,9 @@ export default function TrendingStyles() {
                 name: row.name ?? "Trending style",
                 poster: row.preview_image,
                 video: row.video_url,
+                // Assign before duplicating the carousel, so each style keeps
+                // its own example value across all repeated cards.
+                exampleRoas: `${(2.6 + index * 0.3).toFixed(1)}×`,
               },
             ]
           : [],
