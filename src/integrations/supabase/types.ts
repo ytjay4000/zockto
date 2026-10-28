@@ -14,6 +14,187 @@ export type Database = {
   }
   public: {
     Tables: {
+      ad_generation_events: {
+        Row: {
+          details: Json
+          event: string
+          id: string
+          occurred_at: string
+          request_id: string
+          stage: string
+          status: string
+        }
+        Insert: {
+          details?: Json
+          event: string
+          id?: string
+          occurred_at?: string
+          request_id: string
+          stage: string
+          status: string
+        }
+        Update: {
+          details?: Json
+          event?: string
+          id?: string
+          occurred_at?: string
+          request_id?: string
+          stage?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_generation_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "ad_generation_jobs"
+            referencedColumns: ["request_id"]
+          },
+        ]
+      }
+      ad_generation_jobs: {
+        Row: {
+          attempts: number
+          available_at: string
+          context: Json
+          created_at: string
+          cursor: number
+          data: Json
+          diagnostic: Json | null
+          error: string | null
+          kind: string
+          lease_expires_at: string | null
+          lease_id: string | null
+          payload: Json
+          request_id: string
+          result: Json | null
+          retries: number
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          available_at?: string
+          context: Json
+          created_at?: string
+          cursor?: number
+          data?: Json
+          diagnostic?: Json | null
+          error?: string | null
+          kind: string
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          payload: Json
+          request_id: string
+          result?: Json | null
+          retries?: number
+          stage: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          available_at?: string
+          context?: Json
+          created_at?: string
+          cursor?: number
+          data?: Json
+          diagnostic?: Json | null
+          error?: string | null
+          kind?: string
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          payload?: Json
+          request_id?: string
+          result?: Json | null
+          retries?: number
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ad_generation_prompt_versions: {
+        Row: {
+          content: string
+          created_at: string
+          created_by: string | null
+          key: string
+          version: number
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          created_by?: string | null
+          key: string
+          version: number
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          key?: string
+          version?: number
+        }
+        Relationships: []
+      }
+      ad_generation_prompts: {
+        Row: {
+          key: string
+          updated_at: string
+          updated_by: string | null
+          version: number
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+          version: number
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_generation_prompts_key_version_fkey"
+            columns: ["key", "version"]
+            isOneToOne: false
+            referencedRelation: "ad_generation_prompt_versions"
+            referencedColumns: ["key", "version"]
+          },
+        ]
+      }
+      ad_generation_worker_config: {
+        Row: {
+          enabled: boolean
+          function_url: string
+          id: boolean
+          max_concurrency: number
+          token_hash: string
+        }
+        Insert: {
+          enabled?: boolean
+          function_url: string
+          id?: boolean
+          max_concurrency?: number
+          token_hash: string
+        }
+        Update: {
+          enabled?: boolean
+          function_url?: string
+          id?: boolean
+          max_concurrency?: number
+          token_hash?: string
+        }
+        Relationships: []
+      }
       admin_feedback: {
         Row: {
           added_by: string | null
@@ -689,6 +870,113 @@ export type Database = {
           },
         ]
       }
+      image_generation_events: {
+        Row: {
+          details: Json
+          event: string
+          id: string
+          occurred_at: string
+          request_id: string
+          stage: string
+          status: string
+        }
+        Insert: {
+          details?: Json
+          event: string
+          id?: string
+          occurred_at?: string
+          request_id: string
+          stage: string
+          status: string
+        }
+        Update: {
+          details?: Json
+          event?: string
+          id?: string
+          occurred_at?: string
+          request_id?: string
+          stage?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "image_generation_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "image_generation_jobs"
+            referencedColumns: ["request_id"]
+          },
+        ]
+      }
+      image_generation_jobs: {
+        Row: {
+          attempts: number
+          available_at: string
+          context: Json
+          created_at: string
+          cursor: number
+          data: Json
+          debit: Json | null
+          diagnostic: Json | null
+          error: string | null
+          free_image: boolean
+          lease_expires_at: string | null
+          lease_id: string | null
+          payload: Json
+          refunded_at: string | null
+          request_id: string
+          result: Json | null
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          available_at?: string
+          context: Json
+          created_at?: string
+          cursor?: number
+          data?: Json
+          debit?: Json | null
+          diagnostic?: Json | null
+          error?: string | null
+          free_image: boolean
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          payload: Json
+          refunded_at?: string | null
+          request_id: string
+          result?: Json | null
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          available_at?: string
+          context?: Json
+          created_at?: string
+          cursor?: number
+          data?: Json
+          debit?: Json | null
+          diagnostic?: Json | null
+          error?: string | null
+          free_image?: boolean
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          payload?: Json
+          refunded_at?: string | null
+          request_id?: string
+          result?: Json | null
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       imgresult: {
         Row: {
           aspect_ratio: string | null
@@ -769,6 +1057,7 @@ export type Database = {
           completed_at: string | null
           created_at: string
           display_message: string | null
+          generation_request_id: string | null
           id: string
           imgid: string
           percentage: number | null
@@ -785,6 +1074,7 @@ export type Database = {
           completed_at?: string | null
           created_at?: string
           display_message?: string | null
+          generation_request_id?: string | null
           id?: string
           imgid?: string
           percentage?: number | null
@@ -801,6 +1091,7 @@ export type Database = {
           completed_at?: string | null
           created_at?: string
           display_message?: string | null
+          generation_request_id?: string | null
           id?: string
           imgid?: string
           percentage?: number | null
@@ -810,7 +1101,15 @@ export type Database = {
           user_id?: string
           user_type?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "imgupscalerresult_generation_request_id_fkey"
+            columns: ["generation_request_id"]
+            isOneToOne: true
+            referencedRelation: "image_generation_jobs"
+            referencedColumns: ["request_id"]
+          },
+        ]
       }
       leads: {
         Row: {
@@ -1044,6 +1343,59 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      product_ad_audio_previews: {
+        Row: {
+          attempts: number
+          audio_url: string | null
+          created_at: string
+          error: string | null
+          id: string
+          object_key: string | null
+          request: Json
+          revision: string
+          status: string
+          storyboard_request_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          audio_url?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          object_key?: string | null
+          request: Json
+          revision: string
+          status?: string
+          storyboard_request_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          audio_url?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          object_key?: string | null
+          request?: Json
+          revision?: string
+          status?: string
+          storyboard_request_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_ad_audio_previews_storyboard_request_id_fkey"
+            columns: ["storyboard_request_id"]
+            isOneToOne: false
+            referencedRelation: "storyboard_results"
+            referencedColumns: ["request_id"]
+          },
+        ]
       }
       product_ad_templates: {
         Row: {
@@ -1600,6 +1952,7 @@ export type Database = {
           type: string | null
           user_type: string | null
           video_duration: number | null
+          video_editing_id: string | null
           video_id: string
           video_info: Json | null
           watermark_url: string | null
@@ -1640,6 +1993,7 @@ export type Database = {
           type?: string | null
           user_type?: string | null
           video_duration?: number | null
+          video_editing_id?: string | null
           video_id?: string
           video_info?: Json | null
           watermark_url?: string | null
@@ -1680,6 +2034,7 @@ export type Database = {
           type?: string | null
           user_type?: string | null
           video_duration?: number | null
+          video_editing_id?: string | null
           video_id?: string
           video_info?: Json | null
           watermark_url?: string | null
@@ -1691,6 +2046,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "result_video_editing_owner_fkey"
+            columns: ["video_editing_id", "id"]
+            isOneToOne: false
+            referencedRelation: "video_editing_sources"
+            referencedColumns: ["id", "user_id"]
           },
         ]
       }
@@ -1789,6 +2151,66 @@ export type Database = {
         }
         Relationships: []
       }
+      support_ai_turns: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          error_code: string | null
+          id: string
+          lease_expires_at: string
+          model: string
+          prompt_version: number
+          request_id: string
+          status: string
+          ticket_id: string
+          user_id: string
+          user_message_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          error_code?: string | null
+          id?: string
+          lease_expires_at?: string
+          model?: string
+          prompt_version?: number
+          request_id: string
+          status?: string
+          ticket_id: string
+          user_id: string
+          user_message_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          error_code?: string | null
+          id?: string
+          lease_expires_at?: string
+          model?: string
+          prompt_version?: number
+          request_id?: string
+          status?: string
+          ticket_id?: string
+          user_id?: string
+          user_message_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_ai_turns_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "support_tickets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "support_ai_turns_user_message_id_fkey"
+            columns: ["user_message_id"]
+            isOneToOne: false
+            referencedRelation: "support_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       support_events: {
         Row: {
           actor_id: string | null
@@ -1834,6 +2256,7 @@ export type Database = {
           created_at: string
           id: string
           is_internal_note: boolean
+          metadata: Json
           sender_id: string | null
           sender_role: string
           ticket_id: string
@@ -1844,6 +2267,7 @@ export type Database = {
           created_at?: string
           id?: string
           is_internal_note?: boolean
+          metadata?: Json
           sender_id?: string | null
           sender_role: string
           ticket_id: string
@@ -1854,6 +2278,7 @@ export type Database = {
           created_at?: string
           id?: string
           is_internal_note?: boolean
+          metadata?: Json
           sender_id?: string | null
           sender_role?: string
           ticket_id?: string
@@ -1870,14 +2295,21 @@ export type Database = {
       }
       support_tickets: {
         Row: {
+          ai_reply_state: string
+          ai_summary: string | null
           category: string
           completed_at: string | null
           created_at: string
           description: string
+          handed_off_at: string | null
+          handling_mode: string
+          handoff_reason: string | null
           id: string
+          image_id: string | null
           issue_detail: string | null
           issue_type: string | null
           last_admin_reply_at: string | null
+          last_ai_reply_at: string | null
           priority: string
           status: string
           ticket_number: string
@@ -1887,14 +2319,21 @@ export type Database = {
           video_id: string | null
         }
         Insert: {
+          ai_reply_state?: string
+          ai_summary?: string | null
           category: string
           completed_at?: string | null
           created_at?: string
           description?: string
+          handed_off_at?: string | null
+          handling_mode?: string
+          handoff_reason?: string | null
           id?: string
+          image_id?: string | null
           issue_detail?: string | null
           issue_type?: string | null
           last_admin_reply_at?: string | null
+          last_ai_reply_at?: string | null
           priority?: string
           status?: string
           ticket_number: string
@@ -1904,14 +2343,21 @@ export type Database = {
           video_id?: string | null
         }
         Update: {
+          ai_reply_state?: string
+          ai_summary?: string | null
           category?: string
           completed_at?: string | null
           created_at?: string
           description?: string
+          handed_off_at?: string | null
+          handling_mode?: string
+          handoff_reason?: string | null
           id?: string
+          image_id?: string | null
           issue_detail?: string | null
           issue_type?: string | null
           last_admin_reply_at?: string | null
+          last_ai_reply_at?: string | null
           priority?: string
           status?: string
           ticket_number?: string
@@ -1921,6 +2367,187 @@ export type Database = {
           video_id?: string | null
         }
         Relationships: []
+      }
+      talking_video_config: {
+        Row: {
+          enabled: boolean
+          id: boolean
+          worker_url: string
+          workflow: Json
+        }
+        Insert: {
+          enabled?: boolean
+          id?: boolean
+          worker_url?: string
+          workflow?: Json
+        }
+        Update: {
+          enabled?: boolean
+          id?: boolean
+          worker_url?: string
+          workflow?: Json
+        }
+        Relationships: []
+      }
+      talking_video_jobs: {
+        Row: {
+          artifacts: Json
+          attempts: number
+          available_at: string
+          created_at: string
+          debit: Json
+          error_code: string | null
+          id: string
+          input: Json
+          lease_expires_at: string | null
+          lease_id: string | null
+          provider_output_url: string | null
+          provider_task_id: string | null
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          video_id: string
+        }
+        Insert: {
+          artifacts?: Json
+          attempts?: number
+          available_at?: string
+          created_at?: string
+          debit: Json
+          error_code?: string | null
+          id: string
+          input: Json
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          provider_output_url?: string | null
+          provider_task_id?: string | null
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          video_id: string
+        }
+        Update: {
+          artifacts?: Json
+          attempts?: number
+          available_at?: string
+          created_at?: string
+          debit?: Json
+          error_code?: string | null
+          id?: string
+          input?: Json
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          provider_output_url?: string | null
+          provider_task_id?: string | null
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "talking_video_jobs_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: true
+            referencedRelation: "result"
+            referencedColumns: ["video_id"]
+          },
+        ]
+      }
+      talking_voice_clones: {
+        Row: {
+          consent_at: string
+          created_at: string
+          error_message: string | null
+          id: string
+          name: string
+          provider_voice_id: string | null
+          sample_duration: number | null
+          sample_path: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          consent_at: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          name: string
+          provider_voice_id?: string | null
+          sample_duration?: number | null
+          sample_path?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          consent_at?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          name?: string
+          provider_voice_id?: string | null
+          sample_duration?: number | null
+          sample_path?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      talking_voice_requests: {
+        Row: {
+          clone_id: string | null
+          created_at: string
+          debit: Json | null
+          error_message: string | null
+          id: string
+          input: Json
+          kind: string
+          output: Json | null
+          refunded_at: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          clone_id?: string | null
+          created_at?: string
+          debit?: Json | null
+          error_message?: string | null
+          id: string
+          input: Json
+          kind: string
+          output?: Json | null
+          refunded_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          clone_id?: string | null
+          created_at?: string
+          debit?: Json | null
+          error_message?: string | null
+          id?: string
+          input?: Json
+          kind?: string
+          output?: Json | null
+          refunded_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "talking_voice_requests_clone_id_fkey"
+            columns: ["clone_id"]
+            isOneToOne: false
+            referencedRelation: "talking_voice_clones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       transcript_changes: {
         Row: {
@@ -2204,6 +2831,668 @@ export type Database = {
         }
         Relationships: []
       }
+      video_audio_fix_jobs: {
+        Row: {
+          artifacts: Json
+          attempts: number
+          available_at: string
+          base_version_id: string | null
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          input: Json
+          lease_expires_at: string | null
+          lease_id: string | null
+          pipeline_version: string
+          pool: string
+          progress: number
+          project_id: string
+          project_revision: number
+          request_id: string
+          source_id: string
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          worker_id: string | null
+        }
+        Insert: {
+          artifacts?: Json
+          attempts?: number
+          available_at?: string
+          base_version_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          input: Json
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          pipeline_version?: string
+          pool?: string
+          progress?: number
+          project_id: string
+          project_revision: number
+          request_id: string
+          source_id: string
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          worker_id?: string | null
+        }
+        Update: {
+          artifacts?: Json
+          attempts?: number
+          available_at?: string
+          base_version_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          input?: Json
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          pipeline_version?: string
+          pool?: string
+          progress?: number
+          project_id?: string
+          project_revision?: number
+          request_id?: string
+          source_id?: string
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          worker_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_audio_fix_jobs_base_version_id_fkey"
+            columns: ["base_version_id"]
+            isOneToOne: false
+            referencedRelation: "video_audio_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_audio_fix_jobs_project_id_user_id_fkey"
+            columns: ["project_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editor_projects"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "video_audio_fix_jobs_source_id_user_id_fkey"
+            columns: ["source_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editing_sources"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "video_audio_fix_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_audio_fix_jobs_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "video_audio_fix_workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_audio_fix_operations: {
+        Row: {
+          created_at: string
+          job_id: string
+          operation_key: string
+          result: Json | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          job_id: string
+          operation_key: string
+          result?: Json | null
+          status: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          job_id?: string
+          operation_key?: string
+          result?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_audio_fix_operations_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "video_audio_fix_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_audio_fix_workers: {
+        Row: {
+          enabled: boolean
+          expires_at: string
+          id: string
+          last_seen_at: string | null
+          name: string
+          pipeline_version: string
+          pool: string
+          token_hash: string
+        }
+        Insert: {
+          enabled?: boolean
+          expires_at?: string
+          id?: string
+          last_seen_at?: string | null
+          name: string
+          pipeline_version?: string
+          pool?: string
+          token_hash: string
+        }
+        Update: {
+          enabled?: boolean
+          expires_at?: string
+          id?: string
+          last_seen_at?: string | null
+          name?: string
+          pipeline_version?: string
+          pool?: string
+          token_hash?: string
+        }
+        Relationships: []
+      }
+      video_audio_source_cache: {
+        Row: {
+          analysis: Json
+          created_at: string
+          fingerprint: string
+          pipeline_version: string
+          source_id: string
+        }
+        Insert: {
+          analysis: Json
+          created_at?: string
+          fingerprint: string
+          pipeline_version?: string
+          source_id: string
+        }
+        Update: {
+          analysis?: Json
+          created_at?: string
+          fingerprint?: string
+          pipeline_version?: string
+          source_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_audio_source_cache_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "video_editing_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_audio_versions: {
+        Row: {
+          captions: Json
+          captions_before: Json
+          changes: Json
+          created_at: string
+          duration_seconds: number
+          id: string
+          job_id: string
+          master_path: string
+          media_id: string
+          parent_version_id: string | null
+          project_id: string
+          source_id: string
+          user_id: string
+          words: Json
+        }
+        Insert: {
+          captions: Json
+          captions_before: Json
+          changes: Json
+          created_at?: string
+          duration_seconds: number
+          id?: string
+          job_id: string
+          master_path: string
+          media_id: string
+          parent_version_id?: string | null
+          project_id: string
+          source_id: string
+          user_id: string
+          words: Json
+        }
+        Update: {
+          captions?: Json
+          captions_before?: Json
+          changes?: Json
+          created_at?: string
+          duration_seconds?: number
+          id?: string
+          job_id?: string
+          master_path?: string
+          media_id?: string
+          parent_version_id?: string | null
+          project_id?: string
+          source_id?: string
+          user_id?: string
+          words?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_audio_versions_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: true
+            referencedRelation: "video_audio_fix_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_audio_versions_media_id_fkey"
+            columns: ["media_id"]
+            isOneToOne: false
+            referencedRelation: "video_editor_media"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_audio_versions_parent_version_id_fkey"
+            columns: ["parent_version_id"]
+            isOneToOne: false
+            referencedRelation: "video_audio_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_audio_versions_project_id_user_id_fkey"
+            columns: ["project_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editor_projects"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "video_audio_versions_source_id_user_id_fkey"
+            columns: ["source_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editing_sources"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "video_audio_versions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_editing_sources: {
+        Row: {
+          aspect_ratio: string | null
+          audio_settings: Json
+          bg_music_url: string | null
+          caption_ass_url: string | null
+          caption_json: Json | null
+          captions_enabled: boolean
+          created_at: string
+          cta_duration_seconds: number
+          cta_image_url: string | null
+          duration_seconds: number | null
+          fps: number | null
+          height: number | null
+          id: string
+          language_code: string | null
+          metadata: Json
+          raw_video_url: string
+          render_settings: Json
+          transcript_original: string | null
+          updated_at: string
+          user_id: string
+          voiceover_url: string | null
+          width: number | null
+        }
+        Insert: {
+          aspect_ratio?: string | null
+          audio_settings?: Json
+          bg_music_url?: string | null
+          caption_ass_url?: string | null
+          caption_json?: Json | null
+          captions_enabled?: boolean
+          created_at?: string
+          cta_duration_seconds?: number
+          cta_image_url?: string | null
+          duration_seconds?: number | null
+          fps?: number | null
+          height?: number | null
+          id?: string
+          language_code?: string | null
+          metadata?: Json
+          raw_video_url: string
+          render_settings?: Json
+          transcript_original?: string | null
+          updated_at?: string
+          user_id: string
+          voiceover_url?: string | null
+          width?: number | null
+        }
+        Update: {
+          aspect_ratio?: string | null
+          audio_settings?: Json
+          bg_music_url?: string | null
+          caption_ass_url?: string | null
+          caption_json?: Json | null
+          captions_enabled?: boolean
+          created_at?: string
+          cta_duration_seconds?: number
+          cta_image_url?: string | null
+          duration_seconds?: number | null
+          fps?: number | null
+          height?: number | null
+          id?: string
+          language_code?: string | null
+          metadata?: Json
+          raw_video_url?: string
+          render_settings?: Json
+          transcript_original?: string | null
+          updated_at?: string
+          user_id?: string
+          voiceover_url?: string | null
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_editing_sources_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_editor_media: {
+        Row: {
+          byte_size: number
+          content_type: string
+          created_at: string
+          duration_seconds: number | null
+          file_name: string
+          height: number | null
+          id: string
+          kind: string
+          project_id: string
+          status: string
+          storage_path: string
+          updated_at: string
+          url: string | null
+          user_id: string
+          width: number | null
+        }
+        Insert: {
+          byte_size: number
+          content_type: string
+          created_at?: string
+          duration_seconds?: number | null
+          file_name: string
+          height?: number | null
+          id?: string
+          kind: string
+          project_id: string
+          status?: string
+          storage_path: string
+          updated_at?: string
+          url?: string | null
+          user_id: string
+          width?: number | null
+        }
+        Update: {
+          byte_size?: number
+          content_type?: string
+          created_at?: string
+          duration_seconds?: number | null
+          file_name?: string
+          height?: number | null
+          id?: string
+          kind?: string
+          project_id?: string
+          status?: string
+          storage_path?: string
+          updated_at?: string
+          url?: string | null
+          user_id?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_editor_media_project_id_user_id_fkey"
+            columns: ["project_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editor_projects"
+            referencedColumns: ["id", "user_id"]
+          },
+        ]
+      }
+      video_editor_projects: {
+        Row: {
+          created_at: string
+          document: Json
+          id: string
+          revision: number
+          source_id: string
+          updated_at: string
+          user_id: string
+          video_id: string
+        }
+        Insert: {
+          created_at?: string
+          document: Json
+          id?: string
+          revision?: number
+          source_id: string
+          updated_at?: string
+          user_id: string
+          video_id: string
+        }
+        Update: {
+          created_at?: string
+          document?: Json
+          id?: string
+          revision?: number
+          source_id?: string
+          updated_at?: string
+          user_id?: string
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_editor_projects_source_id_user_id_fkey"
+            columns: ["source_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editing_sources"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "video_editor_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_editor_projects_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "result"
+            referencedColumns: ["video_id"]
+          },
+        ]
+      }
+      video_export_jobs: {
+        Row: {
+          attempts: number
+          available_at: string
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          expected_bytes: number | null
+          id: string
+          lease_expires_at: string | null
+          lease_id: string | null
+          manifest: Json
+          output_bytes: number | null
+          output_duration: number | null
+          output_height: number | null
+          output_path: string | null
+          output_url: string | null
+          output_width: number | null
+          pool: string
+          progress: number
+          project_id: string
+          project_revision: number
+          quality: string
+          renderer_version: string
+          snapshot: Json
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          worker_id: string | null
+        }
+        Insert: {
+          attempts?: number
+          available_at?: string
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          expected_bytes?: number | null
+          id?: string
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          manifest: Json
+          output_bytes?: number | null
+          output_duration?: number | null
+          output_height?: number | null
+          output_path?: string | null
+          output_url?: string | null
+          output_width?: number | null
+          pool?: string
+          progress?: number
+          project_id: string
+          project_revision: number
+          quality: string
+          renderer_version?: string
+          snapshot: Json
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          worker_id?: string | null
+        }
+        Update: {
+          attempts?: number
+          available_at?: string
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          expected_bytes?: number | null
+          id?: string
+          lease_expires_at?: string | null
+          lease_id?: string | null
+          manifest?: Json
+          output_bytes?: number | null
+          output_duration?: number | null
+          output_height?: number | null
+          output_path?: string | null
+          output_url?: string | null
+          output_width?: number | null
+          pool?: string
+          progress?: number
+          project_id?: string
+          project_revision?: number
+          quality?: string
+          renderer_version?: string
+          snapshot?: Json
+          stage?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          worker_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_export_jobs_project_id_user_id_fkey"
+            columns: ["project_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "video_editor_projects"
+            referencedColumns: ["id", "user_id"]
+          },
+          {
+            foreignKeyName: "video_export_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_export_jobs_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "video_export_workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_export_workers: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          expires_at: string
+          id: string
+          last_seen_at: string | null
+          max_quality: string
+          name: string
+          pool: string
+          renderer_version: string
+          token_hash: string
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          expires_at?: string
+          id?: string
+          last_seen_at?: string | null
+          max_quality?: string
+          name: string
+          pool?: string
+          renderer_version?: string
+          token_hash: string
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          expires_at?: string
+          id?: string
+          last_seen_at?: string | null
+          max_quality?: string
+          name?: string
+          pool?: string
+          renderer_version?: string
+          token_hash?: string
+        }
+        Relationships: []
+      }
       video_reports: {
         Row: {
           created_at: string
@@ -2402,7 +3691,23 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      ad_generation_admin_jobs: {
+        Row: {
+          attempts: number | null
+          created_at: string | null
+          diagnostic: Json | null
+          error: string | null
+          kind: string | null
+          request_id: string | null
+          retries: number | null
+          source: string | null
+          stage: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       add_permanent_credits: {
@@ -2432,6 +3737,140 @@ export type Database = {
           user_id: string
         }[]
       }
+      claim_ad_generation: {
+        Args: { p_request: string }
+        Returns: {
+          attempts: number
+          available_at: string
+          context: Json
+          created_at: string
+          cursor: number
+          data: Json
+          diagnostic: Json | null
+          error: string | null
+          kind: string
+          lease_expires_at: string | null
+          lease_id: string | null
+          payload: Json
+          request_id: string
+          result: Json | null
+          retries: number
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "ad_generation_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      claim_image_generation: {
+        Args: { p_request: string }
+        Returns: {
+          attempts: number
+          available_at: string
+          context: Json
+          created_at: string
+          cursor: number
+          data: Json
+          debit: Json | null
+          diagnostic: Json | null
+          error: string | null
+          free_image: boolean
+          lease_expires_at: string | null
+          lease_id: string | null
+          payload: Json
+          refunded_at: string | null
+          request_id: string
+          result: Json | null
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "image_generation_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      claim_video_audio_fix: {
+        Args: { p_worker: string }
+        Returns: {
+          artifacts: Json
+          attempts: number
+          available_at: string
+          base_version_id: string | null
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          input: Json
+          lease_expires_at: string | null
+          lease_id: string | null
+          pipeline_version: string
+          pool: string
+          progress: number
+          project_id: string
+          project_revision: number
+          request_id: string
+          source_id: string
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          worker_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "video_audio_fix_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      claim_video_export: {
+        Args: { p_worker: string }
+        Returns: {
+          attempts: number
+          available_at: string
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          expected_bytes: number | null
+          id: string
+          lease_expires_at: string | null
+          lease_id: string | null
+          manifest: Json
+          output_bytes: number | null
+          output_duration: number | null
+          output_height: number | null
+          output_path: string | null
+          output_url: string | null
+          output_width: number | null
+          pool: string
+          progress: number
+          project_id: string
+          project_revision: number
+          quality: string
+          renderer_version: string
+          snapshot: Json
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          worker_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "video_export_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       consume_first_ad_entitlement: {
         Args: { p_user_id: string; p_video_id: string }
         Returns: Json
@@ -2449,7 +3888,199 @@ export type Database = {
         Args: { p_amount: number; p_user_id: string }
         Returns: Json
       }
+      dispatch_ad_generation: { Args: { p_request?: string }; Returns: number }
+      dispatch_image_generation: {
+        Args: { p_request?: string }
+        Returns: number
+      }
+      dispatch_talking_videos: { Args: { p_id?: string }; Returns: number }
+      enqueue_ad_generation: {
+        Args: {
+          p_context: Json
+          p_kind: string
+          p_payload: Json
+          p_request: string
+          p_user: string
+        }
+        Returns: {
+          attempts: number
+          available_at: string
+          context: Json
+          created_at: string
+          cursor: number
+          data: Json
+          diagnostic: Json | null
+          error: string | null
+          kind: string
+          lease_expires_at: string | null
+          lease_id: string | null
+          payload: Json
+          request_id: string
+          result: Json | null
+          retries: number
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "ad_generation_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      enqueue_image_generation: {
+        Args: {
+          p_context: Json
+          p_legacy?: boolean
+          p_payload: Json
+          p_request: string
+          p_user: string
+        }
+        Returns: {
+          attempts: number
+          available_at: string
+          context: Json
+          created_at: string
+          cursor: number
+          data: Json
+          debit: Json | null
+          diagnostic: Json | null
+          error: string | null
+          free_image: boolean
+          lease_expires_at: string | null
+          lease_id: string | null
+          payload: Json
+          refunded_at: string | null
+          request_id: string
+          result: Json | null
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "image_generation_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      enqueue_video_audio_fix: {
+        Args: {
+          p_base?: string
+          p_input: Json
+          p_project: string
+          p_request: string
+          p_revision: number
+          p_user: string
+        }
+        Returns: {
+          artifacts: Json
+          attempts: number
+          available_at: string
+          base_version_id: string | null
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          input: Json
+          lease_expires_at: string | null
+          lease_id: string | null
+          pipeline_version: string
+          pool: string
+          progress: number
+          project_id: string
+          project_revision: number
+          request_id: string
+          source_id: string
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          worker_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "video_audio_fix_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      enqueue_video_export: {
+        Args: {
+          p_manifest: Json
+          p_project: string
+          p_quality: string
+          p_retry?: boolean
+          p_revision: number
+          p_snapshot: Json
+          p_user: string
+        }
+        Returns: {
+          attempts: number
+          available_at: string
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          expected_bytes: number | null
+          id: string
+          lease_expires_at: string | null
+          lease_id: string | null
+          manifest: Json
+          output_bytes: number | null
+          output_duration: number | null
+          output_height: number | null
+          output_path: string | null
+          output_url: string | null
+          output_width: number | null
+          pool: string
+          progress: number
+          project_id: string
+          project_revision: number
+          quality: string
+          renderer_version: string
+          snapshot: Json
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          worker_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "video_export_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       expire_plan_credits: { Args: never; Returns: undefined }
+      finish_ad_generation: {
+        Args: {
+          p_data: Json
+          p_diagnostic?: Json
+          p_error?: string
+          p_lease: string
+          p_request: string
+          p_result?: Json
+          p_retry?: boolean
+          p_stage: string
+        }
+        Returns: boolean
+      }
+      finish_image_generation: {
+        Args: {
+          p_data?: Json
+          p_diagnostic?: Json
+          p_error?: string
+          p_lease: string
+          p_request: string
+          p_result?: Json
+          p_retry?: boolean
+        }
+        Returns: boolean
+      }
       get_all_auth_user_emails: {
         Args: never
         Returns: {
@@ -2467,15 +4098,109 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_ad_generation_worker: { Args: { p_token: string }; Returns: boolean }
       is_current_user_admin: { Args: never; Returns: boolean }
       process_video_refund: {
         Args: { p_user_id: string; p_video_id: string }
         Returns: Json
       }
+      publish_video_audio_fix: {
+        Args: {
+          p_bytes: number
+          p_captions: Json
+          p_duration: number
+          p_job: string
+          p_lease: string
+          p_master: string
+          p_media: string
+          p_path: string
+          p_url: string
+          p_words: Json
+        }
+        Returns: string
+      }
+      refund_image_generation: {
+        Args: { p_request: string }
+        Returns: undefined
+      }
       remove_plan_credits: { Args: { p_user_id: string }; Returns: undefined }
+      reserve_product_ad_audio_preview: {
+        Args: {
+          p_request: Json
+          p_retry?: boolean
+          p_revision: string
+          p_storyboard_id: string
+          p_user_id: string
+        }
+        Returns: {
+          attempts: number
+          audio_url: string | null
+          created_at: string
+          error: string | null
+          id: string
+          object_key: string | null
+          request: Json
+          revision: string
+          status: string
+          storyboard_request_id: string
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "product_ad_audio_previews"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      reserve_video_editor_media: {
+        Args: {
+          p_byte_size: number
+          p_content_type: string
+          p_duration?: number
+          p_file_name: string
+          p_height?: number
+          p_kind: string
+          p_project_id: string
+          p_user_id: string
+          p_width?: number
+        }
+        Returns: {
+          byte_size: number
+          content_type: string
+          created_at: string
+          duration_seconds: number | null
+          file_name: string
+          height: number | null
+          id: string
+          kind: string
+          project_id: string
+          status: string
+          storage_path: string
+          updated_at: string
+          url: string | null
+          user_id: string
+          width: number | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "video_editor_media"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       reset_freepoint: { Args: never; Returns: undefined }
       restore_first_ad_entitlement: {
         Args: { p_user_id: string; p_video_id: string }
+        Returns: Json
+      }
+      save_ad_generation_prompt: {
+        Args: {
+          p_content: string
+          p_key: string
+          p_user: string
+          p_version: number
+        }
         Returns: Json
       }
       set_my_lead_type: { Args: { p_lead_type: string }; Returns: string }
@@ -2492,6 +4217,129 @@ export type Database = {
         Returns: undefined
       }
       should_show_brand_onboarding: { Args: never; Returns: boolean }
+      support_assistant_finish: {
+        Args: {
+          p_error?: string
+          p_metadata: Json
+          p_reason: string
+          p_reply: string
+          p_route: string
+          p_summary: string
+          p_turn: string
+        }
+        Returns: Json
+      }
+      support_assistant_handoff: {
+        Args: {
+          p_admin?: boolean
+          p_resolve?: boolean
+          p_ticket: string
+          p_user: string
+        }
+        Returns: Json
+      }
+      support_assistant_recover: { Args: { p_user: string }; Returns: number }
+      support_assistant_recover_all: { Args: never; Returns: number }
+      support_assistant_submit: {
+        Args: {
+          p_asset: string
+          p_attachment: string
+          p_body: string
+          p_category: string
+          p_request: string
+          p_ticket: string
+          p_user: string
+        }
+        Returns: Json
+      }
+      talking_restore_debit: {
+        Args: { p_debit: Json; p_user: string }
+        Returns: undefined
+      }
+      talking_video_checkpoint: {
+        Args: {
+          p_artifacts: Json
+          p_complete?: Json
+          p_error?: string
+          p_id: string
+          p_lease: string
+          p_output?: string
+          p_stage: string
+          p_task?: string
+          p_uncertain?: boolean
+        }
+        Returns: boolean
+      }
+      talking_video_claim: {
+        Args: { p_id: string }
+        Returns: {
+          artifacts: Json
+          attempts: number
+          available_at: string
+          created_at: string
+          debit: Json
+          error_code: string | null
+          id: string
+          input: Json
+          lease_expires_at: string | null
+          lease_id: string | null
+          provider_output_url: string | null
+          provider_task_id: string | null
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          video_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "talking_video_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      talking_video_enqueue: {
+        Args: { p_id: string; p_input: Json; p_user: string }
+        Returns: {
+          artifacts: Json
+          attempts: number
+          available_at: string
+          created_at: string
+          debit: Json
+          error_code: string | null
+          id: string
+          input: Json
+          lease_expires_at: string | null
+          lease_id: string | null
+          provider_output_url: string | null
+          provider_task_id: string | null
+          stage: string
+          status: string
+          updated_at: string
+          user_id: string
+          video_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "talking_video_jobs"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      talking_voice_begin: {
+        Args: { p_id: string; p_input: Json; p_kind: string; p_user: string }
+        Returns: Json
+      }
+      talking_voice_finish: {
+        Args: {
+          p_error?: string
+          p_id: string
+          p_output?: Json
+          p_uncertain?: boolean
+        }
+        Returns: undefined
+      }
+      talking_voice_recover: { Args: never; Returns: undefined }
       update_combined_credit: {
         Args: { p_user_id: string }
         Returns: undefined
