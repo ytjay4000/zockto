@@ -20,6 +20,9 @@ import "./premium-landing.css";
 import TrendingStyles from "./TrendingStyles";
 import SalesProof from "./SalesProof";
 import PlatformLogos from "./PlatformLogos";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
+import { isInternationalVisitor } from "@/data/internationalLanding";
+import InternationalPricing from "./InternationalPricing";
 import {
   StudioHeader as Header,
   StudioFooter,
@@ -143,7 +146,7 @@ function Offer() {
   );
 }
 
-function Questions() {
+function Questions({ international = false }: { international?: boolean }) {
   const variant = useVslVariant();
   const subscription =
     variant.source === "999" || Boolean(variant.features?.length);
@@ -153,10 +156,10 @@ function Questions() {
       "Zockto uses your product photo as a reference—watch the photo-to-ad example above to see a finished result. AI can change details such as labels, packaging or colours, so review your own ad before posting.",
     ],
     [
-      subscription
+      international ? "What’s included in each plan?" : subscription
         ? "What’s included in the " + variant.priceLabel + " plan?"
         : "What exactly do I get for " + variant.priceLabel + "?",
-      subscription
+      international ? "Basic is €29 with 600 credits, Creator is €59 with 2,400 credits, and Business is €447 with 25,500 credits. Each is a one-time payment with 30-day validity. See the plan cards above for the included allowances." : subscription
         ? (variant.creditsLabel ?? "") +
           ". " +
           variant.features?.join(". ") +
@@ -167,15 +170,15 @@ function Questions() {
     ],
     [
       "Will I be charged again automatically?",
-      subscription
+      (international || subscription)
         ? "No. This plan is a one-time payment with 30-day validity and no auto-pay. You choose whether to purchase it again."
         : "No. Your first ad is a one-time payment. There’s no subscription or automatic renewal.",
     ],
     [
-      subscription
+      (international || subscription)
         ? "What if this plan isn’t right for me?"
         : "What if I don’t like my first ad?",
-      subscription
+      (international || subscription)
         ? "This plan follows the refund terms on our Terms of Service page. The first-ad 7-day money-back guarantee does not apply to this plan unless your checkout offer expressly includes it."
         : "Your first-ad purchase comes with a 7-day money-back guarantee. Contact us within 7 days of purchase and include your purchase details to request a refund. See our refund policy for the full terms.",
     ],
@@ -246,6 +249,9 @@ function Questions() {
 export default function PremiumLanding() {
   const { scrollYProgress } = useScroll();
   const variant = useVslVariant();
+  const { isIndia, loading } = useGeoLocation();
+  const international = isInternationalVisitor(isIndia, loading);
+  const offerNote = international ? "One-time payment · 30-day validity · No auto-pay" : variant.refundNote;
   return (
     <MotionConfig reducedMotion="user">
       <div className="studio-landing studio-sales" id="top">
@@ -296,17 +302,17 @@ export default function PremiumLanding() {
                     <ArrowRight size={14} />
                   </a>
                 </div>
-                <p className="studio-hero-note">{variant.refundNote}</p>
+                <p className="studio-hero-note">{offerNote}</p>
               </Reveal>
             </div>
-            <TrendingStyles />
+            <TrendingStyles international={international} />
           </section>
           <PlatformLogos />
           <SalesProof
             renderCta={(placement) => <CreateButton placement={placement} />}
           />
-          <Offer />
-          <Questions />
+          {international ? <InternationalPricing /> : <Offer />}
+          <Questions international={international} />
           <section className="studio-final">
             <div className="studio-container">
               <Reveal>
@@ -317,7 +323,7 @@ export default function PremiumLanding() {
                   <em>your product here.</em>
                 </h2>
                 <CreateButton placement="final_cta_click" />
-                <p>{variant.refundNote}</p>
+                <p>{offerNote}</p>
               </Reveal>
               <a
                 href="#top"

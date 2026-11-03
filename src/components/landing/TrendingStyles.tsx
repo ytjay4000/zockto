@@ -7,6 +7,8 @@ import { useVslSource } from "@/context/VslVariant";
 import { getAppUrl } from "@/lib/leadToken";
 import { posthog } from "@/lib/posthog";
 import "./trending-styles.css";
+import { internationalDemoVideos } from "@/data/internationalLanding";
+import { internationalDemoPosters } from "@/data/internationalDemoPosters";
 
 interface TrendingTemplate {
   id: number;
@@ -46,7 +48,7 @@ function TrendingCard({
   const [failed, setFailed] = useState(false);
   const source = useVslSource();
   const templateUrl = new URL(getAppUrl("/product-ad-shot", source));
-  templateUrl.searchParams.set("template_id", String(template.id));
+  if (template.id > 0) templateUrl.searchParams.set("template_id", String(template.id));
 
   useEffect(() => {
     const node = card.current;
@@ -169,13 +171,13 @@ function TrendingCard({
         )}
       </div>
       <div className="studio-trending-footer">
-        <span
+        {template.id > 0 && <span
           className="studio-trending-metric"
           aria-label={`Avg. ROAS ${template.exampleRoas}, illustrative only, not a measured campaign result`}
           title="Illustrative example only—not a measured campaign result."
         >
           <span className="studio-trending-metric-example">Avg.</span> <strong>{template.exampleRoas}</strong> ROAS
-        </span>
+        </span>}
         <a
           href={templateUrl.toString()}
           className="studio-trending-use"
@@ -189,14 +191,14 @@ function TrendingCard({
             })
           }
         >
-          Use this style <ArrowRight size={12} aria-hidden="true" />
+          {template.id > 0 ? "Use this style" : "Create your ad"} <ArrowRight size={12} aria-hidden="true" />
         </a>
       </div>
     </article>
   );
 }
 
-export default function TrendingStyles() {
+export default function TrendingStyles({ international = false }: { international?: boolean }) {
   const viewport = useRef<HTMLDivElement>(null);
   const firstGroup = useRef<HTMLDivElement>(null);
   const section = useRef<HTMLElement>(null);
@@ -216,8 +218,9 @@ export default function TrendingStyles() {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["trending-styles"],
+    queryKey: ["trending-styles", international],
     queryFn: async ({ signal }): Promise<TrendingTemplate[]> => {
+      if (international) return internationalDemoVideos.map((video, index) => ({ ...video, poster: internationalDemoPosters[index], exampleRoas: "" }));
       const { data, error } = await supabase
         .from("product_ad_video")
         .select("id,name,preview_image,video_url")
