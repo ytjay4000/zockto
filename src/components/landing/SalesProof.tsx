@@ -36,8 +36,10 @@ const noSkills = [
 ];
 export default function SalesProof({
   renderCta,
+  showVoice = true,
 }: {
   renderCta: (placement: string) => ReactNode;
+  showVoice?: boolean;
 }) {
   const [activeMedia, setActiveMedia] = useState<string | null>(null);
   const stopMedia = useCallback(
@@ -86,6 +88,7 @@ export default function SalesProof({
         </div>
       </section>
       <TestimonialRow
+        showVoice={showVoice}
         activeMedia={activeMedia}
         onMedia={setActiveMedia}
         onStop={stopMedia}
