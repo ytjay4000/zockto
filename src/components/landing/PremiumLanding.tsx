@@ -21,7 +21,7 @@ import TrendingStyles from "./TrendingStyles";
 import SalesProof from "./SalesProof";
 import PlatformLogos from "./PlatformLogos";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
-import { isInternationalVisitor } from "@/data/internationalLanding";
+import { isInternationalVisitor, shouldShowVoiceTestimonials } from "@/data/internationalLanding";
 import InternationalPricing from "./InternationalPricing";
 import {
   StudioHeader as Header,
@@ -309,6 +309,7 @@ export default function PremiumLanding() {
           </section>
           <PlatformLogos />
           <SalesProof
+            showVoice={shouldShowVoiceTestimonials(international)}
             renderCta={(placement) => <CreateButton placement={placement} />}
           />
           {international ? <InternationalPricing /> : <Offer />}

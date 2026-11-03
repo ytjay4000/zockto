@@ -193,6 +193,7 @@ const writtenEntries = writtenStories.map((testimonial) => ({
 }));
 
 interface TestimonialProps {
+  showVoice?: boolean;
   activeMedia: string | null;
   onMedia: (id: string | null) => void;
   onStop: (id: string) => void;
@@ -205,6 +206,7 @@ function TestimonialRow({
   onStop,
   renderCta,
   kind,
+  showVoice = true,
 }: TestimonialProps & { kind: "voice" | "written" }) {
   const stories = kind === "voice" ? voiceEntries : writtenEntries;
   const viewport = useRef<HTMLDivElement>(null);
@@ -306,7 +308,7 @@ function TestimonialRow({
   };
   return (
     <section
-      id={kind === "voice" ? "stories" : "written-stories"}
+      id={kind === "voice" || !showVoice ? "stories" : "written-stories"}
       ref={section}
       aria-labelledby={kind + "-stories-title"}
       className={
@@ -438,7 +440,7 @@ function TestimonialRow({
 export default function TestimonialSections(props: TestimonialProps) {
   return (
     <>
-      <TestimonialRow {...props} kind="voice" />
+      {props.showVoice !== false && <TestimonialRow {...props} kind="voice" />}
       <TestimonialRow {...props} kind="written" />
     </>
   );
