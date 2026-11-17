@@ -1,13 +1,16 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Play, RotateCcw } from "lucide-react";
-import productImage from "@/assets/kfd-product.jpg.asset.json";
-import storyboardImage from "@/assets/kfd-storyboard.jpg.asset.json";
+import productImage from "@/assets/landing/okrito-product.jpg";
+import storyboardImage from "@/assets/landing/okrito-storyboard.webp";
+import finalVideoPoster from "@/assets/landing/okrito-finished-ad.webp";
 import { posthog } from "@/lib/posthog";
 import "./how-it-works.css";
 
+const STORYBOARD_URL =
+  "https://storages.zockto.com/storyboards/f59919a3-42c3-4575-9a36-a0fe2efe3928/660f36fe-6957-4566-823d-c07b444f6c06/sheet1-6c039d52-4472-43c2-a779-1797e40946b6.png";
 const FINAL_VIDEO =
-  "https://storage.googleapis.com/zockto-demo-videos/demo-192.mp4";
+  "https://storages.zockto.com/product-ad-native/f59919a3-42c3-4575-9a36-a0fe2efe3928/bbf0fa3f-08f4-4a41-8f74-e21018993e8e/f2e6a2d4-2161-44e5-9ca9-15ee02294863/final.mp4";
 const steps = [
   {
     label: "Your photo",
@@ -172,24 +175,26 @@ export default function HowItWorks({
                 </div>
                 {index === 0 && (
                   <div className="studio-how-media studio-how-product">
-                    <img
-                      src={productImage.url}
-                      alt="Original KFD Beauty Hub product photo used to create this ad"
-                      loading="lazy"
-                    />
+                    <div className="studio-how-product-cutout">
+                      <img
+                        src={productImage}
+                        alt="Original photo of the OKRITO okra chips pouch"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 )}
                 {index === 1 && (
                   <a
                     className="studio-how-media studio-how-storyboard"
-                    href={storyboardImage.url}
+                    href={STORYBOARD_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open the complete storyboard created for this product"
                   >
                     <img
-                      src={storyboardImage.url}
-                      alt="The original scene-by-scene storyboard Zockto created for the KFD product"
+                      src={storyboardImage}
+                      alt="Storyboard for the OKRITO okra chips ad"
                       loading="lazy"
                     />
                     <span>
@@ -202,11 +207,11 @@ export default function HowItWorks({
                   <div className="studio-how-media studio-how-final">
                     <video
                       ref={video}
-                      poster="/demo-posters/192.jpg"
+                      poster={finalVideoPoster}
                       preload="none"
                       playsInline
                       controls={started && !failed}
-                      aria-label="Finished KFD product video ad"
+                      aria-label="Finished OKRITO okra chips ad"
                       onPlay={() => {
                         if (selectedStep !== 2) {
                           video.current?.pause();

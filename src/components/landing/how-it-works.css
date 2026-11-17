@@ -130,8 +130,33 @@
   object-fit: contain;
 }
 .studio-how-product {
+  display: grid;
+  place-items: center;
   padding: 24px;
   background: #f3f2ed;
+}
+.studio-how-product-cutout {
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 716 / 820;
+}
+.studio-how-product-cutout img {
+  position: absolute;
+  top: 50%;
+  height: auto;
+  transform: translateY(-50%);
+  /* Trace the OKRITO pouch so the lettering and artwork stay true to the photo. */
+  clip-path: polygon(
+    7.40% 24.28%, 93.16% 24.28%, 93.16% 26.30%, 90.92% 28.65%, 89.11% 31.45%,
+    87.71% 34.83%, 87.01% 38.28%, 86.87% 42.32%, 87.15% 46.48%, 87.71% 50.65%,
+    87.85% 54.69%, 88.41% 58.98%, 88.97% 62.70%, 89.80% 66.21%, 91.20% 69.21%,
+    91.76% 71.35%, 90.08% 72.33%, 88.97% 73.83%, 88.27% 75.33%, 7.82% 75.39%,
+    7.96% 73.57%, 9.64% 71.48%, 11.03% 68.88%, 12.15% 65.63%, 12.71% 62.24%,
+    13.69% 58.66%, 14.25% 54.69%, 14.53% 50.98%, 15.36% 46.81%, 15.92% 44.21%,
+    15.92% 42.51%, 14.66% 40.04%, 13.69% 36.98%, 12.29% 33.98%, 10.61% 30.60%,
+    9.08% 28.13%, 7.40% 26.37%
+  );
 }
 .studio-how-storyboard,
 .studio-how-final {

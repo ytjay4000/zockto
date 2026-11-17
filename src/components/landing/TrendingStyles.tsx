@@ -220,7 +220,13 @@ export default function TrendingStyles({ international = false }: { internationa
   } = useQuery({
     queryKey: ["trending-styles", international],
     queryFn: async ({ signal }): Promise<TrendingTemplate[]> => {
-      if (international) return internationalDemoVideos.map((video, index) => ({ ...video, poster: internationalDemoPosters[index], exampleRoas: "" }));
+      if (international) {
+        return internationalDemoVideos.map((video) => ({
+          ...video,
+          poster: internationalDemoPosters[video.id],
+          exampleRoas: "",
+        }));
+      }
       const { data, error } = await supabase
         .from("product_ad_video")
         .select("id,name,preview_image,video_url")
