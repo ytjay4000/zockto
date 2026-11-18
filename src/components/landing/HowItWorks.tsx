@@ -3,14 +3,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Play, RotateCcw } from "lucide-react";
 import productImage from "@/assets/landing/okrito-product.jpg";
 import storyboardImage from "@/assets/landing/okrito-storyboard.webp";
-import finalVideoPoster from "@/assets/landing/okrito-finished-ad.webp";
+import { okritoAd } from "@/data/landingPreviewPosters";
 import { posthog } from "@/lib/posthog";
 import "./how-it-works.css";
 
 const STORYBOARD_URL =
   "https://storages.zockto.com/storyboards/f59919a3-42c3-4575-9a36-a0fe2efe3928/660f36fe-6957-4566-823d-c07b444f6c06/sheet1-6c039d52-4472-43c2-a779-1797e40946b6.png";
-const FINAL_VIDEO =
-  "https://storages.zockto.com/product-ad-native/f59919a3-42c3-4575-9a36-a0fe2efe3928/bbf0fa3f-08f4-4a41-8f74-e21018993e8e/f2e6a2d4-2161-44e5-9ca9-15ee02294863/final.mp4";
 const steps = [
   {
     label: "Your photo",
@@ -79,7 +77,7 @@ export default function HowItWorks({
   const play = () => {
     const player = video.current;
     if (!player) return;
-    if (!player.getAttribute("src")) player.src = FINAL_VIDEO;
+    if (!player.getAttribute("src")) player.src = okritoAd.video;
     if (failed) player.load();
     if (player.ended) player.currentTime = 0;
     setStarted(true);
@@ -207,7 +205,7 @@ export default function HowItWorks({
                   <div className="studio-how-media studio-how-final">
                     <video
                       ref={video}
-                      poster={finalVideoPoster}
+                      poster={okritoAd.poster}
                       preload="none"
                       playsInline
                       controls={started && !failed}

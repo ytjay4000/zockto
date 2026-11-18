@@ -9,6 +9,7 @@ import { posthog } from "@/lib/posthog";
 import "./trending-styles.css";
 import { internationalDemoVideos } from "@/data/internationalLanding";
 import { internationalDemoPosters } from "@/data/internationalDemoPosters";
+import { indiaDemoPosters } from "@/data/landingPreviewPosters";
 
 interface TrendingTemplate {
   id: number;
@@ -235,21 +236,19 @@ export default function TrendingStyles({ international = false }: { internationa
         .order("trend_rank", { ascending: true })
         .abortSignal(signal);
       if (error) throw error;
-      return (data ?? []).flatMap((row, index) =>
-        row.preview_image && row.video_url
-          ? [
-              {
-                id: row.id,
-                name: row.name ?? "Trending style",
-                poster: row.preview_image,
-                video: row.video_url,
-                // Assign before duplicating the carousel, so each style keeps
-                // its own example value across all repeated cards.
-                exampleRoas: `${(2.6 + index * 0.3).toFixed(1)}×`,
-              },
-            ]
-          : [],
-      );
+      return (data ?? []).flatMap((row, index) => {
+        if (!row.video_url) return [];
+        const poster = indiaDemoPosters.get(row.video_url) ?? row.preview_image;
+        if (!poster) return [];
+        return [{
+          id: row.id,
+          name: row.name ?? "Trending style",
+          poster,
+          video: row.video_url,
+          // Assign before duplicating the carousel so this style keeps its example value.
+          exampleRoas: `${(2.6 + index * 0.3).toFixed(1)}×`,
+        }];
+      });
     },
     staleTime: 5 * 60 * 1000,
     retry: 1,
