@@ -1,10 +1,11 @@
 export const isInternationalVisitor = (isIndia: boolean, loading: boolean) => !loading && !isIndia;
 export const shouldShowVoiceTestimonials = (international: boolean) => !international;
+export const internationalCurrency = "USD";
 
 export const internationalPlans = [
-  { id: "basic", name: "Basic Plan", price: 29, credits: 600, videoSeconds: 120, videos: 12, images: 75, avatarSeconds: 600, popular: false },
-  { id: "creator", name: "Creator Plan", price: 59, credits: 2400, videoSeconds: 480, videos: 48, images: 300, avatarSeconds: 2400, popular: true },
-  { id: "business", name: "Business Plan", price: 447, credits: 25500, videoSeconds: 5100, videos: 510, images: 3187, avatarSeconds: 25500, popular: false },
+  { id: "basic", name: "Basic Plan", price: 59, credits: 600, videoSeconds: 120, videos: 12, images: 75, avatarSeconds: 600, popular: false },
+  { id: "creator", name: "Creator Plan", price: 79, credits: 2400, videoSeconds: 480, videos: 48, images: 300, avatarSeconds: 2400, popular: true },
+  { id: "business", name: "Business Plan", price: 149, credits: 25500, videoSeconds: 5100, videos: 510, images: 3187, avatarSeconds: 25500, popular: false },
 ] as const;
 
 export const internationalFeatures = ["1080p quality", "200 Natural AI Actors", "Use your custom avatar", "Access to all templates", "48 languages", "Commercial rights"];
