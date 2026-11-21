@@ -4,9 +4,13 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
+import { isInternationalVisitor } from "@/data/internationalLanding";
 
 const TermsOfService = () => {
   const { hash } = useLocation();
+  const { isIndia, loading } = useGeoLocation();
+  const international = isInternationalVisitor(isIndia, loading);
   useEffect(() => {
     if (hash === "#refund-policy")
       document.getElementById("refund-policy")?.scrollIntoView();
@@ -114,18 +118,38 @@ const TermsOfService = () => {
                 <h2 className="font-display text-2xl font-semibold mb-4">
                   5. Payments and Subscriptions
                 </h2>
-                <ul className="list-disc list-inside space-y-3 text-muted-foreground">
-                  <li>
-                    First-ad purchases are one-time payments. Subscription
-                    plans, where selected, are billed according to the plan
-                    shown at checkout.
-                  </li>
-                  <li>
-                    You may cancel anytime; refunds are handled per our refund
-                    policy.
-                  </li>
-                  <li>Taxes and payment processing fees may apply.</li>
-                </ul>
+                {international ? (
+                  <ul className="list-disc list-inside space-y-3 text-muted-foreground">
+                    <li>
+                      First-ad purchases of $1 plan are one-time payments.
+                      Subscription plans, where selected, are billed according
+                      to the plan shown at checkout. If for example you
+                      purchase a monthly plan, you are automatically charged
+                      the amount that the plan each month.
+                    </li>
+                    <li>You may cancel anytime; we do not give refunds.</li>
+                    <li>Taxes and payment processing fees may apply.</li>
+                    <li>
+                      If you purchase a $1 plan, you will be automatically
+                      charged a monthly plan of $59 after 72 hours of the
+                      purchase of the $1. However, if you decide to cancel the
+                      plan before 72 hours, there will be no charges.
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="list-disc list-inside space-y-3 text-muted-foreground">
+                    <li>
+                      First-ad purchases are one-time payments. Subscription
+                      plans, where selected, are billed according to the plan
+                      shown at checkout.
+                    </li>
+                    <li>
+                      You may cancel anytime; refunds are handled per our
+                      refund policy.
+                    </li>
+                    <li>Taxes and payment processing fees may apply.</li>
+                  </ul>
+                )}
               </section>
 
               {/* 6. AI-Generated Content */}
@@ -172,43 +196,62 @@ const TermsOfService = () => {
                 <h2 className="font-display text-2xl font-semibold mb-4">
                   9. Refund Policy
                 </h2>
-                <p className="mb-4">
-                  <strong>
-                    7-day money-back guarantee for first-ad purchases.
-                  </strong>{" "}
-                  Your one-time first-ad purchase is covered by a 7-day
-                  money-back guarantee. If it isn’t right for you, request a
-                  refund within 7 days of purchase through our{" "}
-                  <Link to="/contact" className="text-primary underline">
-                    contact page
-                  </Link>
-                  , including the details needed to identify your purchase.
-                </p>
-                <p className="mb-4">
-                  This first-ad guarantee does not apply to monthly plans,
-                  subscriptions, or other purchases unless the offer shown at
-                  checkout expressly includes it. For those purchases:
-                </p>
-                <ul className="list-disc list-inside space-y-3 text-muted-foreground mb-4">
-                  <li>
-                    Payments are non-refundable for unused subscription time,
-                    dissatisfaction with generated content, or account
-                    inactivity, except where a refund is required by law or
-                    expressly offered at checkout; and
-                  </li>
-                  <li>
-                    Subscriptions may be canceled at any time to prevent future
-                    billing, but previously charged amounts remain
-                    non-refundable.
-                  </li>
-                </ul>
-                <p className="mb-4">
-                  If required by law in your country, this policy does not
-                  affect any mandatory statutory rights you may have.
-                </p>
-                <p className="font-medium">
-                  Approved refunds will be credited within 10-15 days.
-                </p>
+                {international ? (
+                  <>
+                    <p className="mb-4">
+                      Zockto does not provide refunds of any purchases.
+                    </p>
+                    <p className="mb-4">
+                      Subscriptions may be canceled at any time to prevent
+                      future billing, but previously charged amounts remain
+                      non-refundable.
+                    </p>
+                    <p className="mb-4">
+                      If required by law in your country, this policy does not
+                      affect any mandatory statutory rights you may have.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="mb-4">
+                      <strong>
+                        7-day money-back guarantee for first-ad purchases.
+                      </strong>{" "}
+                      Your one-time first-ad purchase is covered by a 7-day
+                      money-back guarantee. If it isn’t right for you, request
+                      a refund within 7 days of purchase through our{" "}
+                      <Link to="/contact" className="text-primary underline">
+                        contact page
+                      </Link>
+                      , including the details needed to identify your purchase.
+                    </p>
+                    <p className="mb-4">
+                      This first-ad guarantee does not apply to monthly plans,
+                      subscriptions, or other purchases unless the offer shown
+                      at checkout expressly includes it. For those purchases:
+                    </p>
+                    <ul className="list-disc list-inside space-y-3 text-muted-foreground mb-4">
+                      <li>
+                        Payments are non-refundable for unused subscription
+                        time, dissatisfaction with generated content, or
+                        account inactivity, except where a refund is required
+                        by law or expressly offered at checkout; and
+                      </li>
+                      <li>
+                        Subscriptions may be canceled at any time to prevent
+                        future billing, but previously charged amounts remain
+                        non-refundable.
+                      </li>
+                    </ul>
+                    <p className="mb-4">
+                      If required by law in your country, this policy does not
+                      affect any mandatory statutory rights you may have.
+                    </p>
+                    <p className="font-medium">
+                      Approved refunds will be credited within 10-15 days.
+                    </p>
+                  </>
+                )}
               </section>
 
               {/* 10. Changes */}
