@@ -33,7 +33,7 @@ export default function InternationalPricing() {
             const properties = { source, currency: internationalCurrency, value: plan.price, plan: plan.id, placement: "international_pricing" };
             posthog.capture("offer_cta_click", properties);
             trackMetaCustomEvent("VSLOfferClick", properties);
-          }}>Choose {plan.name.replace(" Plan", "")}</AppLink></Button>
+          }}>Start now for $1</AppLink></Button>
         </article>)}
       </div>
     </div>
