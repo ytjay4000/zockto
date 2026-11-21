@@ -196,7 +196,9 @@ function Questions({ international = false }: { international?: boolean }) {
     ],
     [
       "Can I create in my own language?",
-      "Yes. Hindi, Hinglish and English are included, alongside other supported languages.",
+      international
+        ? "Yes. There are 30+ languages available, such as English, Spanish, and French."
+        : "Yes. Hindi, Hinglish and English are included, alongside other supported languages.",
     ],
     [
       "Where can I use my finished video?",
@@ -307,7 +309,7 @@ export default function PremiumLanding() {
             </div>
             <TrendingStyles international={international} />
           </section>
-          <PlatformLogos />
+          <PlatformLogos international={international} />
           <SalesProof
             showVoice={shouldShowVoiceTestimonials(international)}
             renderCta={(placement) => <CreateButton placement={placement} />}

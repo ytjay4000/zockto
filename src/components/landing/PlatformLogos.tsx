@@ -15,7 +15,14 @@ const platforms = [
   { name: "WhatsApp", icon: "whatsapp" },
 ];
 
-export default function PlatformLogos() {
+export default function PlatformLogos({ international = false }: { international?: boolean }) {
+  const visiblePlatforms = international
+    ? [
+        ...platforms.filter(({ name }) => !["Myntra", "Meesho", "WhatsApp", "Flipkart"].includes(name)),
+        { name: "TikTok", icon: "tiktok" },
+        { name: "Pinterest", icon: "pinterest" },
+      ]
+    : platforms;
   const sectionRef = useRef<HTMLElement>(null);
   const [paused, setPaused] = useState(false);
   const [inView, setInView] = useState(false);
@@ -70,7 +77,7 @@ export default function PlatformLogos() {
               key={String(duplicate)}
               aria-hidden={duplicate || undefined}
             >
-              {platforms.map((platform) => (
+              {visiblePlatforms.map((platform) => (
                 <li
                   className={
                     "studio-platform-logo studio-platform-logo-" +
