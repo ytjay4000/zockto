@@ -40,7 +40,7 @@ const TermsOfService = () => {
               </span>
             </h1>
             <p className="text-muted-foreground mb-12">
-              Last updated: 18.10.2026
+              Last updated: {international ? "21.11.2026" : "18.10.2026"}
             </p>
 
             <div className="space-y-10 text-foreground/90">
