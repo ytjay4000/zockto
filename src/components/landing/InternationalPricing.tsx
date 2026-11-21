@@ -11,12 +11,12 @@ export default function InternationalPricing() {
   const source = useVslSource();
   return <section id="pricing" className="studio-section studio-pricing">
     <div className="studio-container">
-      <div className="studio-international-heading"><h2>Your video ad plan.</h2><p>One-time payment. 30-day validity. No auto-pay.</p></div>
+      <div className="studio-international-heading"><h2>Your video ad plan.</h2></div>
       <div className="studio-international-plans">
         {internationalPlans.map((plan, index) => <article key={plan.id} className={`studio-international-plan${plan.popular ? " is-popular" : ""}`}>
           {plan.popular && <span className="studio-international-popular">Most popular</span>}
           <h3>{plan.name}</h3>
-          <div><div className="studio-international-price">${plan.price}<span>/mo</span></div><p className="studio-international-validity">One-time, 30-day validity</p></div>
+          <div><div className="studio-international-price">${plan.price}<span>/mo</span></div></div>
           <div><p className="studio-international-credits">{plan.credits.toLocaleString("en-US")} credits per month</p><div className="studio-international-unit"><span>${(plan.price / plan.videos).toFixed(2)} per video</span><span>${(plan.price / plan.credits).toFixed(3)} per credit</span></div></div>
           <div className="studio-international-allowances"><h4>WHAT THIS GETS YOU</h4>
             <p>Up to <strong>{plan.videoSeconds.toLocaleString("en-US")}</strong> seconds of video ads</p>

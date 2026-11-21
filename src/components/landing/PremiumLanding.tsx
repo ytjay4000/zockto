@@ -159,7 +159,7 @@ function Questions({ international = false }: { international?: boolean }) {
       international ? "What’s included in each plan?" : subscription
         ? "What’s included in the " + variant.priceLabel + " plan?"
         : "What exactly do I get for " + variant.priceLabel + "?",
-      international ? "Basic is €29 with 600 credits, Creator is €59 with 2,400 credits, and Business is €447 with 25,500 credits. Each is a one-time payment with 30-day validity. See the plan cards above for the included allowances." : subscription
+      international ? "The main difference is the cost per creative, and the number of video and image creatives you can create per month. Creator Plan offer videos around 3x more affordably than Basic Plan. Business Plan the price per video is 15x more affordable than with Basic Plan." : subscription
         ? (variant.creditsLabel ?? "") +
           ". " +
           variant.features?.join(". ") +
@@ -168,19 +168,25 @@ function Questions({ international = false }: { international?: boolean }) {
           "."
         : "One fully edited video ad, including the script, product scenes, supporting visuals, voiceover, music, captions and transitions.",
     ],
-    [
-      "Will I be charged again automatically?",
-      (international || subscription)
-        ? "No. This plan is a one-time payment with 30-day validity and no auto-pay. You choose whether to purchase it again."
-        : "No. Your first ad is a one-time payment. There’s no subscription or automatic renewal.",
-    ],
+    ...(!international
+      ? [
+          [
+            "Will I be charged again automatically?",
+            subscription
+              ? "No. This plan is a one-time payment with 30-day validity and no auto-pay. You choose whether to purchase it again."
+              : "No. Your first ad is a one-time payment. There’s no subscription or automatic renewal.",
+          ],
+        ]
+      : []),
     [
       (international || subscription)
         ? "What if this plan isn’t right for me?"
         : "What if I don’t like my first ad?",
-      (international || subscription)
-        ? "This plan follows the refund terms on our Terms of Service page. The first-ad 7-day money-back guarantee does not apply to this plan unless your checkout offer expressly includes it."
-        : "Your first-ad purchase comes with a 7-day money-back guarantee. Contact us within 7 days of purchase and include your purchase details to request a refund. See our refund policy for the full terms.",
+      international
+        ? "You can always change the plan to a different one or cancel the plan."
+        : subscription
+          ? "This plan follows the refund terms on our Terms of Service page. The first-ad 7-day money-back guarantee does not apply to this plan unless your checkout offer expressly includes it."
+          : "Your first-ad purchase comes with a 7-day money-back guarantee. Contact us within 7 days of purchase and include your purchase details to request a refund. See our refund policy for the full terms.",
     ],
     [
       "What do I need to get started?",
@@ -202,7 +208,9 @@ function Questions({ international = false }: { international?: boolean }) {
     ],
     [
       "Where can I use my finished video?",
-      "Use it on Instagram, Facebook, WhatsApp or YouTube Shorts. Marketplace listings and paid ads have their own content rules, so check the requirements before uploading.",
+      international
+        ? "You can use it anywhere you want! E.g. on Instagram, TikTok, or YouTube Shorts. Marketplace listings, social media platforms and paid ads have their own content rules, so check the requirements before uploading."
+        : "Use it on Instagram, Facebook, WhatsApp or YouTube Shorts. Marketplace listings and paid ads have their own content rules, so check the requirements before uploading.",
     ],
     [
       "Will this guarantee more orders?",
@@ -253,7 +261,7 @@ export default function PremiumLanding() {
   const variant = useVslVariant();
   const { isIndia, loading } = useGeoLocation();
   const international = isInternationalVisitor(isIndia, loading);
-  const offerNote = international ? "One-time payment · 30-day validity · No auto-pay" : variant.refundNote;
+  const offerNote = international ? "" : variant.refundNote;
   return (
     <MotionConfig reducedMotion="user">
       <div className="studio-landing studio-sales" id="top">
@@ -304,7 +312,7 @@ export default function PremiumLanding() {
                     <ArrowRight size={14} />
                   </a>
                 </div>
-                <p className="studio-hero-note">{offerNote}</p>
+                {offerNote && <p className="studio-hero-note">{offerNote}</p>}
               </Reveal>
             </div>
             <TrendingStyles international={international} />
@@ -326,7 +334,7 @@ export default function PremiumLanding() {
                   <em>your product here.</em>
                 </h2>
                 <CreateButton placement="final_cta_click" />
-                <p>{offerNote}</p>
+                {offerNote && <p>{offerNote}</p>}
               </Reveal>
               <a
                 href="#top"
