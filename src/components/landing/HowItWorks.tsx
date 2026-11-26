@@ -186,13 +186,21 @@ export default function HowItWorks({
                 </div>
                 {index === 0 && (
                   <div className={`studio-how-media studio-how-product${international ? " is-international" : ""}`}>
-                    <div className="studio-how-product-cutout">
+                    {international ? (
                       <img
-                        src={international ? lrpProductImage : okritoProductImage}
-                        alt={international ? "La Roche-Posay Cicaplast B5 spray bottle" : "Original photo of the OKRITO okra chips pouch"}
+                        src={lrpProductImage}
+                        alt="La Roche-Posay Cicaplast B5 spray bottle"
                         loading="lazy"
                       />
-                    </div>
+                    ) : (
+                      <div className="studio-how-product-cutout">
+                        <img
+                          src={okritoProductImage}
+                          alt="Original photo of the OKRITO okra chips pouch"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
                 {index === 1 && (

@@ -14,14 +14,14 @@ import {
   Plus,
   ShieldCheck,
 } from "lucide-react";
-import { useVslVariant } from "@/context/VslVariant";
+import { useVslSource, useVslVariant } from "@/context/VslVariant";
 import { posthog } from "@/lib/posthog";
 import "./premium-landing.css";
 import TrendingStyles from "./TrendingStyles";
 import SalesProof from "./SalesProof";
 import PlatformLogos from "./PlatformLogos";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
-import { isInternationalVisitor, shouldShowVoiceTestimonials } from "@/data/internationalLanding";
+import { internationalLandingSource, isInternationalVisitor, shouldShowVoiceTestimonials } from "@/data/internationalLanding";
 import InternationalPricing from "./InternationalPricing";
 import {
   StudioHeader as Header,
@@ -259,8 +259,10 @@ function Questions({ international = false }: { international?: boolean }) {
 export default function PremiumLanding() {
   const { scrollYProgress } = useScroll();
   const variant = useVslVariant();
+  const source = useVslSource();
   const { isIndia, loading } = useGeoLocation();
-  const international = isInternationalVisitor(isIndia, loading);
+  const international =
+    source === internationalLandingSource || isInternationalVisitor(isIndia, loading);
   const offerNote = international ? "" : variant.refundNote;
   return (
     <MotionConfig reducedMotion="user">

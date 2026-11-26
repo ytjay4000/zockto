@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { internationalLandingSource } from "@/data/internationalLanding";
 
 export interface VslVariant {
   /** Price in INR, e.g. 299, 199, 999, or 99 */
@@ -135,6 +137,11 @@ export const VslVariantProvider: React.FC<VslVariantProviderProps> = ({
 export const useVslVariant = (): VslVariant =>
   useContext(Ctx) ?? VSL_VARIANTS[DEFAULT_VARIANT_KEY];
 
-/** Raw source (null outside VSL pages) — used by AppLink. */
-export const useVslSource = (): string | null =>
-  useContext(Ctx)?.source ?? null;
+/** Campaign source to forward to the app, with the offer source as the default. */
+export const useVslSource = (): string | null => {
+  const [params] = useSearchParams();
+  const variant = useContext(Ctx);
+  return params.get("source") === internationalLandingSource
+    ? internationalLandingSource
+    : variant?.source ?? null;
+};

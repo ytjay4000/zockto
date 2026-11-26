@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { internationalLandingSource } from '@/data/internationalLanding';
 
 const CACHE_KEY = 'geo_country_code';
 const CACHE_EXPIRY_KEY = 'geo_country_code_expiry';
@@ -60,6 +61,7 @@ const AutoTranslateForBrazil = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (new URLSearchParams(location.search).get('source') === internationalLandingSource) return;
     if (sessionStorage.getItem(DISMISS_KEY) === '1') return;
 
     const applyForCountry = (code: string) => {
@@ -85,9 +87,11 @@ const AutoTranslateForBrazil = () => {
       return;
     }
 
-    fetch('https://ipapi.co/json/')
+    const controller = new AbortController();
+    fetch('https://ipapi.co/json/', { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
+        if (controller.signal.aborted) return;
         const code = data.country_code || '';
         if (code) {
           localStorage.setItem(CACHE_KEY, code);
@@ -96,6 +100,7 @@ const AutoTranslateForBrazil = () => {
         applyForCountry(code);
       })
       .catch(() => {});
+    return () => controller.abort();
   }, [location.pathname, location.search, location.hash, navigate]);
 
   return null;

@@ -3,19 +3,20 @@ import { Link, useLocation } from "react-router-dom";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import AppLink from "@/components/AppLink";
-import { useVslVariant } from "@/context/VslVariant";
+import { useVslSource, useVslVariant } from "@/context/VslVariant";
+import { internationalLandingSource } from "@/data/internationalLanding";
 import { posthog } from "@/lib/posthog";
 import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import "./premium-landing.css";
 
-function pagePath(path: string, source: string) {
-  return source === "199"
+function pagePath(path: string, source: string | null) {
+  return !source || source === "199"
     ? path
     : path + "?source=" + encodeURIComponent(source);
 }
 
 export function StudioBrand() {
-  const { source } = useVslVariant();
+  const source = useVslSource();
   return (
     <Link
       className="studio-brand studio-brand-original"
@@ -37,17 +38,17 @@ export function StudioCreateButton({
   className?: string;
 }) {
   const variant = useVslVariant();
+  const source = useVslSource() ?? variant.source;
+  const offer = source === internationalLandingSource
+    ? { source }
+    : { source, price_inr: variant.price };
   return (
     <AppLink
       className={"studio-button " + className}
       onClick={() => {
-        posthog.capture(placement, {
-          price_inr: variant.price,
-          source: variant.source,
-        });
+        posthog.capture(placement, offer);
         trackMetaCustomEvent("VSLOfferClick", {
-          price_inr: variant.price,
-          source: variant.source,
+          ...offer,
           placement,
         });
       }}
@@ -63,15 +64,18 @@ export function StudioHeader() {
   const toggle = useRef<HTMLButtonElement>(null);
   const location = useLocation();
   const reduced = useReducedMotion();
-  const { source } = useVslVariant();
+  const source = useVslSource();
   const homePath = pagePath("/", source);
   const home =
     location.pathname === "/" || location.pathname.startsWith("/vsl");
+  const sectionPath = home
+    ? (source === internationalLandingSource ? location.search : "")
+    : homePath;
   const links = [
-    ["See example ads", home ? "#work" : homePath + "#work"],
-    ["How it works", home ? "#process" : homePath + "#process"],
-    ["Customer stories", home ? "#stories" : homePath + "#stories"],
-    ["Pricing", home ? "#pricing" : homePath + "#pricing"],
+    ["See example ads", sectionPath + "#work"],
+    ["How it works", sectionPath + "#process"],
+    ["Customer stories", sectionPath + "#stories"],
+    ["Pricing", sectionPath + "#pricing"],
     ["Demo", pagePath("/demo", source)],
     ["Contact", pagePath("/contact", source)],
   ];
@@ -175,7 +179,7 @@ export function StudioHeader() {
 }
 
 export function StudioFooter() {
-  const { source } = useVslVariant();
+  const source = useVslSource();
   return (
     <footer className="studio-footer">
       <div className="studio-container">

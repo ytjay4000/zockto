@@ -1,6 +1,7 @@
 export const isInternationalVisitor = (isIndia: boolean, loading: boolean) => !loading && !isIndia;
 export const shouldShowVoiceTestimonials = (international: boolean) => !international;
 export const internationalCurrency = "USD";
+export const internationalLandingSource = "us";
 
 export const internationalPlans = [
   { id: "basic", name: "Starter", price: 59, videos: 12, images: 75 },
