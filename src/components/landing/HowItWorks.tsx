@@ -1,14 +1,18 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Play, RotateCcw } from "lucide-react";
-import productImage from "@/assets/landing/okrito-product.jpg";
-import storyboardImage from "@/assets/landing/okrito-storyboard.webp";
+import okritoProductImage from "@/assets/landing/okrito-product.jpg";
+import okritoStoryboardImage from "@/assets/landing/okrito-storyboard.webp";
+import lrpProductImage from "@/assets/landing/lrp-cicaplast-product.webp";
+import { lrpInternationalAd } from "@/data/internationalLanding";
 import { okritoAd } from "@/data/landingPreviewPosters";
 import { posthog } from "@/lib/posthog";
 import "./how-it-works.css";
 
-const STORYBOARD_URL =
+const okritoStoryboardUrl =
   "https://storages.zockto.com/storyboards/f59919a3-42c3-4575-9a36-a0fe2efe3928/660f36fe-6957-4566-823d-c07b444f6c06/sheet1-6c039d52-4472-43c2-a779-1797e40946b6.png";
+const lrpStoryboardUrl =
+  "https://storages.zockto.com/storyboards/6cf1c3e0-9747-4080-bad4-2a95dd81f280/873b1a59-6594-4515-891a-08f40a7a20ce/sheet1-e60efc6c-bab8-4fba-8c0d-59dc17024314.png";
 const steps = [
   {
     label: "Your photo",
@@ -29,10 +33,12 @@ const steps = [
 
 export default function HowItWorks({
   activeMedia,
+  international,
   onMedia,
   onStop,
 }: {
   activeMedia: string | null;
+  international: boolean;
   onMedia: (id: string | null) => void;
   onStop: (id: string) => void;
 }) {
@@ -43,6 +49,13 @@ export default function HowItWorks({
   const [failed, setFailed] = useState(false);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const video = useRef<HTMLVideoElement>(null);
+  const adUrl = international ? lrpInternationalAd.video : okritoAd.video;
+
+  useEffect(() => {
+    setStarted(false);
+    setFailed(false);
+    onStop("finished-ad");
+  }, [international, onStop]);
 
   useEffect(() => {
     if (activeMedia !== "finished-ad" || selectedStep !== 2)
@@ -77,7 +90,7 @@ export default function HowItWorks({
   const play = () => {
     const player = video.current;
     if (!player) return;
-    if (!player.getAttribute("src")) player.src = okritoAd.video;
+    if (!player.getAttribute("src")) player.src = adUrl;
     if (failed) player.load();
     if (player.ended) player.currentTime = 0;
     setStarted(true);
@@ -172,11 +185,11 @@ export default function HowItWorks({
                   <p>{step.copy}</p>
                 </div>
                 {index === 0 && (
-                  <div className="studio-how-media studio-how-product">
+                  <div className={`studio-how-media studio-how-product${international ? " is-international" : ""}`}>
                     <div className="studio-how-product-cutout">
                       <img
-                        src={productImage}
-                        alt="Original photo of the OKRITO okra chips pouch"
+                        src={international ? lrpProductImage : okritoProductImage}
+                        alt={international ? "La Roche-Posay Cicaplast B5 spray bottle" : "Original photo of the OKRITO okra chips pouch"}
                         loading="lazy"
                       />
                     </div>
@@ -185,14 +198,14 @@ export default function HowItWorks({
                 {index === 1 && (
                   <a
                     className="studio-how-media studio-how-storyboard"
-                    href={STORYBOARD_URL}
+                    href={international ? lrpStoryboardUrl : okritoStoryboardUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open the complete storyboard created for this product"
                   >
                     <img
-                      src={storyboardImage}
-                      alt="Storyboard for the OKRITO okra chips ad"
+                      src={international ? lrpStoryboardUrl : okritoStoryboardImage}
+                      alt={international ? "Nine-scene storyboard for the La Roche-Posay Cicaplast B5 ad" : "Storyboard for the OKRITO okra chips ad"}
                       loading="lazy"
                     />
                     <span>
@@ -204,12 +217,14 @@ export default function HowItWorks({
                 {index === 2 && (
                   <div className="studio-how-media studio-how-final">
                     <video
+                      key={adUrl}
                       ref={video}
-                      poster={okritoAd.poster}
-                      preload="none"
+                      src={international && selectedStep === 2 ? `${adUrl}#t=0.1` : undefined}
+                      poster={international ? undefined : okritoAd.poster}
+                      preload={international && selectedStep === 2 ? "metadata" : "none"}
                       playsInline
                       controls={started && !failed}
-                      aria-label="Finished OKRITO okra chips ad"
+                      aria-label={international ? "Finished La Roche-Posay Cicaplast B5 ad" : "Finished OKRITO okra chips ad"}
                       onPlay={() => {
                         if (selectedStep !== 2) {
                           video.current?.pause();

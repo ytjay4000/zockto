@@ -79,6 +79,12 @@
   gap: 18px;
   padding-right: 18px;
 }
+.studio-trending.is-international .studio-trending-track {
+  margin-inline: auto;
+}
+.studio-trending.is-international .studio-trending-group {
+  padding-right: 0;
+}
 .studio-trending-card {
   flex: 0 0 224px;
   width: 224px;

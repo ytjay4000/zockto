@@ -37,9 +37,11 @@ const noSkills = [
 export default function SalesProof({
   renderCta,
   showVoice = true,
+  international = false,
 }: {
   renderCta: (placement: string) => ReactNode;
   showVoice?: boolean;
+  international?: boolean;
 }) {
   const [activeMedia, setActiveMedia] = useState<string | null>(null);
   const stopMedia = useCallback(
@@ -58,6 +60,7 @@ export default function SalesProof({
     <>
       <HowItWorks
         activeMedia={activeMedia}
+        international={international}
         onMedia={setActiveMedia}
         onStop={stopMedia}
       />

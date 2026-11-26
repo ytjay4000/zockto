@@ -158,6 +158,18 @@
     9.08% 28.13%, 7.40% 26.37%
   );
 }
+.studio-how-product.is-international {
+  background: #eaf1f3;
+}
+.studio-how-product.is-international .studio-how-product-cutout {
+  aspect-ratio: 2 / 3;
+}
+.studio-how-product.is-international img {
+  position: static;
+  height: 100%;
+  transform: none;
+  clip-path: none;
+}
 .studio-how-storyboard,
 .studio-how-final {
   background: #252620;

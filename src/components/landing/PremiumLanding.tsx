@@ -159,7 +159,7 @@ function Questions({ international = false }: { international?: boolean }) {
       international ? "What’s included in each plan?" : subscription
         ? "What’s included in the " + variant.priceLabel + " plan?"
         : "What exactly do I get for " + variant.priceLabel + "?",
-      international ? "The main difference is the cost per creative, and the number of video and image creatives you can create per month. Creator Plan offer videos around 3x more affordably than Basic Plan. Business Plan the price per video is 15x more affordable than with Basic Plan." : subscription
+      international ? "Starter, Growth, and Pro differ in how many fully edited videos or image creatives you can make each month." : subscription
         ? (variant.creditsLabel ?? "") +
           ". " +
           variant.features?.join(". ") +
@@ -319,6 +319,7 @@ export default function PremiumLanding() {
           </section>
           <PlatformLogos international={international} />
           <SalesProof
+            international={international}
             showVoice={shouldShowVoiceTestimonials(international)}
             renderCta={(placement) => <CreateButton placement={placement} />}
           />

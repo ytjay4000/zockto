@@ -7,22 +7,22 @@ import { useVslSource } from "@/context/VslVariant";
 import { getAppUrl } from "@/lib/leadToken";
 import { posthog } from "@/lib/posthog";
 import "./trending-styles.css";
-import { internationalDemoVideos } from "@/data/internationalLanding";
-import { internationalDemoPosters } from "@/data/internationalDemoPosters";
+import { internationalDemoVideos, internationalFinalDemoId } from "@/data/internationalLanding";
 import { indiaDemoPosters } from "@/data/landingPreviewPosters";
 
 interface TrendingTemplate {
   id: number;
   name: string;
-  poster: string;
+  poster?: string | null;
   video: string;
   // Illustrative layout value only. Keep the visible "Example" label until
   // this is replaced with verified per-style campaign performance.
-  exampleRoas: string;
+  exampleRoas?: string;
 }
 
 function TrendingCard({
   template,
+  international,
   instance,
   viewport,
   playing,
@@ -32,6 +32,7 @@ function TrendingCard({
   onResume,
 }: {
   template: TrendingTemplate;
+  international: boolean;
   instance: string;
   viewport: React.RefObject<HTMLDivElement>;
   playing: boolean;
@@ -49,7 +50,10 @@ function TrendingCard({
   const [failed, setFailed] = useState(false);
   const source = useVslSource();
   const templateUrl = new URL(getAppUrl("/product-ad-shot", source));
-  if (template.id > 0) templateUrl.searchParams.set("template_id", String(template.id));
+  const useTemplate = !international && template.id > 0;
+  if (useTemplate) templateUrl.searchParams.set("template_id", String(template.id));
+  // The international previews use a frame from the actual clip as the poster.
+  const videoSource = template.poster ? template.video : `${template.video}#t=0.1`;
 
   useEffect(() => {
     const node = card.current;
@@ -105,13 +109,13 @@ function TrendingCard({
       <div className="studio-trending-media">
         <video
           ref={player}
-          src={loaded ? template.video : undefined}
-          poster={template.poster}
+          src={loaded ? videoSource : undefined}
+          poster={template.poster ?? undefined}
           muted={!audible}
           autoPlay={playing && visible}
           loop
           playsInline
-          preload="none"
+          preload={template.poster ? "none" : "metadata"}
           aria-label={`${template.name} preview`}
           onError={() => {
             setFailed(true);
@@ -172,7 +176,7 @@ function TrendingCard({
         )}
       </div>
       <div className="studio-trending-footer">
-        {template.id > 0 && <span
+        {useTemplate && <span
           className="studio-trending-metric"
           aria-label={`Avg. ROAS ${template.exampleRoas}, illustrative only, not a measured campaign result`}
           title="Illustrative example only—not a measured campaign result."
@@ -192,7 +196,7 @@ function TrendingCard({
             })
           }
         >
-          {template.id > 0 ? "Use this style" : "Create your ad"} <ArrowRight size={12} aria-hidden="true" />
+          {useTemplate ? "Use this style" : "Create your ad"} <ArrowRight size={12} aria-hidden="true" />
         </a>
       </div>
     </article>
@@ -214,7 +218,7 @@ export default function TrendingStyles({ international = false }: { internationa
   const [audible, setAudible] = useState<string | null>(null);
   const playing = !paused && inView && pageVisible;
   const {
-    data: templates = [],
+    data,
     isPending,
     isError,
     refetch,
@@ -222,11 +226,26 @@ export default function TrendingStyles({ international = false }: { internationa
     queryKey: ["trending-styles", international],
     queryFn: async ({ signal }): Promise<TrendingTemplate[]> => {
       if (international) {
-        return internationalDemoVideos.map((video) => ({
-          ...video,
-          poster: internationalDemoPosters[video.id],
-          exampleRoas: "",
-        }));
+        const { data: finalDemo, error } = await supabase
+          .from("product_ad_video")
+          .select("id,name,preview_image,video_url,global_video_url")
+          .eq("id", internationalFinalDemoId)
+          .abortSignal(signal)
+          .maybeSingle();
+        if (error) throw error;
+
+        const video = finalDemo?.global_video_url || finalDemo?.video_url;
+        if (!finalDemo || !video) return [...internationalDemoVideos];
+
+        return [
+          ...internationalDemoVideos,
+          {
+            id: finalDemo.id,
+            name: finalDemo.name ?? "Trending style",
+            poster: finalDemo.preview_image,
+            video,
+          },
+        ];
       }
       const { data, error } = await supabase
         .from("product_ad_video")
@@ -253,10 +272,11 @@ export default function TrendingStyles({ international = false }: { internationa
     staleTime: 5 * 60 * 1000,
     retry: 1,
   });
-  // Fill narrow feeds before duplicating the row, so its loop never exposes a gap.
-  const row = templates.length
-    ? Array.from({ length: Math.max(templates.length, 6) }, (_, index) => templates[index % templates.length])
-    : [];
+  const templates = data ?? (international ? internationalDemoVideos : []);
+  // Fill narrow India feeds before duplicating the row for a seamless loop.
+  const row = !international && templates.length > 0 && templates.length < 6
+    ? Array.from({ length: 6 }, (_, index) => templates[index % templates.length])
+    : templates;
   const silence = useCallback(
     (instance: string) => setAudible((current) => (current === instance ? null : current)),
     [],
@@ -297,7 +317,8 @@ export default function TrendingStyles({ international = false }: { internationa
       const width = firstGroup.current?.offsetWidth ?? 0;
       if (width && width > node.clientWidth) {
         if (last) position += Math.min(time - last, 50) * 0.025;
-        position = ((position % width) + width) % width;
+        const loopWidth = international ? width - node.clientWidth + 1 : width;
+        position = ((position % loopWidth) + loopWidth) % loopWidth;
         node.scrollLeft = position;
       }
       last = time;
@@ -305,7 +326,7 @@ export default function TrendingStyles({ international = false }: { internationa
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [playing, reduced, hovered, focused, interacting, audible, templates.length]);
+  }, [playing, reduced, hovered, focused, interacting, audible, templates.length, international]);
 
   const pauseInteraction = () => {
     clearTimeout(resumeTimer.current);
@@ -320,7 +341,7 @@ export default function TrendingStyles({ international = false }: { internationa
     if (!node) return;
     pauseInteraction();
     const width = firstGroup.current?.offsetWidth ?? 0;
-    if (width && direction < 0 && node.scrollLeft < 1) node.scrollLeft = width;
+    if (!international && width && direction < 0 && node.scrollLeft < 1) node.scrollLeft = width;
     node.scrollBy({
       left: direction * 250,
       behavior: reduced ? "instant" : "smooth",
@@ -329,7 +350,12 @@ export default function TrendingStyles({ international = false }: { internationa
   };
 
   return (
-    <section ref={section} id="work" className="studio-trending" aria-label="Video styles created with Zockto">
+    <section
+      ref={section}
+      id="work"
+      className={international ? "studio-trending is-international" : "studio-trending"}
+      aria-label="Video styles created with Zockto"
+    >
       {templates.length > 0 && (
         <button
           className="studio-trending-pause"
@@ -344,13 +370,13 @@ export default function TrendingStyles({ international = false }: { internationa
           <span>{paused ? "Play" : "Pause"}</span>
         </button>
       )}
-      {isPending ? (
+      {isPending && !templates.length ? (
         <div className="studio-trending-loading" role="status" aria-label="Loading trending styles">
           {[0, 1, 2, 3, 4, 5].map((index) => (
             <div key={index} />
           ))}
         </div>
-      ) : isError ? (
+      ) : isError && !templates.length ? (
         <div className="studio-trending-empty" role="status">
           <p>Trending styles couldn’t load. Please try again.</p>
           <button onClick={() => refetch()}>
@@ -395,7 +421,7 @@ export default function TrendingStyles({ international = false }: { internationa
             }}
           >
             <div className="studio-trending-track">
-              {[0, 1].map((group) => (
+              {(international ? [0] : [0, 1]).map((group) => (
                 <div ref={group === 0 ? firstGroup : undefined} key={group} className="studio-trending-group">
                   {row.map((template, index) => {
                     const instance = `${group}-${index}-${template.id}`;
@@ -403,6 +429,7 @@ export default function TrendingStyles({ international = false }: { internationa
                       <TrendingCard
                         key={instance}
                         template={template}
+                        international={international}
                         instance={instance}
                         viewport={viewport}
                         playing={playing}

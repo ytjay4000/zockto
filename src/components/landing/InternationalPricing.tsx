@@ -1,41 +1,97 @@
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Check, LockKeyhole, Zap } from "lucide-react";
 import AppLink from "@/components/AppLink";
-import { internationalCurrency, internationalFeatures, internationalPlans } from "@/data/internationalLanding";
-import { posthog } from "@/lib/posthog";
-import { trackMetaCustomEvent } from "@/lib/metaPixel";
 import { useVslSource } from "@/context/VslVariant";
+import {
+  internationalCurrency,
+  internationalFeatures,
+  internationalPlans,
+} from "@/data/internationalLanding";
+import { trackMetaCustomEvent } from "@/lib/metaPixel";
+import { posthog } from "@/lib/posthog";
 import "./international-pricing.css";
 
 export default function InternationalPricing() {
   const source = useVslSource();
-  return <section id="pricing" className="studio-section studio-pricing">
-    <div className="studio-container">
-      <div className="studio-international-heading"><h2>Your video ad plan.</h2></div>
-      <div className="studio-international-plans">
-        {internationalPlans.map((plan, index) => <article key={plan.id} className={`studio-international-plan${plan.popular ? " is-popular" : ""}`}>
-          {plan.popular && <span className="studio-international-popular">Most popular</span>}
-          <h3>{plan.name}</h3>
-          <div><div className="studio-international-price">${plan.price}<span>/mo</span></div></div>
-          <div><p className="studio-international-credits">{plan.credits.toLocaleString("en-US")} credits per month</p><div className="studio-international-unit"><span>${(plan.price / plan.videos).toFixed(2)} per video</span><span>${(plan.price / plan.credits).toFixed(3)} per credit</span></div></div>
-          <div className="studio-international-allowances"><h4>WHAT THIS GETS YOU</h4>
-            <p>Up to <strong>{plan.videoSeconds.toLocaleString("en-US")}</strong> seconds of video ads</p>
-            <p>Up to <strong>{plan.videos}</strong> fully edited video ads</p>
-            <p>Up to <strong>{plan.images.toLocaleString("en-US")}</strong> image ads</p>
-            <p>Up to <strong>{plan.avatarSeconds.toLocaleString("en-US")}</strong> seconds of AI avatar talking</p>
-          </div>
-          <ul className="studio-international-features">
-            {index > 0 && <li><Check size={15} />Everything in {index === 1 ? "Basic" : "Creator"}</li>}
-            {internationalFeatures.map(feature => <li key={feature}><Check size={15} />{feature}</li>)}
-            {index === 0 && <li><Check size={15} />Up to 30s per video</li>}
-          </ul>
-          <Button asChild className="studio-button"><AppLink onClick={() => {
-            const properties = { source, currency: internationalCurrency, value: plan.price, plan: plan.id, placement: "international_pricing" };
-            posthog.capture("offer_cta_click", properties);
-            trackMetaCustomEvent("VSLOfferClick", properties);
-          }}>Start now for $1</AppLink></Button>
-        </article>)}
+
+  return (
+    <section
+      id="pricing"
+      className="studio-section studio-pricing studio-international-pricing"
+      aria-labelledby="international-pricing-title"
+    >
+      <div className="studio-container">
+        <h2 id="international-pricing-title" className="studio-international-heading">
+          Choose your plan
+        </h2>
+
+        <div className="studio-international-billing" role="group" aria-label="Billing period">
+          <span aria-current="true">Monthly</span>
+          <button type="button" disabled>Yearly</button>
+        </div>
+
+        <div className="studio-international-plans">
+          {internationalPlans.map((plan) => (
+            <article
+              key={plan.id}
+              aria-labelledby={`international-plan-${plan.id}`}
+              className="studio-international-plan"
+            >
+              <header className="studio-international-plan-header">
+                <div className="studio-international-plan-heading">
+                  <h3 id={`international-plan-${plan.id}`}>{plan.name}</h3>
+                  <span className="studio-international-trial">
+                    $1 for 3 days <Zap size={12} fill="currentColor" aria-hidden="true" />
+                  </span>
+                </div>
+                <p className="studio-international-price">
+                  ${plan.price}<span> {internationalCurrency} / month</span>
+                </p>
+              </header>
+
+              <div className="studio-international-plan-body">
+                <h4 className="studio-international-includes">Plan includes</h4>
+                <p className="studio-international-videos">
+                  Up to {plan.videos.toLocaleString("en-US")} fully edited videos
+                </p>
+                <p className="studio-international-images">
+                  or up to {plan.images.toLocaleString("en-US")} image creatives
+                </p>
+                <ul className="studio-international-features" role="list">
+                  {internationalFeatures.map((feature) => (
+                    <li key={feature}>
+                      <span aria-hidden="true"><Check size={11} /></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <AppLink
+                  className="studio-button studio-international-cta"
+                  aria-label={`Start for $1 — ${plan.name}`}
+                  onClick={() => {
+                    const properties = {
+                      source,
+                      currency: internationalCurrency,
+                      value: plan.price,
+                      plan: plan.id,
+                      placement: "international_pricing",
+                    };
+                    posthog.capture("offer_cta_click", properties);
+                    trackMetaCustomEvent("VSLOfferClick", properties);
+                  }}
+                >
+                  Start for $1
+                </AppLink>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="studio-international-note">
+          <p><LockKeyhole size={13} aria-hidden="true" /> Secure payment by Stripe</p>
+          <p>Cancel in Account → Billing</p>
+        </div>
       </div>
-    </div>
-  </section>;
+    </section>
+  );
 }
